@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{533F1771-6668-4564-9A23-C4F02EA9769A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ERPManagementAPP</RootNamespace>
+    <AssemblyName>ERPManagementAPP</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="DevExpress.BonusSkins.v20.1" />
+    <Reference Include="DevExpress.Data.Desktop.v20.1" />
+    <Reference Include="DevExpress.Data.v20.1" />
+    <Reference Include="DevExpress.Utils.v20.1" />
+    <Reference Include="DevExpress.Sparkline.v20.1.Core" />
+    <Reference Include="DevExpress.XtraBars.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v20.1" />
+    <Reference Include="DevExpress.Printing.v20.1.Core" />
+    <Reference Include="DevExpress.XtraGrid.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraNavBar.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="RestSharp, Version=107.3.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.107.3.0\lib\netstandard2.0\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.10.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.Console.4.0.1\lib\net45\Serilog.Sinks.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=5.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.File.5.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\SystemSetting.cs" />
+    <Compile Include="Emuns\TokenEnum.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\BaseEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\CompanyMaintainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Maintain\CompanyMaintainControl.Designer.cs">
+      <DependentUpon>CompanyMaintainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\CompanyMaintainForm\CompanyDirectoryEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\CompanyMaintainForm\CompanyDirectoryEditForm.Designer.cs">
+      <DependentUpon>CompanyDirectoryEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\CompanyMaintainForm\CompanyEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\CompanyMaintainForm\CompanyEditForm.Designer.cs">
+      <DependentUpon>CompanyEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\CustomerMaintainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Maintain\CustomerMaintainControl.Designer.cs">
+      <DependentUpon>CustomerMaintainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\CustomerMaintainForm\CustomerDirectoryEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\CustomerMaintainForm\CustomerDirectoryEditForm.Designer.cs">
+      <DependentUpon>CustomerDirectoryEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\CustomerMaintainForm\CustomerEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\CustomerMaintainForm\CustomerEditForm.Designer.cs">
+      <DependentUpon>CustomerEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\EmployeeMaintainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Maintain\EmployeeMaintainControl.Designer.cs">
+      <DependentUpon>EmployeeMaintainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\EmployeeMaintainForm\EmployeeEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\EmployeeMaintainForm\EmployeeEditForm.Designer.cs">
+      <DependentUpon>EmployeeEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\Field4MaintainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Maintain\HomeMaintainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Maintain\HomeMaintainControl.Designer.cs">
+      <DependentUpon>HomeMaintainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\ProductMaintainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Maintain\ProductMaintainControl.Designer.cs">
+      <DependentUpon>ProductMaintainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\ProductMaintainForm\ProductCategoryEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\ProductMaintainForm\ProductCategoryEditForm.Designer.cs">
+      <DependentUpon>ProductCategoryEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\ProductMaintainForm\ProductEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\ProductMaintainForm\ProductEditForm.Designer.cs">
+      <DependentUpon>ProductEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Methods\APIMethod.cs" />
+    <Compile Include="Methods\InitailMethod.cs" />
+    <Compile Include="Models\CompanyDirectorySetting.cs" />
+    <Compile Include="Models\CompanySetting.cs" />
+    <Compile Include="Models\CustomerDirectorySetting.cs" />
+    <Compile Include="Models\CustomerSetting.cs" />
+    <Compile Include="Models\EmployeeSetting.cs" />
+    <Compile Include="Models\ProductCategorySetting.cs" />
+    <Compile Include="Models\ProductSetting.cs" />
+    <Compile Include="Modules\MaintainModule.cs" />
+    <Compile Include="Modules\Registrations.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\CompanyMaintainControl.resx">
+      <DependentUpon>CompanyMaintainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\CompanyMaintainForm\CompanyDirectoryEditForm.resx">
+      <DependentUpon>CompanyDirectoryEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\CompanyMaintainForm\CompanyEditForm.resx">
+      <DependentUpon>CompanyEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\CustomerMaintainControl.resx">
+      <DependentUpon>CustomerMaintainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\CustomerMaintainForm\CustomerDirectoryEditForm.resx">
+      <DependentUpon>CustomerDirectoryEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\CustomerMaintainForm\CustomerEditForm.resx">
+      <DependentUpon>CustomerEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\EmployeeMaintainControl.resx">
+      <DependentUpon>EmployeeMaintainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\EmployeeMaintainForm\EmployeeEditForm.resx">
+      <DependentUpon>EmployeeEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\HomeMaintainControl.resx">
+      <DependentUpon>HomeMaintainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\ProductMaintainControl.resx">
+      <DependentUpon>ProductMaintainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\ProductMaintainForm\ProductCategoryEditForm.resx">
+      <DependentUpon>ProductCategoryEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\ProductMaintainForm\ProductEditForm.resx">
+      <DependentUpon>ProductEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
