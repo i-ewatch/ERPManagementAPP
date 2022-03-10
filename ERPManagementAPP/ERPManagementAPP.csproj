@@ -37,6 +37,7 @@
     <Reference Include="DevExpress.BonusSkins.v20.1" />
     <Reference Include="DevExpress.Data.Desktop.v20.1" />
     <Reference Include="DevExpress.Data.v20.1" />
+    <Reference Include="DevExpress.DataAccess.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v20.1" />
     <Reference Include="DevExpress.Sparkline.v20.1.Core" />
     <Reference Include="DevExpress.XtraBars.v20.1, Version=20.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -181,6 +182,18 @@
     <Compile Include="Maintain\ProductMaintainForm\ProductEditForm.Designer.cs">
       <DependentUpon>ProductEditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Maintain\PurchaseMaintainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Maintain\PurchaseMaintainControl.Designer.cs">
+      <DependentUpon>PurchaseMaintainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\PurchaseMainTainForm\PurchaseEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\PurchaseMainTainForm\PurchaseEditForm.designer.cs">
+      <DependentUpon>PurchaseEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Methods\APIMethod.cs" />
     <Compile Include="Methods\InitailMethod.cs" />
     <Compile Include="Models\CompanyDirectorySetting.cs" />
@@ -190,6 +203,9 @@
     <Compile Include="Models\EmployeeSetting.cs" />
     <Compile Include="Models\ProductCategorySetting.cs" />
     <Compile Include="Models\ProductSetting.cs" />
+    <Compile Include="Models\PurchaseMainSetting.cs" />
+    <Compile Include="Models\PurchaseSetting.cs" />
+    <Compile Include="Models\PurchaseSubSetting.cs" />
     <Compile Include="Modules\MaintainModule.cs" />
     <Compile Include="Modules\Registrations.cs" />
     <Compile Include="Program.cs" />
@@ -232,6 +248,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maintain\ProductMaintainForm\ProductEditForm.resx">
       <DependentUpon>ProductEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\PurchaseMaintainControl.resx">
+      <DependentUpon>PurchaseMaintainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\PurchaseMainTainForm\PurchaseEditForm.resx">
+      <DependentUpon>PurchaseEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

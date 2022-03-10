@@ -12,10 +12,11 @@ namespace ERPManagementAPP.Methods
 {
     public class APIMethod
     {
+        private int time = 3000;
         /// <summary>
         /// 主要網址
         /// </summary>
-        public  string URL { get; set; }
+        public string URL { get; set; }
         /// <summary>
         /// 錯誤訊息
         /// </summary>
@@ -24,6 +25,10 @@ namespace ERPManagementAPP.Methods
         /// API回應錯誤訊息
         /// </summary>
         public string ResponseErrorMessage { get; set; } = "";
+        /// <summary>
+        /// API回應數值
+        /// </summary>
+        public string ResponseDataMessage { get; set; } = "";
         /// <summary>
         /// API連結旗標
         /// </summary>
@@ -37,19 +42,19 @@ namespace ERPManagementAPP.Methods
         {
             URL = url;
             Company_url = $"{URL}/Company";
-            CompanyAttachmentFile_url  = $"{URL}/CompanyAttachmentFile";
-            CompanyAttachmentFile_url  = $"{URL}/CompanyAttachmentFile";
-            CompanyDirectory_url  = $"{URL}/CompanyDirectory";
-            CompanyDirectoryNumber_url  = $"{URL}/CompanyDirectoryNumber";
-            DirectoryCompany_url  = $"{URL}/DirectoryCompany";
-            CompanyDirectoryAttachmentFile_url  = $"{URL}/CompanyDirectoryAttachmentFile";
-            Customer_url  = $"{URL}/Customer";
-            CustomerNumber_url  = $"{URL}/CustomerNumber";
-            CustomerAttachmentFile_url  = $"{URL}/CustomerAttachmentFile";
-            CustomerDirectory_url  = $"{URL}/CustomerDirectory";
-            CustomerDirectoryNumber_url  = $"{URL}/CompanyDirectoryNumber";
-            DirectoryCustomer_url  = $"{URL}/DirectoryCustomer";
-            CustomerDirectoryAttachmentFile_url  = $"{URL}/CustomerDirectoryAttachmentFile";
+            CompanyAttachmentFile_url = $"{URL}/CompanyAttachmentFile";
+            CompanyAttachmentFile_url = $"{URL}/CompanyAttachmentFile";
+            CompanyDirectory_url = $"{URL}/CompanyDirectory";
+            CompanyDirectoryNumber_url = $"{URL}/CompanyDirectoryNumber";
+            DirectoryCompany_url = $"{URL}/DirectoryCompany";
+            CompanyDirectoryAttachmentFile_url = $"{URL}/CompanyDirectoryAttachmentFile";
+            Customer_url = $"{URL}/Customer";
+            CustomerNumber_url = $"{URL}/CustomerNumber";
+            CustomerAttachmentFile_url = $"{URL}/CustomerAttachmentFile";
+            CustomerDirectory_url = $"{URL}/CustomerDirectory";
+            CustomerDirectoryNumber_url = $"{URL}/CompanyDirectoryNumber";
+            DirectoryCustomer_url = $"{URL}/DirectoryCustomer";
+            CustomerDirectoryAttachmentFile_url = $"{URL}/CustomerDirectoryAttachmentFile";
             Employee_url = $"{URL}/Employee";
             EmployeeNumber_url = $"{URL}/EmployeeNumber";
             Product_url = $"{URL}/Product";
@@ -57,10 +62,13 @@ namespace ERPManagementAPP.Methods
             ProductNumber_url = $"{URL}/ProductNumber";
             ProductAttachmentFile_url = $"{URL}/ProductAttachmentFile";
             ProductGategory_url = $"{URL}/ProductCategory";
+            Purchase_url = $"{URL}/Purchase";
+            PurchaseNumber_url = $"{URL}/Purchase/PurchaseNumber";
+            PurchaseAttachmenFile_url = $"{URL}/PurchaseAttachmentFile";
         }
         #region 公司資訊
         /// <summary>
-        /// 廠商資料(Get、Post、Put)
+        /// 廠商資料(Get、Post、Put、Delete)
         /// </summary>
         private string Company_url { get; set; }
         /// <summary>
@@ -72,7 +80,7 @@ namespace ERPManagementAPP.Methods
         /// </summary>
         private string CompanyAttachmentFile_url { get; set; }
         /// <summary>
-        /// 廠商通訊錄資料(Get、Post、Put)
+        /// 廠商通訊錄資料(Get、Post、Put、Delete)
         /// </summary>
         private string CompanyDirectory_url { get; set; }
         /// <summary>
@@ -84,13 +92,13 @@ namespace ERPManagementAPP.Methods
         /// </summary>
         private string DirectoryCompany_url { get; set; }
         /// <summary>
-        /// 廠商通訊錄檔案上傳(Post)
+        /// 廠商通訊錄檔案(Post、Get)
         /// </summary>
         private string CompanyDirectoryAttachmentFile_url { get; set; }
         #endregion
         #region 客戶資訊
         /// <summary>
-        /// 客戶資料(Get、Post、Put)
+        /// 客戶資料(Get、Post、Put、Delete)
         /// </summary>
         private string Customer_url { get; set; }
         /// <summary>
@@ -102,7 +110,7 @@ namespace ERPManagementAPP.Methods
         /// </summary>
         private string CustomerAttachmentFile_url { get; set; }
         /// <summary>
-        /// 客戶通訊錄資料(Get、Post、Put)
+        /// 客戶通訊錄資料(Get、Post、Put、Delete)
         /// </summary>
         private string CustomerDirectory_url { get; set; }
         /// <summary>
@@ -114,13 +122,13 @@ namespace ERPManagementAPP.Methods
         /// </summary>
         private string DirectoryCustomer_url { get; set; }
         /// <summary>
-        /// 客戶通訊錄檔案上傳(Post)
+        /// 客戶通訊錄檔案(Post、Get)
         /// </summary>
         private string CustomerDirectoryAttachmentFile_url { get; set; }
         #endregion
         #region 員工資訊
         /// <summary>
-        /// 員工資料(Get、Post、Put)
+        /// 員工資料(Get、Post、Put、Delete)
         /// </summary>
         private string Employee_url { get; set; }
         /// <summary>
@@ -130,7 +138,7 @@ namespace ERPManagementAPP.Methods
         #endregion
         #region 產品資訊
         /// <summary>
-        /// 產品資料(Get、Post、Put)
+        /// 產品資料(Get、Post、Put、Delete)
         /// </summary>
         private string Product_url { get; set; }
         /// <summary>
@@ -142,13 +150,27 @@ namespace ERPManagementAPP.Methods
         /// </summary>
         private string ProductNumber_url { get; set; }
         /// <summary>
-        /// 產品檔案上傳(Post)
+        /// 產品檔案(Post、Get)
         /// </summary>
         private string ProductAttachmentFile_url { get; set; }
         /// <summary>
-        /// 產品類別資料(Get、Post、Put)
+        /// 產品類別資料(Get、Post、Put、Delete)
         /// </summary>
         private string ProductGategory_url { get; set; }
+        #endregion
+        #region 進貨資訊
+        /// <summary>
+        /// 進貨資料(Get、Post、Put、Delete)
+        /// </summary>
+        private string Purchase_url { get; set; }
+        /// <summary>
+        /// 進貨資料查詢(年月份)
+        /// </summary>
+        private string PurchaseNumber_url { get; set; }
+        /// <summary>
+        /// 進貨檔案(Post、Get)
+        /// </summary>
+        private string PurchaseAttachmenFile_url { get; set; }
         #endregion
 
         /*以下API功能----------------------------------------------------------------------------------------*/
@@ -165,7 +187,7 @@ namespace ERPManagementAPP.Methods
                 List<CompanySetting> settings = null;
                 var option = new RestClientOptions(Company_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -196,7 +218,7 @@ namespace ERPManagementAPP.Methods
                 List<CompanySetting> settings = null;
                 var option = new RestClientOptions(CompanyNumber_url + $"/{CompanyNumber}")
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -226,7 +248,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(Company_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
@@ -255,7 +277,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(Company_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
@@ -284,7 +306,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(Company_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
@@ -315,7 +337,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(CompanyAttachmentFile_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
@@ -346,10 +368,9 @@ namespace ERPManagementAPP.Methods
         {
             try
             {
-                MemoryStream File;
                 var option = new RestClientOptions(CompanyAttachmentFile_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -383,7 +404,7 @@ namespace ERPManagementAPP.Methods
                 List<CompanyDirectorySetting> settings = null;
                 var option = new RestClientOptions(CompanyDirectory_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -414,7 +435,7 @@ namespace ERPManagementAPP.Methods
                 List<CompanyDirectorySetting> settings = null;
                 var option = new RestClientOptions(DirectoryCompany_url + $"/{DirectoryCompanyNumber}")
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -445,7 +466,7 @@ namespace ERPManagementAPP.Methods
                 List<CompanyDirectorySetting> settings = null;
                 var option = new RestClientOptions(CompanyDirectoryNumber_url + $"/{DirectoryNumber}")
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -475,7 +496,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(CompanyDirectory_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
@@ -504,7 +525,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(CompanyDirectory_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
@@ -533,7 +554,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(CompanyDirectory_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
@@ -564,7 +585,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(CompanyDirectoryAttachmentFile_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
@@ -597,7 +618,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(CompanyDirectoryAttachmentFile_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -631,7 +652,7 @@ namespace ERPManagementAPP.Methods
                 List<CustomerSetting> settings = null;
                 var option = new RestClientOptions(Customer_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -662,7 +683,7 @@ namespace ERPManagementAPP.Methods
                 List<CustomerSetting> settings = null;
                 var option = new RestClientOptions(CustomerNumber_url + $"/{CustomerNumber}")
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -692,7 +713,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(Customer_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
@@ -721,7 +742,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(Customer_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
@@ -750,7 +771,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(Customer_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
@@ -781,7 +802,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(CustomerAttachmentFile_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
@@ -814,7 +835,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(CustomerAttachmentFile_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -848,7 +869,7 @@ namespace ERPManagementAPP.Methods
                 List<CustomerDirectorySetting> settings = null;
                 var option = new RestClientOptions(CustomerDirectory_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -879,7 +900,7 @@ namespace ERPManagementAPP.Methods
                 List<CustomerDirectorySetting> settings = null;
                 var option = new RestClientOptions(DirectoryCustomer_url + $"/{DirectoryCustomerNumber}")
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -910,7 +931,7 @@ namespace ERPManagementAPP.Methods
                 List<CustomerDirectorySetting> settings = null;
                 var option = new RestClientOptions(CustomerDirectoryNumber_url + $"/{DirectoryNumber}")
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -940,7 +961,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(CustomerDirectory_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
@@ -969,7 +990,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(CustomerDirectory_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
@@ -998,7 +1019,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(CustomerDirectory_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
@@ -1029,7 +1050,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(CustomerDirectoryAttachmentFile_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
@@ -1062,7 +1083,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(CustomerDirectoryAttachmentFile_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -1096,7 +1117,7 @@ namespace ERPManagementAPP.Methods
                 List<EmployeeSetting> settings = null;
                 var option = new RestClientOptions(Employee_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -1127,7 +1148,7 @@ namespace ERPManagementAPP.Methods
                 List<EmployeeSetting> settings = null;
                 var option = new RestClientOptions(EmployeeNumber_url + $"/{EmployeeNumber}")
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -1157,7 +1178,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(Employee_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
@@ -1186,7 +1207,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(Employee_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
@@ -1215,7 +1236,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(Employee_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
@@ -1247,7 +1268,7 @@ namespace ERPManagementAPP.Methods
                 List<ProductSetting> settings = null;
                 var option = new RestClientOptions(Product_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -1278,7 +1299,7 @@ namespace ERPManagementAPP.Methods
                 List<ProductSetting> settings = null;
                 var option = new RestClientOptions(ProductNumber_url + $"/{ProductNumber}")
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -1309,7 +1330,7 @@ namespace ERPManagementAPP.Methods
                 List<ProductSetting> settings = null;
                 var option = new RestClientOptions(ProductType_url + $"/{ProductType}")
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -1339,7 +1360,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(Product_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
@@ -1368,7 +1389,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(Product_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
@@ -1397,7 +1418,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(Product_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
@@ -1428,7 +1449,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(ProductAttachmentFile_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
@@ -1461,7 +1482,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(ProductAttachmentFile_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -1495,7 +1516,7 @@ namespace ERPManagementAPP.Methods
                 List<ProductCategorySetting> settings = null;
                 var option = new RestClientOptions(ProductGategory_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
@@ -1525,7 +1546,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(ProductGategory_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
@@ -1554,7 +1575,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(ProductGategory_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
@@ -1583,7 +1604,7 @@ namespace ERPManagementAPP.Methods
             {
                 var option = new RestClientOptions(ProductGategory_url)
                 {
-                    Timeout = 1000
+                    Timeout = time
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
@@ -1592,6 +1613,226 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
+            }
+            catch (Exception)
+            {
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region 進貨API
+        #region 全部進貨表頭(年月份)
+        /// <summary>
+        /// 全部進貨表頭(年月份)
+        /// </summary>
+        /// <param name="PurchaseNumber">年月份</param>
+        /// <returns></returns>
+        public List<PurchaseMainSetting> Get_Purchase(string PurchaseNumber)
+        {
+            try
+            {
+                List<PurchaseMainSetting> settings = null;
+                var option = new RestClientOptions(PurchaseNumber_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddParameter("PurchaseNumber", PurchaseNumber, type: ParameterType.QueryString);
+                var response = clinet.ExecuteGetAsync<List<PurchaseMainSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<PurchaseMainSetting>>(response.Result.Content);
+                ClientFlag = true;
+                return settings;
+            }
+            catch (Exception)
+            {
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 查詢單筆【進貨】或【進貨退出】父子資料
+        /// <summary>
+        /// 查詢單筆【進貨】或【進貨退出】父子資料
+        /// </summary>
+        /// <param name="setting"></param>
+        /// <returns></returns>
+        public List<PurchaseSetting> Get_Purchase(PurchaseMainSetting setting)
+        {
+            try
+            {
+                List<PurchaseSetting> settings = null;
+                var option = new RestClientOptions(Purchase_url + $"/{setting.PurchaseFlag}/{setting.PurchaseNumber}")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<PurchaseSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<PurchaseSetting>>(response.Result.Content);
+                ClientFlag = true;
+                return settings;
+            }
+            catch (Exception)
+            {
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 新增進貨資料
+        /// <summary>
+        /// 新增進貨資料
+        /// </summary>
+        /// <param name="PruchaseSetting"></param>
+        /// <returns></returns>
+        public string Post_Purchase(string PruchaseSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Purchase_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddBody(PruchaseSetting, ContentType.Json);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ResponseDataMessage = response.Result.Content;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception)
+            {
+                ResponseDataMessage = "";
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 修改進貨資料
+        /// <summary>
+        /// 修改進貨資料
+        /// </summary>
+        /// <param name="PruchaseSetting"></param>
+        /// <returns></returns>
+        public string Put_Purchase(string PruchaseSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Purchase_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(PruchaseSetting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception)
+            {
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 刪除進貨資料
+        /// <summary>
+        /// 刪除進貨資料
+        /// </summary>
+        /// <param name="PruchaseSetting"></param>
+        /// <returns></returns>
+        public string Delete_Purchase(int PurchaseFlag, string PurchaseNumber)
+        {
+            try
+            {
+                var option = new RestClientOptions($"{Purchase_url}/{PurchaseFlag}/{PurchaseNumber}")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Delete);
+                var response = clinet.DeleteAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception)
+            {
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 進貨上傳檔案
+        /// <summary>
+        /// 進貨上傳檔案
+        /// </summary>
+        /// <param name="PruchaseSetting"></param>
+        /// <param name="Path"></param>
+        /// <returns></returns>
+        public string Post_PurchaseAttachmentFile(int PurchaseFlag, string PurchaseCompanyNumber, DateTime PurchaseDate, string PurchaseNumber, string Path)
+        {
+            try
+            {
+                var option = new RestClientOptions(PurchaseAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddParameter("PurchaseFlag", PurchaseFlag, type: ParameterType.QueryString);
+                requsest.AddParameter("PurchaseCompanyNumber", PurchaseCompanyNumber, type: ParameterType.QueryString);
+                requsest.AddParameter("PurchaseDate", PurchaseDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
+                requsest.AddParameter("PurchaseNumber", PurchaseNumber, type: ParameterType.QueryString);
+                requsest.AddFile("AttachmentFile", Path);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception)
+            {
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 進貨下載檔案
+        /// <summary>
+        /// 進貨下載檔案
+        /// </summary>
+        /// <param name="Number">產品編號</param>
+        /// <param name="Name">產品名稱</param>
+        /// <param name="File">檔案名稱</param>
+        /// <returns></returns>
+        public byte[] Get_PurchaseAttachmentFile(string PurchaseCompanyNumber, string File)
+        {
+            try
+            {
+                var option = new RestClientOptions(PurchaseAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
+                requsest.AddParameter("PurchaseCompanyNumber", PurchaseCompanyNumber, type: ParameterType.QueryString);
+                var response = clinet.DownloadDataAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                return response.Result;
             }
             catch (Exception)
             {

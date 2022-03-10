@@ -1,7 +1,6 @@
 ﻿using DevExpress.Utils;
 using DevExpress.XtraBars.Docking2010.Customization;
 using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
-using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
@@ -11,13 +10,7 @@ using ERPManagementAPP.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ERPManagementAPP.Maintain
@@ -71,6 +64,7 @@ namespace ERPManagementAPP.Maintain
             #region 新增產品類別
             btn_ProductGategory_Add.Click += (s, e) =>
             {
+                Refresh_API();
                 ProductCategoryEditForm productCategory = new ProductCategoryEditForm(ProductCategorySettings, null, apiMethod, Form1);
                 if (productCategory.ShowDialog() == DialogResult.OK)
                 {
@@ -82,6 +76,7 @@ namespace ERPManagementAPP.Maintain
             #region 修改產品類別
             btn_ProductGategory_Edit.Click += (s, e) =>
             {
+                Refresh_API();
                 ProductCategoryEditForm productCategory = new ProductCategoryEditForm(ProductCategorySettings, FocuseProductCategorySetting, apiMethod, Form1);
                 if (productCategory.ShowDialog() == DialogResult.OK)
                 {
@@ -93,6 +88,7 @@ namespace ERPManagementAPP.Maintain
             #region 雙擊修改產品類別
             ProductCategorygridControl.DoubleClick += (s, e) =>
             {
+                Refresh_API();
                 FocuseMainGrid();
                 ProductCategoryEditForm productCategory = new ProductCategoryEditForm(ProductCategorySettings, FocuseProductCategorySetting, apiMethod, Form1);
                 if (productCategory.ShowDialog() == DialogResult.OK)
@@ -270,9 +266,9 @@ namespace ERPManagementAPP.Maintain
             };
         }
         #endregion
-        #region 聚焦主資料表功能
+        #region 聚焦次資料表功能
         /// <summary>
-        /// 聚焦主資料表功能
+        /// 聚焦次資料表功能
         /// </summary>
         private void FocuseSecondGrid()
         {
@@ -323,9 +319,9 @@ namespace ERPManagementAPP.Maintain
             }
         }
         #endregion
-        #region 聚焦次資料表功能
+        #region 聚焦主資料表功能
         /// <summary>
-        /// 聚焦次資料表功能
+        /// 聚焦主資料表功能
         /// </summary>
         private void FocuseMainGrid()
         {
@@ -388,7 +384,7 @@ namespace ERPManagementAPP.Maintain
         #endregion
         public override void Refresh_Main_GridView()
         {
-            CompanySettings = apiMethod.Get_Company();
+            Refresh_API();
             ProductCategorySettings = apiMethod.Get_ProductGategory();
             ProductCategorygridControl.DataSource = ProductCategorySettings;
             Refresh_Second_GridView("");
@@ -398,6 +394,10 @@ namespace ERPManagementAPP.Maintain
             ProductSettings = apiMethod.Get_Product();
             ProductgridControl.DataSource = ProductSettings;
             ChangeGridStr();
+        }
+        private void Refresh_API()
+        {
+            CompanySettings = apiMethod.Get_Company();
         }
     }
 }

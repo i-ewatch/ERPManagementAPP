@@ -37,7 +37,7 @@ namespace ERPManagementAPP.Methods
                 {
                     SystemSetting Setting = new SystemSetting()
                     {
-                        URL = "http://localhost:60678/api"
+                        URL = "http://erpmanagment.azurewebsites.net/api"
                     };
                     setting = Setting;
                     string output = JsonConvert.SerializeObject(setting, Formatting.Indented, new JsonSerializerSettings());

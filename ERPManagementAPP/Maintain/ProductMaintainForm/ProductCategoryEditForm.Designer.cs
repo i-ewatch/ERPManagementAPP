@@ -72,9 +72,9 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.panelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl4.Controls.Add(this.btn_Save);
             this.panelControl4.Controls.Add(this.btn_Cancel);
-            this.panelControl4.Location = new System.Drawing.Point(12, 83);
+            this.panelControl4.Location = new System.Drawing.Point(12, 89);
             this.panelControl4.Name = "panelControl4";
-            this.panelControl4.Size = new System.Drawing.Size(640, 41);
+            this.panelControl4.Size = new System.Drawing.Size(640, 35);
             this.panelControl4.TabIndex = 20;
             // 
             // btn_Save
@@ -83,7 +83,7 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.btn_Save.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Save.ImageOptions.Image")));
             this.btn_Save.Location = new System.Drawing.Point(452, 0);
             this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(94, 41);
+            this.btn_Save.Size = new System.Drawing.Size(94, 35);
             this.btn_Save.TabIndex = 1;
             this.btn_Save.Text = "Save";
             // 
@@ -93,25 +93,29 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.btn_Cancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Cancel.ImageOptions.Image")));
             this.btn_Cancel.Location = new System.Drawing.Point(546, 0);
             this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.Size = new System.Drawing.Size(94, 41);
+            this.btn_Cancel.Size = new System.Drawing.Size(94, 35);
             this.btn_Cancel.TabIndex = 0;
             this.btn_Cancel.Text = "Cancel";
             // 
             // txt_CategoryNumber
             // 
-            this.txt_CategoryNumber.Location = new System.Drawing.Point(92, 12);
+            this.txt_CategoryNumber.Location = new System.Drawing.Point(118, 12);
             this.txt_CategoryNumber.Name = "txt_CategoryNumber";
+            this.txt_CategoryNumber.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.txt_CategoryNumber.Properties.Appearance.Options.UseFont = true;
             this.txt_CategoryNumber.Properties.MaxLength = 6;
-            this.txt_CategoryNumber.Size = new System.Drawing.Size(560, 22);
+            this.txt_CategoryNumber.Size = new System.Drawing.Size(534, 26);
             this.txt_CategoryNumber.StyleController = this.layoutControl1;
             this.txt_CategoryNumber.TabIndex = 4;
             // 
             // txt_CategoryName
             // 
-            this.txt_CategoryName.Location = new System.Drawing.Point(92, 38);
+            this.txt_CategoryName.Location = new System.Drawing.Point(118, 42);
             this.txt_CategoryName.Name = "txt_CategoryName";
+            this.txt_CategoryName.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.txt_CategoryName.Properties.Appearance.Options.UseFont = true;
             this.txt_CategoryName.Properties.MaxLength = 20;
-            this.txt_CategoryName.Size = new System.Drawing.Size(560, 22);
+            this.txt_CategoryName.Size = new System.Drawing.Size(534, 26);
             this.txt_CategoryName.StyleController = this.layoutControl1;
             this.txt_CategoryName.TabIndex = 4;
             // 
@@ -130,38 +134,42 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             // 
             // layoutControlItem1
             // 
+            this.layoutControlItem1.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.layoutControlItem1.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem1.Control = this.txt_CategoryNumber;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(644, 26);
+            this.layoutControlItem1.Size = new System.Drawing.Size(644, 30);
             this.layoutControlItem1.Text = "產品類別編號*";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(77, 16);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(103, 20);
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 52);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 60);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(644, 19);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(644, 17);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem2
             // 
+            this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem2.Control = this.txt_CategoryName;
             this.layoutControlItem2.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem2.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 26);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 30);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(644, 26);
+            this.layoutControlItem2.Size = new System.Drawing.Size(644, 30);
             this.layoutControlItem2.Text = "產品類別名稱*";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(77, 16);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(103, 20);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.panelControl4;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 71);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 77);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(644, 45);
+            this.layoutControlItem3.Size = new System.Drawing.Size(644, 39);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
