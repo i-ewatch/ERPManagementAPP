@@ -1,39 +1,30 @@
 ﻿using DevExpress.XtraBars.Docking2010.Customization;
 using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
-using DevExpress.XtraEditors;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Grid;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
+namespace ERPManagementAPP.Maintain.SalesMaintainForm
 {
-    public partial class PurchaseEditForm : BaseEditForm
+    public partial class SalesEditForm : BaseEditForm
     {
         /// <summary>
         /// 聚焦表身資訊
         /// </summary>
-        private PurchaseSubSetting FocusePurchaseSubSetting { get; set; } = new PurchaseSubSetting();
+        private SalesSubSetting FocuseSalesSubSetting { get; set; } = new SalesSubSetting();
         /// <summary>
         /// 表身資訊
         /// </summary>
-        private List<PurchaseSubSetting> PurchaseSubSettings { get; set; } = new List<PurchaseSubSetting>();
+        private List<SalesSubSetting> SalesSubSettings { get; set; } = new List<SalesSubSetting>();
         /// <summary>
         /// 進貨資訊
         /// </summary>
-        private PurchaseSetting PurchaseSetting { get; set; } = new PurchaseSetting();
+        private SalesSetting SalesSetting { get; set; } = new SalesSetting();
         /// <summary>
         /// 產品資訊
         /// </summary>
@@ -41,7 +32,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         /// <summary>
         /// 公司資訊
         /// </summary>
-        private List<CompanySetting> CompanySettings { get; set; }
+        private List<CustomerSetting> CustomerSettings { get; set; }
         /// <summary>
         /// 員工資訊
         /// </summary>
@@ -66,38 +57,38 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         /// 稅後總計
         /// </summary>
         private double TotalTax = 0;
-        public PurchaseEditForm(List<CompanySetting> companySettings, List<EmployeeSetting> employeeSettings, List<ProductSetting> productSettings, PurchaseSetting purchaseSetting, APIMethod apiMethod, Form1 form1)
+        public SalesEditForm(List<CustomerSetting> customerSettings, List<EmployeeSetting> employeeSettings, List<ProductSetting> productSettings, SalesSetting salesSetting, APIMethod apiMethod, Form1 form1)
         {
             InitializeComponent();
             Form1 = form1;
             action.Commands.Add(FlyoutCommand.Yes);
-            CompanySettings = companySettings;
+            CustomerSettings = customerSettings;
             EmployeeSettings = employeeSettings;
             ProductSettings = productSettings;
-            PurchaseSetting = purchaseSetting;
-            Create_cbt_PurchasecompanyNumber_cbt();
+            SalesSetting = salesSetting;
+            Create_cbt_SalescustomerNumber_cbt();
             Create_cbt_EmployeeNumber_cbt();
             Create_cbt_ProductName_cbt();
-            if (purchaseSetting != null)
+            if (salesSetting != null)
             {
-                cbt_PurchaseFlag.SelectedIndex = purchaseSetting.PurchaseFlag - 1;
-                txt_PurchaseNumber.Text = purchaseSetting.PurchaseNumber;
-                det_PurchaseDate.Text = purchaseSetting.PurchaseDate.ToString("yyyy年MM月dd日");
-                Show_ProductCompanyNumber_Index();
-                cbt_PurchaseTax.SelectedIndex = purchaseSetting.PurchaseTax;
-                txt_PurchaseInvoiceNo.Text = purchaseSetting.PurchaseInvoiceNo;
+                cbt_SalesFlag.SelectedIndex = salesSetting.SalesFlag - 3;
+                txt_SalesNumber.Text = salesSetting.SalesNumber;
+                det_SalesDate.Text = salesSetting.SalesDate.ToString("yyyy年MM月dd日");
+                Show_ProductCustomerNumber_Index();
+                cbt_SalesTax.SelectedIndex = salesSetting.SalesTax;
+                txt_SalesInvoiceNo.Text = salesSetting.SalesInvoiceNo;
                 Show_EmployeeNumber_Index();
-                mmt_Remark.Text = purchaseSetting.Remark;
-                cbt_Posting.SelectedIndex = purchaseSetting.Posting;
-                PurchaseSubSettings = purchaseSetting.PurchaseSub;
+                mmt_Remark.Text = salesSetting.Remark;
+                cbt_Posting.SelectedIndex = salesSetting.Posting;
+                SalesSubSettings = salesSetting.SalesSub;
             }
             else
             {
-                det_PurchaseDate.EditValue = DateTime.Now;
+                det_SalesDate.EditValue = DateTime.Now;
             }
             CacalculateData();
             RefreshData();
-            cbt_PurchaseTax.SelectedIndexChanged += (s, e) =>
+            cbt_SalesTax.SelectedIndexChanged += (s, e) =>
             {
                 CacalculateData();
             };
@@ -169,11 +160,11 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             {
                 if (cbt_ProductName.SelectedIndex > -1 && !string.IsNullOrEmpty(txt_ProducUnit.Text) && !string.IsNullOrEmpty(txt_productPrice.Text))
                 {
-                    PurchaseSubSettings.Add(new PurchaseSubSetting()
+                    SalesSubSettings.Add(new SalesSubSetting()
                     {
-                        PurchaseFlag = cbt_PurchaseFlag.SelectedIndex + 1,
-                        PurchaseNumber = "",
-                        PurchaseNo = PurchaseSubSettings.Count() + 1,
+                        SalesFlag = cbt_SalesFlag.SelectedIndex + 3,
+                        SalesNumber = "",
+                        SalesNo = SalesSubSettings.Count() + 1,
                         ProductNumber = Get_cbt_ProductName_Number(),
                         ProductName = cbt_ProductName.Text,
                         ProductUnit = txt_ProducUnit.Text,
@@ -209,14 +200,14 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             #region 刪除細項
             btn_Delete.Click += (s, e) =>
             {
-                for (int i = 0; i < PurchaseSubSettings.Count; i++)
+                for (int i = 0; i < SalesSubSettings.Count; i++)
                 {
-                    if (PurchaseSubSettings[i].PurchaseNo == FocusePurchaseSubSetting.PurchaseNo)
+                    if (SalesSubSettings[i].SalesNo == FocuseSalesSubSetting.SalesNo)
                     {
-                        PurchaseSubSettings.RemoveAt(i);
+                        SalesSubSettings.RemoveAt(i);
                     }
                 }
-                RefraeshPurchaseNo();
+                RefraeshSalesNo();
                 CacalculateData();
                 RefreshData();
                 FocuseMainGrid();
@@ -231,7 +222,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             #region 儲存按鈕
             btn_Save.Click += (s, e) =>
             {
-                CheckNumber(purchaseSetting, apiMethod);
+                CheckNumber(salesSetting, apiMethod);
             };
             #endregion
         }
@@ -243,20 +234,20 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         {
             if (gridView1.FocusedRowHandle > -1 && gridView1.DataRowCount > 0)
             {
-                FocusePurchaseSubSetting.PurchaseFlag = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseFlag").ToString()) - 1;
-                FocusePurchaseSubSetting.PurchaseNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseNumber").ToString();
-                FocusePurchaseSubSetting.PurchaseNo = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseNo").ToString());
-                FocusePurchaseSubSetting.ProductNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductNumber").ToString();
-                FocusePurchaseSubSetting.ProductName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductName").ToString();
-                FocusePurchaseSubSetting.ProductName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductName").ToString();
-                FocusePurchaseSubSetting.ProductUnit = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductUnit").ToString();
-                FocusePurchaseSubSetting.ProductQty = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductQty").ToString());
-                FocusePurchaseSubSetting.ProductPrice = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductPrice").ToString());
-                FocusePurchaseSubSetting.ProductTotal = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductTotal").ToString());
+                FocuseSalesSubSetting.SalesFlag = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesFlag").ToString()) - 1;
+                FocuseSalesSubSetting.SalesNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesNumber").ToString();
+                FocuseSalesSubSetting.SalesNo = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesNo").ToString());
+                FocuseSalesSubSetting.ProductNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductNumber").ToString();
+                FocuseSalesSubSetting.ProductName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductName").ToString();
+                FocuseSalesSubSetting.ProductName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductName").ToString();
+                FocuseSalesSubSetting.ProductUnit = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductUnit").ToString();
+                FocuseSalesSubSetting.ProductQty = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductQty").ToString());
+                FocuseSalesSubSetting.ProductPrice = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductPrice").ToString());
+                FocuseSalesSubSetting.ProductTotal = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductTotal").ToString());
             }
             else
             {
-                FocusePurchaseSubSetting = new PurchaseSubSetting();
+                FocuseSalesSubSetting = new SalesSubSetting();
             }
         }
         #endregion
@@ -264,11 +255,11 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         /// <summary>
         /// 刷新細項編號
         /// </summary>
-        private void RefraeshPurchaseNo()
+        private void RefraeshSalesNo()
         {
-            for (int i = 0; i < PurchaseSubSettings.Count; i++)
+            for (int i = 0; i < SalesSubSettings.Count; i++)
             {
-                PurchaseSubSettings[i].PurchaseNo = i + 1;
+                SalesSubSettings[i].SalesNo = i + 1;
             }
         }
         #endregion
@@ -278,7 +269,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         /// </summary>
         private void RefreshData()
         {
-            gridControl1.DataSource = PurchaseSubSettings;
+            gridControl1.DataSource = SalesSubSettings;
             gridControl1.RefreshDataSource();
         }
         #endregion
@@ -291,14 +282,14 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             Total = 0;
             Tax = 0;
             TotalTax = 0;
-            if (PurchaseSubSettings.Count > 0)
+            if (SalesSubSettings.Count > 0)
             {
-                foreach (var item in PurchaseSubSettings)
+                foreach (var item in SalesSubSettings)
                 {
                     Total += item.ProductTotal;
                 }
             }
-            if (cbt_PurchaseTax.SelectedIndex == 0)
+            if (cbt_SalesTax.SelectedIndex == 0)
             {
                 Tax = Math.Round(Total * 0.05, 0);
             }
@@ -308,55 +299,55 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             txt_TotalTax.EditValue = TotalTax.ToString();
         }
         #endregion
-        #region 廠商編號功能
+        #region 客戶編號功能
         /// <summary>
-        /// 創建廠商編號下拉選單
+        /// 創建客戶編號下拉選單
         /// </summary>
         /// <param name="companySettings"></param>
-        private void Create_cbt_PurchasecompanyNumber_cbt()
+        private void Create_cbt_SalescustomerNumber_cbt()
         {
-            if (cbt_PurchasecompanyNumber.Properties.Items.Count > 0)
+            if (cbt_SalesCustomerNumber.Properties.Items.Count > 0)
             {
-                cbt_PurchasecompanyNumber.Properties.Items.Clear();
+                cbt_SalesCustomerNumber.Properties.Items.Clear();
             }
-            if (CompanySettings != null)
+            if (CustomerSettings != null)
             {
-                foreach (var item in CompanySettings)
+                foreach (var item in CustomerSettings)
                 {
-                    cbt_PurchasecompanyNumber.Properties.Items.Add(item.CompanyName);
+                    cbt_SalesCustomerNumber.Properties.Items.Add(item.CustomerName);
                 }
             }
         }
         /// <summary>
-        /// 取得廠商編號
+        /// 取得客戶編號
         /// </summary>
         /// <returns></returns>
-        private string Get_ProductCompanyNumber_Number()
+        private string Get_ProductCustomerNumber_Number()
         {
             string value = "";
-            if (CompanySettings != null)
+            if (CustomerSettings != null)
             {
-                if (CompanySettings.Count > 0)
+                if (CustomerSettings.Count > 0)
                 {
-                    value = CompanySettings[cbt_PurchasecompanyNumber.SelectedIndex].CompanyNumber;
+                    value = CustomerSettings[cbt_SalesCustomerNumber.SelectedIndex].CustomerNumber;
                 }
             }
             return value;
         }
         /// <summary>
-        /// 顯示廠商名稱
+        /// 顯示客戶名稱
         /// </summary>
-        private void Show_ProductCompanyNumber_Index()
+        private void Show_ProductCustomerNumber_Index()
         {
             int Index = -1;
-            if (CompanySettings != null)
+            if (CustomerSettings != null)
             {
-                foreach (var item in CompanySettings)
+                foreach (var item in CustomerSettings)
                 {
-                    if (item.CompanyNumber == PurchaseSetting.PurchaseCompanyNumber)
+                    if (item.CustomerNumber == SalesSetting.SalesCustomerNumber)
                     {
                         Index++;
-                        cbt_PurchasecompanyNumber.SelectedIndex = Index;
+                        cbt_SalesCustomerNumber.SelectedIndex = Index;
                     }
                     else
                     {
@@ -411,7 +402,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             {
                 foreach (var item in EmployeeSettings)
                 {
-                    if (item.EmployeeNumber == PurchaseSetting.PurchaseEmployeeNumber)
+                    if (item.EmployeeNumber == SalesSetting.SalesEmployeeNumber)
                     {
                         Index++;
                         cbt_EmployeeNumber.SelectedIndex = Index;
@@ -461,36 +452,36 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         }
         #endregion
         #region 檢查資料問題
-        private void CheckNumber(PurchaseSetting purchaseSetting, APIMethod apiMethod)
+        private void CheckNumber(SalesSetting salesSetting, APIMethod apiMethod)
         {
             string response = "";
-            if (purchaseSetting != null && purchaseSetting.PurchaseNumber != null)
+            if (salesSetting != null && salesSetting.SalesNumber != null)
             {
-                foreach (var item in PurchaseSubSettings)
+                foreach (var item in SalesSubSettings)
                 {
-                    item.PurchaseNumber = txt_PurchaseNumber.Text;
+                    item.SalesNumber = txt_SalesNumber.Text;
                 }
                 action.Caption = "進貨修改錯誤";
-                purchaseSetting.PurchaseFlag = cbt_PurchaseFlag.SelectedIndex + 1;
-                purchaseSetting.PurchaseNumber = txt_PurchaseNumber.Text;
-                purchaseSetting.PurchaseDate = Convert.ToDateTime(det_PurchaseDate.Text);
-                purchaseSetting.PurchaseCompanyNumber = Get_ProductCompanyNumber_Number();
-                purchaseSetting.PurchaseTax = cbt_PurchaseTax.SelectedIndex;
-                purchaseSetting.PurchaseInvoiceNo = txt_PurchaseInvoiceNo.Text;
-                purchaseSetting.PurchaseEmployeeNumber = Get_cbt_EmployeeNumber_Number();
-                purchaseSetting.Remark = mmt_Remark.Text;
-                purchaseSetting.Posting = cbt_Posting.SelectedIndex;
-                purchaseSetting.PurchaseSub = PurchaseSubSettings;
-                purchaseSetting.Total = Convert.ToDouble(txt_Total.EditValue);
-                purchaseSetting.Tax = Convert.ToDouble(txt_Tax.EditValue);
-                purchaseSetting.TotalTax = Convert.ToDouble(txt_TotalTax.EditValue);
-                string value = JsonConvert.SerializeObject(purchaseSetting);
-                response = apiMethod.Put_Purchase(value);
+                salesSetting.SalesFlag = cbt_SalesFlag.SelectedIndex + 3;
+                salesSetting.SalesNumber = txt_SalesNumber.Text;
+                salesSetting.SalesDate = Convert.ToDateTime(det_SalesDate.Text);
+                salesSetting.SalesCustomerNumber = Get_ProductCustomerNumber_Number();
+                salesSetting.SalesTax = cbt_SalesTax.SelectedIndex;
+                salesSetting.SalesInvoiceNo = txt_SalesInvoiceNo.Text;
+                salesSetting.SalesEmployeeNumber = Get_cbt_EmployeeNumber_Number();
+                salesSetting.Remark = mmt_Remark.Text;
+                salesSetting.Posting = cbt_Posting.SelectedIndex;
+                salesSetting.SalesSub = SalesSubSettings;
+                salesSetting.Total = Convert.ToDouble(txt_Total.EditValue);
+                salesSetting.Tax = Convert.ToDouble(txt_Tax.EditValue);
+                salesSetting.TotalTax = Convert.ToDouble(txt_TotalTax.EditValue);
+                string value = JsonConvert.SerializeObject(salesSetting);
+                response = apiMethod.Put_Sales(value);
                 if (response == "200")
                 {
                     if (!string.IsNullOrEmpty(AttachmentFilePath))
                     {
-                        response = apiMethod.Post_PurchaseAttachmentFile(purchaseSetting.PurchaseFlag, purchaseSetting.PurchaseCompanyNumber, purchaseSetting.PurchaseDate, purchaseSetting.PurchaseNumber, AttachmentFilePath);
+                        response = apiMethod.Post_SalesAttachmentFile(salesSetting.SalesFlag, salesSetting.SalesCustomerNumber, salesSetting.SalesDate, salesSetting.SalesNumber, AttachmentFilePath);
                         if (response == "200")
                         {
                             DialogResult = DialogResult.OK;
@@ -514,29 +505,29 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             }
             else
             {
-                if (!string.IsNullOrEmpty(det_PurchaseDate.Text) && cbt_PurchasecompanyNumber.SelectedIndex > -1 && cbt_EmployeeNumber.SelectedIndex > -1)
+                if (!string.IsNullOrEmpty(det_SalesDate.Text) && cbt_SalesCustomerNumber.SelectedIndex > -1 && cbt_EmployeeNumber.SelectedIndex > -1)
                 {
-                    PurchaseSetting PurchaseSetting = new PurchaseSetting()
+                    SalesSetting SalesSetting = new SalesSetting()
                     {
-                        PurchaseFlag = cbt_PurchaseFlag.SelectedIndex + 1,
-                        PurchaseNumber = txt_PurchaseNumber.Text,
-                        PurchaseDate = Convert.ToDateTime(det_PurchaseDate.Text),
-                        PurchaseCompanyNumber = Get_ProductCompanyNumber_Number(),
-                        PurchaseTax = cbt_PurchaseTax.SelectedIndex,
-                        PurchaseInvoiceNo = txt_PurchaseInvoiceNo.Text,
-                        PurchaseEmployeeNumber = Get_cbt_EmployeeNumber_Number(),
+                        SalesFlag = cbt_SalesFlag.SelectedIndex + 3,
+                        SalesNumber = txt_SalesNumber.Text,
+                        SalesDate = Convert.ToDateTime(det_SalesDate.Text),
+                        SalesCustomerNumber = Get_ProductCustomerNumber_Number(),
+                        SalesTax = cbt_SalesTax.SelectedIndex,
+                        SalesInvoiceNo = txt_SalesInvoiceNo.Text,
+                        SalesEmployeeNumber = Get_cbt_EmployeeNumber_Number(),
                         Remark = mmt_Remark.Text,
                         Posting = cbt_Posting.SelectedIndex,
-                        PurchaseSub = PurchaseSubSettings
+                        SalesSub = SalesSubSettings
                     };
-                    string value = JsonConvert.SerializeObject(PurchaseSetting);
-                    response = apiMethod.Post_Purchase(value);
+                    string value = JsonConvert.SerializeObject(SalesSetting);
+                    response = apiMethod.Post_Sales(value);
                     if (response == "200")
                     {
                         if (!string.IsNullOrEmpty(AttachmentFilePath) && !string.IsNullOrEmpty(apiMethod.ResponseDataMessage))
                         {
-                            List<PurchaseSetting> settings = JsonConvert.DeserializeObject<List<PurchaseSetting>>(apiMethod.ResponseDataMessage);
-                            response = apiMethod.Post_PurchaseAttachmentFile(settings[0].PurchaseFlag, settings[0].PurchaseCompanyNumber, settings[0].PurchaseDate, settings[0].PurchaseNumber, AttachmentFilePath);
+                            List<SalesSetting> settings = JsonConvert.DeserializeObject<List<SalesSetting>>(apiMethod.ResponseDataMessage);
+                            response = apiMethod.Post_SalesAttachmentFile(settings[0].SalesFlag, settings[0].SalesCustomerNumber, settings[0].SalesDate, settings[0].SalesNumber, AttachmentFilePath);
                             if (response == "200")
                             {
                                 DialogResult = DialogResult.OK;

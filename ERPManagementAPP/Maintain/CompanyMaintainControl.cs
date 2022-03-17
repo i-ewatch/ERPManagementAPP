@@ -38,7 +38,7 @@ namespace ERPManagementAPP.Maintain
             InitializeComponent();
             Form1 = form1;
             apiMethod = APIMethod;
-            if (Form1.TokenEnumIndex > 0)
+            if (Form1.EmployeeSetting.Token > 0)
             {
                 Refresh_Main_GridView();
             }
@@ -300,6 +300,7 @@ namespace ERPManagementAPP.Maintain
                 FocuseCompanySetting.ContactName = advBandedGridView1.GetRowCellValue(advBandedGridView1.FocusedRowHandle, "ContactName").ToString();
                 FocuseCompanySetting.ContactEmail = advBandedGridView1.GetRowCellValue(advBandedGridView1.FocusedRowHandle, "ContactEmail").ToString();
                 FocuseCompanySetting.ContactPhone = advBandedGridView1.GetRowCellValue(advBandedGridView1.FocusedRowHandle, "ContactPhone").ToString();
+                FocuseCompanySetting.CheckoutType = Convert.ToInt32(advBandedGridView1.GetRowCellValue(advBandedGridView1.FocusedRowHandle, "CheckoutType").ToString());
                 if (advBandedGridView1.GetRowCellValue(advBandedGridView1.FocusedRowHandle, "Remark") != null)
                 {
                     FocuseCompanySetting.Remark = advBandedGridView1.GetRowCellValue(advBandedGridView1.FocusedRowHandle, "Remark").ToString();
@@ -485,7 +486,7 @@ namespace ERPManagementAPP.Maintain
                     action.Caption = "下載檔案錯誤";
                     action.Description = "伺服器找不到此檔案";
                     FlyoutDialog.Show(Form1, action);
-                }  
+                }
             }
             else
             {
@@ -504,6 +505,19 @@ namespace ERPManagementAPP.Maintain
         public override void Refresh_Second_GridView(string Number)
         {
             CompanyDirectorygridControl.DataSource = apiMethod.Get_DirectoryCompany(Number);
+        }
+        public override void Refresh_Token()
+        {
+            if (Form1.EmployeeSetting.Token != 2)
+            {
+                btn_Company_Delete.Visible = false;
+                btn_CompanyDirectory_Delete.Visible = false;
+            }
+            else
+            {
+                btn_Company_Delete.Visible = true;
+                btn_CompanyDirectory_Delete.Visible = true;
+            }
         }
     }
 }

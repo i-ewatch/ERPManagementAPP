@@ -13,12 +13,16 @@ namespace ERPManagementAPP.Modules
             EmployeeMaintainControl employeeMaintainControl = new EmployeeMaintainControl(apiMethod, form1);
             ProductMaintainControl productMaintainControl = new ProductMaintainControl(apiMethod, form1);
             PurchaseMaintainControl purchaseMaintainControl = new PurchaseMaintainControl(apiMethod, form1);
+            SalesMaintainControl salesMaintainControl = new SalesMaintainControl(apiMethod, form1);
+            PaymentMiantainControl paymentMiantainControl = new PaymentMiantainControl(apiMethod, form1);
             MaintainModule.Add(homeMaintainControl);
             MaintainModule.Add(companyMaintainControl);
             MaintainModule.Add(customerMaintainControl);
             MaintainModule.Add(employeeMaintainControl);
             MaintainModule.Add(productMaintainControl);
             MaintainModule.Add(purchaseMaintainControl);
+            MaintainModule.Add(salesMaintainControl);
+            MaintainModule.Add(paymentMiantainControl);
         }
     }
 }

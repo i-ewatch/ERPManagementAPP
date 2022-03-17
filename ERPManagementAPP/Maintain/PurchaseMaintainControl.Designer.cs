@@ -166,6 +166,8 @@ namespace ERPManagementAPP.Maintain
             // colTotal
             // 
             this.colTotal.Caption = "合計";
+            this.colTotal.DisplayFormat.FormatString = "C0";
+            this.colTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotal.FieldName = "Total";
             this.colTotal.Name = "colTotal";
             this.colTotal.OptionsColumn.AllowEdit = false;
@@ -175,6 +177,8 @@ namespace ERPManagementAPP.Maintain
             // colTotalTax
             // 
             this.colTotalTax.Caption = "稅後總計";
+            this.colTotalTax.DisplayFormat.FormatString = "C0";
+            this.colTotalTax.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colTotalTax.FieldName = "TotalTax";
             this.colTotalTax.Name = "colTotalTax";
             this.colTotalTax.OptionsColumn.AllowEdit = false;

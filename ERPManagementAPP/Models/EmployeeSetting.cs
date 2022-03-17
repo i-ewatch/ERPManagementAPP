@@ -22,5 +22,13 @@
         /// 權限
         /// </summary>
         public int Token { get; set; }
+        /// <summary>
+        /// 帳號
+        /// </summary>
+        public string AccountNo { get; set; }
+        /// <summary>
+        /// 密碼
+        /// </summary>
+        public string PassWord { get; set; }
     }
 }

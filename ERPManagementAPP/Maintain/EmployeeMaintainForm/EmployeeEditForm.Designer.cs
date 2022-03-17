@@ -31,6 +31,8 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeEditForm));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.txt_PassWord = new DevExpress.XtraEditors.TextEdit();
+            this.txt_Account = new DevExpress.XtraEditors.TextEdit();
             this.cbt_Token = new DevExpress.XtraEditors.ComboBoxEdit();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.btn_Save = new DevExpress.XtraEditors.SimpleButton();
@@ -48,8 +50,12 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_PassWord.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_Account.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbt_Token.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
@@ -66,10 +72,14 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.txt_PassWord);
+            this.layoutControl1.Controls.Add(this.txt_Account);
             this.layoutControl1.Controls.Add(this.cbt_Token);
             this.layoutControl1.Controls.Add(this.panelControl2);
             this.layoutControl1.Controls.Add(this.panelControl1);
@@ -80,9 +90,29 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(569, 239);
+            this.layoutControl1.Size = new System.Drawing.Size(569, 289);
             this.layoutControl1.TabIndex = 2;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // txt_PassWord
+            // 
+            this.txt_PassWord.Location = new System.Drawing.Point(83, 203);
+            this.txt_PassWord.Name = "txt_PassWord";
+            this.txt_PassWord.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.txt_PassWord.Properties.Appearance.Options.UseFont = true;
+            this.txt_PassWord.Size = new System.Drawing.Size(474, 26);
+            this.txt_PassWord.StyleController = this.layoutControl1;
+            this.txt_PassWord.TabIndex = 10;
+            // 
+            // txt_Account
+            // 
+            this.txt_Account.Location = new System.Drawing.Point(83, 173);
+            this.txt_Account.Name = "txt_Account";
+            this.txt_Account.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.txt_Account.Properties.Appearance.Options.UseFont = true;
+            this.txt_Account.Size = new System.Drawing.Size(474, 26);
+            this.txt_Account.StyleController = this.layoutControl1;
+            this.txt_Account.TabIndex = 9;
             // 
             // cbt_Token
             // 
@@ -110,9 +140,9 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             this.panelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl2.Controls.Add(this.btn_Save);
             this.panelControl2.Controls.Add(this.btn_Cancel);
-            this.panelControl2.Location = new System.Drawing.Point(12, 189);
+            this.panelControl2.Location = new System.Drawing.Point(12, 233);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(545, 38);
+            this.panelControl2.Size = new System.Drawing.Size(545, 44);
             this.panelControl2.TabIndex = 7;
             // 
             // btn_Save
@@ -121,7 +151,7 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             this.btn_Save.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Save.ImageOptions.Image")));
             this.btn_Save.Location = new System.Drawing.Point(357, 0);
             this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(94, 38);
+            this.btn_Save.Size = new System.Drawing.Size(94, 44);
             this.btn_Save.TabIndex = 3;
             this.btn_Save.Text = "Save";
             // 
@@ -131,7 +161,7 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             this.btn_Cancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Cancel.ImageOptions.Image")));
             this.btn_Cancel.Location = new System.Drawing.Point(451, 0);
             this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.Size = new System.Drawing.Size(94, 38);
+            this.btn_Cancel.Size = new System.Drawing.Size(94, 44);
             this.btn_Cancel.TabIndex = 2;
             this.btn_Cancel.Text = "Cancel";
             // 
@@ -142,7 +172,7 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             this.panelControl1.Controls.Add(this.labelControl1);
             this.panelControl1.Location = new System.Drawing.Point(12, 102);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(545, 83);
+            this.panelControl1.Size = new System.Drawing.Size(545, 67);
             this.panelControl1.TabIndex = 6;
             // 
             // mmt_Address
@@ -152,7 +182,7 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             this.mmt_Address.Name = "mmt_Address";
             this.mmt_Address.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.mmt_Address.Properties.Appearance.Options.UseFont = true;
-            this.mmt_Address.Size = new System.Drawing.Size(473, 83);
+            this.mmt_Address.Size = new System.Drawing.Size(473, 67);
             this.mmt_Address.TabIndex = 1;
             // 
             // labelControl1
@@ -164,7 +194,7 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(72, 20);
             this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "戶籍地址  ";
+            this.labelControl1.Text = "信箱          ";
             // 
             // txt_EmployeeNumber
             // 
@@ -209,9 +239,11 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             this.layoutControlItem4,
             this.layoutControlItem1,
             this.layoutControlItem5,
-            this.layoutControlItem6});
+            this.layoutControlItem6,
+            this.layoutControlItem7,
+            this.layoutControlItem8});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(569, 239);
+            this.Root.Size = new System.Drawing.Size(569, 289);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem2
@@ -257,16 +289,16 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             this.layoutControlItem1.Control = this.panelControl1;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 90);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(549, 87);
+            this.layoutControlItem1.Size = new System.Drawing.Size(549, 71);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.panelControl2;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 177);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 221);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(549, 42);
+            this.layoutControlItem5.Size = new System.Drawing.Size(549, 48);
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
             // 
@@ -281,11 +313,33 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             this.layoutControlItem6.Text = "權限";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(68, 20);
             // 
+            // layoutControlItem7
+            // 
+            this.layoutControlItem7.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem7.Control = this.txt_Account;
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 161);
+            this.layoutControlItem7.Name = "layoutControlItem7";
+            this.layoutControlItem7.Size = new System.Drawing.Size(549, 30);
+            this.layoutControlItem7.Text = "帳號*";
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(68, 20);
+            // 
+            // layoutControlItem8
+            // 
+            this.layoutControlItem8.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.layoutControlItem8.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem8.Control = this.txt_PassWord;
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 191);
+            this.layoutControlItem8.Name = "layoutControlItem8";
+            this.layoutControlItem8.Size = new System.Drawing.Size(549, 30);
+            this.layoutControlItem8.Text = "密碼*";
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(68, 20);
+            // 
             // EmployeeEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(569, 239);
+            this.ClientSize = new System.Drawing.Size(569, 289);
             this.ControlBox = false;
             this.Controls.Add(this.layoutControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -296,6 +350,8 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             this.Text = "EmployeeEditForm";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txt_PassWord.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_Account.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbt_Token.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
@@ -313,6 +369,8 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -337,5 +395,9 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
         private DevExpress.XtraEditors.ComboBoxEdit cbt_Token;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraEditors.MemoEdit mmt_Address;
+        private DevExpress.XtraEditors.TextEdit txt_PassWord;
+        private DevExpress.XtraEditors.TextEdit txt_Account;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
     }
 }

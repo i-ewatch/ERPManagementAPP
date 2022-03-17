@@ -3,10 +3,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Serializers;
+using Serilog;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace ERPManagementAPP.Methods
 {
@@ -32,7 +31,7 @@ namespace ERPManagementAPP.Methods
         /// <summary>
         /// API連結旗標
         /// </summary>
-        public bool ClientFlag { get; set; } = false;
+        public bool ClientFlag { get; set; } = true;
         /// <summary>
         /// API連結物件
         /// </summary>
@@ -41,6 +40,8 @@ namespace ERPManagementAPP.Methods
         public APIMethod(string url)
         {
             URL = url;
+            Login_url = $"{URL}/EmployeeLogin";
+
             Company_url = $"{URL}/Company";
             CompanyAttachmentFile_url = $"{URL}/CompanyAttachmentFile";
             CompanyAttachmentFile_url = $"{URL}/CompanyAttachmentFile";
@@ -48,6 +49,7 @@ namespace ERPManagementAPP.Methods
             CompanyDirectoryNumber_url = $"{URL}/CompanyDirectoryNumber";
             DirectoryCompany_url = $"{URL}/DirectoryCompany";
             CompanyDirectoryAttachmentFile_url = $"{URL}/CompanyDirectoryAttachmentFile";
+
             Customer_url = $"{URL}/Customer";
             CustomerNumber_url = $"{URL}/CustomerNumber";
             CustomerAttachmentFile_url = $"{URL}/CustomerAttachmentFile";
@@ -55,17 +57,34 @@ namespace ERPManagementAPP.Methods
             CustomerDirectoryNumber_url = $"{URL}/CompanyDirectoryNumber";
             DirectoryCustomer_url = $"{URL}/DirectoryCustomer";
             CustomerDirectoryAttachmentFile_url = $"{URL}/CustomerDirectoryAttachmentFile";
+
             Employee_url = $"{URL}/Employee";
             EmployeeNumber_url = $"{URL}/EmployeeNumber";
+
             Product_url = $"{URL}/Product";
             ProductType_url = $"{URL}/ProductNumber/ProductType";
             ProductNumber_url = $"{URL}/ProductNumber";
             ProductAttachmentFile_url = $"{URL}/ProductAttachmentFile";
             ProductGategory_url = $"{URL}/ProductCategory";
+
             Purchase_url = $"{URL}/Purchase";
             PurchaseNumber_url = $"{URL}/Purchase/PurchaseNumber";
             PurchaseAttachmenFile_url = $"{URL}/PurchaseAttachmentFile";
+
+            Sales_url = $"{URL}/Sales";
+            SalesNumber_url = $"{URL}/Sales/SalesNumber";
+            SalesAttachmenFile_url = $"{URL}/SalesAttachmentFile";
+
+            Payment_url = $"{URL}/Payment";
+            PaymentAttachmenFile_url = $"{URL}/PaymentAttachmentFile";
+            PaymentItem_url = $"{URL}/PaymentItem";
         }
+        #region 登入資訊
+        /// <summary>
+        /// 登入資料
+        /// </summary>
+        private string Login_url { get; set; }
+        #endregion
         #region 公司資訊
         /// <summary>
         /// 廠商資料(Get、Post、Put、Delete)
@@ -172,8 +191,75 @@ namespace ERPManagementAPP.Methods
         /// </summary>
         private string PurchaseAttachmenFile_url { get; set; }
         #endregion
+        #region 銷貨資訊
+        /// <summary>
+        /// 銷貨資料(Get、Post、Put、Delete)
+        /// </summary>
+        private string Sales_url { get; set; }
+        /// <summary>
+        /// 銷貨資料查詢(年月份)
+        /// </summary>
+        private string SalesNumber_url { get; set; }
+        /// <summary>
+        /// 銷貨檔案(Post、Get)
+        /// </summary>
+        private string SalesAttachmenFile_url { get; set; }
+        #endregion
+        #region 代墊代付資訊
+        /// <summary>
+        /// 代墊代付資料(Get、Post、Put、Delete)
+        /// </summary>
+        private string Payment_url { get; set; }
+        /// <summary>
+        /// 代墊代付檔案(Post、Put)
+        /// </summary>
+        private string PaymentAttachmenFile_url { get; set; }
+        /// <summary>
+        /// 代墊代付請款品項資料(Get、Post、Put、Delete)
+        /// </summary>
+        private string PaymentItem_url { get; set; }
+        #endregion
 
         /*以下API功能----------------------------------------------------------------------------------------*/
+        #region 登入API
+        /// <summary>
+        /// 帳號登入
+        /// </summary>
+        /// <param name="Account">帳號</param>
+        /// <param name="PassWord">密碼</param>
+        /// <returns></returns>
+        public List<EmployeeSetting> Get_Login(string Account,string PassWord)
+        {
+            try
+            {
+                List<EmployeeSetting> setting = null;
+                var option = new RestClientOptions(Login_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddParameter("Account", Account, type: ParameterType.QueryString);
+                requsest.AddParameter("PassWord", PassWord, type: ParameterType.QueryString);
+                var response = clinet.ExecuteGetAsync(requsest);
+                response.Wait();
+                if (response.Result.Content != null)
+                {
+                    setting = JsonConvert.DeserializeObject<List<EmployeeSetting>>(response.Result.Content);
+                }
+                ClientFlag = true;
+                return setting;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "登入失敗");
+                ClientFlag = false;
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+
         #region 廠商API
         #region 全部廠商
         /// <summary>
@@ -197,8 +283,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "查詢全部廠商API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -228,8 +315,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "查詢廠商(廠商編號)API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -258,8 +346,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "新增廠商資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -287,8 +376,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "修改廠商資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -316,8 +406,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "刪除廠商資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -349,8 +440,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "廠商上傳檔案API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -382,8 +474,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return response.Result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "廠商下載檔案API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -414,8 +507,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "全部廠商通訊錄API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -445,8 +539,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "廠商通訊錄(廠商編號)API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -476,8 +571,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "廠商通訊錄(廠商通訊錄編號)API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -506,8 +602,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "新增廠商通訊錄資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -535,8 +632,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "修改廠商通訊錄資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -564,8 +662,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "刪除廠商通訊錄資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -597,8 +696,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "廠商通訊錄上傳檔案API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -630,8 +730,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return response.Result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "廠商通訊錄下載檔案API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -662,8 +763,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "全部客戶API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -693,8 +795,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "客戶(客戶編號)API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -723,8 +826,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "新增客戶資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -752,8 +856,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "修改客戶資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -781,8 +886,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "刪除客戶資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -814,8 +920,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "客戶上傳檔案API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -847,8 +954,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return response.Result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "客戶下載檔案API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -879,8 +987,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "全部客戶通訊錄API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -910,8 +1019,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "客戶通訊錄(客戶編號)API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -941,8 +1051,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "客戶通訊錄(客戶通訊錄編號)API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -971,8 +1082,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "新增客戶通訊錄資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1000,8 +1112,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "修改客戶通訊錄資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1029,8 +1142,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "刪除客戶通訊錄資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1062,8 +1176,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "客戶通訊錄上傳檔案API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1095,8 +1210,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return response.Result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "客戶通訊錄下載檔案API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1127,8 +1243,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "全部員工API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -1158,8 +1275,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "員工(員工編號)API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -1188,8 +1306,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "新增員工資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1217,8 +1336,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "修改員工資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1246,8 +1366,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "刪除員工資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1278,8 +1399,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "全部產品API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -1309,8 +1431,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "產品(產品編號)API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -1340,8 +1463,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "產品(產品種類代碼)API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -1370,8 +1494,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "新增產品資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1399,8 +1524,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "修改產品資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1428,8 +1554,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "刪除產品資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1461,8 +1588,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "產品上傳檔案API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1494,8 +1622,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return response.Result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "產品下載檔案API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1526,8 +1655,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "全部產品類別API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -1556,8 +1686,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "新增產品類別資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1585,8 +1716,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "修改產品類別資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1614,8 +1746,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "刪除產品類別資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1648,8 +1781,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "全部進貨表頭(年月份)API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -1679,8 +1813,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return settings;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "查詢單筆【進貨】或【進貨退出】父子資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;
@@ -1710,8 +1845,9 @@ namespace ERPManagementAPP.Methods
                 ResponseDataMessage = response.Result.Content;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "新增進貨資料API錯誤");
                 ResponseDataMessage = "";
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
@@ -1740,8 +1876,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "修改進貨資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1768,8 +1905,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "刪除進貨資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1802,8 +1940,9 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return ResponseMessage(response.Result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "進貨上傳檔案API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -1813,8 +1952,6 @@ namespace ERPManagementAPP.Methods
         /// <summary>
         /// 進貨下載檔案
         /// </summary>
-        /// <param name="Number">產品編號</param>
-        /// <param name="Name">產品名稱</param>
         /// <param name="File">檔案名稱</param>
         /// <returns></returns>
         public byte[] Get_PurchaseAttachmentFile(string PurchaseCompanyNumber, string File)
@@ -1834,8 +1971,640 @@ namespace ERPManagementAPP.Methods
                 ClientFlag = true;
                 return response.Result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex, "進貨下載檔案API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region 銷貨API
+        #region 全部銷貨表頭(年月份)
+        /// <summary>
+        /// 全部銷貨表頭(年月份)
+        /// </summary>
+        /// <param name="SalesNumber">年月份</param>
+        /// <returns></returns>
+        public List<SalesMainSetting> Get_Sales(string SalesNumber)
+        {
+            try
+            {
+                List<SalesMainSetting> settings = null;
+                var option = new RestClientOptions(SalesNumber_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddParameter("SalesNumber", SalesNumber, type: ParameterType.QueryString);
+                var response = clinet.ExecuteGetAsync<List<SalesMainSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<SalesMainSetting>>(response.Result.Content);
+                ClientFlag = true;
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "全部銷貨表頭(年月份)API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 查詢單筆【銷貨】或【銷貨退出】父子資料
+        /// <summary>
+        /// 查詢單筆【銷貨】或【銷貨退出】父子資料
+        /// </summary>
+        /// <param name="setting"></param>
+        /// <returns></returns>
+        public List<SalesSetting> Get_Sales(SalesMainSetting setting)
+        {
+            try
+            {
+                List<SalesSetting> settings = null;
+                var option = new RestClientOptions(Sales_url + $"/{setting.SalesFlag}/{setting.SalesNumber}")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<SalesSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<SalesSetting>>(response.Result.Content);
+                ClientFlag = true;
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "查詢單筆【銷貨】或【銷貨退出】父子資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 新增銷貨資料
+        /// <summary>
+        /// 新增銷貨資料
+        /// </summary>
+        /// <param name="PruchaseSetting"></param>
+        /// <returns></returns>
+        public string Post_Sales(string PruchaseSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Sales_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddBody(PruchaseSetting, ContentType.Json);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ResponseDataMessage = response.Result.Content;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "新增銷貨資料API錯誤");
+                ResponseDataMessage = "";
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 修改銷貨資料
+        /// <summary>
+        /// 修改銷貨資料
+        /// </summary>
+        /// <param name="PruchaseSetting"></param>
+        /// <returns></returns>
+        public string Put_Sales(string PruchaseSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Sales_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(PruchaseSetting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "修改銷貨資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 刪除銷貨資料
+        /// <summary>
+        /// 刪除銷貨資料
+        /// </summary>
+        /// <param name="PruchaseSetting"></param>
+        /// <returns></returns>
+        public string Delete_Sales(int SalesFlag, string SalesNumber)
+        {
+            try
+            {
+                var option = new RestClientOptions($"{Sales_url}/{SalesFlag}/{SalesNumber}")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Delete);
+                var response = clinet.DeleteAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "刪除銷貨資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 銷貨上傳檔案
+        /// <summary>
+        /// 銷貨上傳檔案
+        /// </summary>
+        /// <param name="PruchaseSetting"></param>
+        /// <param name="Path"></param>
+        /// <returns></returns>
+        public string Post_SalesAttachmentFile(int SalesFlag, string SalesCompanyNumber, DateTime SalesDate, string SalesNumber, string Path)
+        {
+            try
+            {
+                var option = new RestClientOptions(SalesAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddParameter("SalesFlag", SalesFlag, type: ParameterType.QueryString);
+                requsest.AddParameter("SalesCustomerNumber", SalesCompanyNumber, type: ParameterType.QueryString);
+                requsest.AddParameter("SalesDate", SalesDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
+                requsest.AddParameter("SalesNumber", SalesNumber, type: ParameterType.QueryString);
+                requsest.AddFile("AttachmentFile", Path);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "銷貨上傳檔案API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 銷貨下載檔案
+        /// <summary>
+        /// 銷貨下載檔案
+        /// </summary>
+        /// <param name="File">檔案名稱</param>
+        /// <returns></returns>
+        public byte[] Get_SalesAttachmentFile(string SalesCompanyNumber, string File)
+        {
+            try
+            {
+                var option = new RestClientOptions(SalesAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
+                requsest.AddParameter("SalesCustomerNumber", SalesCompanyNumber, type: ParameterType.QueryString);
+                var response = clinet.DownloadDataAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                return response.Result;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "銷貨下載檔案API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region 代墊代付API
+        #region 全部代墊代付資料
+        /// <summary>
+        /// 全部代墊代付資料
+        /// </summary>
+        /// <returns></returns>
+        public List<PaymentSetting> Get_Payment()
+        {
+            try
+            {
+                List<PaymentSetting> settings = null;
+                var option = new RestClientOptions(Payment_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<PaymentSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<PaymentSetting>>(response.Result.Content);
+                ClientFlag = true;
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "全部代墊代付API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 全部未付款代墊代付資料
+        /// <summary>
+        /// 全部未付款代墊代付資料
+        /// </summary>
+        /// <returns></returns>
+        public List<PaymentSetting> Get_PaymentTransferDate()
+        {
+            try
+            {
+                List<PaymentSetting> settings = null;
+                var option = new RestClientOptions(Payment_url+"/TransferDate")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<PaymentSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<PaymentSetting>>(response.Result.Content);
+                ClientFlag = true;
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "全部未付款代墊代付API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 年分代墊代付資料
+        /// <summary>
+        /// 年分代墊代付資料
+        /// </summary>
+        /// <param name="Year">yyyy</param>
+        /// <returns></returns>
+        public List<PaymentSetting> Get_PaymentYear(string Year)
+        {
+            try
+            {
+                List<PaymentSetting> settings = null;
+                var option = new RestClientOptions(Payment_url+"/YearDate")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddParameter("YearDate", Year, type: ParameterType.QueryString);
+                var response = clinet.ExecuteGetAsync<List<PaymentSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<PaymentSetting>>(response.Result.Content);
+                ClientFlag = true;
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "年分代墊代付API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 月份代墊代付資料
+        /// <summary>
+        /// 月份代墊代付資料
+        /// </summary>
+        /// <param name="Month">yyyyMM</param>
+        /// <returns></returns>
+        public List<PaymentSetting> Get_PaymentMonth(string Month)
+        {
+            try
+            {
+                List<PaymentSetting> settings = null;
+                var option = new RestClientOptions(Payment_url + "/MonthDate")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddParameter("YearDate", Month, type: ParameterType.QueryString);
+                var response = clinet.ExecuteGetAsync<List<PaymentSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<PaymentSetting>>(response.Result.Content);
+                ClientFlag = true;
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "月分代墊代付API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 新增代墊代付資料
+        /// <summary>
+        /// 新增代墊代付資料
+        /// </summary>
+        /// <param name="PaymentSetting"></param>
+        /// <returns></returns>
+        public string Post_Payment(string PaymentSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Payment_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddBody(PaymentSetting, ContentType.Json);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ResponseDataMessage = response.Result.Content;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "新增代墊代付資料API錯誤");
+                ResponseDataMessage = "";
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 修改代墊代付資料
+        /// <summary>
+        /// 修改代墊代付資料
+        /// </summary>
+        /// <param name="PaymentSetting"></param>
+        /// <returns></returns>
+        public string Put_Payment(string PaymentSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Payment_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(PaymentSetting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ResponseDataMessage = response.Result.Content;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "修改代墊代付資料API錯誤");
+                ResponseDataMessage = "";
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 刪除代墊代付資料
+        /// <summary>
+        /// 刪除代墊代付資料
+        /// </summary>
+        /// <param name="PaymentSetting"></param>
+        /// <returns></returns>
+        public string Delete_Payment(string PaymentSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Payment_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Delete);
+                requsest.AddBody(PaymentSetting, ContentType.Json);
+                var response = clinet.DeleteAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ResponseDataMessage = response.Result.Content;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "刪除代墊代付資料API錯誤");
+                ResponseDataMessage = "";
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 代墊代付上傳檔案
+        public string Post_PaymentAttachmentFile(string PaymentNumber,string Path)
+        {
+            try
+            {
+                var option = new RestClientOptions(PaymentAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddParameter("PaymentNumber", PaymentNumber, type: ParameterType.QueryString);
+                requsest.AddFile("AttachmentFile", Path);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "代墊代付上傳檔案API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 代墊代付下載檔案
+        public byte[] Get_PaymentAttachmentFile(string PaymentNumber,string File)
+        {
+            try
+            {
+                var option = new RestClientOptions(PaymentAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
+                requsest.AddParameter("PaymentNumber", PaymentNumber, type: ParameterType.QueryString);
+                var response = clinet.DownloadDataAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                return response.Result;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "代墊代付下載檔案API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region 代墊代付品項API
+        #region 全部代墊代付品項資料
+        /// <summary>
+        /// 全部代墊代付品項資料
+        /// </summary>
+        /// <returns></returns>
+        public List<PaymentItemSetting> Get_PaymentItem()
+        {
+            try
+            {
+                List<PaymentItemSetting> settings = null;
+                var option = new RestClientOptions(PaymentItem_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<PaymentItemSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<PaymentItemSetting>>(response.Result.Content);
+                ClientFlag = true;
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "全部代墊代付品項API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 新增代墊代付品項資料
+        /// <summary>
+        /// 新增代墊代付品項資料
+        /// </summary>
+        /// <returns></returns>
+        public string Post_PaymentItem(string PaymentItemSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(PaymentItem_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddBody(PaymentItemSetting, ContentType.Json);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ResponseDataMessage = response.Result.Content;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "新增代墊代付品項資料API錯誤");
+                ResponseDataMessage = "";
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 修改代墊代付品項資料
+        /// <summary>
+        /// 修改代墊代付品項資料
+        /// </summary>
+        /// <returns></returns>
+        public string Put_PaymentItem(string PaymentItemSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(PaymentItem_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(PaymentItemSetting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ResponseDataMessage = response.Result.Content;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "修改代墊代付品項資料API錯誤");
+                ResponseDataMessage = "";
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 刪除代墊代付品項資料
+        /// <summary>
+        /// 刪除代墊代付品項資料
+        /// </summary>
+        /// <returns></returns>
+        public string Delete_PaymentItem(string PaymentItemSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(PaymentItem_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Delete);
+                requsest.AddBody(PaymentItemSetting, ContentType.Json);
+                var response = clinet.DeleteAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ResponseDataMessage = response.Result.Content;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "刪除代墊代付品項資料API錯誤");
+                ResponseDataMessage = "";
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }

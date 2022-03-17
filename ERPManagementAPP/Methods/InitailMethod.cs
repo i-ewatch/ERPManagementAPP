@@ -2,11 +2,8 @@
 using Newtonsoft.Json;
 using Serilog;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ERPManagementAPP.Methods
 {
@@ -49,6 +46,42 @@ namespace ERPManagementAPP.Methods
                 Log.Error(ex, " 跑馬燈資訊設定載入錯誤");
             }
             return setting;
+        }
+        /// <summary>
+        /// 讀取帳號密碼
+        /// </summary>
+        /// <returns></returns>
+        public static AccountSetting AccountLoad()
+        {
+            AccountSetting setting = new AccountSetting();
+            if (!Directory.Exists($"{MyWorkPath}\\stf"))
+                Directory.CreateDirectory($"{MyWorkPath}\\stf");
+            string SettingPath = $"{MyWorkPath}\\stf\\Account.json";
+            try
+            {
+                if (File.Exists(SettingPath))
+                {
+                    string json = File.ReadAllText(SettingPath, Encoding.UTF8);
+                    setting = JsonConvert.DeserializeObject<AccountSetting>(json);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, " 跑馬燈資訊設定載入錯誤");
+            }
+            return setting;
+        }
+        /// <summary>
+        /// 儲存帳號密碼
+        /// </summary>
+        /// <param name="setting"></param>
+        public static void AccountSave(AccountSetting setting)
+        {
+            if (!Directory.Exists($"{MyWorkPath}\\stf"))
+                Directory.CreateDirectory($"{MyWorkPath}\\stf");
+            string SettingPath = $"{MyWorkPath}\\stf\\Account.json";
+            string output = JsonConvert.SerializeObject(setting, Formatting.Indented, new JsonSerializerSettings());
+            File.WriteAllText(SettingPath, output);
         }
     }
 }

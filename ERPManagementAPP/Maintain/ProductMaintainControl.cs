@@ -42,7 +42,7 @@ namespace ERPManagementAPP.Maintain
             InitializeComponent();
             Form1 = form1;
             apiMethod = APIMethod;
-            if (Form1.TokenEnumIndex > 0)
+            if (Form1.EmployeeSetting.Token > 0)
             {
                 Refresh_Main_GridView();
             }
@@ -218,6 +218,10 @@ namespace ERPManagementAPP.Maintain
             #region 產品資料刷新
             btn_Product_Refresh.Click += (s, e) =>
               {
+                  if (ProductCategorySettings == null)
+                  {
+                      Refresh_Main_GridView();
+                  }
                   Refresh_Second_GridView("");
               };
             #endregion
@@ -398,6 +402,19 @@ namespace ERPManagementAPP.Maintain
         private void Refresh_API()
         {
             CompanySettings = apiMethod.Get_Company();
+        }
+        public override void Refresh_Token()
+        {
+            if (Form1.EmployeeSetting.Token != 2)
+            {
+                btn_Product_Delete.Visible = false;
+                btn_ProductGategory_Delete.Visible = false;
+            }
+            else
+            {
+                btn_Product_Delete.Visible = true;
+                btn_ProductGategory_Delete.Visible = true;
+            }
         }
     }
 }

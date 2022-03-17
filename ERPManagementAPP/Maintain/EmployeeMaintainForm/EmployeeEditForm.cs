@@ -20,6 +20,14 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             action.Commands.Add(FlyoutCommand.Yes);
             if (employeeSetting != null && employeeSetting.EmployeeNumber != null)//修改
             {
+                if (Form1.EmployeeSetting.Token == 2)
+                {
+                    cbt_Token.Enabled = true;
+                }
+                else
+                {
+                    cbt_Token.Enabled = false;
+                }
                 action.Caption = "員工修改錯誤";
                 txt_EmployeeNumber.Enabled = false;
                 txt_EmployeeNumber.Text = employeeSetting.EmployeeNumber;
@@ -27,6 +35,8 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
                 txt_Phone.Text = employeeSetting.Phone;
                 mmt_Address.Text = employeeSetting.Address;
                 cbt_Token.SelectedIndex = Convert.ToInt32(employeeSetting.Token);
+                txt_Account.Text = employeeSetting.AccountNo;
+                txt_PassWord.Text = employeeSetting.PassWord;
             }
             else//新增
             {
@@ -60,6 +70,8 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
                 employeeSetting.Phone = txt_Phone.Text;
                 employeeSetting.Address = mmt_Address.Text;
                 employeeSetting.Token = cbt_Token.SelectedIndex;
+                employeeSetting.AccountNo = txt_Account.Text;
+                employeeSetting.PassWord = txt_PassWord.Text;
                 string value = JsonConvert.SerializeObject(employeeSetting);
                 response = apiMethod.Put_Employee(value);
                 if (response == "200")
@@ -85,6 +97,8 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
                             Phone = txt_Phone.Text,
                             Address = mmt_Address.Text,
                             Token = cbt_Token.SelectedIndex,
+                            AccountNo = txt_Account.Text,
+                            PassWord = txt_PassWord.Text
                         };
                         string value = JsonConvert.SerializeObject(setting);
                         response = apiMethod.Post_Employee(value);

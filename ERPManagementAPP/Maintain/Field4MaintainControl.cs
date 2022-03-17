@@ -31,5 +31,9 @@ namespace ERPManagementAPP.Maintain
         /// 刷新資料(次要)
         /// </summary>
         public virtual void Refresh_Second_GridView(string Number) { }
+        /// <summary>
+        /// 刷新權限
+        /// </summary>
+        public virtual void Refresh_Token() { }
     }
 }

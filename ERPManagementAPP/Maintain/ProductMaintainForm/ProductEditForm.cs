@@ -109,9 +109,12 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             {
                 cbt_ProductCompanyNumber.Properties.Items.Clear();
             }
-            foreach (var item in CompanySettings)
+            if (CompanySettings != null)
             {
-                cbt_ProductCompanyNumber.Properties.Items.Add(item.CompanyName);
+                foreach (var item in CompanySettings)
+                {
+                    cbt_ProductCompanyNumber.Properties.Items.Add(item.CompanyName);
+                }
             }
         }
         /// <summary>
@@ -121,9 +124,12 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
         private string Get_ProductCompanyNumber_Number()
         {
             string value = "";
-            if (CompanySettings.Count > 0)
+            if (CompanySettings != null)
             {
-                value = CompanySettings[cbt_ProductCompanyNumber.SelectedIndex].CompanyNumber;
+                if (CompanySettings.Count > 0)
+                {
+                    value = CompanySettings[cbt_ProductCompanyNumber.SelectedIndex].CompanyNumber;
+                }
             }
             return value;
         }
@@ -133,16 +139,19 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
         private void Show_ProductCompanyNumber_Index()
         {
             int Index = -1;
-            foreach (var item in CompanySettings)
+            if (CompanySettings != null)
             {
-                if (item.CompanyNumber == ProductSetting.ProductCompanyNumber)
+                foreach (var item in CompanySettings)
                 {
-                    Index++;
-                    cbt_ProductCompanyNumber.SelectedIndex = Index;
-                }
-                else
-                {
-                    Index++;
+                    if (item.CompanyNumber == ProductSetting.ProductCompanyNumber)
+                    {
+                        Index++;
+                        cbt_ProductCompanyNumber.SelectedIndex = Index;
+                    }
+                    else
+                    {
+                        Index++;
+                    }
                 }
             }
         }
@@ -157,9 +166,12 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             {
                 cbt_ProductCategory.Properties.Items.Clear();
             }
-            foreach (var item in ProductCategorySettings)
+            if (ProductCategorySettings != null)
             {
-                cbt_ProductCategory.Properties.Items.Add(item.CategoryName);
+                foreach (var item in ProductCategorySettings)
+                {
+                    cbt_ProductCategory.Properties.Items.Add(item.CategoryName);
+                }
             }
         }
         /// <summary>
@@ -169,9 +181,12 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
         private string Get_ProductCategory_Number()
         {
             string value = "";
-            if (ProductCategorySettings.Count > 0)
+            if (ProductCategorySettings != null)
             {
-                value = ProductCategorySettings[cbt_ProductCategory.SelectedIndex].CategoryNumber;
+                if (ProductCategorySettings.Count > 0)
+                {
+                    value = ProductCategorySettings[cbt_ProductCategory.SelectedIndex].CategoryNumber;
+                }
             }
             return value;
         }
@@ -181,16 +196,19 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
         private void Show_ProductCategory_Index()
         {
             int Index = -1;
-            foreach (var item in ProductCategorySettings)
+            if (ProductCategorySettings != null)
             {
-                if (item.CategoryNumber == ProductSetting.ProductCategory)
+                foreach (var item in ProductCategorySettings)
                 {
-                    Index++;
-                    cbt_ProductCategory.SelectedIndex = Index;
-                }
-                else
-                {
-                    Index++;
+                    if (item.CategoryNumber == ProductSetting.ProductCategory)
+                    {
+                        Index++;
+                        cbt_ProductCategory.SelectedIndex = Index;
+                    }
+                    else
+                    {
+                        Index++;
+                    }
                 }
             }
         }

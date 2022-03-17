@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ewatch.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="DevExpress.BonusSkins.v20.1" />
@@ -68,7 +71,9 @@
     <Reference Include="Serilog.Sinks.File, Version=5.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.Sinks.File.5.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
@@ -110,6 +115,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\AccountSetting.cs" />
     <Compile Include="Configuration\SystemSetting.cs" />
     <Compile Include="Emuns\TokenEnum.cs" />
     <Compile Include="Form1.cs">
@@ -117,6 +123,12 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\AccountMaintainForm\AccountEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\AccountMaintainForm\AccountEditForm.Designer.cs">
+      <DependentUpon>AccountEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Maintain\BaseEditForm.cs">
       <SubType>Form</SubType>
@@ -178,6 +190,24 @@
     <Compile Include="Maintain\HomeMaintainControl.Designer.cs">
       <DependentUpon>HomeMaintainControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Maintain\PaymentMaintainForm\PaymentEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\PaymentMaintainForm\PaymentEditForm.Designer.cs">
+      <DependentUpon>PaymentEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\PaymentMaintainForm\PaymentItemEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\PaymentMaintainForm\PaymentItemEditForm.Designer.cs">
+      <DependentUpon>PaymentItemEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\PaymentMiantainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Maintain\PaymentMiantainControl.Designer.cs">
+      <DependentUpon>PaymentMiantainControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Maintain\ProductMaintainControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -208,6 +238,18 @@
     <Compile Include="Maintain\PurchaseMainTainForm\PurchaseEditForm.designer.cs">
       <DependentUpon>PurchaseEditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Maintain\SalesMaintainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Maintain\SalesMaintainControl.Designer.cs">
+      <DependentUpon>SalesMaintainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\SalesMaintainForm\SalesEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\SalesMaintainForm\SalesEditForm.Designer.cs">
+      <DependentUpon>SalesEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Methods\APIMethod.cs" />
     <Compile Include="Methods\InitailMethod.cs" />
     <Compile Include="Models\CompanyDirectorySetting.cs" />
@@ -215,17 +257,25 @@
     <Compile Include="Models\CustomerDirectorySetting.cs" />
     <Compile Include="Models\CustomerSetting.cs" />
     <Compile Include="Models\EmployeeSetting.cs" />
+    <Compile Include="Models\PaymentItemSetting.cs" />
+    <Compile Include="Models\PaymentSetting.cs" />
     <Compile Include="Models\ProductCategorySetting.cs" />
     <Compile Include="Models\ProductSetting.cs" />
     <Compile Include="Models\PurchaseMainSetting.cs" />
     <Compile Include="Models\PurchaseSetting.cs" />
     <Compile Include="Models\PurchaseSubSetting.cs" />
+    <Compile Include="Models\SalesMainSetting.cs" />
+    <Compile Include="Models\SalesSetting.cs" />
+    <Compile Include="Models\SalesSubSetting.cs" />
     <Compile Include="Modules\MaintainModule.cs" />
     <Compile Include="Modules\Registrations.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\AccountMaintainForm\AccountEditForm.resx">
+      <DependentUpon>AccountEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maintain\CompanyMaintainControl.resx">
       <DependentUpon>CompanyMaintainControl.cs</DependentUpon>
@@ -254,6 +304,15 @@
     <EmbeddedResource Include="Maintain\HomeMaintainControl.resx">
       <DependentUpon>HomeMaintainControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\PaymentMaintainForm\PaymentEditForm.resx">
+      <DependentUpon>PaymentEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\PaymentMaintainForm\PaymentItemEditForm.resx">
+      <DependentUpon>PaymentItemEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\PaymentMiantainControl.resx">
+      <DependentUpon>PaymentMiantainControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maintain\ProductMaintainControl.resx">
       <DependentUpon>ProductMaintainControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -268,6 +327,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maintain\PurchaseMainTainForm\PurchaseEditForm.resx">
       <DependentUpon>PurchaseEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\SalesMaintainControl.resx">
+      <DependentUpon>SalesMaintainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\SalesMaintainForm\SalesEditForm.resx">
+      <DependentUpon>SalesEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -291,7 +356,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ewatch.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

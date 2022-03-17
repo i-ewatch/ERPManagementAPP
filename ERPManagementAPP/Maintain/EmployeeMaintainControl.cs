@@ -5,6 +5,7 @@ using ERPManagementAPP.Maintain.EmployeeMaintainForm;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -25,7 +26,7 @@ namespace ERPManagementAPP.Maintain
             InitializeComponent();
             Form1 = form1;
             apiMethod = APIMethod;
-            if (Form1.TokenEnumIndex > 0)
+            if (Form1.EmployeeSetting.Token > 0)
             {
                 Refresh_Main_GridView();
             }
@@ -70,51 +71,110 @@ namespace ERPManagementAPP.Maintain
             #region 新增員工
             btn_Employee_Add.Click += (s, e) =>
             {
-                EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, null, apiMethod, Form1);
-                if (company.ShowDialog() == DialogResult.OK)
+                if (Form1.EmployeeSetting.Token == 2)
                 {
-                    Refresh_Main_GridView();
+                    EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, null, apiMethod, Form1);
+                    if (company.ShowDialog() == DialogResult.OK)
+                    {
+                        Refresh_Main_GridView();
+                    }
+                }
+                else
+                {
+                    action.Caption = "權限不足";
+                    action.Description = "請管理員做新增";
+                    FlyoutDialog.Show(Form1, action);
                 }
             };
             #endregion
             #region 修改員工
             btn_Employee_Edit.Click += (s, e) =>
-            {
-                EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
-                if (company.ShowDialog() == DialogResult.OK)
                 {
-                    Refresh_Main_GridView();
-                }
-            };
+                    if (Form1.EmployeeSetting.Token == 2)
+                    {
+                        EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
+                        if (company.ShowDialog() == DialogResult.OK)
+                        {
+                            Refresh_Main_GridView();
+                        }
+                    }
+                    else if (Form1.EmployeeSetting.Token == 1)
+                    {
+                        if (FocuseEmployeeSetting.AccountNo == Form1.EmployeeSetting.AccountNo)
+                        {
+                            EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
+                            if (company.ShowDialog() == DialogResult.OK)
+                            {
+                                Refresh_Main_GridView();
+                            }
+                        }
+                        else
+                        {
+                            action.Caption = "權限不足";
+                            action.Description = "請管理員或該帳號做修改";
+                            FlyoutDialog.Show(Form1, action);
+                        }
+                    }
+                };
             #endregion
             #region 雙擊修改員工
             EmployeegridControl.DoubleClick += (s, e) =>
             {
-                FocuseMainGrid();
-                EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
-                if (company.ShowDialog() == DialogResult.OK)
+                if (Form1.EmployeeSetting.Token == 2)
                 {
-                    Refresh_Main_GridView();
+                    FocuseMainGrid();
+                    EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
+                    if (company.ShowDialog() == DialogResult.OK)
+                    {
+                        Refresh_Main_GridView();
+                    }
+                }
+                else if (Form1.EmployeeSetting.Token == 1)
+                {
+                    FocuseMainGrid();
+                    if (FocuseEmployeeSetting.AccountNo == Form1.EmployeeSetting.AccountNo)
+                    {
+                        EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
+                        if (company.ShowDialog() == DialogResult.OK)
+                        {
+                            Refresh_Main_GridView();
+                        }
+                    }
+                    else
+                    {
+                        action.Caption = "權限不足";
+                        action.Description = "請管理員或該帳號做修改";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion
             #region 刪除員工
             btn_Employee_Delete.Click += (s, e) =>
              {
-                 FocuseMainGrid();
-                 string data = JsonConvert.SerializeObject(FocuseEmployeeSetting);
-                 string response = apiMethod.Delete_Employee(data);
-                 if (response == "200")
+                 if (Form1.EmployeeSetting.Token == 2)
                  {
-                     Refresh_Main_GridView();
-                     action.Caption = "刪除員工成功";
-                     action.Description = "";
-                     FlyoutDialog.Show(Form1, action);
+                     FocuseMainGrid();
+                     string data = JsonConvert.SerializeObject(FocuseEmployeeSetting);
+                     string response = apiMethod.Delete_Employee(data);
+                     if (response == "200")
+                     {
+                         Refresh_Main_GridView();
+                         action.Caption = "刪除員工成功";
+                         action.Description = "";
+                         FlyoutDialog.Show(Form1, action);
+                     }
+                     else
+                     {
+                         action.Caption = "刪除員工失敗";
+                         action.Description = "";
+                         FlyoutDialog.Show(Form1, action);
+                     }
                  }
                  else
                  {
-                     action.Caption = "刪除員工失敗";
-                     action.Description = "";
+                     action.Caption = "權限不足";
+                     action.Description = "請管理員做刪除";
                      FlyoutDialog.Show(Form1, action);
                  }
              };
@@ -153,6 +213,23 @@ namespace ERPManagementAPP.Maintain
                 {
                     FocuseEmployeeSetting.Address = "";
                 }
+                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "AccountNo") != null)
+                {
+                    FocuseEmployeeSetting.AccountNo = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "AccountNo").ToString();
+                }
+                else
+                {
+                    FocuseEmployeeSetting.AccountNo = "";
+                }
+                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PassWord") != null)
+                {
+                    FocuseEmployeeSetting.PassWord = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PassWord").ToString();
+                }
+                else
+                {
+                    FocuseEmployeeSetting.PassWord = "";
+                }
+                FocuseEmployeeSetting.Token = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Token").ToString());
             }
             else
             {
@@ -164,6 +241,19 @@ namespace ERPManagementAPP.Maintain
         {
             EmployeeSettings = apiMethod.Get_Employee();
             EmployeegridControl.DataSource = EmployeeSettings;
+        }
+        public override void Refresh_Token()
+        {
+            if (Form1.EmployeeSetting.Token != 2)
+            {
+                btn_Employee_Add.Visible = false;
+                btn_Employee_Delete.Visible = false;
+            }
+            else
+            {
+                btn_Employee_Add.Visible = true;
+                btn_Employee_Delete.Visible = true;
+            }
         }
     }
 }

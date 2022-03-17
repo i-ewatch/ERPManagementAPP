@@ -38,7 +38,7 @@ namespace ERPManagementAPP.Maintain
             InitializeComponent();
             Form1 = form1;
             apiMethod = APIMethod;
-            if (Form1.TokenEnumIndex > 0)
+            if (Form1.EmployeeSetting.Token > 0)
             {
                 Refresh_Main_GridView();
             }
@@ -290,6 +290,8 @@ namespace ERPManagementAPP.Maintain
                 FocuseCustomerSetting.ContactName = advBandedGridView1.GetRowCellValue(advBandedGridView1.FocusedRowHandle, "ContactName").ToString();
                 FocuseCustomerSetting.ContactEmail = advBandedGridView1.GetRowCellValue(advBandedGridView1.FocusedRowHandle, "ContactEmail").ToString();
                 FocuseCustomerSetting.ContactPhone = advBandedGridView1.GetRowCellValue(advBandedGridView1.FocusedRowHandle, "ContactPhone").ToString();
+                FocuseCustomerSetting.CheckoutType = Convert.ToInt32(advBandedGridView1.GetRowCellValue(advBandedGridView1.FocusedRowHandle, "CheckoutType").ToString());
+                FocuseCustomerSetting.CheckoutType = Convert.ToInt32(advBandedGridView1.GetRowCellValue(advBandedGridView1.FocusedRowHandle, "CheckoutType").ToString());
                 if (advBandedGridView1.GetRowCellValue(advBandedGridView1.FocusedRowHandle, "FileName") != null)
                 {
                     FocuseCustomerSetting.FileName = advBandedGridView1.GetRowCellValue(advBandedGridView1.FocusedRowHandle, "FileName").ToString();
@@ -486,6 +488,19 @@ namespace ERPManagementAPP.Maintain
         {
             CustomerDirectorySettings = apiMethod.Get_DirectoryCustomer(Number);
             CustomerDirectorygridControl.DataSource = CustomerDirectorySettings;
+        }
+        public override void Refresh_Token()
+        {
+            if (Form1.EmployeeSetting.Token != 2)
+            {
+                btn_Customer_Delete.Visible = false;
+                btn_CustomerDirectory_Delete.Visible = false;
+            }
+            else
+            {
+                btn_Customer_Delete.Visible = true;
+                btn_CustomerDirectory_Delete.Visible = true;
+            }
         }
     }
 }

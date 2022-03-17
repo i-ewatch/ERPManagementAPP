@@ -42,13 +42,15 @@ namespace ERPManagementAPP
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
-            this.AccountingBarGroup = new DevExpress.XtraNavBar.NavBarGroup();
-            this.PurchasenavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.BasicDatanavBarGroup = new DevExpress.XtraNavBar.NavBarGroup();
             this.CompanynavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.CustermernavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.EmployeenavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.Device_PartsnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
+            this.AccountingBarGroup = new DevExpress.XtraNavBar.NavBarGroup();
+            this.PurchasenavBarItem = new DevExpress.XtraNavBar.NavBarItem();
+            this.SalesnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
+            this.PaymentnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.LoginimageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.pcl_View = new DevExpress.XtraEditors.PanelControl();
@@ -98,6 +100,7 @@ namespace ERPManagementAPP
             this.LoginbarButtonItem.Caption = "Login";
             this.LoginbarButtonItem.Id = 2;
             this.LoginbarButtonItem.Name = "LoginbarButtonItem";
+            this.LoginbarButtonItem.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
             // bar3
             // 
@@ -119,6 +122,8 @@ namespace ERPManagementAPP
             this.TimebarStaticItem.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.TimebarStaticItem.Caption = "Online Time";
             this.TimebarStaticItem.Id = 1;
+            this.TimebarStaticItem.ItemAppearance.Normal.ForeColor = System.Drawing.Color.White;
+            this.TimebarStaticItem.ItemAppearance.Normal.Options.UseForeColor = true;
             this.TimebarStaticItem.Name = "TimebarStaticItem";
             // 
             // barDockControlTop
@@ -164,6 +169,8 @@ namespace ERPManagementAPP
             // 
             this.navBarControl1.ActiveGroup = this.BasicDatanavBarGroup;
             this.navBarControl1.AllowDrop = false;
+            this.navBarControl1.Appearance.GroupHeaderActive.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.navBarControl1.Appearance.GroupHeaderActive.Options.UseFont = true;
             this.navBarControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.navBarControl1.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
             this.BasicDatanavBarGroup,
@@ -173,44 +180,30 @@ namespace ERPManagementAPP
             this.CustermernavBarItem,
             this.EmployeenavBarItem,
             this.Device_PartsnavBarItem,
-            this.PurchasenavBarItem});
+            this.PurchasenavBarItem,
+            this.PaymentnavBarItem,
+            this.SalesnavBarItem});
             this.navBarControl1.LinkSelectionMode = DevExpress.XtraNavBar.LinkSelectionModeType.OneInControl;
             this.navBarControl1.Location = new System.Drawing.Point(0, 25);
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 184;
+            this.navBarControl1.OptionsNavPane.ShowOverflowPanel = false;
             this.navBarControl1.PaintStyleKind = DevExpress.XtraNavBar.NavBarViewKind.NavigationPane;
             this.navBarControl1.Size = new System.Drawing.Size(184, 843);
             this.navBarControl1.TabIndex = 0;
             this.navBarControl1.Tag = "";
             this.navBarControl1.Text = "navBarControl1";
             // 
-            // AccountingBarGroup
-            // 
-            this.AccountingBarGroup.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.AccountingBarGroup.Appearance.Options.UseFont = true;
-            this.AccountingBarGroup.Caption = "會計資料管理";
-            this.AccountingBarGroup.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
-            this.AccountingBarGroup.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("AccountingBarGroup.ImageOptions.LargeImage")));
-            this.AccountingBarGroup.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("AccountingBarGroup.ImageOptions.SmallImage")));
-            this.AccountingBarGroup.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
-            new DevExpress.XtraNavBar.NavBarItemLink(this.PurchasenavBarItem)});
-            this.AccountingBarGroup.Name = "AccountingBarGroup";
-            // 
-            // PurchasenavBarItem
-            // 
-            this.PurchasenavBarItem.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.PurchasenavBarItem.Appearance.Options.UseFont = true;
-            this.PurchasenavBarItem.Caption = "進貨/進貨退出資料";
-            this.PurchasenavBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("PurchasenavBarItem.ImageOptions.LargeImage")));
-            this.PurchasenavBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("PurchasenavBarItem.ImageOptions.SmallImage")));
-            this.PurchasenavBarItem.Name = "PurchasenavBarItem";
-            this.PurchasenavBarItem.Tag = "5";
-            this.PurchasenavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
-            // 
             // BasicDatanavBarGroup
             // 
             this.BasicDatanavBarGroup.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.BasicDatanavBarGroup.Appearance.Options.UseFont = true;
+            this.BasicDatanavBarGroup.AppearanceBackground.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.BasicDatanavBarGroup.AppearanceBackground.Options.UseFont = true;
+            this.BasicDatanavBarGroup.AppearanceHotTracked.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.BasicDatanavBarGroup.AppearanceHotTracked.Options.UseFont = true;
+            this.BasicDatanavBarGroup.AppearancePressed.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.BasicDatanavBarGroup.AppearancePressed.Options.UseFont = true;
             this.BasicDatanavBarGroup.Caption = "基本資料管理";
             this.BasicDatanavBarGroup.Expanded = true;
             this.BasicDatanavBarGroup.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
@@ -267,6 +260,55 @@ namespace ERPManagementAPP
             this.Device_PartsnavBarItem.Tag = "4";
             this.Device_PartsnavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
             // 
+            // AccountingBarGroup
+            // 
+            this.AccountingBarGroup.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.AccountingBarGroup.Appearance.Options.UseFont = true;
+            this.AccountingBarGroup.AppearanceBackground.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.AccountingBarGroup.AppearanceBackground.Options.UseFont = true;
+            this.AccountingBarGroup.AppearanceHotTracked.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.AccountingBarGroup.AppearanceHotTracked.Options.UseFont = true;
+            this.AccountingBarGroup.AppearancePressed.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.AccountingBarGroup.AppearancePressed.Options.UseFont = true;
+            this.AccountingBarGroup.Caption = "會計資料管理";
+            this.AccountingBarGroup.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
+            this.AccountingBarGroup.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("AccountingBarGroup.ImageOptions.LargeImage")));
+            this.AccountingBarGroup.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("AccountingBarGroup.ImageOptions.SmallImage")));
+            this.AccountingBarGroup.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.PurchasenavBarItem),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.SalesnavBarItem),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.PaymentnavBarItem)});
+            this.AccountingBarGroup.Name = "AccountingBarGroup";
+            // 
+            // PurchasenavBarItem
+            // 
+            this.PurchasenavBarItem.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.PurchasenavBarItem.Appearance.Options.UseFont = true;
+            this.PurchasenavBarItem.Caption = "進貨/進貨退出資料";
+            this.PurchasenavBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("PurchasenavBarItem.ImageOptions.LargeImage")));
+            this.PurchasenavBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("PurchasenavBarItem.ImageOptions.SmallImage")));
+            this.PurchasenavBarItem.Name = "PurchasenavBarItem";
+            this.PurchasenavBarItem.Tag = "5";
+            this.PurchasenavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
+            // 
+            // SalesnavBarItem
+            // 
+            this.SalesnavBarItem.Caption = "銷貨/銷貨退回資料";
+            this.SalesnavBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("SalesnavBarItem.ImageOptions.LargeImage")));
+            this.SalesnavBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("SalesnavBarItem.ImageOptions.SmallImage")));
+            this.SalesnavBarItem.Name = "SalesnavBarItem";
+            this.SalesnavBarItem.Tag = "6";
+            this.SalesnavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
+            // 
+            // PaymentnavBarItem
+            // 
+            this.PaymentnavBarItem.Caption = "代墊代付費用";
+            this.PaymentnavBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("PaymentnavBarItem.ImageOptions.LargeImage")));
+            this.PaymentnavBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("PaymentnavBarItem.ImageOptions.SmallImage")));
+            this.PaymentnavBarItem.Name = "PaymentnavBarItem";
+            this.PaymentnavBarItem.Tag = "7";
+            this.PaymentnavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
+            // 
             // LoginimageCollection
             // 
             this.LoginimageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("LoginimageCollection.ImageStream")));
@@ -301,6 +343,7 @@ namespace ERPManagementAPP
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "ERPManagementAPP";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.MainbarManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
@@ -334,6 +377,8 @@ namespace ERPManagementAPP
         private DevExpress.XtraEditors.PanelControl pcl_View;
         private DevExpress.XtraNavBar.NavBarGroup AccountingBarGroup;
         private DevExpress.XtraNavBar.NavBarItem PurchasenavBarItem;
+        private DevExpress.XtraNavBar.NavBarItem PaymentnavBarItem;
+        private DevExpress.XtraNavBar.NavBarItem SalesnavBarItem;
     }
 }
 

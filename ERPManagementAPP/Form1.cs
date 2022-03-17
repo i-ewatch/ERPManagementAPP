@@ -1,11 +1,12 @@
 ﻿using DevExpress.XtraNavBar;
 using ERPManagementAPP.Configuration;
 using ERPManagementAPP.Emuns;
-using ERPManagementAPP.Maintain;
 using ERPManagementAPP.Methods;
+using ERPManagementAPP.Models;
 using ERPManagementAPP.Modules;
 using Serilog;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace ERPManagementAPP
@@ -21,9 +22,9 @@ namespace ERPManagementAPP
         /// </summary>
         private SystemSetting SystemSetting { get; set; }
         /// <summary>
-        /// 權限編碼
+        /// 登入員工資料
         /// </summary>
-        public int TokenEnumIndex { get; set; } = 0;
+        public EmployeeSetting EmployeeSetting { get; set; } = new EmployeeSetting();
         /// <summary>
         /// 權限
         /// </summary>
@@ -43,28 +44,30 @@ namespace ERPManagementAPP
             APIMethod = new APIMethod(SystemSetting.URL);
             LoginbarButtonItem.ImageOptions.Image = LoginimageCollection.Images["login"];
             Registrations.Register(APIMethod, this);
-            TokenChange();
+            #region 權限登入
+            LoginbarButtonItem.ItemClick += (s, e) =>
+            {
+                //if (EmployeeSetting.AccountNo != null)
+                //{
+                //    EmployeeSetting = new EmployeeSetting();
+                //    TokenChange();
+                //    HomeShow();
+                //}
+                //else
+                //{
+                //    AccountEditForm accountEdit = new AccountEditForm(this, APIMethod);
+                //    if (accountEdit.ShowDialog() == DialogResult.OK)
+                //    {
+                //        TokenChange();
+                //        HomeShow();
+                //    }
+                //}
+            };
+            #endregion
+            //TokenChange();//權限限制
             HomeShow();
             timer.Interval = 1000;
             timer.Enabled = true;
-            #region 權限登入
-            //LoginbarButtonItem.ItemClick += (s, e) =>
-            //{
-            //    TokenEnum = (TokenEnum)TokenEnumIndex;
-            //    if (TokenEnum == TokenEnum.adminstrator || TokenEnum == TokenEnum.user)
-            //    {
-            //        TokenEnumIndex = 0;
-            //        TokenEnum = (TokenEnum)TokenEnumIndex;
-            //    }
-            //    else
-            //    {
-            //        TokenEnumIndex = 2;
-            //        TokenEnum = (TokenEnum)TokenEnumIndex;
-            //    }
-            //    TokenChange();
-            //    HomeShow();
-            //};
-            #endregion
         }
 
         #region 權限變更
@@ -73,32 +76,44 @@ namespace ERPManagementAPP
         /// </summary>
         private void TokenChange()
         {
+            TokenEnum = (TokenEnum)EmployeeSetting.Token;
             switch (TokenEnum)
             {
                 case TokenEnum.None:
                     {
                         timer.Enabled = false;
+                        if (TimebarStaticItem.ItemAppearance.Normal.ForeColor == Color.Red)
+                        {
+                            TimebarStaticItem.ItemAppearance.Normal.ForeColor = Color.White;
+                        }
                         TimebarStaticItem.Caption = "請登入使用者";
+                        LoginbarButtonItem.Caption = "Login";
                         LoginbarButtonItem.ImageOptions.Image = LoginimageCollection.Images["login"];
+                        navBarControl1.Enabled = false;
                     }
                     break;
                 case TokenEnum.user:
                     {
                         LoginbarButtonItem.ImageOptions.Image = LoginimageCollection.Images["employee"];
+                        LoginbarButtonItem.Caption = EmployeeSetting.EmployeeName;
                         timer.Interval = 1000;
                         timer.Enabled = true;
+                        navBarControl1.Enabled = true;
                     }
                     break;
                 case TokenEnum.adminstrator:
                     {
                         LoginbarButtonItem.ImageOptions.Image = LoginimageCollection.Images["administrator"];
+                        LoginbarButtonItem.Caption = EmployeeSetting.EmployeeName;
                         timer.Interval = 1000;
                         timer.Enabled = true;
+                        navBarControl1.Enabled = true;
                     }
                     break;
             }
         }
         #endregion
+
         #region 返回首頁
         /// <summary>
         /// 返回首頁
@@ -123,13 +138,16 @@ namespace ERPManagementAPP
                 pcl_View.ResumeLayout();
                 pcl_View.Parent.ResumeLayout();
             }
+            navBarControl1.ActiveGroup = BasicDatanavBarGroup;
             BasicDatanavBarGroup.SelectedLinkIndex = -1;
+            AccountingBarGroup.SelectedLinkIndex = -1;
         }
         #endregion
+
         #region 切換畫面功能
         private void NavBarItem_LinkClicked(object sender, NavBarLinkEventArgs e)
         {
-            //if (TokenEnum == TokenEnum.adminstrator || TokenEnum == TokenEnum.user)
+            //if (TokenEnum == TokenEnum.adminstrator || TokenEnum == TokenEnum.user)//權限限制
             {
                 pcl_View.Parent.SuspendLayout();
                 pcl_View.SuspendLayout();
@@ -142,6 +160,7 @@ namespace ERPManagementAPP
                         maintainControl.Dock = DockStyle.Fill;
                         maintainControl.Parent = pcl_View;
                         maintainControl.Refresh_Main_GridView();
+                        //maintainControl.Refresh_Token();//權限限制
                         MaintainModule.CurrentControl.Visible = true;
                     }
                 }
@@ -153,24 +172,45 @@ namespace ERPManagementAPP
             }
         }
         #endregion
-        #region 視窗顯示初始化
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Size = new System.Drawing.Size(1496, 962);
-        }
-        #endregion
+
         #region 執行緒
         private void timer_Tick(object sender, EventArgs e)
         {
             if (APIMethod.ClientFlag)
             {
+                if (TimebarStaticItem.ItemAppearance.Normal.ForeColor == Color.Red)
+                {
+                    TimebarStaticItem.ItemAppearance.Normal.ForeColor = Color.White;
+                }
                 TimebarStaticItem.Caption = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             }
             else
             {
+                if (TimebarStaticItem.ItemAppearance.Normal.ForeColor == Color.White)
+                {
+                    TimebarStaticItem.ItemAppearance.Normal.ForeColor = Color.Red;
+                }
                 TimebarStaticItem.Caption = APIMethod.ErrorStr;
             }
 
+        }
+        #endregion
+
+        #region 視窗顯示初始化
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Location = new Point(0, 0);
+            Size = new System.Drawing.Size(1496, 962);
+        }
+        #endregion
+
+        #region 視窗關閉
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (timer.Enabled)
+            {
+                timer.Enabled = false;
+            }
         }
         #endregion
     }
