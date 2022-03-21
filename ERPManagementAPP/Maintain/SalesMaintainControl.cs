@@ -22,7 +22,7 @@ namespace ERPManagementAPP.Maintain
         /// </summary>
         private List<ProductSetting> ProductSettings { get; set; }
         /// <summary>
-        /// 公司資訊
+        /// 客戶資訊
         /// </summary>
         private List<CustomerSetting> CustomerSettings { get; set; }
         /// <summary>

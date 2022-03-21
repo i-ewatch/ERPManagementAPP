@@ -70,10 +70,14 @@ namespace ERPManagementAPP.Methods
             Purchase_url = $"{URL}/Purchase";
             PurchaseNumber_url = $"{URL}/Purchase/PurchaseNumber";
             PurchaseAttachmenFile_url = $"{URL}/PurchaseAttachmentFile";
+            PurchasePosting_url = $"{URL}/Purchase/PurchasePosting";
+            UpdatePurchaseMain_url = $"{URL}/Purchase/UpdatePurchaseMain";
 
             Sales_url = $"{URL}/Sales";
             SalesNumber_url = $"{URL}/Sales/SalesNumber";
             SalesAttachmenFile_url = $"{URL}/SalesAttachmentFile";
+            SalesPosting_url= $"{URL}/Sales/SalesPosting";
+            UpdateSalesMain_url = $"{URL}/Sales/UpdateSalesMain";
 
             Payment_url = $"{URL}/Payment";
             PaymentAttachmenFile_url = $"{URL}/PaymentAttachmentFile";
@@ -190,6 +194,14 @@ namespace ERPManagementAPP.Methods
         /// 進貨檔案(Post、Get)
         /// </summary>
         private string PurchaseAttachmenFile_url { get; set; }
+        /// <summary>
+        /// 未過帳進貨資料(Get)
+        /// </summary>
+        private string PurchasePosting_url { get; set; }
+        /// <summary>
+        /// 進貨父更新(Put)
+        /// </summary>
+        private string UpdatePurchaseMain_url { get; set; }
         #endregion
         #region 銷貨資訊
         /// <summary>
@@ -204,6 +216,14 @@ namespace ERPManagementAPP.Methods
         /// 銷貨檔案(Post、Get)
         /// </summary>
         private string SalesAttachmenFile_url { get; set; }
+        /// <summary>
+        /// 未過帳銷貨資料(Get)
+        /// </summary>
+        private string SalesPosting_url { get; set; }
+        /// <summary>
+        /// 銷貨父更新(Put)
+        /// </summary>
+        private string UpdateSalesMain_url { get; set; }
         #endregion
         #region 代墊代付資訊
         /// <summary>
@@ -1822,6 +1842,37 @@ namespace ERPManagementAPP.Methods
             }
         }
         #endregion
+        #region 查詢未過帳進貨表頭
+        /// <summary>
+        /// 查詢未過帳進貨表頭
+        /// </summary>
+        /// <returns></returns>
+        public List<PurchaseMainSetting> Get_PurchasePosting()
+        {
+            try
+            {
+                List<PurchaseMainSetting> settings = null;
+                var option = new RestClientOptions(PurchasePosting_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<PurchaseMainSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<PurchaseMainSetting>>(response.Result.Content);
+                ClientFlag = true;
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "查詢未過帳進貨表頭API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
         #region 新增進貨資料
         /// <summary>
         /// 新增進貨資料
@@ -1879,6 +1930,36 @@ namespace ERPManagementAPP.Methods
             catch (Exception ex)
             {
                 Log.Error(ex, "修改進貨資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 更新過帳進貨資料
+        /// <summary>
+        /// 更新過帳進貨資料
+        /// </summary>
+        /// <param name="PruchaseMainSetting"></param>
+        /// <returns></returns>
+        public string Put_PurchaseMain(string PruchaseMainSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(UpdatePurchaseMain_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(PruchaseMainSetting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "更新過帳進貨資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }
@@ -2047,6 +2128,37 @@ namespace ERPManagementAPP.Methods
             }
         }
         #endregion
+        #region 查詢未過帳銷貨表頭
+        /// <summary>
+        /// 查詢未過帳銷貨表頭
+        /// </summary>
+        /// <returns></returns>
+        public List<SalesMainSetting> Get_SalesPosting()
+        {
+            try
+            {
+                List<SalesMainSetting> settings = null;
+                var option = new RestClientOptions(SalesPosting_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<SalesMainSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<SalesMainSetting>>(response.Result.Content);
+                ClientFlag = true;
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "查詢未過帳銷貨表頭API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
         #region 新增銷貨資料
         /// <summary>
         /// 新增銷貨資料
@@ -2104,6 +2216,36 @@ namespace ERPManagementAPP.Methods
             catch (Exception ex)
             {
                 Log.Error(ex, "修改銷貨資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 更新過帳銷貨資料
+        /// <summary>
+        /// 更新過帳銷貨資料
+        /// </summary>
+        /// <param name="PruchaseMainSetting"></param>
+        /// <returns></returns>
+        public string Put_SalesMain(string SalesMainSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(UpdateSalesMain_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(SalesMainSetting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "更新過帳銷貨資料API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }

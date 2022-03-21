@@ -45,6 +45,19 @@ namespace ERPManagementAPP.Maintain.CompanyMaintainForm
             {
                 action.Caption = "廠商新增錯誤";
             }
+            #region 公司名稱轉公司簡稱
+            txt_CompanyName.TextChanged += (s, e) =>
+            {
+                if (txt_CompanyShortName.Text != "") return;
+                else
+                {
+                    if (txt_CompanyName.Text.Length >= 4)
+                    {
+                        txt_CompanyShortName.Text = txt_CompanyName.Text.Substring(0, 4);
+                    }
+                }
+            };
+            #endregion
             #region 載入檔案按鈕
             btn_LoadFile.Click += (s, e) =>
             {

@@ -71,89 +71,89 @@ namespace ERPManagementAPP.Maintain
             #region 新增員工
             btn_Employee_Add.Click += (s, e) =>
             {
-                if (Form1.EmployeeSetting.Token == 2)
-                {
+                //if (Form1.EmployeeSetting.Token == 2)
+                //{
                     EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, null, apiMethod, Form1);
                     if (company.ShowDialog() == DialogResult.OK)
                     {
                         Refresh_Main_GridView();
                     }
-                }
-                else
-                {
-                    action.Caption = "權限不足";
-                    action.Description = "請管理員做新增";
-                    FlyoutDialog.Show(Form1, action);
-                }
+                //}
+                //else
+                //{
+                //    action.Caption = "權限不足";
+                //    action.Description = "請管理員做新增";
+                //    FlyoutDialog.Show(Form1, action);
+                //}
             };
             #endregion
             #region 修改員工
             btn_Employee_Edit.Click += (s, e) =>
                 {
-                    if (Form1.EmployeeSetting.Token == 2)
-                    {
+                    //if (Form1.EmployeeSetting.Token == 2)
+                    //{
                         EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
                         if (company.ShowDialog() == DialogResult.OK)
                         {
                             Refresh_Main_GridView();
                         }
-                    }
-                    else if (Form1.EmployeeSetting.Token == 1)
-                    {
-                        if (FocuseEmployeeSetting.AccountNo == Form1.EmployeeSetting.AccountNo)
-                        {
-                            EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
-                            if (company.ShowDialog() == DialogResult.OK)
-                            {
-                                Refresh_Main_GridView();
-                            }
-                        }
-                        else
-                        {
-                            action.Caption = "權限不足";
-                            action.Description = "請管理員或該帳號做修改";
-                            FlyoutDialog.Show(Form1, action);
-                        }
-                    }
+                    //}
+                    //else if (Form1.EmployeeSetting.Token == 1)
+                    //{
+                    //    if (FocuseEmployeeSetting.AccountNo == Form1.EmployeeSetting.AccountNo)
+                    //    {
+                    //        EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
+                    //        if (company.ShowDialog() == DialogResult.OK)
+                    //        {
+                    //            Refresh_Main_GridView();
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        action.Caption = "權限不足";
+                    //        action.Description = "請管理員或該帳號做修改";
+                    //        FlyoutDialog.Show(Form1, action);
+                    //    }
+                    //}
                 };
             #endregion
             #region 雙擊修改員工
             EmployeegridControl.DoubleClick += (s, e) =>
             {
-                if (Form1.EmployeeSetting.Token == 2)
-                {
+                //if (Form1.EmployeeSetting.Token == 2)
+                //{
                     FocuseMainGrid();
                     EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
                     if (company.ShowDialog() == DialogResult.OK)
                     {
                         Refresh_Main_GridView();
                     }
-                }
-                else if (Form1.EmployeeSetting.Token == 1)
-                {
-                    FocuseMainGrid();
-                    if (FocuseEmployeeSetting.AccountNo == Form1.EmployeeSetting.AccountNo)
-                    {
-                        EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
-                        if (company.ShowDialog() == DialogResult.OK)
-                        {
-                            Refresh_Main_GridView();
-                        }
-                    }
-                    else
-                    {
-                        action.Caption = "權限不足";
-                        action.Description = "請管理員或該帳號做修改";
-                        FlyoutDialog.Show(Form1, action);
-                    }
-                }
+                //}
+                //else if (Form1.EmployeeSetting.Token == 1)
+                //{
+                //    FocuseMainGrid();
+                //    if (FocuseEmployeeSetting.AccountNo == Form1.EmployeeSetting.AccountNo)
+                //    {
+                //        EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
+                //        if (company.ShowDialog() == DialogResult.OK)
+                //        {
+                //            Refresh_Main_GridView();
+                //        }
+                //    }
+                //    else
+                //    {
+                //        action.Caption = "權限不足";
+                //        action.Description = "請管理員或該帳號做修改";
+                //        FlyoutDialog.Show(Form1, action);
+                //    }
+                //}
             };
             #endregion
             #region 刪除員工
             btn_Employee_Delete.Click += (s, e) =>
              {
-                 if (Form1.EmployeeSetting.Token == 2)
-                 {
+                 //if (Form1.EmployeeSetting.Token == 2)
+                 //{
                      FocuseMainGrid();
                      string data = JsonConvert.SerializeObject(FocuseEmployeeSetting);
                      string response = apiMethod.Delete_Employee(data);
@@ -170,13 +170,13 @@ namespace ERPManagementAPP.Maintain
                          action.Description = "";
                          FlyoutDialog.Show(Form1, action);
                      }
-                 }
-                 else
-                 {
-                     action.Caption = "權限不足";
-                     action.Description = "請管理員做刪除";
-                     FlyoutDialog.Show(Form1, action);
-                 }
+                 //}
+                 //else
+                 //{
+                 //    action.Caption = "權限不足";
+                 //    action.Description = "請管理員做刪除";
+                 //    FlyoutDialog.Show(Form1, action);
+                 //}
              };
             #endregion
             #region 員工資料刷新

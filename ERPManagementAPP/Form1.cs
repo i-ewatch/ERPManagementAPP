@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraNavBar;
 using ERPManagementAPP.Configuration;
 using ERPManagementAPP.Emuns;
+using ERPManagementAPP.Maintain.AccountMaintainForm;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using ERPManagementAPP.Modules;
@@ -45,24 +46,24 @@ namespace ERPManagementAPP
             LoginbarButtonItem.ImageOptions.Image = LoginimageCollection.Images["login"];
             Registrations.Register(APIMethod, this);
             #region 權限登入
-            LoginbarButtonItem.ItemClick += (s, e) =>
-            {
-                //if (EmployeeSetting.AccountNo != null)
-                //{
-                //    EmployeeSetting = new EmployeeSetting();
-                //    TokenChange();
-                //    HomeShow();
-                //}
-                //else
-                //{
-                //    AccountEditForm accountEdit = new AccountEditForm(this, APIMethod);
-                //    if (accountEdit.ShowDialog() == DialogResult.OK)
-                //    {
-                //        TokenChange();
-                //        HomeShow();
-                //    }
-                //}
-            };
+            //LoginbarButtonItem.ItemClick += (s, e) =>
+            //{
+            //    if (EmployeeSetting.AccountNo != null)
+            //    {
+            //        EmployeeSetting = new EmployeeSetting();
+            //        TokenChange();
+            //        HomeShow();
+            //    }
+            //    else
+            //    {
+            //        AccountEditForm accountEdit = new AccountEditForm(this, APIMethod);
+            //        if (accountEdit.ShowDialog() == DialogResult.OK)
+            //        {
+            //            TokenChange();
+            //            HomeShow();
+            //        }
+            //    }
+            //};
             #endregion
             //TokenChange();//權限限制
             HomeShow();
