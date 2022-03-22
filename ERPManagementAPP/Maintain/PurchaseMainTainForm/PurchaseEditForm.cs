@@ -47,6 +47,10 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         /// </summary>
         private List<EmployeeSetting> EmployeeSettings { get; set; }
         /// <summary>
+        /// 被選擇的公司資訊
+        /// </summary>
+        private CompanySetting SelectCompanySetting { get; set; }
+        /// <summary>
         /// 產品數量
         /// </summary>
         private double ProductQty = 0;
@@ -75,7 +79,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             EmployeeSettings = employeeSettings;
             ProductSettings = productSettings;
             PurchaseSetting = purchaseSetting;
-            Create_cbt_PurchasecompanyNumber_cbt();
+            Create_slt_PurchasecompanyNumber();
             Create_cbt_EmployeeNumber_cbt();
             Create_cbt_ProductName_cbt();
             if (purchaseSetting != null)
@@ -310,58 +314,54 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         #endregion
         #region 廠商編號功能
         /// <summary>
-        /// 創建廠商編號下拉選單
+        /// 創建廠商下拉選單
         /// </summary>
-        /// <param name="companySettings"></param>
-        private void Create_cbt_PurchasecompanyNumber_cbt()
+        private void Create_slt_PurchasecompanyNumber()
         {
-            if (cbt_PurchasecompanyNumber.Properties.Items.Count > 0)
-            {
-                cbt_PurchasecompanyNumber.Properties.Items.Clear();
-            }
-            if (CompanySettings != null)
-            {
-                foreach (var item in CompanySettings)
-                {
-                    cbt_PurchasecompanyNumber.Properties.Items.Add(item.CompanyName);
-                }
-            }
+            slt_PurchasecompanyNumber.Properties.DataSource = CompanySettings;
+            slt_PurchasecompanyNumber.Properties.DisplayMember = "CompanyName";
+            slt_PurchasecompanyNumber.CustomDisplayText += (s, e) =>
+              {
+                  if (PurchaseSetting != null)
+                  {
+                      if (SelectCompanySetting != null)
+                      {
+                          if (e.Value.ToString() != "")
+                          {
+                              SelectCompanySetting = e.Value as CompanySetting;
+                              e.DisplayText = SelectCompanySetting.CompanyName;
+                          }
+                          else
+                          {
+                              e.DisplayText = SelectCompanySetting.CompanyName;
+                          }
+                      }
+                      else
+                      {
+                          e.DisplayText = "";
+                      }
+                  }
+                  else
+                  {
+                      SelectCompanySetting = e.Value as CompanySetting;
+                  }
+              };
         }
         /// <summary>
-        /// 取得廠商編號
-        /// </summary>
-        /// <returns></returns>
-        private string Get_ProductCompanyNumber_Number()
-        {
-            string value = "";
-            if (CompanySettings != null)
-            {
-                if (CompanySettings.Count > 0)
-                {
-                    value = CompanySettings[cbt_PurchasecompanyNumber.SelectedIndex].CompanyNumber;
-                }
-            }
-            return value;
-        }
-        /// <summary>
-        /// 顯示廠商名稱
+        /// 顯示廠商選單項目
         /// </summary>
         private void Show_ProductCompanyNumber_Index()
         {
-            int Index = -1;
-            if (CompanySettings != null)
+            for (int i = 0; i < CompanySettings.Count; i++)
             {
-                foreach (var item in CompanySettings)
+                if (CompanySettings[i].CompanyNumber == PurchaseSetting.PurchaseCompanyNumber)
                 {
-                    if (item.CompanyNumber == PurchaseSetting.PurchaseCompanyNumber)
-                    {
-                        Index++;
-                        cbt_PurchasecompanyNumber.SelectedIndex = Index;
-                    }
-                    else
-                    {
-                        Index++;
-                    }
+                    SelectCompanySetting = CompanySettings[i];
+                    break;
+                }
+                else
+                {
+                    SelectCompanySetting = null;
                 }
             }
         }
@@ -474,7 +474,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
                 purchaseSetting.PurchaseFlag = cbt_PurchaseFlag.SelectedIndex + 1;
                 purchaseSetting.PurchaseNumber = txt_PurchaseNumber.Text;
                 purchaseSetting.PurchaseDate = Convert.ToDateTime(det_PurchaseDate.Text);
-                purchaseSetting.PurchaseCompanyNumber = Get_ProductCompanyNumber_Number();
+                purchaseSetting.PurchaseCompanyNumber = SelectCompanySetting.CompanyNumber;
                 purchaseSetting.PurchaseTax = cbt_PurchaseTax.SelectedIndex;
                 purchaseSetting.PurchaseInvoiceNo = txt_PurchaseInvoiceNo.Text;
                 purchaseSetting.PurchaseEmployeeNumber = Get_cbt_EmployeeNumber_Number();
@@ -514,14 +514,14 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             }
             else
             {
-                if (!string.IsNullOrEmpty(det_PurchaseDate.Text) && cbt_PurchasecompanyNumber.SelectedIndex > -1 && cbt_EmployeeNumber.SelectedIndex > -1)
+                if (!string.IsNullOrEmpty(det_PurchaseDate.Text) && SelectCompanySetting != null && cbt_EmployeeNumber.SelectedIndex > -1)
                 {
                     PurchaseSetting PurchaseSetting = new PurchaseSetting()
                     {
                         PurchaseFlag = cbt_PurchaseFlag.SelectedIndex + 1,
                         PurchaseNumber = txt_PurchaseNumber.Text,
                         PurchaseDate = Convert.ToDateTime(det_PurchaseDate.Text),
-                        PurchaseCompanyNumber = Get_ProductCompanyNumber_Number(),
+                        PurchaseCompanyNumber = SelectCompanySetting.CompanyNumber,
                         PurchaseTax = cbt_PurchaseTax.SelectedIndex,
                         PurchaseInvoiceNo = txt_PurchaseInvoiceNo.Text,
                         PurchaseEmployeeNumber = Get_cbt_EmployeeNumber_Number(),

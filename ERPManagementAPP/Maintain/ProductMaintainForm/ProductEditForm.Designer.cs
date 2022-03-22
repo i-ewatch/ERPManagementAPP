@@ -144,6 +144,7 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.mmt_Remark.Name = "mmt_Remark";
             this.mmt_Remark.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.mmt_Remark.Properties.Appearance.Options.UseFont = true;
+            this.mmt_Remark.Properties.MaxLength = 250;
             this.mmt_Remark.Size = new System.Drawing.Size(563, 83);
             this.mmt_Remark.TabIndex = 3;
             // 

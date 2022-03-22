@@ -30,13 +30,17 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         /// </summary>
         private List<ProductSetting> ProductSettings { get; set; }
         /// <summary>
-        /// 公司資訊
+        /// 客戶資訊
         /// </summary>
         private List<CustomerSetting> CustomerSettings { get; set; }
         /// <summary>
         /// 員工資訊
         /// </summary>
         private List<EmployeeSetting> EmployeeSettings { get; set; }
+        /// <summary>
+        /// 被選擇的客戶資訊
+        /// </summary>
+        private CustomerSetting SelectCustomerSetting { get; set; }
         /// <summary>
         /// 產品數量
         /// </summary>
@@ -66,7 +70,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             EmployeeSettings = employeeSettings;
             ProductSettings = productSettings;
             SalesSetting = salesSetting;
-            Create_cbt_SalescustomerNumber_cbt();
+            Create_slt_SalescustomerNumber_cbt();
             Create_cbt_EmployeeNumber_cbt();
             Create_cbt_ProductName_cbt();
             if (salesSetting != null)
@@ -303,56 +307,52 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         /// <summary>
         /// 創建客戶編號下拉選單
         /// </summary>
-        /// <param name="companySettings"></param>
-        private void Create_cbt_SalescustomerNumber_cbt()
+        private void Create_slt_SalescustomerNumber_cbt()
         {
-            if (cbt_SalesCustomerNumber.Properties.Items.Count > 0)
+            slt_SalesCustomerNumber.Properties.DataSource = CustomerSettings;
+            slt_SalesCustomerNumber.Properties.DisplayMember = "CustomerName";
+            slt_SalesCustomerNumber.CustomDisplayText += (s, e) =>
             {
-                cbt_SalesCustomerNumber.Properties.Items.Clear();
-            }
-            if (CustomerSettings != null)
-            {
-                foreach (var item in CustomerSettings)
+                if (SalesSetting != null)
                 {
-                    cbt_SalesCustomerNumber.Properties.Items.Add(item.CustomerName);
-                }
-            }
-        }
-        /// <summary>
-        /// 取得客戶編號
-        /// </summary>
-        /// <returns></returns>
-        private string Get_ProductCustomerNumber_Number()
-        {
-            string value = "";
-            if (CustomerSettings != null)
-            {
-                if (CustomerSettings.Count > 0)
-                {
-                    value = CustomerSettings[cbt_SalesCustomerNumber.SelectedIndex].CustomerNumber;
-                }
-            }
-            return value;
-        }
-        /// <summary>
-        /// 顯示客戶名稱
-        /// </summary>
-        private void Show_ProductCustomerNumber_Index()
-        {
-            int Index = -1;
-            if (CustomerSettings != null)
-            {
-                foreach (var item in CustomerSettings)
-                {
-                    if (item.CustomerNumber == SalesSetting.SalesCustomerNumber)
+                    if (SelectCustomerSetting != null)
                     {
-                        Index++;
-                        cbt_SalesCustomerNumber.SelectedIndex = Index;
+                        if (e.Value.ToString() != "")
+                        {
+                            SelectCustomerSetting = e.Value as CustomerSetting;
+                            e.DisplayText = SelectCustomerSetting.CustomerName;
+                        }
+                        else
+                        {
+                            e.DisplayText = SelectCustomerSetting.CustomerName;
+                        }
                     }
                     else
                     {
-                        Index++;
+                        e.DisplayText = "";
                     }
+                }
+                else
+                {
+                    SelectCustomerSetting = e.Value as CustomerSetting;
+                }
+            };
+        }
+        /// <summary>
+        /// 顯示客戶選單項目
+        /// </summary>
+        private void Show_ProductCustomerNumber_Index()
+        {
+            for (int i = 0; i < CustomerSettings.Count; i++)
+            {
+                if (CustomerSettings[i].CustomerNumber == SalesSetting.SalesCustomerNumber)
+                {
+                    SelectCustomerSetting = CustomerSettings[i];
+                    break;
+                }
+                else
+                {
+                    SelectCustomerSetting = null;
                 }
             }
         }
@@ -465,7 +465,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
                 salesSetting.SalesFlag = cbt_SalesFlag.SelectedIndex + 3;
                 salesSetting.SalesNumber = txt_SalesNumber.Text;
                 salesSetting.SalesDate = Convert.ToDateTime(det_SalesDate.Text);
-                salesSetting.SalesCustomerNumber = Get_ProductCustomerNumber_Number();
+                salesSetting.SalesCustomerNumber = SelectCustomerSetting.CustomerNumber;
                 salesSetting.SalesTax = cbt_SalesTax.SelectedIndex;
                 salesSetting.SalesInvoiceNo = txt_SalesInvoiceNo.Text;
                 salesSetting.SalesEmployeeNumber = Get_cbt_EmployeeNumber_Number();
@@ -505,14 +505,14 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             }
             else
             {
-                if (!string.IsNullOrEmpty(det_SalesDate.Text) && cbt_SalesCustomerNumber.SelectedIndex > -1 && cbt_EmployeeNumber.SelectedIndex > -1)
+                if (!string.IsNullOrEmpty(det_SalesDate.Text) && SelectCustomerSetting != null && cbt_EmployeeNumber.SelectedIndex > -1)
                 {
                     SalesSetting SalesSetting = new SalesSetting()
                     {
                         SalesFlag = cbt_SalesFlag.SelectedIndex + 3,
                         SalesNumber = txt_SalesNumber.Text,
                         SalesDate = Convert.ToDateTime(det_SalesDate.Text),
-                        SalesCustomerNumber = Get_ProductCustomerNumber_Number(),
+                        SalesCustomerNumber = SelectCustomerSetting.CustomerNumber,
                         SalesTax = cbt_SalesTax.SelectedIndex,
                         SalesInvoiceNo = txt_SalesInvoiceNo.Text,
                         SalesEmployeeNumber = Get_cbt_EmployeeNumber_Number(),

@@ -133,7 +133,7 @@ namespace ERPManagementAPP.Maintain
             // 
             // colAddress
             // 
-            this.colAddress.Caption = "戶籍地址";
+            this.colAddress.Caption = "信箱";
             this.colAddress.FieldName = "Address";
             this.colAddress.Name = "colAddress";
             this.colAddress.OptionsColumn.AllowEdit = false;

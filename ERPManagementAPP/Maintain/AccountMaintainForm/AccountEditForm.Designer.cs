@@ -31,6 +31,7 @@ namespace ERPManagementAPP.Maintain.AccountMaintainForm
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccountEditForm));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.ckt_RememberFlag = new DevExpress.XtraEditors.CheckEdit();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.btn_Login = new DevExpress.XtraEditors.SimpleButton();
             this.btn_Cancel = new DevExpress.XtraEditors.SimpleButton();
@@ -42,10 +43,10 @@ namespace ERPManagementAPP.Maintain.AccountMaintainForm
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ckt_RememberFlag = new DevExpress.XtraEditors.CheckEdit();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ckt_RememberFlag.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txt_PassWord.Properties)).BeginInit();
@@ -55,7 +56,6 @@ namespace ERPManagementAPP.Maintain.AccountMaintainForm
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ckt_RememberFlag.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,6 +74,18 @@ namespace ERPManagementAPP.Maintain.AccountMaintainForm
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // ckt_RememberFlag
+            // 
+            this.ckt_RememberFlag.Location = new System.Drawing.Point(12, 72);
+            this.ckt_RememberFlag.Name = "ckt_RememberFlag";
+            this.ckt_RememberFlag.Properties.AllowFocused = false;
+            this.ckt_RememberFlag.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.ckt_RememberFlag.Properties.Appearance.Options.UseFont = true;
+            this.ckt_RememberFlag.Properties.Caption = "記住密碼";
+            this.ckt_RememberFlag.Size = new System.Drawing.Size(201, 24);
+            this.ckt_RememberFlag.StyleController = this.layoutControl1;
+            this.ckt_RememberFlag.TabIndex = 8;
+            // 
             // panelControl1
             // 
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
@@ -89,10 +101,10 @@ namespace ERPManagementAPP.Maintain.AccountMaintainForm
             this.btn_Login.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.btn_Login.Appearance.Options.UseFont = true;
             this.btn_Login.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btn_Login.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton3.ImageOptions.Image")));
-            this.btn_Login.Location = new System.Drawing.Point(19, 2);
+            this.btn_Login.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Login.ImageOptions.Image")));
+            this.btn_Login.Location = new System.Drawing.Point(21, 0);
             this.btn_Login.Name = "btn_Login";
-            this.btn_Login.Size = new System.Drawing.Size(75, 35);
+            this.btn_Login.Size = new System.Drawing.Size(75, 39);
             this.btn_Login.TabIndex = 1;
             this.btn_Login.Text = "登入";
             // 
@@ -101,10 +113,10 @@ namespace ERPManagementAPP.Maintain.AccountMaintainForm
             this.btn_Cancel.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.btn_Cancel.Appearance.Options.UseFont = true;
             this.btn_Cancel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btn_Cancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.ImageOptions.Image")));
-            this.btn_Cancel.Location = new System.Drawing.Point(94, 2);
+            this.btn_Cancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Cancel.ImageOptions.Image")));
+            this.btn_Cancel.Location = new System.Drawing.Point(96, 0);
             this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.Size = new System.Drawing.Size(75, 35);
+            this.btn_Cancel.Size = new System.Drawing.Size(75, 39);
             this.btn_Cancel.TabIndex = 0;
             this.btn_Cancel.Text = "取消";
             // 
@@ -115,7 +127,7 @@ namespace ERPManagementAPP.Maintain.AccountMaintainForm
             this.btn_ShowPassWord.Appearance.Options.UseFont = true;
             this.btn_ShowPassWord.AppearancePressed.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.btn_ShowPassWord.AppearancePressed.Options.UseFont = true;
-            this.btn_ShowPassWord.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.btn_ShowPassWord.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_ShowPassWord.ImageOptions.Image")));
             this.btn_ShowPassWord.Location = new System.Drawing.Point(364, 42);
             this.btn_ShowPassWord.Name = "btn_ShowPassWord";
             this.btn_ShowPassWord.Size = new System.Drawing.Size(24, 22);
@@ -130,6 +142,7 @@ namespace ERPManagementAPP.Maintain.AccountMaintainForm
             this.txt_PassWord.Properties.Appearance.Options.UseFont = true;
             this.txt_PassWord.Properties.AppearanceFocused.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_PassWord.Properties.AppearanceFocused.Options.UseFont = true;
+            this.txt_PassWord.Properties.NullValuePrompt = "請輸入密碼";
             this.txt_PassWord.Properties.UseSystemPasswordChar = true;
             this.txt_PassWord.Size = new System.Drawing.Size(305, 26);
             this.txt_PassWord.StyleController = this.layoutControl1;
@@ -143,6 +156,7 @@ namespace ERPManagementAPP.Maintain.AccountMaintainForm
             this.txt_Account.Properties.Appearance.Options.UseFont = true;
             this.txt_Account.Properties.AppearanceFocused.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_Account.Properties.AppearanceFocused.Options.UseFont = true;
+            this.txt_Account.Properties.NullValuePrompt = "請輸入帳號";
             this.txt_Account.Size = new System.Drawing.Size(333, 26);
             this.txt_Account.StyleController = this.layoutControl1;
             this.txt_Account.TabIndex = 4;
@@ -201,18 +215,6 @@ namespace ERPManagementAPP.Maintain.AccountMaintainForm
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
             // 
-            // ckt_RememberFlag
-            // 
-            this.ckt_RememberFlag.Location = new System.Drawing.Point(12, 72);
-            this.ckt_RememberFlag.Name = "ckt_RememberFlag";
-            this.ckt_RememberFlag.Properties.AllowFocused = false;
-            this.ckt_RememberFlag.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.ckt_RememberFlag.Properties.Appearance.Options.UseFont = true;
-            this.ckt_RememberFlag.Properties.Caption = "記住密碼";
-            this.ckt_RememberFlag.Size = new System.Drawing.Size(201, 24);
-            this.ckt_RememberFlag.StyleController = this.layoutControl1;
-            this.ckt_RememberFlag.TabIndex = 8;
-            // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.ckt_RememberFlag;
@@ -236,6 +238,7 @@ namespace ERPManagementAPP.Maintain.AccountMaintainForm
             this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ckt_RememberFlag.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txt_PassWord.Properties)).EndInit();
@@ -245,7 +248,6 @@ namespace ERPManagementAPP.Maintain.AccountMaintainForm
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ckt_RememberFlag.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             this.ResumeLayout(false);
 

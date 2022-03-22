@@ -19,7 +19,7 @@ namespace ERPManagementAPP.Methods
         /// <summary>
         /// 錯誤訊息
         /// </summary>
-        public string ErrorStr { get; set; } = "無網路或伺服器未開啟!";
+        public string ErrorStr { get; set; } = "NONE";
         /// <summary>
         /// API回應錯誤訊息
         /// </summary>
@@ -268,6 +268,7 @@ namespace ERPManagementAPP.Methods
                     setting = JsonConvert.DeserializeObject<List<EmployeeSetting>>(response.Result.Content);
                 }
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return setting;
             }
             catch (Exception ex)
@@ -301,6 +302,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CompanySetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -333,6 +335,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CompanySetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -364,6 +367,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -394,6 +398,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -424,6 +429,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -458,6 +464,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -492,6 +499,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DownloadDataAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return response.Result;
             }
             catch (Exception ex)
@@ -525,6 +533,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CompanyDirectorySetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -557,6 +566,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CompanyDirectorySetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -589,6 +599,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CompanyDirectorySetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -620,6 +631,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -650,6 +662,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -680,6 +693,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -714,6 +728,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -748,6 +763,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DownloadDataAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return response.Result;
             }
             catch (Exception ex)
@@ -781,6 +797,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CustomerSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -813,6 +830,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CustomerSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -844,6 +862,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -874,6 +893,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -904,6 +924,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -938,6 +959,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -972,6 +994,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DownloadDataAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return response.Result;
             }
             catch (Exception ex)
@@ -1005,6 +1028,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CustomerDirectorySetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -1037,6 +1061,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CustomerDirectorySetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -1069,6 +1094,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CustomerDirectorySetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -1100,6 +1126,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1130,6 +1157,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1160,6 +1188,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1194,6 +1223,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1228,6 +1258,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DownloadDataAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return response.Result;
             }
             catch (Exception ex)
@@ -1261,6 +1292,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<EmployeeSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -1293,6 +1325,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<EmployeeSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -1324,6 +1357,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1354,6 +1388,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1384,6 +1419,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1417,6 +1453,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<ProductSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -1449,6 +1486,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<ProductSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -1481,6 +1519,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<ProductSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -1512,6 +1551,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1542,6 +1582,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1572,6 +1613,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1606,6 +1648,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1640,6 +1683,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DownloadDataAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return response.Result;
             }
             catch (Exception ex)
@@ -1673,6 +1717,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<ProductCategorySetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -1704,6 +1749,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1734,6 +1780,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1764,6 +1811,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1799,6 +1847,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PurchaseMainSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -1831,6 +1880,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PurchaseSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -1862,6 +1912,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PurchaseMainSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -1893,6 +1944,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 ResponseDataMessage = response.Result.Content;
                 return ResponseMessage(response.Result);
             }
@@ -1925,6 +1977,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1955,6 +2008,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -1984,6 +2038,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -2019,6 +2074,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -2050,6 +2106,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DownloadDataAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return response.Result;
             }
             catch (Exception ex)
@@ -2085,6 +2142,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<SalesMainSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -2117,6 +2175,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<SalesSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -2148,6 +2207,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<SalesMainSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -2179,6 +2239,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 ResponseDataMessage = response.Result.Content;
                 return ResponseMessage(response.Result);
             }
@@ -2211,6 +2272,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -2241,6 +2303,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -2270,6 +2333,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -2305,6 +2369,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -2336,6 +2401,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DownloadDataAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return response.Result;
             }
             catch (Exception ex)
@@ -2369,6 +2435,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PaymentSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -2400,6 +2467,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PaymentSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -2433,6 +2501,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PaymentSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -2466,6 +2535,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PaymentSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -2497,6 +2567,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 ResponseDataMessage = response.Result.Content;
                 return ResponseMessage(response.Result);
             }
@@ -2529,6 +2600,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 ResponseDataMessage = response.Result.Content;
                 return ResponseMessage(response.Result);
             }
@@ -2561,6 +2633,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 ResponseDataMessage = response.Result.Content;
                 return ResponseMessage(response.Result);
             }
@@ -2589,6 +2662,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)
@@ -2615,6 +2689,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DownloadDataAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return response.Result;
             }
             catch (Exception ex)
@@ -2648,6 +2723,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PaymentItemSetting>>(response.Result.Content);
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
             }
             catch (Exception ex)
@@ -2678,6 +2754,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 ResponseDataMessage = response.Result.Content;
                 return ResponseMessage(response.Result);
             }
@@ -2709,6 +2786,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 ResponseDataMessage = response.Result.Content;
                 return ResponseMessage(response.Result);
             }
@@ -2740,6 +2818,7 @@ namespace ERPManagementAPP.Methods
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 ResponseDataMessage = response.Result.Content;
                 return ResponseMessage(response.Result);
             }

@@ -192,10 +192,10 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             // mmt_Remark
             // 
             this.mmt_Remark.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mmt_Remark.Location = new System.Drawing.Point(102, 2);
+            this.mmt_Remark.Location = new System.Drawing.Point(100, 0);
             this.mmt_Remark.Name = "mmt_Remark";
-            this.mmt_Remark.Properties.MaxLength = 100;
-            this.mmt_Remark.Size = new System.Drawing.Size(654, 121);
+            this.mmt_Remark.Properties.MaxLength = 250;
+            this.mmt_Remark.Size = new System.Drawing.Size(658, 125);
             this.mmt_Remark.TabIndex = 1;
             // 
             // labelControl2
@@ -203,7 +203,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.labelControl2.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.labelControl2.Location = new System.Drawing.Point(2, 2);
+            this.labelControl2.Location = new System.Drawing.Point(0, 0);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(100, 20);
             this.labelControl2.TabIndex = 0;
@@ -293,10 +293,10 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             // mmt_PaymentUse
             // 
             this.mmt_PaymentUse.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mmt_PaymentUse.Location = new System.Drawing.Point(105, 2);
+            this.mmt_PaymentUse.Location = new System.Drawing.Point(103, 0);
             this.mmt_PaymentUse.Name = "mmt_PaymentUse";
             this.mmt_PaymentUse.Properties.MaxLength = 100;
-            this.mmt_PaymentUse.Size = new System.Drawing.Size(651, 120);
+            this.mmt_PaymentUse.Size = new System.Drawing.Size(655, 124);
             this.mmt_PaymentUse.TabIndex = 1;
             // 
             // labelControl1
@@ -304,7 +304,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.labelControl1.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.labelControl1.Location = new System.Drawing.Point(2, 2);
+            this.labelControl1.Location = new System.Drawing.Point(0, 0);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(103, 20);
             this.labelControl1.TabIndex = 0;

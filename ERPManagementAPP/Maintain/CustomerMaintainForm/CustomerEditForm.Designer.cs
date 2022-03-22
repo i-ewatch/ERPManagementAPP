@@ -130,6 +130,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.txt_ContactPhone.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_ContactPhone.Properties.Appearance.Options.UseFont = true;
             this.txt_ContactPhone.Properties.MaxLength = 11;
+            this.txt_ContactPhone.Properties.NullValuePrompt = "09-12345678";
             this.txt_ContactPhone.Size = new System.Drawing.Size(451, 26);
             this.txt_ContactPhone.StyleController = this.layoutControl1;
             this.txt_ContactPhone.TabIndex = 21;
@@ -243,7 +244,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             // cbt_CheckoutType
             // 
             this.cbt_CheckoutType.EditValue = "現金";
-            this.cbt_CheckoutType.Location = new System.Drawing.Point(415, 132);
+            this.cbt_CheckoutType.Location = new System.Drawing.Point(505, 132);
             this.cbt_CheckoutType.Name = "cbt_CheckoutType";
             this.cbt_CheckoutType.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.cbt_CheckoutType.Properties.Appearance.Options.UseFont = true;
@@ -269,7 +270,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             "60天",
             "其他"});
             this.cbt_CheckoutType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbt_CheckoutType.Size = new System.Drawing.Size(172, 26);
+            this.cbt_CheckoutType.Size = new System.Drawing.Size(82, 26);
             this.cbt_CheckoutType.StyleController = this.layoutControl1;
             this.cbt_CheckoutType.TabIndex = 11;
             // 
@@ -281,7 +282,8 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.txt_RemittanceAccount.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_RemittanceAccount.Properties.Appearance.Options.UseFont = true;
             this.txt_RemittanceAccount.Properties.MaxLength = 50;
-            this.txt_RemittanceAccount.Size = new System.Drawing.Size(151, 26);
+            this.txt_RemittanceAccount.Properties.NullValuePrompt = "銀行代碼-銀行帳號";
+            this.txt_RemittanceAccount.Size = new System.Drawing.Size(241, 26);
             this.txt_RemittanceAccount.StyleController = this.layoutControl1;
             this.txt_RemittanceAccount.TabIndex = 10;
             // 
@@ -293,6 +295,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.txt_Fax.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_Fax.Properties.Appearance.Options.UseFont = true;
             this.txt_Fax.Properties.MaxLength = 11;
+            this.txt_Fax.Properties.NullValuePrompt = "02-12345678";
             this.txt_Fax.Size = new System.Drawing.Size(172, 26);
             this.txt_Fax.StyleController = this.layoutControl1;
             this.txt_Fax.TabIndex = 9;
@@ -305,6 +308,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.txt_Phone.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_Phone.Properties.Appearance.Options.UseFont = true;
             this.txt_Phone.Properties.MaxLength = 20;
+            this.txt_Phone.Properties.NullValuePrompt = "02-12345678#1000";
             this.txt_Phone.Size = new System.Drawing.Size(151, 26);
             this.txt_Phone.StyleController = this.layoutControl1;
             this.txt_Phone.TabIndex = 8;
@@ -317,6 +321,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.txt_UniformNumbers.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_UniformNumbers.Properties.Appearance.Options.UseFont = true;
             this.txt_UniformNumbers.Properties.MaxLength = 8;
+            this.txt_UniformNumbers.Properties.NullValuePrompt = "請輸入統一編號";
             this.txt_UniformNumbers.Size = new System.Drawing.Size(451, 26);
             this.txt_UniformNumbers.StyleController = this.layoutControl1;
             this.txt_UniformNumbers.TabIndex = 7;
@@ -329,6 +334,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.txt_CustomerName.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_CustomerName.Properties.Appearance.Options.UseFont = true;
             this.txt_CustomerName.Properties.MaxLength = 50;
+            this.txt_CustomerName.Properties.NullValuePrompt = "請輸入名稱";
             this.txt_CustomerName.Size = new System.Drawing.Size(451, 26);
             this.txt_CustomerName.StyleController = this.layoutControl1;
             this.txt_CustomerName.TabIndex = 5;
@@ -341,6 +347,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.txt_CustomerNumber.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_CustomerNumber.Properties.Appearance.Options.UseFont = true;
             this.txt_CustomerNumber.Properties.MaxLength = 6;
+            this.txt_CustomerNumber.Properties.NullValuePrompt = "XX-000";
             this.txt_CustomerNumber.Size = new System.Drawing.Size(451, 26);
             this.txt_CustomerNumber.StyleController = this.layoutControl1;
             this.txt_CustomerNumber.TabIndex = 4;
@@ -353,6 +360,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.txt_ContactName.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_ContactName.Properties.Appearance.Options.UseFont = true;
             this.txt_ContactName.Properties.MaxLength = 10;
+            this.txt_ContactName.Properties.NullValuePrompt = "請輸入姓名";
             this.txt_ContactName.Size = new System.Drawing.Size(451, 26);
             this.txt_ContactName.StyleController = this.layoutControl1;
             this.txt_ContactName.TabIndex = 10;
@@ -441,7 +449,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.layoutControlItem7.Control = this.txt_RemittanceAccount;
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 120);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(279, 30);
+            this.layoutControlItem7.Size = new System.Drawing.Size(369, 30);
             this.layoutControlItem7.Text = "匯款帳號*";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(121, 20);
             // 
@@ -450,9 +458,9 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.layoutControlItem8.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem8.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem8.Control = this.cbt_CheckoutType;
-            this.layoutControlItem8.Location = new System.Drawing.Point(279, 120);
+            this.layoutControlItem8.Location = new System.Drawing.Point(369, 120);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(300, 30);
+            this.layoutControlItem8.Size = new System.Drawing.Size(210, 30);
             this.layoutControlItem8.Text = "結帳方式*";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(121, 20);
             // 

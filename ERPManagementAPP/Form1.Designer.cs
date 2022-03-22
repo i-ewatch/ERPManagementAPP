@@ -36,16 +36,13 @@ namespace ERPManagementAPP
             this.LoginbarButtonItem = new DevExpress.XtraBars.BarButtonItem();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.TimebarStaticItem = new DevExpress.XtraBars.BarStaticItem();
+            this.ConnectbarStaticItem = new DevExpress.XtraBars.BarStaticItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
-            this.PaymentManagementBarGroup = new DevExpress.XtraNavBar.NavBarGroup();
-            this.PurchasePostingnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
-            this.SalesPostingnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
-            this.PaymentTransferDatenavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.BasicDatanavBarGroup = new DevExpress.XtraNavBar.NavBarGroup();
             this.CompanynavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.CustermernavBarItem = new DevExpress.XtraNavBar.NavBarItem();
@@ -55,6 +52,10 @@ namespace ERPManagementAPP
             this.PurchasenavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.SalesnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.PaymentnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
+            this.PaymentManagementBarGroup = new DevExpress.XtraNavBar.NavBarGroup();
+            this.PurchasePostingnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
+            this.SalesPostingnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
+            this.PaymentTransferDatenavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.LoginimageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.pcl_View = new DevExpress.XtraEditors.PanelControl();
@@ -77,9 +78,10 @@ namespace ERPManagementAPP
             this.MainbarManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.barStaticItem1,
             this.TimebarStaticItem,
-            this.LoginbarButtonItem});
+            this.LoginbarButtonItem,
+            this.ConnectbarStaticItem});
             this.MainbarManager.MainMenu = this.bar2;
-            this.MainbarManager.MaxItemId = 3;
+            this.MainbarManager.MaxItemId = 4;
             this.MainbarManager.StatusBar = this.bar3;
             // 
             // bar2
@@ -114,7 +116,8 @@ namespace ERPManagementAPP
             this.bar3.DockRow = 0;
             this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
             this.bar3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.TimebarStaticItem)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.TimebarStaticItem),
+            new DevExpress.XtraBars.LinkPersistInfo(this.ConnectbarStaticItem)});
             this.bar3.OptionsBar.AllowQuickCustomization = false;
             this.bar3.OptionsBar.DrawDragBorder = false;
             this.bar3.OptionsBar.UseWholeRow = true;
@@ -129,6 +132,16 @@ namespace ERPManagementAPP
             this.TimebarStaticItem.ItemAppearance.Normal.ForeColor = System.Drawing.Color.White;
             this.TimebarStaticItem.ItemAppearance.Normal.Options.UseForeColor = true;
             this.TimebarStaticItem.Name = "TimebarStaticItem";
+            // 
+            // ConnectbarStaticItem
+            // 
+            this.ConnectbarStaticItem.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Left;
+            this.ConnectbarStaticItem.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.ConnectbarStaticItem.Caption = "Connection";
+            this.ConnectbarStaticItem.Id = 3;
+            this.ConnectbarStaticItem.ItemAppearance.Normal.ForeColor = System.Drawing.Color.White;
+            this.ConnectbarStaticItem.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.ConnectbarStaticItem.Name = "ConnectbarStaticItem";
             // 
             // barDockControlTop
             // 
@@ -201,60 +214,6 @@ namespace ERPManagementAPP
             this.navBarControl1.TabIndex = 0;
             this.navBarControl1.Tag = "";
             this.navBarControl1.Text = "navBarControl1";
-            // 
-            // PaymentManagementBarGroup
-            // 
-            this.PaymentManagementBarGroup.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.PaymentManagementBarGroup.Appearance.Options.UseFont = true;
-            this.PaymentManagementBarGroup.AppearanceHotTracked.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.PaymentManagementBarGroup.AppearanceHotTracked.Options.UseFont = true;
-            this.PaymentManagementBarGroup.AppearancePressed.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.PaymentManagementBarGroup.AppearancePressed.Options.UseFont = true;
-            this.PaymentManagementBarGroup.Caption = "收付款管理";
-            this.PaymentManagementBarGroup.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
-            this.PaymentManagementBarGroup.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("PaymentManagementBarGroup.ImageOptions.LargeImage")));
-            this.PaymentManagementBarGroup.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("PaymentManagementBarGroup.ImageOptions.SmallImage")));
-            this.PaymentManagementBarGroup.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
-            new DevExpress.XtraNavBar.NavBarItemLink(this.PurchasePostingnavBarItem),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.SalesPostingnavBarItem),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.PaymentTransferDatenavBarItem)});
-            this.PaymentManagementBarGroup.Name = "PaymentManagementBarGroup";
-            // 
-            // PurchasePostingnavBarItem
-            // 
-            this.PurchasePostingnavBarItem.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.PurchasePostingnavBarItem.Appearance.Options.UseFont = true;
-            this.PurchasePostingnavBarItem.Caption = "進貨/進貨退出";
-            this.PurchasePostingnavBarItem.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            this.PurchasePostingnavBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("PurchasePostingnavBarItem.ImageOptions.LargeImage")));
-            this.PurchasePostingnavBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("PurchasePostingnavBarItem.ImageOptions.SmallImage")));
-            this.PurchasePostingnavBarItem.Name = "PurchasePostingnavBarItem";
-            this.PurchasePostingnavBarItem.Tag = "8";
-            this.PurchasePostingnavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
-            // 
-            // SalesPostingnavBarItem
-            // 
-            this.SalesPostingnavBarItem.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.SalesPostingnavBarItem.Appearance.Options.UseFont = true;
-            this.SalesPostingnavBarItem.Caption = "銷貨/銷貨退回";
-            this.SalesPostingnavBarItem.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            this.SalesPostingnavBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("SalesPostingnavBarItem.ImageOptions.LargeImage")));
-            this.SalesPostingnavBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("SalesPostingnavBarItem.ImageOptions.SmallImage")));
-            this.SalesPostingnavBarItem.Name = "SalesPostingnavBarItem";
-            this.SalesPostingnavBarItem.Tag = "9";
-            this.SalesPostingnavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
-            // 
-            // PaymentTransferDatenavBarItem
-            // 
-            this.PaymentTransferDatenavBarItem.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.PaymentTransferDatenavBarItem.Appearance.Options.UseFont = true;
-            this.PaymentTransferDatenavBarItem.Caption = "代墊代付費用";
-            this.PaymentTransferDatenavBarItem.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            this.PaymentTransferDatenavBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("PaymentTransferDatenavBarItem.ImageOptions.LargeImage")));
-            this.PaymentTransferDatenavBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("PaymentTransferDatenavBarItem.ImageOptions.SmallImage")));
-            this.PaymentTransferDatenavBarItem.Name = "PaymentTransferDatenavBarItem";
-            this.PaymentTransferDatenavBarItem.Tag = "10";
-            this.PaymentTransferDatenavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
             // 
             // BasicDatanavBarGroup
             // 
@@ -375,6 +334,60 @@ namespace ERPManagementAPP
             this.PaymentnavBarItem.Tag = "7";
             this.PaymentnavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
             // 
+            // PaymentManagementBarGroup
+            // 
+            this.PaymentManagementBarGroup.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.PaymentManagementBarGroup.Appearance.Options.UseFont = true;
+            this.PaymentManagementBarGroup.AppearanceHotTracked.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.PaymentManagementBarGroup.AppearanceHotTracked.Options.UseFont = true;
+            this.PaymentManagementBarGroup.AppearancePressed.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.PaymentManagementBarGroup.AppearancePressed.Options.UseFont = true;
+            this.PaymentManagementBarGroup.Caption = "收付款管理";
+            this.PaymentManagementBarGroup.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
+            this.PaymentManagementBarGroup.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("PaymentManagementBarGroup.ImageOptions.LargeImage")));
+            this.PaymentManagementBarGroup.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("PaymentManagementBarGroup.ImageOptions.SmallImage")));
+            this.PaymentManagementBarGroup.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.PurchasePostingnavBarItem),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.SalesPostingnavBarItem),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.PaymentTransferDatenavBarItem)});
+            this.PaymentManagementBarGroup.Name = "PaymentManagementBarGroup";
+            // 
+            // PurchasePostingnavBarItem
+            // 
+            this.PurchasePostingnavBarItem.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.PurchasePostingnavBarItem.Appearance.Options.UseFont = true;
+            this.PurchasePostingnavBarItem.Caption = "進貨/進貨退出";
+            this.PurchasePostingnavBarItem.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            this.PurchasePostingnavBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("PurchasePostingnavBarItem.ImageOptions.LargeImage")));
+            this.PurchasePostingnavBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("PurchasePostingnavBarItem.ImageOptions.SmallImage")));
+            this.PurchasePostingnavBarItem.Name = "PurchasePostingnavBarItem";
+            this.PurchasePostingnavBarItem.Tag = "8";
+            this.PurchasePostingnavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
+            // 
+            // SalesPostingnavBarItem
+            // 
+            this.SalesPostingnavBarItem.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.SalesPostingnavBarItem.Appearance.Options.UseFont = true;
+            this.SalesPostingnavBarItem.Caption = "銷貨/銷貨退回";
+            this.SalesPostingnavBarItem.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            this.SalesPostingnavBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("SalesPostingnavBarItem.ImageOptions.LargeImage")));
+            this.SalesPostingnavBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("SalesPostingnavBarItem.ImageOptions.SmallImage")));
+            this.SalesPostingnavBarItem.Name = "SalesPostingnavBarItem";
+            this.SalesPostingnavBarItem.Tag = "9";
+            this.SalesPostingnavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
+            // 
+            // PaymentTransferDatenavBarItem
+            // 
+            this.PaymentTransferDatenavBarItem.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.PaymentTransferDatenavBarItem.Appearance.Options.UseFont = true;
+            this.PaymentTransferDatenavBarItem.Caption = "代墊代付費用";
+            this.PaymentTransferDatenavBarItem.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            this.PaymentTransferDatenavBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("PaymentTransferDatenavBarItem.ImageOptions.LargeImage")));
+            this.PaymentTransferDatenavBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("PaymentTransferDatenavBarItem.ImageOptions.SmallImage")));
+            this.PaymentTransferDatenavBarItem.Name = "PaymentTransferDatenavBarItem";
+            this.PaymentTransferDatenavBarItem.Tag = "10";
+            this.PaymentTransferDatenavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
+            // 
             // LoginimageCollection
             // 
             this.LoginimageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("LoginimageCollection.ImageStream")));
@@ -449,6 +462,7 @@ namespace ERPManagementAPP
         private DevExpress.XtraNavBar.NavBarItem PurchasePostingnavBarItem;
         private DevExpress.XtraNavBar.NavBarItem SalesPostingnavBarItem;
         private DevExpress.XtraNavBar.NavBarItem PaymentTransferDatenavBarItem;
+        private DevExpress.XtraBars.BarStaticItem ConnectbarStaticItem;
     }
 }
 

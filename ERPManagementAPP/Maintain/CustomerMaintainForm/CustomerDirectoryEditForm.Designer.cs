@@ -221,6 +221,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.mmt_Remark.Name = "mmt_Remark";
             this.mmt_Remark.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.mmt_Remark.Properties.Appearance.Options.UseFont = true;
+            this.mmt_Remark.Properties.MaxLength = 250;
             this.mmt_Remark.Size = new System.Drawing.Size(497, 71);
             this.mmt_Remark.TabIndex = 2;
             // 
@@ -242,6 +243,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.txt_DirectoryNumber.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_DirectoryNumber.Properties.Appearance.Options.UseFont = true;
             this.txt_DirectoryNumber.Properties.MaxLength = 6;
+            this.txt_DirectoryNumber.Properties.NullValuePrompt = "XX-000";
             this.txt_DirectoryNumber.Size = new System.Drawing.Size(496, 26);
             this.txt_DirectoryNumber.StyleController = this.layoutControl1;
             this.txt_DirectoryNumber.TabIndex = 5;
@@ -253,6 +255,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.txt_Name.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_Name.Properties.Appearance.Options.UseFont = true;
             this.txt_Name.Properties.MaxLength = 10;
+            this.txt_Name.Properties.NullValuePrompt = "請輸入姓名";
             this.txt_Name.Size = new System.Drawing.Size(496, 26);
             this.txt_Name.StyleController = this.layoutControl1;
             this.txt_Name.TabIndex = 5;
@@ -264,6 +267,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.txt_JobTitle.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_JobTitle.Properties.Appearance.Options.UseFont = true;
             this.txt_JobTitle.Properties.MaxLength = 11;
+            this.txt_JobTitle.Properties.NullValuePrompt = "請輸入職稱";
             this.txt_JobTitle.Size = new System.Drawing.Size(496, 26);
             this.txt_JobTitle.StyleController = this.layoutControl1;
             this.txt_JobTitle.TabIndex = 5;
@@ -275,6 +279,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.txt_Phone.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_Phone.Properties.Appearance.Options.UseFont = true;
             this.txt_Phone.Properties.MaxLength = 20;
+            this.txt_Phone.Properties.NullValuePrompt = "02-12345678#1000";
             this.txt_Phone.Size = new System.Drawing.Size(238, 26);
             this.txt_Phone.StyleController = this.layoutControl1;
             this.txt_Phone.TabIndex = 5;
@@ -286,6 +291,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.txt_MobilePhone.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_MobilePhone.Properties.Appearance.Options.UseFont = true;
             this.txt_MobilePhone.Properties.MaxLength = 11;
+            this.txt_MobilePhone.Properties.NullValuePrompt = "09-12345678";
             this.txt_MobilePhone.Size = new System.Drawing.Size(177, 26);
             this.txt_MobilePhone.StyleController = this.layoutControl1;
             this.txt_MobilePhone.TabIndex = 5;

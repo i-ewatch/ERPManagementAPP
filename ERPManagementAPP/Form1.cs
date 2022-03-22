@@ -179,19 +179,21 @@ namespace ERPManagementAPP
         {
             if (APIMethod.ClientFlag)
             {
-                if (TimebarStaticItem.ItemAppearance.Normal.ForeColor == Color.Red)
+                if (ConnectbarStaticItem.ItemAppearance.Normal.ForeColor == Color.Red)
                 {
-                    TimebarStaticItem.ItemAppearance.Normal.ForeColor = Color.White;
+                    ConnectbarStaticItem.ItemAppearance.Normal.ForeColor = Color.White;
                 }
-                TimebarStaticItem.Caption = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                TimebarStaticItem.Caption = $"系統時間 : {DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")} ";
+                ConnectbarStaticItem.Caption = $"最後通訊時間 : {APIMethod.ErrorStr}";
             }
             else
             {
-                if (TimebarStaticItem.ItemAppearance.Normal.ForeColor == Color.White)
+                if (ConnectbarStaticItem.ItemAppearance.Normal.ForeColor == Color.White)
                 {
-                    TimebarStaticItem.ItemAppearance.Normal.ForeColor = Color.Red;
+                    ConnectbarStaticItem.ItemAppearance.Normal.ForeColor = Color.Red;
                 }
-                TimebarStaticItem.Caption = APIMethod.ErrorStr;
+                TimebarStaticItem.Caption = $"系統時間 : {DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")} ";
+                ConnectbarStaticItem.Caption = APIMethod.ErrorStr;
             }
 
         }
