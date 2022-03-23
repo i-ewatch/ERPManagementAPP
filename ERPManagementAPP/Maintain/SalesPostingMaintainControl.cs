@@ -252,6 +252,14 @@ namespace ERPManagementAPP.Maintain
         {
             Refresh_API();
             SalesMainSettings = apiMethod.Get_SalesPosting();
+            foreach (var item in SalesMainSettings)
+            {
+                if (item.SalesFlag == 4)
+                {
+                    item.Total = -1 * item.Total;
+                    item.TotalTax = -1 * item.TotalTax;
+                }
+            }
             Controller();
         }
         private void Refresh_API()

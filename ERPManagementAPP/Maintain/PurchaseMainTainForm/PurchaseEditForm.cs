@@ -84,6 +84,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             Create_cbt_ProductName_cbt();
             if (purchaseSetting != null)
             {
+                cbt_PurchaseFlag.Enabled = false;
                 cbt_PurchaseFlag.SelectedIndex = purchaseSetting.PurchaseFlag - 1;
                 txt_PurchaseNumber.Text = purchaseSetting.PurchaseNumber;
                 det_PurchaseDate.Text = purchaseSetting.PurchaseDate.ToString("yyyy年MM月dd日");
@@ -309,7 +310,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             TotalTax = Total + Tax;
             txt_Total.EditValue = Total.ToString();
             txt_Tax.EditValue = Tax.ToString();
-            txt_TotalTax.EditValue = TotalTax.ToString();
+            txt_TotalTax.EditValue = $"{TotalTax.ToString()}";
         }
         #endregion
         #region 廠商編號功能

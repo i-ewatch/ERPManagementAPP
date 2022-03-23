@@ -300,7 +300,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             TotalTax = Total + Tax;
             txt_Total.EditValue = Total.ToString();
             txt_Tax.EditValue = Tax.ToString();
-            txt_TotalTax.EditValue = TotalTax.ToString();
+            txt_TotalTax.EditValue = $"{TotalTax.ToString()}";
         }
         #endregion
         #region 客戶編號功能

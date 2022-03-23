@@ -251,6 +251,14 @@ namespace ERPManagementAPP.Maintain
         {
             Refersh_API();
             PurchaseMainSettings = apiMethod.Get_PurchasePosting();
+            foreach (var item in PurchaseMainSettings)
+            {
+                if (item.PurchaseFlag == 2)
+                {
+                    item.Total = -1 * item.Total;
+                    item.TotalTax = -1 * item.TotalTax;
+                }
+            }
             Controller();
         }
         private void Refersh_API()
