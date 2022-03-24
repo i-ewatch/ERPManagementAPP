@@ -286,6 +286,14 @@ namespace ERPManagementAPP.Maintain
                 {
                     FocusePurchaseMainSetting.FileName = "";
                 }
+                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PostingDate") != null)
+                {
+                    FocusePurchaseMainSetting.PostingDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PostingDate").ToString());
+                }
+                else
+                {
+                    FocusePurchaseMainSetting.PostingDate = null;
+                }
             }
             else
             {

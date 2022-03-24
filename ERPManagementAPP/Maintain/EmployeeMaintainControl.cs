@@ -64,6 +64,11 @@ namespace ERPManagementAPP.Maintain
                                 e.DisplayText = "管理員";
                             }
                             break;
+                        case "2":
+                            {
+                                e.DisplayText = "合作夥伴";
+                            }
+                            break;
                     }
                 }
             };

@@ -42,6 +42,10 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         /// </summary>
         private CustomerSetting SelectCustomerSetting { get; set; }
         /// <summary>
+        /// 被選擇的產品資訊
+        /// </summary>
+        private ProductSetting SelectProductSetting { get; set; }
+        /// <summary>
         /// 產品數量
         /// </summary>
         private double ProductQty = 0;
@@ -85,10 +89,14 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
                 mmt_Remark.Text = salesSetting.Remark;
                 cbt_Posting.SelectedIndex = salesSetting.Posting;
                 SalesSubSettings = salesSetting.SalesSub;
+                txt_TakeACut.EditValue = salesSetting.TakeACut;
+                txt_Cost.EditValue = salesSetting.Cost;
             }
             else
             {
                 det_SalesDate.EditValue = DateTime.Now;
+                txt_TakeACut.EditValue = 0;
+                txt_Cost.EditValue = 0;
             }
             CacalculateData();
             RefreshData();
@@ -96,6 +104,19 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             {
                 CacalculateData();
             };
+            #region 員工下拉選單變更
+            cbt_EmployeeNumber.EditValueChanged += (s, e) =>
+              {
+                  if (EmployeeSettings[cbt_EmployeeNumber.SelectedIndex].Token == 2)
+                  {
+                      txt_TakeACut.EditValue = 15;
+                  }
+                  else
+                  {
+                      txt_TakeACut.EditValue = 0;
+                  }
+              };
+            #endregion
             #region 載入檔案按鈕
             btn_LoadFile.Click += (s, e) =>
             {
@@ -162,7 +183,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             #region 細項新增
             btn_Add.Click += (s, e) =>
             {
-                if (cbt_ProductName.SelectedIndex > -1 && !string.IsNullOrEmpty(txt_ProducUnit.Text) && !string.IsNullOrEmpty(txt_productPrice.Text))
+                if (SelectProductSetting != null && !string.IsNullOrEmpty(txt_ProducUnit.Text) && !string.IsNullOrEmpty(txt_productPrice.Text))
                 {
                     SalesSubSettings.Add(new SalesSubSetting()
                     {
@@ -170,14 +191,14 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
                         SalesNumber = "",
                         SalesNo = SalesSubSettings.Count() + 1,
                         ProductNumber = Get_cbt_ProductName_Number(),
-                        ProductName = cbt_ProductName.Text,
+                        ProductName = SelectProductSetting.ProductName,
                         ProductUnit = txt_ProducUnit.Text,
                         ProductQty = Convert.ToDouble(txt_productQty.Text),
                         ProductPrice = Convert.ToDouble(txt_productPrice.Text),
                         ProductTotal = Convert.ToDouble(txt_productQty.Text) * Convert.ToDouble(txt_productPrice.Text)
                     });
-                    cbt_ProductName.SelectedIndex = -1;
-                    //txt_ProducUnit.Text = "";
+                    slt_ProductName.EditValue = null;
+                    SelectProductSetting = null;
                     txt_productQty.Text = "";
                     txt_productPrice.Text = "";
                     CacalculateData();
@@ -195,7 +216,8 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             #region 表身輸入框清除
             btn_Clear.Click += (s, e) =>
             {
-                cbt_ProductName.SelectedIndex = -1;
+                slt_ProductName.EditValue = null;
+                SelectProductSetting = null;
                 txt_ProducUnit.Text = "";
                 txt_productQty.Text = "";
                 txt_productPrice.Text = "";
@@ -406,6 +428,10 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
                     {
                         Index++;
                         cbt_EmployeeNumber.SelectedIndex = Index;
+                        if (item.Token == 2 && txt_TakeACut.EditValue.ToString() == "0")
+                        {
+                            txt_TakeACut.EditValue = 15;
+                        }
                     }
                     else
                     {
@@ -422,17 +448,20 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         /// <param name="companySettings"></param>
         private void Create_cbt_ProductName_cbt()
         {
-            if (cbt_ProductName.Properties.Items.Count > 0)
+            slt_ProductName.Properties.DataSource = ProductSettings;
+            slt_ProductName.Properties.DisplayMember = "ProductName";
+            slt_ProductName.CustomDisplayText += (s, e) =>
             {
-                cbt_ProductName.Properties.Items.Clear();
-            }
-            if (ProductSettings != null)
-            {
-                foreach (var item in ProductSettings)
+                SelectProductSetting = e.Value as ProductSetting;
+                if (SelectProductSetting != null)
                 {
-                    cbt_ProductName.Properties.Items.Add(item.ProductName);
+                    e.DisplayText = SelectProductSetting.ProductName;
                 }
-            }
+                else
+                {
+                    e.DisplayText = "";
+                }
+            };
         }
         /// <summary>
         /// 取得產品編號
@@ -441,12 +470,9 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         private string Get_cbt_ProductName_Number()
         {
             string value = "";
-            if (ProductSettings != null)
+            if (SelectProductSetting != null)
             {
-                if (ProductSettings.Count > 0)
-                {
-                    value = ProductSettings[cbt_ProductName.SelectedIndex].ProductNumber;
-                }
+                value = SelectProductSetting.ProductNumber;
             }
             return value;
         }
@@ -475,6 +501,19 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
                 salesSetting.Total = Convert.ToDouble(txt_Total.EditValue);
                 salesSetting.Tax = Convert.ToDouble(txt_Tax.EditValue);
                 salesSetting.TotalTax = Convert.ToDouble(txt_TotalTax.EditValue);
+                salesSetting.TakeACut = Convert.ToInt32(txt_TakeACut.EditValue);
+                salesSetting.Cost = Convert.ToDouble(txt_Cost.EditValue);
+                double profitSharing = 0;
+                profitSharing = TotalTax - (TotalTax * salesSetting.TakeACut / 100) - salesSetting.Cost;
+                salesSetting.ProfitSharing = profitSharing;
+                if (salesSetting.SalesFlag == 2)
+                {
+                    salesSetting.PostingDate = DateTime.Now;
+                }
+                else
+                {
+                    salesSetting.PostingDate = null;
+                }
                 string value = JsonConvert.SerializeObject(salesSetting);
                 response = apiMethod.Put_Sales(value);
                 if (response == "200")
@@ -518,8 +557,21 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
                         SalesEmployeeNumber = Get_cbt_EmployeeNumber_Number(),
                         Remark = mmt_Remark.Text,
                         Posting = cbt_Posting.SelectedIndex,
-                        SalesSub = SalesSubSettings
+                        SalesSub = SalesSubSettings,
+                        TakeACut = Convert.ToInt32(txt_TakeACut.EditValue),
+                        Cost = Convert.ToDouble(txt_Cost.EditValue)
                     };
+                    double profitSharing = 0;
+                    profitSharing = TotalTax - (TotalTax * SalesSetting.TakeACut / 100) - SalesSetting.Cost;
+                    SalesSetting.ProfitSharing = profitSharing;
+                    if (SalesSetting.SalesFlag == 2)
+                    {
+                        SalesSetting.PostingDate = DateTime.Now;
+                    }
+                    else
+                    {
+                        SalesSetting.PostingDate = null;
+                    }
                     string value = JsonConvert.SerializeObject(SalesSetting);
                     response = apiMethod.Post_Sales(value);
                     if (response == "200")

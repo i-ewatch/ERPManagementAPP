@@ -32,11 +32,6 @@ namespace ERPManagementAPP.Maintain
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesPostingMaintainControl));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.btn_Sales_Search = new DevExpress.XtraEditors.SimpleButton();
-            this.cet_Other = new DevExpress.XtraEditors.CheckEdit();
-            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.SalesgridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colSalesFlag = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -48,18 +43,24 @@ namespace ERPManagementAPP.Maintain
             this.colTotalTax = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPosting = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPostingDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFileName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.btn_Sales_Search = new DevExpress.XtraEditors.SimpleButton();
+            this.cet_Other = new DevExpress.XtraEditors.CheckEdit();
+            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SalesgridControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cet_Other.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SalesgridControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -85,61 +86,6 @@ namespace ERPManagementAPP.Maintain
             this.groupControl1.TabIndex = 4;
             this.groupControl1.Text = "銷貨/銷貨退回";
             // 
-            // panelControl1
-            // 
-            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl1.Controls.Add(this.btn_Sales_Search);
-            this.panelControl1.Controls.Add(this.cet_Other);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(2, 23);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1250, 43);
-            this.panelControl1.TabIndex = 1;
-            // 
-            // btn_Sales_Search
-            // 
-            this.btn_Sales_Search.AllowFocus = false;
-            this.btn_Sales_Search.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btn_Sales_Search.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Sales_Search.ImageOptions.Image")));
-            this.btn_Sales_Search.Location = new System.Drawing.Point(142, 0);
-            this.btn_Sales_Search.Name = "btn_Sales_Search";
-            this.btn_Sales_Search.Size = new System.Drawing.Size(85, 43);
-            this.btn_Sales_Search.TabIndex = 29;
-            this.btn_Sales_Search.Text = "Search";
-            // 
-            // cet_Other
-            // 
-            this.cet_Other.Dock = System.Windows.Forms.DockStyle.Left;
-            this.cet_Other.Location = new System.Drawing.Point(0, 0);
-            this.cet_Other.Name = "cet_Other";
-            this.cet_Other.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.cet_Other.Properties.Appearance.Options.UseFont = true;
-            this.cet_Other.Properties.Appearance.Options.UseTextOptions = true;
-            this.cet_Other.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.cet_Other.Properties.Caption = "其他付款方式";
-            this.cet_Other.Properties.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.SvgCheckBox1;
-            this.cet_Other.Size = new System.Drawing.Size(142, 43);
-            this.cet_Other.TabIndex = 28;
-            // 
-            // Root
-            // 
-            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root.GroupBordersVisible = false;
-            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1});
-            this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1278, 846);
-            this.Root.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.groupControl1;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1258, 826);
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
-            // 
             // SalesgridControl
             // 
             this.SalesgridControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -163,6 +109,7 @@ namespace ERPManagementAPP.Maintain
             this.colTotalTax,
             this.colPosting,
             this.colRemark,
+            this.colPostingDate,
             this.colFileName});
             this.gridView1.GridControl = this.SalesgridControl;
             this.gridView1.Name = "gridView1";
@@ -250,11 +197,74 @@ namespace ERPManagementAPP.Maintain
             this.colRemark.Visible = true;
             this.colRemark.VisibleIndex = 7;
             // 
+            // colPostingDate
+            // 
+            this.colPostingDate.Caption = "過帳日期";
+            this.colPostingDate.FieldName = "PostingDate";
+            this.colPostingDate.Name = "colPostingDate";
+            this.colPostingDate.Visible = true;
+            this.colPostingDate.VisibleIndex = 8;
+            // 
             // colFileName
             // 
             this.colFileName.Caption = "附件檔名";
             this.colFileName.FieldName = "FileName";
             this.colFileName.Name = "colFileName";
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl1.Controls.Add(this.btn_Sales_Search);
+            this.panelControl1.Controls.Add(this.cet_Other);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl1.Location = new System.Drawing.Point(2, 23);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(1250, 43);
+            this.panelControl1.TabIndex = 1;
+            // 
+            // btn_Sales_Search
+            // 
+            this.btn_Sales_Search.AllowFocus = false;
+            this.btn_Sales_Search.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_Sales_Search.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Sales_Search.ImageOptions.Image")));
+            this.btn_Sales_Search.Location = new System.Drawing.Point(142, 0);
+            this.btn_Sales_Search.Name = "btn_Sales_Search";
+            this.btn_Sales_Search.Size = new System.Drawing.Size(85, 43);
+            this.btn_Sales_Search.TabIndex = 29;
+            this.btn_Sales_Search.Text = "Search";
+            // 
+            // cet_Other
+            // 
+            this.cet_Other.Dock = System.Windows.Forms.DockStyle.Left;
+            this.cet_Other.Location = new System.Drawing.Point(0, 0);
+            this.cet_Other.Name = "cet_Other";
+            this.cet_Other.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.cet_Other.Properties.Appearance.Options.UseFont = true;
+            this.cet_Other.Properties.Appearance.Options.UseTextOptions = true;
+            this.cet_Other.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.cet_Other.Properties.Caption = "其他付款方式";
+            this.cet_Other.Properties.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.SvgCheckBox1;
+            this.cet_Other.Size = new System.Drawing.Size(142, 43);
+            this.cet_Other.TabIndex = 28;
+            // 
+            // Root
+            // 
+            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root.GroupBordersVisible = false;
+            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1});
+            this.Root.Name = "Root";
+            this.Root.Size = new System.Drawing.Size(1278, 846);
+            this.Root.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.groupControl1;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(1258, 826);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
             // 
             // SalesPostingMaintainControl
             // 
@@ -267,13 +277,13 @@ namespace ERPManagementAPP.Maintain
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SalesgridControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cet_Other.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SalesgridControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -299,5 +309,6 @@ namespace ERPManagementAPP.Maintain
         private DevExpress.XtraGrid.Columns.GridColumn colPosting;
         private DevExpress.XtraGrid.Columns.GridColumn colRemark;
         private DevExpress.XtraGrid.Columns.GridColumn colFileName;
+        private DevExpress.XtraGrid.Columns.GridColumn colPostingDate;
     }
 }

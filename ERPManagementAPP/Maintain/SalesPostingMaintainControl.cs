@@ -54,11 +54,22 @@ namespace ERPManagementAPP.Maintain
                         {
                             if (item.SalesNumber == FocuseSalesMainSetting.SalesNumber)
                             {
-                                item.Posting = 1;
-                                FocuseSalesMainSetting.Posting = 1;
-                                string value = JsonConvert.SerializeObject(FocuseSalesMainSetting);
-                                apiMethod.Put_SalesMain(value);
-                                break;
+                                if (item.Posting == 0)
+                                {
+                                    item.Posting = 1;
+                                    item.PostingDate = DateTime.Now;
+                                    item.ProfitSharingDate = null;
+                                    FocuseSalesMainSetting.Posting = 1;
+                                    FocuseSalesMainSetting.PostingDate = DateTime.Now;
+                                    FocuseSalesMainSetting.ProfitSharingDate = null;
+                                    string value = JsonConvert.SerializeObject(FocuseSalesMainSetting);
+                                    apiMethod.Put_SalesMain(value);
+                                    break;
+                                }
+                                else
+                                {
+                                    break;
+                                }
                             }
                         }
                     }
@@ -241,6 +252,25 @@ namespace ERPManagementAPP.Maintain
                 {
                     FocuseSalesMainSetting.FileName = "";
                 }
+                FocuseSalesMainSetting.TakeACut = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TakeACut").ToString());
+                FocuseSalesMainSetting.Cost = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Cost").ToString());
+                FocuseSalesMainSetting.ProfitSharing = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProfitSharing").ToString());
+                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PostingDate") != null)
+                {
+                    FocuseSalesMainSetting.PostingDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PostingDate").ToString());
+                }
+                else
+                {
+                    FocuseSalesMainSetting.PostingDate = null;
+                }
+                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProfitSharingDate") != null)
+                {
+                    FocuseSalesMainSetting.ProfitSharingDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProfitSharingDate").ToString());
+                }
+                else
+                {
+                    FocuseSalesMainSetting.ProfitSharingDate = null;
+                }
             }
             else
             {
@@ -266,9 +296,9 @@ namespace ERPManagementAPP.Maintain
         {
             CustomerSettings = apiMethod.Get_Customer();
         }
-        #region 未過戶客戶篩選功能
+        #region 未過帳客戶篩選功能
         /// <summary>
-        /// 未過戶客戶篩選功能
+        /// 未過帳客戶篩選功能
         /// </summary>
         private void Controller()
         {

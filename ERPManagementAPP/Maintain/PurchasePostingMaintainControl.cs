@@ -55,7 +55,9 @@ namespace ERPManagementAPP.Maintain
                             if (item.PurchaseNumber == FocusePurchaseMainSetting.PurchaseNumber)
                             {
                                 item.Posting = 1;
+                                item.PostingDate = DateTime.Now;
                                 FocusePurchaseMainSetting.Posting = 1;
+                                FocusePurchaseMainSetting.PostingDate = DateTime.Now;
                                 string value = JsonConvert.SerializeObject(FocusePurchaseMainSetting);
                                 apiMethod.Put_PurchaseMain(value);
                             }
@@ -239,6 +241,14 @@ namespace ERPManagementAPP.Maintain
                 else
                 {
                     FocusePurchaseMainSetting.FileName = "";
+                }
+                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PostingDate") != null)
+                {
+                    FocusePurchaseMainSetting.PostingDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PostingDate").ToString());
+                }
+                else
+                {
+                    FocusePurchaseMainSetting.PostingDate = null;
                 }
             }
             else

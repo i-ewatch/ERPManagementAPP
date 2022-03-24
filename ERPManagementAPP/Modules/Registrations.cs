@@ -18,6 +18,7 @@ namespace ERPManagementAPP.Modules
             PurchasePostingMaintainControl purchasePostingMaintainControl = new PurchasePostingMaintainControl(apiMethod, form1);
             SalesPostingMaintainControl salesPostingMaintainControl = new SalesPostingMaintainControl(apiMethod, form1);
             PaymentTransferMaintainControl paymentTransferMaintainControl = new PaymentTransferMaintainControl(apiMethod, form1);
+            PartnerMaintainControl partnerMaintainControl = new PartnerMaintainControl(apiMethod, form1);
 
             MaintainModule.Add(homeMaintainControl);
             MaintainModule.Add(companyMaintainControl);
@@ -30,6 +31,7 @@ namespace ERPManagementAPP.Modules
             MaintainModule.Add(purchasePostingMaintainControl);
             MaintainModule.Add(salesPostingMaintainControl);
             MaintainModule.Add(paymentTransferMaintainControl);
+            MaintainModule.Add(partnerMaintainControl);
         }
     }
 }

@@ -31,6 +31,10 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseEditForm));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.slt_ProductName = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colProductNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colProductName1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.slt_PurchasecompanyNumber = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colCompanyNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -40,7 +44,6 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
             this.btn_Delete = new DevExpress.XtraEditors.SimpleButton();
             this.btn_Add = new DevExpress.XtraEditors.SimpleButton();
-            this.cbt_ProductName = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txt_productPrice = new DevExpress.XtraEditors.TextEdit();
             this.txt_productQty = new DevExpress.XtraEditors.TextEdit();
             this.cbt_Posting = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -89,7 +92,6 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -102,16 +104,18 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.layoutControlItem23 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.slt_ProductName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slt_PurchasecompanyNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
             this.panelControl6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
             this.panelControl5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbt_ProductName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_productPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_productQty.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbt_Posting.Properties)).BeginInit();
@@ -150,7 +154,6 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem21)).BeginInit();
@@ -163,15 +166,16 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem23)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.slt_ProductName);
             this.layoutControl1.Controls.Add(this.slt_PurchasecompanyNumber);
             this.layoutControl1.Controls.Add(this.panelControl6);
             this.layoutControl1.Controls.Add(this.panelControl5);
-            this.layoutControl1.Controls.Add(this.cbt_ProductName);
             this.layoutControl1.Controls.Add(this.txt_productPrice);
             this.layoutControl1.Controls.Add(this.txt_productQty);
             this.layoutControl1.Controls.Add(this.cbt_Posting);
@@ -194,9 +198,54 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1242, 169, 650, 605);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1178, 616);
+            this.layoutControl1.Size = new System.Drawing.Size(1178, 798);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // slt_ProductName
+            // 
+            this.slt_ProductName.EditValue = "";
+            this.slt_ProductName.Location = new System.Drawing.Point(86, 157);
+            this.slt_ProductName.Name = "slt_ProductName";
+            this.slt_ProductName.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.slt_ProductName.Properties.Appearance.Options.UseFont = true;
+            this.slt_ProductName.Properties.AppearanceDropDown.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.slt_ProductName.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.slt_ProductName.Properties.AppearanceFocused.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.slt_ProductName.Properties.AppearanceFocused.Options.UseFont = true;
+            this.slt_ProductName.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.slt_ProductName.Properties.PopupView = this.gridView2;
+            this.slt_ProductName.Properties.ShowClearButton = false;
+            this.slt_ProductName.Size = new System.Drawing.Size(384, 26);
+            this.slt_ProductName.StyleController = this.layoutControl1;
+            this.slt_ProductName.TabIndex = 33;
+            // 
+            // gridView2
+            // 
+            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colProductNumber,
+            this.colProductName1});
+            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
+            // colProductNumber
+            // 
+            this.colProductNumber.Caption = "產品編號";
+            this.colProductNumber.FieldName = "ProductNumber";
+            this.colProductNumber.Name = "colProductNumber";
+            this.colProductNumber.Visible = true;
+            this.colProductNumber.VisibleIndex = 0;
+            // 
+            // colProductName1
+            // 
+            this.colProductName1.Caption = "產品名稱";
+            this.colProductName1.FieldName = "ProductName";
+            this.colProductName1.Name = "colProductName1";
+            this.colProductName1.Visible = true;
+            this.colProductName1.VisibleIndex = 1;
             // 
             // slt_PurchasecompanyNumber
             // 
@@ -247,9 +296,9 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // 
             this.panelControl6.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl6.Controls.Add(this.btn_Clear);
-            this.panelControl6.Location = new System.Drawing.Point(1073, 157);
+            this.panelControl6.Location = new System.Drawing.Point(1083, 157);
             this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(93, 38);
+            this.panelControl6.Size = new System.Drawing.Size(83, 38);
             this.panelControl6.TabIndex = 31;
             // 
             // btn_Clear
@@ -261,7 +310,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.btn_Clear.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Clear.ImageOptions.Image")));
             this.btn_Clear.Location = new System.Drawing.Point(0, 0);
             this.btn_Clear.Name = "btn_Clear";
-            this.btn_Clear.Size = new System.Drawing.Size(93, 38);
+            this.btn_Clear.Size = new System.Drawing.Size(83, 38);
             this.btn_Clear.StyleController = this.layoutControl1;
             this.btn_Clear.TabIndex = 31;
             this.btn_Clear.Text = "Clear";
@@ -273,7 +322,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.panelControl5.Controls.Add(this.btn_Add);
             this.panelControl5.Location = new System.Drawing.Point(12, 199);
             this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(1154, 26);
+            this.panelControl5.Size = new System.Drawing.Size(1154, 34);
             this.panelControl5.TabIndex = 29;
             // 
             // btn_Delete
@@ -286,7 +335,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.btn_Delete.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btn_Delete.Location = new System.Drawing.Point(577, 0);
             this.btn_Delete.Name = "btn_Delete";
-            this.btn_Delete.Size = new System.Drawing.Size(577, 26);
+            this.btn_Delete.Size = new System.Drawing.Size(577, 34);
             this.btn_Delete.TabIndex = 23;
             this.btn_Delete.Text = "Delete";
             // 
@@ -300,48 +349,31 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.btn_Add.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btn_Add.Location = new System.Drawing.Point(0, 0);
             this.btn_Add.Name = "btn_Add";
-            this.btn_Add.Size = new System.Drawing.Size(577, 26);
+            this.btn_Add.Size = new System.Drawing.Size(577, 34);
             this.btn_Add.TabIndex = 22;
             this.btn_Add.Text = "Add";
             // 
-            // cbt_ProductName
-            // 
-            this.cbt_ProductName.Location = new System.Drawing.Point(86, 157);
-            this.cbt_ProductName.Name = "cbt_ProductName";
-            this.cbt_ProductName.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.cbt_ProductName.Properties.Appearance.Options.UseFont = true;
-            this.cbt_ProductName.Properties.AppearanceDropDown.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.cbt_ProductName.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbt_ProductName.Properties.AppearanceFocused.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.cbt_ProductName.Properties.AppearanceFocused.Options.UseFont = true;
-            this.cbt_ProductName.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbt_ProductName.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbt_ProductName.Size = new System.Drawing.Size(288, 26);
-            this.cbt_ProductName.StyleController = this.layoutControl1;
-            this.cbt_ProductName.TabIndex = 12;
-            // 
             // txt_productPrice
             // 
-            this.txt_productPrice.Location = new System.Drawing.Point(897, 157);
+            this.txt_productPrice.Location = new System.Drawing.Point(952, 157);
             this.txt_productPrice.Name = "txt_productPrice";
             this.txt_productPrice.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_productPrice.Properties.Appearance.Options.UseFont = true;
             this.txt_productPrice.Properties.Mask.EditMask = "[0-9]*";
             this.txt_productPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txt_productPrice.Size = new System.Drawing.Size(172, 26);
+            this.txt_productPrice.Size = new System.Drawing.Size(127, 26);
             this.txt_productPrice.StyleController = this.layoutControl1;
             this.txt_productPrice.TabIndex = 18;
             // 
             // txt_productQty
             // 
-            this.txt_productQty.Location = new System.Drawing.Point(630, 157);
+            this.txt_productQty.Location = new System.Drawing.Point(728, 157);
             this.txt_productQty.Name = "txt_productQty";
             this.txt_productQty.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_productQty.Properties.Appearance.Options.UseFont = true;
             this.txt_productQty.Properties.Mask.EditMask = "[0-9]*";
             this.txt_productQty.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txt_productQty.Size = new System.Drawing.Size(189, 26);
+            this.txt_productQty.Size = new System.Drawing.Size(146, 26);
             this.txt_productQty.StyleController = this.layoutControl1;
             this.txt_productQty.TabIndex = 16;
             // 
@@ -411,17 +443,17 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // 
             // txt_ProducUnit
             // 
-            this.txt_ProducUnit.Location = new System.Drawing.Point(452, 157);
+            this.txt_ProducUnit.Location = new System.Drawing.Point(548, 157);
             this.txt_ProducUnit.Name = "txt_ProducUnit";
             this.txt_ProducUnit.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_ProducUnit.Properties.Appearance.Options.UseFont = true;
-            this.txt_ProducUnit.Size = new System.Drawing.Size(100, 26);
+            this.txt_ProducUnit.Size = new System.Drawing.Size(102, 26);
             this.txt_ProducUnit.StyleController = this.layoutControl1;
             this.txt_ProducUnit.TabIndex = 14;
             // 
             // txt_TotalTax
             // 
-            this.txt_TotalTax.Location = new System.Drawing.Point(958, 438);
+            this.txt_TotalTax.Location = new System.Drawing.Point(958, 640);
             this.txt_TotalTax.Name = "txt_TotalTax";
             this.txt_TotalTax.Properties.AllowFocused = false;
             this.txt_TotalTax.Properties.AppearanceReadOnly.Font = new System.Drawing.Font("微軟正黑體", 12F);
@@ -436,7 +468,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // 
             // txt_Tax
             // 
-            this.txt_Tax.Location = new System.Drawing.Point(696, 438);
+            this.txt_Tax.Location = new System.Drawing.Point(696, 640);
             this.txt_Tax.Name = "txt_Tax";
             this.txt_Tax.Properties.AllowFocused = false;
             this.txt_Tax.Properties.AppearanceReadOnly.Font = new System.Drawing.Font("微軟正黑體", 12F);
@@ -451,7 +483,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // 
             // txt_Total
             // 
-            this.txt_Total.Location = new System.Drawing.Point(418, 438);
+            this.txt_Total.Location = new System.Drawing.Point(418, 640);
             this.txt_Total.Name = "txt_Total";
             this.txt_Total.Properties.AllowFocused = false;
             this.txt_Total.Properties.AppearanceReadOnly.Font = new System.Drawing.Font("微軟正黑體", 12F);
@@ -469,9 +501,9 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.panelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl4.Controls.Add(this.btn_Save);
             this.panelControl4.Controls.Add(this.btn_Cancel);
-            this.panelControl4.Location = new System.Drawing.Point(12, 545);
+            this.panelControl4.Location = new System.Drawing.Point(12, 751);
             this.panelControl4.Name = "panelControl4";
-            this.panelControl4.Size = new System.Drawing.Size(1154, 59);
+            this.panelControl4.Size = new System.Drawing.Size(1154, 35);
             this.panelControl4.TabIndex = 20;
             // 
             // btn_Save
@@ -480,7 +512,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.btn_Save.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Save.ImageOptions.Image")));
             this.btn_Save.Location = new System.Drawing.Point(966, 0);
             this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(94, 59);
+            this.btn_Save.Size = new System.Drawing.Size(94, 35);
             this.btn_Save.TabIndex = 1;
             this.btn_Save.Text = "Save";
             // 
@@ -490,7 +522,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.btn_Cancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Cancel.ImageOptions.Image")));
             this.btn_Cancel.Location = new System.Drawing.Point(1060, 0);
             this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.Size = new System.Drawing.Size(94, 59);
+            this.btn_Cancel.Size = new System.Drawing.Size(94, 35);
             this.btn_Cancel.TabIndex = 0;
             this.btn_Cancel.Text = "Cancel";
             // 
@@ -500,9 +532,9 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.panelControl2.Controls.Add(this.panelControl3);
             this.panelControl2.Controls.Add(this.txt_FileName);
             this.panelControl2.Controls.Add(this.labelControl6);
-            this.panelControl2.Location = new System.Drawing.Point(12, 468);
+            this.panelControl2.Location = new System.Drawing.Point(12, 670);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(328, 73);
+            this.panelControl2.Size = new System.Drawing.Size(328, 77);
             this.panelControl2.TabIndex = 18;
             // 
             // panelControl3
@@ -513,7 +545,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl3.Location = new System.Drawing.Point(0, 46);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(328, 27);
+            this.panelControl3.Size = new System.Drawing.Size(328, 31);
             this.panelControl3.TabIndex = 19;
             // 
             // btn_LoadFile
@@ -522,7 +554,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.btn_LoadFile.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_LoadFile.ImageOptions.Image")));
             this.btn_LoadFile.Location = new System.Drawing.Point(124, 0);
             this.btn_LoadFile.Name = "btn_LoadFile";
-            this.btn_LoadFile.Size = new System.Drawing.Size(102, 27);
+            this.btn_LoadFile.Size = new System.Drawing.Size(102, 31);
             this.btn_LoadFile.TabIndex = 1;
             this.btn_LoadFile.Text = "Load File";
             // 
@@ -532,7 +564,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.btn_ClearFile.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_ClearFile.ImageOptions.Image")));
             this.btn_ClearFile.Location = new System.Drawing.Point(226, 0);
             this.btn_ClearFile.Name = "btn_ClearFile";
-            this.btn_ClearFile.Size = new System.Drawing.Size(102, 27);
+            this.btn_ClearFile.Size = new System.Drawing.Size(102, 31);
             this.btn_ClearFile.TabIndex = 0;
             this.btn_ClearFile.Text = "Clear File";
             // 
@@ -563,9 +595,9 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl1.Controls.Add(this.mmt_Remark);
             this.panelControl1.Controls.Add(this.labelControl5);
-            this.panelControl1.Location = new System.Drawing.Point(344, 468);
+            this.panelControl1.Location = new System.Drawing.Point(344, 670);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(822, 73);
+            this.panelControl1.Size = new System.Drawing.Size(822, 77);
             this.panelControl1.TabIndex = 17;
             // 
             // mmt_Remark
@@ -576,7 +608,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.mmt_Remark.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.mmt_Remark.Properties.Appearance.Options.UseFont = true;
             this.mmt_Remark.Properties.MaxLength = 250;
-            this.mmt_Remark.Size = new System.Drawing.Size(786, 73);
+            this.mmt_Remark.Size = new System.Drawing.Size(786, 77);
             this.mmt_Remark.TabIndex = 1;
             // 
             // labelControl5
@@ -592,10 +624,10 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // 
             // gridControl1
             // 
-            this.gridControl1.Location = new System.Drawing.Point(12, 229);
+            this.gridControl1.Location = new System.Drawing.Point(12, 237);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1154, 205);
+            this.gridControl1.Size = new System.Drawing.Size(1154, 399);
             this.gridControl1.TabIndex = 15;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -803,7 +835,6 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.layoutControlItem15,
             this.layoutControlItem6,
             this.emptySpaceItem1,
-            this.layoutControlItem18,
             this.layoutControlItem19,
             this.layoutControlItem20,
             this.layoutControlItem21,
@@ -815,9 +846,10 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.layoutControlItem14,
             this.layoutControlItem23,
             this.layoutControlItem8,
-            this.layoutControlItem22});
+            this.layoutControlItem22,
+            this.layoutControlItem4});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1178, 616);
+            this.Root.Size = new System.Drawing.Size(1178, 798);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -847,27 +879,27 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.panelControl1;
-            this.layoutControlItem9.Location = new System.Drawing.Point(332, 456);
+            this.layoutControlItem9.Location = new System.Drawing.Point(332, 658);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(826, 77);
+            this.layoutControlItem9.Size = new System.Drawing.Size(826, 81);
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
             // 
             // layoutControlItem10
             // 
             this.layoutControlItem10.Control = this.panelControl2;
-            this.layoutControlItem10.Location = new System.Drawing.Point(0, 456);
+            this.layoutControlItem10.Location = new System.Drawing.Point(0, 658);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(332, 77);
+            this.layoutControlItem10.Size = new System.Drawing.Size(332, 81);
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextVisible = false;
             // 
             // layoutControlItem11
             // 
             this.layoutControlItem11.Control = this.panelControl4;
-            this.layoutControlItem11.Location = new System.Drawing.Point(0, 533);
+            this.layoutControlItem11.Location = new System.Drawing.Point(0, 739);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(1158, 63);
+            this.layoutControlItem11.Size = new System.Drawing.Size(1158, 39);
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextVisible = false;
             // 
@@ -930,30 +962,19 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 426);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 628);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
             this.emptySpaceItem1.Size = new System.Drawing.Size(332, 30);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // layoutControlItem18
-            // 
-            this.layoutControlItem18.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.layoutControlItem18.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem18.Control = this.cbt_ProductName;
-            this.layoutControlItem18.Location = new System.Drawing.Point(0, 145);
-            this.layoutControlItem18.Name = "layoutControlItem18";
-            this.layoutControlItem18.Size = new System.Drawing.Size(366, 42);
-            this.layoutControlItem18.Text = "產品名稱";
-            this.layoutControlItem18.TextSize = new System.Drawing.Size(71, 20);
             // 
             // layoutControlItem19
             // 
             this.layoutControlItem19.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem19.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem19.Control = this.txt_ProducUnit;
-            this.layoutControlItem19.Location = new System.Drawing.Point(366, 145);
+            this.layoutControlItem19.Location = new System.Drawing.Point(462, 145);
             this.layoutControlItem19.Name = "layoutControlItem19";
-            this.layoutControlItem19.Size = new System.Drawing.Size(178, 42);
+            this.layoutControlItem19.Size = new System.Drawing.Size(180, 42);
             this.layoutControlItem19.Text = "產品單位";
             this.layoutControlItem19.TextSize = new System.Drawing.Size(71, 20);
             // 
@@ -962,9 +983,9 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.layoutControlItem20.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem20.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem20.Control = this.txt_productQty;
-            this.layoutControlItem20.Location = new System.Drawing.Point(544, 145);
+            this.layoutControlItem20.Location = new System.Drawing.Point(642, 145);
             this.layoutControlItem20.Name = "layoutControlItem20";
-            this.layoutControlItem20.Size = new System.Drawing.Size(267, 42);
+            this.layoutControlItem20.Size = new System.Drawing.Size(224, 42);
             this.layoutControlItem20.Text = "產品數量";
             this.layoutControlItem20.TextSize = new System.Drawing.Size(71, 20);
             // 
@@ -973,9 +994,9 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.layoutControlItem21.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem21.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem21.Control = this.txt_productPrice;
-            this.layoutControlItem21.Location = new System.Drawing.Point(811, 145);
+            this.layoutControlItem21.Location = new System.Drawing.Point(866, 145);
             this.layoutControlItem21.Name = "layoutControlItem21";
-            this.layoutControlItem21.Size = new System.Drawing.Size(250, 42);
+            this.layoutControlItem21.Size = new System.Drawing.Size(205, 42);
             this.layoutControlItem21.Text = "產品單價";
             this.layoutControlItem21.TextSize = new System.Drawing.Size(71, 20);
             // 
@@ -1004,9 +1025,9 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.gridControl1;
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 217);
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 225);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(1158, 209);
+            this.layoutControlItem7.Size = new System.Drawing.Size(1158, 403);
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextVisible = false;
             // 
@@ -1015,7 +1036,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.layoutControlItem13.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem13.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem13.Control = this.txt_Total;
-            this.layoutControlItem13.Location = new System.Drawing.Point(332, 426);
+            this.layoutControlItem13.Location = new System.Drawing.Point(332, 628);
             this.layoutControlItem13.Name = "layoutControlItem13";
             this.layoutControlItem13.Size = new System.Drawing.Size(278, 30);
             this.layoutControlItem13.Text = "合計";
@@ -1026,7 +1047,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.layoutControlItem12.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem12.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem12.Control = this.txt_Tax;
-            this.layoutControlItem12.Location = new System.Drawing.Point(610, 426);
+            this.layoutControlItem12.Location = new System.Drawing.Point(610, 628);
             this.layoutControlItem12.Name = "layoutControlItem12";
             this.layoutControlItem12.Size = new System.Drawing.Size(262, 30);
             this.layoutControlItem12.Text = "稅金";
@@ -1037,7 +1058,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.layoutControlItem14.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem14.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem14.Control = this.txt_TotalTax;
-            this.layoutControlItem14.Location = new System.Drawing.Point(872, 426);
+            this.layoutControlItem14.Location = new System.Drawing.Point(872, 628);
             this.layoutControlItem14.Name = "layoutControlItem14";
             this.layoutControlItem14.Size = new System.Drawing.Size(286, 30);
             this.layoutControlItem14.Text = "稅後總計";
@@ -1046,9 +1067,9 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // layoutControlItem23
             // 
             this.layoutControlItem23.Control = this.panelControl6;
-            this.layoutControlItem23.Location = new System.Drawing.Point(1061, 145);
+            this.layoutControlItem23.Location = new System.Drawing.Point(1071, 145);
             this.layoutControlItem23.Name = "layoutControlItem23";
-            this.layoutControlItem23.Size = new System.Drawing.Size(97, 42);
+            this.layoutControlItem23.Size = new System.Drawing.Size(87, 42);
             this.layoutControlItem23.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem23.TextVisible = false;
             // 
@@ -1057,7 +1078,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.layoutControlItem8.Control = this.panelControl5;
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 187);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(1158, 30);
+            this.layoutControlItem8.Size = new System.Drawing.Size(1158, 38);
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
             // 
@@ -1072,6 +1093,17 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.layoutControlItem22.Text = "廠商編號*";
             this.layoutControlItem22.TextSize = new System.Drawing.Size(71, 20);
             // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem4.Control = this.slt_ProductName;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 145);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(462, 42);
+            this.layoutControlItem4.Text = "產品名稱";
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(71, 20);
+            // 
             // layoutControlItem16
             // 
             this.layoutControlItem16.Location = new System.Drawing.Point(0, 596);
@@ -1083,7 +1115,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1178, 616);
+            this.ClientSize = new System.Drawing.Size(1178, 798);
             this.ControlBox = false;
             this.Controls.Add(this.layoutControl1);
             this.MaximizeBox = false;
@@ -1093,13 +1125,14 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.Text = "PurchaseEditForm";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.slt_ProductName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slt_PurchasecompanyNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).EndInit();
             this.panelControl6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).EndInit();
             this.panelControl5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.cbt_ProductName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_productPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_productQty.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbt_Posting.Properties)).EndInit();
@@ -1140,7 +1173,6 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem19)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem20)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem21)).EndInit();
@@ -1153,6 +1185,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem23)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
             this.ResumeLayout(false);
 
@@ -1214,8 +1247,6 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         private DevExpress.XtraEditors.TextEdit txt_productPrice;
         private DevExpress.XtraEditors.TextEdit txt_productQty;
         private DevExpress.XtraEditors.TextEdit txt_ProducUnit;
-        private DevExpress.XtraEditors.ComboBoxEdit cbt_ProductName;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem19;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem20;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem21;
@@ -1233,5 +1264,10 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem22;
         private DevExpress.XtraGrid.Columns.GridColumn colCompanyNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colCompanyName;
+        private DevExpress.XtraEditors.SearchLookUpEdit slt_ProductName;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.Columns.GridColumn colProductNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colProductName1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
     }
 }

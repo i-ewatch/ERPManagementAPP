@@ -132,7 +132,8 @@ namespace ERPManagementAPP.Maintain.EmployeeMaintainForm
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbt_Token.Properties.Items.AddRange(new object[] {
             "一般使用者",
-            "管理員"});
+            "管理員",
+            "合作夥伴"});
             this.cbt_Token.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbt_Token.Size = new System.Drawing.Size(104, 26);
             this.cbt_Token.StyleController = this.layoutControl1;

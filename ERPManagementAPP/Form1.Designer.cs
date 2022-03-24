@@ -59,6 +59,7 @@ namespace ERPManagementAPP
             this.LoginimageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.pcl_View = new DevExpress.XtraEditors.PanelControl();
+            this.PartnernavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.MainbarManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LoginimageCollection)).BeginInit();
@@ -203,7 +204,8 @@ namespace ERPManagementAPP
             this.SalesnavBarItem,
             this.PurchasePostingnavBarItem,
             this.SalesPostingnavBarItem,
-            this.PaymentTransferDatenavBarItem});
+            this.PaymentTransferDatenavBarItem,
+            this.PartnernavBarItem});
             this.navBarControl1.LinkSelectionMode = DevExpress.XtraNavBar.LinkSelectionModeType.OneInControl;
             this.navBarControl1.Location = new System.Drawing.Point(0, 25);
             this.navBarControl1.Name = "navBarControl1";
@@ -349,7 +351,8 @@ namespace ERPManagementAPP
             this.PaymentManagementBarGroup.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.PurchasePostingnavBarItem),
             new DevExpress.XtraNavBar.NavBarItemLink(this.SalesPostingnavBarItem),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.PaymentTransferDatenavBarItem)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.PaymentTransferDatenavBarItem),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.PartnernavBarItem)});
             this.PaymentManagementBarGroup.Name = "PaymentManagementBarGroup";
             // 
             // PurchasePostingnavBarItem
@@ -408,6 +411,19 @@ namespace ERPManagementAPP
             this.pcl_View.Size = new System.Drawing.Size(1278, 843);
             this.pcl_View.TabIndex = 14;
             // 
+            // PartnernavBarItem
+            // 
+            this.PartnernavBarItem.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.PartnernavBarItem.Appearance.Options.UseFont = true;
+            this.PartnernavBarItem.AppearanceHotTracked.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.PartnernavBarItem.AppearanceHotTracked.Options.UseFont = true;
+            this.PartnernavBarItem.Caption = "合作夥伴分潤";
+            this.PartnernavBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("PartnernavBarItem.ImageOptions.LargeImage")));
+            this.PartnernavBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("PartnernavBarItem.ImageOptions.SmallImage")));
+            this.PartnernavBarItem.Name = "PartnernavBarItem";
+            this.PartnernavBarItem.Tag = "11";
+            this.PartnernavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -463,6 +479,7 @@ namespace ERPManagementAPP
         private DevExpress.XtraNavBar.NavBarItem SalesPostingnavBarItem;
         private DevExpress.XtraNavBar.NavBarItem PaymentTransferDatenavBarItem;
         private DevExpress.XtraBars.BarStaticItem ConnectbarStaticItem;
+        private DevExpress.XtraNavBar.NavBarItem PartnernavBarItem;
     }
 }
 

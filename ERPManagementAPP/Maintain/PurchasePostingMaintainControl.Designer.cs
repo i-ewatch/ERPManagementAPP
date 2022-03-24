@@ -49,6 +49,7 @@ namespace ERPManagementAPP.Maintain
             this.cet_Other = new DevExpress.XtraEditors.CheckEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.colPostingDate = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -108,7 +109,8 @@ namespace ERPManagementAPP.Maintain
             this.colTotalTax,
             this.colPosting,
             this.colRemark,
-            this.colFileName});
+            this.colFileName,
+            this.colPostingDate});
             this.gridView1.GridControl = this.PurchasegridControl;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
@@ -257,6 +259,14 @@ namespace ERPManagementAPP.Maintain
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
+            // colPostingDate
+            // 
+            this.colPostingDate.Caption = "過帳日期";
+            this.colPostingDate.FieldName = "PostingDate";
+            this.colPostingDate.Name = "colPostingDate";
+            this.colPostingDate.Visible = true;
+            this.colPostingDate.VisibleIndex = 8;
+            // 
             // PurchasePostingMaintainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -300,5 +310,6 @@ namespace ERPManagementAPP.Maintain
         private DevExpress.XtraGrid.Columns.GridColumn colPosting;
         private DevExpress.XtraGrid.Columns.GridColumn colRemark;
         private DevExpress.XtraGrid.Columns.GridColumn colFileName;
+        private DevExpress.XtraGrid.Columns.GridColumn colPostingDate;
     }
 }
