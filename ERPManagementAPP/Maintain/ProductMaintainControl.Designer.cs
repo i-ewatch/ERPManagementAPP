@@ -133,6 +133,7 @@ namespace ERPManagementAPP.Maintain
             this.colCategoryNumber.Caption = "產品類別編號";
             this.colCategoryNumber.FieldName = "CategoryNumber";
             this.colCategoryNumber.Name = "colCategoryNumber";
+            this.colCategoryNumber.OptionsColumn.AllowEdit = false;
             this.colCategoryNumber.Visible = true;
             this.colCategoryNumber.VisibleIndex = 0;
             // 
@@ -141,6 +142,7 @@ namespace ERPManagementAPP.Maintain
             this.colCategoryName.Caption = "產品類別名稱";
             this.colCategoryName.FieldName = "CategoryName";
             this.colCategoryName.Name = "colCategoryName";
+            this.colCategoryName.OptionsColumn.AllowEdit = false;
             this.colCategoryName.Visible = true;
             this.colCategoryName.VisibleIndex = 1;
             // 

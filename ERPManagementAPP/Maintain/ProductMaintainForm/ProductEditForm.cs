@@ -22,6 +22,14 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
         private List<CompanySetting> CompanySettings { get; set; }
         private ProductSetting ProductSetting { get; set; }
         private List<ProductCategorySetting> ProductCategorySettings { get; set; }
+        /// <summary>
+        /// 被選擇的公司資訊
+        /// </summary>
+        private CompanySetting SelectCompanySetting { get; set; }
+        /// <summary>
+        /// 被選擇的設備類型資訊
+        /// </summary>
+        private ProductCategorySetting SelectProductCategorySetting { get; set; }
         public ProductEditForm(List<ProductSetting> productSettings, ProductSetting productSetting, List<CompanySetting> companySettings, List<ProductCategorySetting> productCategorySetting, APIMethod apiMethod, Form1 form1)
         {
             InitializeComponent();
@@ -30,12 +38,12 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             ProductSetting = productSetting;
             ProductCategorySettings = productCategorySetting;
             action.Commands.Add(FlyoutCommand.Yes);
-            Create_ProductCompanyNumber_cbt();
+            Create_slt_PurchasecompanyNumber();
             Create_ProductCategory_cbt();
             if (productSetting != null && productSetting.ProductNumber != null)//修改
             {
                 action.Caption = "產品修改錯誤";
-                cbt_ProductCompanyNumber.Enabled = false;
+                slt_ProductCompanyNumber.Enabled = false;
                 Show_ProductCompanyNumber_Index();
                 txt_ProductNumber.Enabled = false;
                 txt_ProductNumber.Text = ProductSetting.ProductNumber;
@@ -100,58 +108,54 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
         }
         #region 廠商編號功能
         /// <summary>
-        /// 創建廠商編號下拉選單
+        /// 創建廠商下拉選單
         /// </summary>
-        /// <param name="companySettings"></param>
-        private void Create_ProductCompanyNumber_cbt()
+        private void Create_slt_PurchasecompanyNumber()
         {
-            if (cbt_ProductCompanyNumber.Properties.Items.Count > 0)
+            slt_ProductCompanyNumber.Properties.DataSource = CompanySettings;
+            slt_ProductCompanyNumber.Properties.DisplayMember = "CompanyName";
+            slt_ProductCompanyNumber.CustomDisplayText += (s, e) =>
             {
-                cbt_ProductCompanyNumber.Properties.Items.Clear();
-            }
-            if (CompanySettings != null)
-            {
-                foreach (var item in CompanySettings)
+                if (ProductSetting != null)
                 {
-                    cbt_ProductCompanyNumber.Properties.Items.Add(item.CompanyName);
-                }
-            }
-        }
-        /// <summary>
-        /// 取得廠商編號
-        /// </summary>
-        /// <returns></returns>
-        private string Get_ProductCompanyNumber_Number()
-        {
-            string value = "";
-            if (CompanySettings != null)
-            {
-                if (CompanySettings.Count > 0)
-                {
-                    value = CompanySettings[cbt_ProductCompanyNumber.SelectedIndex].CompanyNumber;
-                }
-            }
-            return value;
-        }
-        /// <summary>
-        /// 顯示廠商名稱
-        /// </summary>
-        private void Show_ProductCompanyNumber_Index()
-        {
-            int Index = -1;
-            if (CompanySettings != null)
-            {
-                foreach (var item in CompanySettings)
-                {
-                    if (item.CompanyNumber == ProductSetting.ProductCompanyNumber)
+                    if (SelectCompanySetting != null)
                     {
-                        Index++;
-                        cbt_ProductCompanyNumber.SelectedIndex = Index;
+                        if (e.Value.ToString() != "")
+                        {
+                            SelectCompanySetting = e.Value as CompanySetting;
+                            e.DisplayText = SelectCompanySetting.CompanyName;
+                        }
+                        else
+                        {
+                            e.DisplayText = SelectCompanySetting.CompanyName;
+                        }
                     }
                     else
                     {
-                        Index++;
+                        e.DisplayText = "";
                     }
+                }
+                else
+                {
+                    SelectCompanySetting = e.Value as CompanySetting;
+                }
+            };
+        }
+        /// <summary>
+        /// 顯示廠商選單項目
+        /// </summary>
+        private void Show_ProductCompanyNumber_Index()
+        {
+            for (int i = 0; i < CompanySettings.Count; i++)
+            {
+                if (CompanySettings[i].CompanyNumber == ProductSetting.ProductCompanyNumber)
+                {
+                    SelectCompanySetting = CompanySettings[i];
+                    break;
+                }
+                else
+                {
+                    SelectCompanySetting = null;
                 }
             }
         }
@@ -162,53 +166,50 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
         /// </summary>
         private void Create_ProductCategory_cbt()
         {
-            if (cbt_ProductCategory.Properties.Items.Count > 0)
+            slt_ProductCategory.Properties.DataSource = ProductCategorySettings;
+            slt_ProductCategory.Properties.DisplayMember = "CategoryName";
+            slt_ProductCategory.CustomDisplayText += (s, e) =>
             {
-                cbt_ProductCategory.Properties.Items.Clear();
-            }
-            if (ProductCategorySettings != null)
-            {
-                foreach (var item in ProductCategorySettings)
+                if (ProductSetting != null)
                 {
-                    cbt_ProductCategory.Properties.Items.Add(item.CategoryName);
+                    if (SelectProductCategorySetting != null)
+                    {
+                        if (e.Value.ToString() != "")
+                        {
+                            SelectCompanySetting = e.Value as CompanySetting;
+                            e.DisplayText = SelectProductCategorySetting.CategoryName;
+                        }
+                        else
+                        {
+                            e.DisplayText = SelectProductCategorySetting.CategoryName;
+                        }
+                    }
+                    else
+                    {
+                        e.DisplayText = "";
+                    }
                 }
-            }
-        }
-        /// <summary>
-        /// 取得產品類別編號
-        /// </summary>
-        /// <returns></returns>
-        private string Get_ProductCategory_Number()
-        {
-            string value = "";
-            if (ProductCategorySettings != null)
-            {
-                if (ProductCategorySettings.Count > 0)
+                else
                 {
-                    value = ProductCategorySettings[cbt_ProductCategory.SelectedIndex].CategoryNumber;
+                    SelectProductCategorySetting = e.Value as ProductCategorySetting;
                 }
-            }
-            return value;
+            };
         }
         /// <summary>
         /// 顯示產品類別名稱
         /// </summary>
         private void Show_ProductCategory_Index()
         {
-            int Index = -1;
-            if (ProductCategorySettings != null)
+            for (int i = 0; i < ProductCategorySettings.Count; i++)
             {
-                foreach (var item in ProductCategorySettings)
+                if (ProductCategorySettings[i].CategoryNumber == ProductSetting.ProductCategory)
                 {
-                    if (item.CategoryNumber == ProductSetting.ProductCategory)
-                    {
-                        Index++;
-                        cbt_ProductCategory.SelectedIndex = Index;
-                    }
-                    else
-                    {
-                        Index++;
-                    }
+                    SelectProductCategorySetting = ProductCategorySettings[i];
+                    break;
+                }
+                else
+                {
+                    SelectProductCategorySetting = null;
                 }
             }
         }
@@ -229,12 +230,12 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             }
             if (productSetting != null && productsetting.ProductNumber != null)
             {
-                productSetting.ProductCompanyNumber = Get_ProductCompanyNumber_Number();
+                productSetting.ProductCompanyNumber = SelectCompanySetting.CompanyNumber;
                 productSetting.ProductNumber = txt_ProductNumber.Text;
                 productSetting.ProductName = txt_ProductName.Text;
                 productSetting.ProductModel = txt_ProductModel.Text;
                 productSetting.ProductType = cbt_ProductType.SelectedIndex;
-                productSetting.ProductCategory = Get_ProductCategory_Number();
+                productSetting.ProductCategory = SelectProductCategorySetting.CategoryNumber;
                 productSetting.FootPrint = mmt_FootPrint.Text;
                 productSetting.Remark = mmt_Remark.Text;
                 productSetting.Explanation = mmt_Explanation.Text;
@@ -270,16 +271,16 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             {
                 if (productsetting == null)
                 {
-                    if (cbt_ProductCompanyNumber.SelectedIndex > -1 && !string.IsNullOrEmpty(txt_ProductNumber.Text) && !string.IsNullOrEmpty(txt_ProductName.Text) && !string.IsNullOrEmpty(txt_ProductModel.Text) && cbt_ProductType.SelectedIndex > -1 && !string.IsNullOrEmpty(mmt_FootPrint.Text))
+                    if (SelectCompanySetting != null && !string.IsNullOrEmpty(txt_ProductNumber.Text) && !string.IsNullOrEmpty(txt_ProductName.Text) && !string.IsNullOrEmpty(txt_ProductModel.Text) && cbt_ProductType.SelectedIndex > -1)
                     {
                         ProductSetting setting = new ProductSetting()
                         {
-                            ProductCompanyNumber = Get_ProductCompanyNumber_Number(),
+                            ProductCompanyNumber = SelectCompanySetting.CompanyNumber,
                             ProductNumber = txt_ProductNumber.Text,
                             ProductName = txt_ProductName.Text,
                             ProductModel = txt_ProductModel.Text,
                             ProductType = cbt_ProductType.SelectedIndex,
-                            ProductCategory = Get_ProductCategory_Number(),
+                            ProductCategory = SelectProductCategorySetting.CategoryNumber,
                             FootPrint = mmt_FootPrint.Text,
                             Remark = mmt_Remark.Text,
                             Explanation = mmt_Explanation.Text
