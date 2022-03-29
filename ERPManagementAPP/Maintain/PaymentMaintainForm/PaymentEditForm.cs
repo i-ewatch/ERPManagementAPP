@@ -238,23 +238,27 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             if (paymentSetting != null && paymentSetting.PaymentNumber != null)
             {
                 paymentSetting.PaymentInvoiceNo = txt_PaymentInvoiceNo.Text;
-                paymentsetting.PaymentItemNo = Get_PaymentItemNo_No();
-                paymentsetting.EmployeeNumber = Get_EmployeeNumber_Number();
-                paymentsetting.PaymentAmount = Convert.ToDouble(txt_PaymentAmoumt.EditValue);
-                paymentsetting.PaymentMethod = cbt_PaymentMethod.SelectedIndex;
-                paymentsetting.PaymentUse = mmt_PaymentUse.Text;
-                paymentsetting.Remark = mmt_Remark.Text;
+                paymentSetting.PaymentItemNo = Get_PaymentItemNo_No();
+                paymentSetting.EmployeeNumber = Get_EmployeeNumber_Number();
+                paymentSetting.PaymentAmount = Convert.ToDouble(txt_PaymentAmoumt.EditValue);
+                paymentSetting.PaymentMethod = cbt_PaymentMethod.SelectedIndex;
+                paymentSetting.PaymentUse = mmt_PaymentUse.Text;
+                paymentSetting.Remark = mmt_Remark.Text;
                 if (!string.IsNullOrEmpty(det_TransferDate.Text))
                 {
-                    paymentsetting.TransferDate = Convert.ToDateTime(det_TransferDate.EditValue);
+                    paymentSetting.TransferDate = Convert.ToDateTime(det_TransferDate.EditValue);
                 }
-                string value = JsonConvert.SerializeObject(paymentsetting);
+                else
+                {
+                    paymentSetting.TransferDate = null;
+                }
+                string value = JsonConvert.SerializeObject(paymentSetting);
                 response = apiMethod.Put_Payment(value);
                 if (response == "200")
                 {
                     if (!string.IsNullOrEmpty(AttachmentFilePath))
                     {
-                        response = apiMethod.Post_PaymentAttachmentFile(paymentsetting.PaymentNumber, AttachmentFilePath);
+                        response = apiMethod.Post_PaymentAttachmentFile(paymentSetting.PaymentNumber, AttachmentFilePath);
                         if (response == "200")
                         {
                             DialogResult = DialogResult.OK;

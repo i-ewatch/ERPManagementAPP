@@ -243,7 +243,7 @@ namespace ERPManagementAPP.Maintain
                 }
                 else
                 {
-                    FocusePaymentItemSetting.PaymentItemName = "";
+                    FocusePaymentItemSetting.PaymentItemName = null;
                 }
             }
             else
@@ -266,18 +266,38 @@ namespace ERPManagementAPP.Maintain
                 {
                     FocusePaymentSetting.PaymentInvoiceNo = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentInvoiceNo").ToString();
                 }
+                else
+                {
+                    FocusePaymentSetting.PaymentInvoiceNo = null;
+                }
                 FocusePaymentSetting.PaymentItemNo = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentItemNo").ToString();
                 FocusePaymentSetting.PaymentUse = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentUse").ToString();
                 FocusePaymentSetting.EmployeeNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "EmployeeNumber").ToString();
                 FocusePaymentSetting.PaymentAmount = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentAmount").ToString());
                 FocusePaymentSetting.PaymentMethod = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentMethod").ToString());
+                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Remark") != null)
+                {
+                    FocusePaymentSetting.Remark = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Remark").ToString();
+                }
+                else
+                {
+                    FocusePaymentSetting.Remark = null;
+                }
                 if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TransferDate") != null)
                 {
                     FocusePaymentSetting.TransferDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TransferDate").ToString());
                 }
+                else
+                {
+                    FocusePaymentSetting.TransferDate = null;
+                }
                 if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "FileName") != null)
                 {
                     FocusePaymentSetting.FileName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "FileName").ToString();
+                }
+                else
+                {
+                    FocusePaymentSetting.FileName = null;
                 }
             }
             else
