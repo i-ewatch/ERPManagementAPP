@@ -2530,7 +2530,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
-                requsest.AddParameter("YearDate", Month, type: ParameterType.QueryString);
+                requsest.AddParameter("MonthDate", Month, type: ParameterType.QueryString);
                 var response = clinet.ExecuteGetAsync<List<PaymentSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PaymentSetting>>(response.Result.Content);
