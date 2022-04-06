@@ -400,23 +400,26 @@ namespace ERPManagementAPP.Maintain
         {
             CustomerSettings = apiMethod.Get_Customer();
             var employeeSettings = apiMethod.Get_Employee();
-            EmployeeSettings = employeeSettings.Where(g => g.Token == 2).ToList();
-
-            if (EmployeeSettings.Count > cbt_Employee.Properties.Items.Count - 1)
+            if (employeeSettings != null)
             {
-                if (cbt_Employee.Properties.Items.Count > 0)
+                EmployeeSettings = employeeSettings.Where(g => g.Token == 2).ToList();
+
+                if (EmployeeSettings.Count > cbt_Employee.Properties.Items.Count - 1)
                 {
-                    cbt_Employee.Properties.Items.Clear();
-                }
-                cbt_Employee.Properties.Items.Add("全部");
-                if (EmployeeSettings != null)
-                {
-                    foreach (var item in EmployeeSettings)
+                    if (cbt_Employee.Properties.Items.Count > 0)
                     {
-                        cbt_Employee.Properties.Items.Add(item.EmployeeName);
+                        cbt_Employee.Properties.Items.Clear();
                     }
+                    cbt_Employee.Properties.Items.Add("全部");
+                    if (EmployeeSettings != null)
+                    {
+                        foreach (var item in EmployeeSettings)
+                        {
+                            cbt_Employee.Properties.Items.Add(item.EmployeeName);
+                        }
+                    }
+                    cbt_Employee.SelectedIndex = 0;
                 }
-                cbt_Employee.SelectedIndex = 0;
             }
         }
     }
