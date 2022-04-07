@@ -31,11 +31,7 @@ namespace ERPManagementAPP.Maintain
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaymentTransferMaintainControl));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.btn_Payment_Refresh = new DevExpress.XtraEditors.SimpleButton();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colPaymentNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -49,16 +45,21 @@ namespace ERPManagementAPP.Maintain
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTransferDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFileName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.btn_Payment_Refresh = new DevExpress.XtraEditors.SimpleButton();
+            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.btn_TransferDate = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -72,16 +73,6 @@ namespace ERPManagementAPP.Maintain
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // Root
-            // 
-            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root.GroupBordersVisible = false;
-            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1});
-            this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1278, 846);
-            this.Root.TextVisible = false;
-            // 
             // groupControl1
             // 
             this.groupControl1.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
@@ -93,36 +84,6 @@ namespace ERPManagementAPP.Maintain
             this.groupControl1.Size = new System.Drawing.Size(1254, 822);
             this.groupControl1.TabIndex = 4;
             this.groupControl1.Text = "代墊代付費用";
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.groupControl1;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1258, 826);
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
-            // 
-            // panelControl1
-            // 
-            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl1.Controls.Add(this.btn_Payment_Refresh);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(2, 23);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1250, 43);
-            this.panelControl1.TabIndex = 1;
-            // 
-            // btn_Payment_Refresh
-            // 
-            this.btn_Payment_Refresh.AllowFocus = false;
-            this.btn_Payment_Refresh.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btn_Payment_Refresh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Payment_Refresh.ImageOptions.Image")));
-            this.btn_Payment_Refresh.Location = new System.Drawing.Point(0, 0);
-            this.btn_Payment_Refresh.Name = "btn_Payment_Refresh";
-            this.btn_Payment_Refresh.Size = new System.Drawing.Size(85, 43);
-            this.btn_Payment_Refresh.TabIndex = 31;
-            this.btn_Payment_Refresh.Text = "Refresh";
             // 
             // gridControl1
             // 
@@ -238,14 +199,64 @@ namespace ERPManagementAPP.Maintain
             this.colTransferDate.Caption = "匯款收款日期";
             this.colTransferDate.FieldName = "TransferDate";
             this.colTransferDate.Name = "colTransferDate";
-            this.colTransferDate.Visible = true;
-            this.colTransferDate.VisibleIndex = 7;
             // 
             // colFileName
             // 
             this.colFileName.Caption = "附件檔名";
             this.colFileName.FieldName = "FileName";
             this.colFileName.Name = "colFileName";
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl1.Controls.Add(this.btn_TransferDate);
+            this.panelControl1.Controls.Add(this.btn_Payment_Refresh);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl1.Location = new System.Drawing.Point(2, 23);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(1250, 43);
+            this.panelControl1.TabIndex = 1;
+            // 
+            // btn_Payment_Refresh
+            // 
+            this.btn_Payment_Refresh.AllowFocus = false;
+            this.btn_Payment_Refresh.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_Payment_Refresh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Payment_Refresh.ImageOptions.Image")));
+            this.btn_Payment_Refresh.Location = new System.Drawing.Point(0, 0);
+            this.btn_Payment_Refresh.Name = "btn_Payment_Refresh";
+            this.btn_Payment_Refresh.Size = new System.Drawing.Size(85, 43);
+            this.btn_Payment_Refresh.TabIndex = 31;
+            this.btn_Payment_Refresh.Text = "Refresh";
+            // 
+            // Root
+            // 
+            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root.GroupBordersVisible = false;
+            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1});
+            this.Root.Name = "Root";
+            this.Root.Size = new System.Drawing.Size(1278, 846);
+            this.Root.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.groupControl1;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(1258, 826);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
+            // 
+            // btn_TransferDate
+            // 
+            this.btn_TransferDate.AllowFocus = false;
+            this.btn_TransferDate.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_TransferDate.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.btn_TransferDate.Location = new System.Drawing.Point(85, 0);
+            this.btn_TransferDate.Name = "btn_TransferDate";
+            this.btn_TransferDate.Size = new System.Drawing.Size(111, 43);
+            this.btn_TransferDate.TabIndex = 32;
+            this.btn_TransferDate.Text = "全部過帳";
             // 
             // PaymentTransferMaintainControl
             // 
@@ -256,14 +267,14 @@ namespace ERPManagementAPP.Maintain
             this.Size = new System.Drawing.Size(1278, 846);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -289,5 +300,6 @@ namespace ERPManagementAPP.Maintain
         private DevExpress.XtraGrid.Columns.GridColumn colRemark;
         private DevExpress.XtraGrid.Columns.GridColumn colTransferDate;
         private DevExpress.XtraGrid.Columns.GridColumn colFileName;
+        private DevExpress.XtraEditors.SimpleButton btn_TransferDate;
     }
 }

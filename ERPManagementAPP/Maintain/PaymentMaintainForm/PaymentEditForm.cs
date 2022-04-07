@@ -303,6 +303,10 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
                     {
                         setting.TransferDate = null;
                     }
+                    if (setting.PaymentMethod == 1)
+                    {
+                        setting.TransferDate = DateTime.Now;
+                    }
                     string value = JsonConvert.SerializeObject(setting);
                     response = apiMethod.Post_Payment(value);
                     if (response == "200")

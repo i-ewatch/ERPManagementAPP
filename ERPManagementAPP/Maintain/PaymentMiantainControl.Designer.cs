@@ -49,6 +49,7 @@ namespace ERPManagementAPP.Maintain
             this.colPaymentInvoiceNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPaymentItemNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPaymentUse = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEmployeeNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPaymentAmount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPaymentMethod = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -65,7 +66,6 @@ namespace ERPManagementAPP.Maintain
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
-            this.colEmployeeNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
@@ -246,6 +246,7 @@ namespace ERPManagementAPP.Maintain
             this.colFileName});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsView.ColumnAutoWidth = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // colPaymentNumber
@@ -292,6 +293,16 @@ namespace ERPManagementAPP.Maintain
             this.colPaymentUse.OptionsColumn.AllowEdit = false;
             this.colPaymentUse.Visible = true;
             this.colPaymentUse.VisibleIndex = 4;
+            // 
+            // colEmployeeNumber
+            // 
+            this.colEmployeeNumber.Caption = "申請人";
+            this.colEmployeeNumber.FieldName = "EmployeeNumber";
+            this.colEmployeeNumber.Name = "colEmployeeNumber";
+            this.colEmployeeNumber.OptionsColumn.AllowEdit = false;
+            this.colEmployeeNumber.OptionsFilter.AllowAutoFilter = false;
+            this.colEmployeeNumber.Visible = true;
+            this.colEmployeeNumber.VisibleIndex = 5;
             // 
             // colPaymentAmount
             // 
@@ -472,16 +483,6 @@ namespace ERPManagementAPP.Maintain
             this.splitterItem1.Location = new System.Drawing.Point(857, 0);
             this.splitterItem1.Name = "splitterItem1";
             this.splitterItem1.Size = new System.Drawing.Size(12, 823);
-            // 
-            // colEmployeeNumber
-            // 
-            this.colEmployeeNumber.Caption = "申請人";
-            this.colEmployeeNumber.FieldName = "EmployeeNumber";
-            this.colEmployeeNumber.Name = "colEmployeeNumber";
-            this.colEmployeeNumber.OptionsColumn.AllowEdit = false;
-            this.colEmployeeNumber.OptionsFilter.AllowAutoFilter = false;
-            this.colEmployeeNumber.Visible = true;
-            this.colEmployeeNumber.VisibleIndex = 5;
             // 
             // PaymentMiantainControl
             // 

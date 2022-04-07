@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ERPManagementAPP.Maintain
@@ -270,9 +271,15 @@ namespace ERPManagementAPP.Maintain
                 {
                     FocusePaymentSetting.PaymentInvoiceNo = null;
                 }
-                FocusePaymentSetting.PaymentItemNo = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentItemNo").ToString();
+
+                var paymentItemNo = PaymentItemSettings.SingleOrDefault(g => g.PaymentItemName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentItemNo").ToString());
+                if (paymentItemNo != null)FocusePaymentSetting.PaymentItemNo = paymentItemNo.PaymentItemNo;
+
                 FocusePaymentSetting.PaymentUse = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentUse").ToString();
-                FocusePaymentSetting.EmployeeNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "EmployeeNumber").ToString();
+
+                var employee = EmployeeSettings.SingleOrDefault(g => g.EmployeeName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "EmployeeNumber").ToString());
+                if (employee != null) FocusePaymentSetting.EmployeeNumber = employee.EmployeeNumber;
+
                 FocusePaymentSetting.PaymentAmount = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentAmount").ToString());
                 FocusePaymentSetting.PaymentMethod = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentMethod").ToString());
                 if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Remark") != null)
@@ -314,35 +321,35 @@ namespace ERPManagementAPP.Maintain
         {
             gridView1.CustomDrawCell += (s, e) =>
             {
-                if (e.Column.FieldName == "PaymentItemNo")
-                {
-                    if (e.CellValue != null)
-                    {
-                        string Index = e.CellValue.ToString();
-                        foreach (var item in PaymentItemSettings)
-                        {
-                            if (item.PaymentItemNo == Index)
-                            {
-                                e.DisplayText = item.PaymentItemName;
-                            }
-                        }
-                    }
-                }
-                else if (e.Column.FieldName == "EmployeeNumber")
-                {
-                    if (e.CellValue != null)
-                    {
-                        string Index = e.CellValue.ToString();
-                        foreach (var item in EmployeeSettings)
-                        {
-                            if (item.EmployeeNumber == Index)
-                            {
-                                e.DisplayText = item.EmployeeName;
-                            }
-                        }
-                    }
-                }
-                else if (e.Column.FieldName == "PaymentMethod")
+                //if (e.Column.FieldName == "PaymentItemNo")
+                //{
+                //    if (e.CellValue != null)
+                //    {
+                //        string Index = e.CellValue.ToString();
+                //        foreach (var item in PaymentItemSettings)
+                //        {
+                //            if (item.PaymentItemNo == Index)
+                //            {
+                //                e.DisplayText = item.PaymentItemName;
+                //            }
+                //        }
+                //    }
+                //}
+                //else if (e.Column.FieldName == "EmployeeNumber")
+                //{
+                //    if (e.CellValue != null)
+                //    {
+                //        string Index = e.CellValue.ToString();
+                //        foreach (var item in EmployeeSettings)
+                //        {
+                //            if (item.EmployeeNumber == Index)
+                //            {
+                //                e.DisplayText = item.EmployeeName;
+                //            }
+                //        }
+                //    }
+                //}
+                if (e.Column.FieldName == "PaymentMethod")
                 {
                     e.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
                     string Index = e.CellValue.ToString();
@@ -413,7 +420,22 @@ namespace ERPManagementAPP.Maintain
         {
             //PaymentSettings = apiMethod.Get_PaymentTransferDate();//未付款
             PaymentSettings = apiMethod.Get_PaymentMonth(det_PaymentDate.Text.Replace("/", ""));
+            foreach (var Employeeitem in EmployeeSettings)
+            {
+                PaymentSettings.Where(g => g.EmployeeNumber == Employeeitem.EmployeeNumber).ToList().ForEach(t => t.EmployeeNumber = Employeeitem.EmployeeName);
+            }
+            foreach (var item in PaymentItemSettings)
+            {
+                PaymentSettings.Where(g => g.PaymentItemNo == item.PaymentItemNo).ToList().ForEach(t => t.PaymentItemNo = item.PaymentItemName);
+            }
             gridControl1.DataSource = PaymentSettings;
+            for (int i = 0; i < gridView1.Columns.Count; i++)
+            {
+                if (gridView1.Columns[i].FieldName != "PaymentUse")
+                {
+                    gridView1.Columns[i].BestFit();
+                }
+            }
             ChangeGridStr();
         }
         private void Refresh_API()

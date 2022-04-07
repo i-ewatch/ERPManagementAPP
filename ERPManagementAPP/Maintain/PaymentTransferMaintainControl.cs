@@ -1,22 +1,16 @@
 ﻿using DevExpress.Data;
 using DevExpress.Utils;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraBars.Docking2010.Customization;
+using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ERPManagementAPP.Maintain
@@ -44,37 +38,40 @@ namespace ERPManagementAPP.Maintain
             InitializeComponent();
             Form1 = form1;
             apiMethod = APIMethod;
+            action.Commands.Add(FlyoutCommand.Yes);
+            action.Commands.Add(FlyoutCommand.Cancel);
+            action1.Commands.Add(FlyoutCommand.Yes);
             #region 代墊代付資料表
             gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            #region 產品資訊報表按鈕
-            RepositoryItemButtonEdit paymentedit = new RepositoryItemButtonEdit();
-            paymentedit.ButtonClick += (s, e) =>
-            {
-                FocuseMainGrid();
-                if (e.Button.Kind == ButtonPredefines.Plus)
-                {
-                    if (FocusePaymentSetting.TransferDate == null)
-                    {
-                        foreach (var item in PaymentSettings)
-                        {
-                            if (item.PaymentNumber == FocusePaymentSetting.PaymentNumber)
-                            {
-                                item.TransferDate = DateTime.Now;
-                                FocusePaymentSetting.TransferDate= DateTime.Now;
-                                string value = JsonConvert.SerializeObject(FocusePaymentSetting);
-                                apiMethod.Put_Payment(value);
-                                break;
-                            }
-                        }
-                    }
-                }
-            };
-            paymentedit.Buttons[0].Kind = ButtonPredefines.Plus;
-            paymentedit.Buttons[0].Caption = "匯款日期";
-            paymentedit.TextEditStyle = TextEditStyles.DisableTextEditor;
-            gridControl1.RepositoryItems.Add(paymentedit);
-            gridView1.Columns["TransferDate"].ColumnEdit = paymentedit;
-            gridView1.Columns["TransferDate"].ShowButtonMode = ShowButtonModeEnum.ShowAlways;
+            #region 產品資訊報表按鈕 (不使用 2022/4/7)
+            //RepositoryItemButtonEdit paymentedit = new RepositoryItemButtonEdit();
+            //paymentedit.ButtonClick += (s, e) =>
+            //{
+            //    FocuseMainGrid();
+            //    if (e.Button.Kind == ButtonPredefines.Plus)
+            //    {
+            //        if (FocusePaymentSetting.TransferDate == null)
+            //        {
+            //            foreach (var item in PaymentSettings)
+            //            {
+            //                if (item.PaymentNumber == FocusePaymentSetting.PaymentNumber)
+            //                {
+            //                    item.TransferDate = DateTime.Now;
+            //                    FocusePaymentSetting.TransferDate= DateTime.Now;
+            //                    string value = JsonConvert.SerializeObject(FocusePaymentSetting);
+            //                    apiMethod.Put_Payment(value);
+            //                    break;
+            //                }
+            //            }
+            //        }
+            //    }
+            //};
+            //paymentedit.Buttons[0].Kind = ButtonPredefines.Plus;
+            //paymentedit.Buttons[0].Caption = "匯款日期";
+            //paymentedit.TextEditStyle = TextEditStyles.DisableTextEditor;
+            //gridControl1.RepositoryItems.Add(paymentedit);
+            //gridView1.Columns["TransferDate"].ColumnEdit = paymentedit;
+            //gridView1.Columns["TransferDate"].ShowButtonMode = ShowButtonModeEnum.ShowAlways;
             #endregion
             #region 群組功能
             gridView1.Columns["EmployeeNumber"].Group();
@@ -115,6 +112,28 @@ namespace ERPManagementAPP.Maintain
             btn_Payment_Refresh.Click += (s, e) =>
             {
                 Refresh_Main_GridView();
+            };
+            #endregion
+            #region 全部過帳按鈕(新增 2022/4/7)
+            btn_TransferDate.Click += (s, e) =>
+            {
+                action.Caption = "代墊代付是否全部過帳完成";
+                if (FlyoutDialog.Show(Form1, action) == DialogResult.Yes)
+                {
+                    if (PaymentSettings != null)
+                    {
+                        foreach (var Paymentitem in PaymentSettings)
+                        {
+                            Paymentitem.TransferDate = DateTime.Now;
+                            string value = JsonConvert.SerializeObject(Paymentitem);
+                            apiMethod.Put_Payment(value);
+                            Thread.Sleep(80);
+                        }
+                    }
+                    action1.Caption = "代墊代付全部過帳完成";
+                    FlyoutDialog.Show(Form1, action1);
+                    Refresh_Main_GridView();
+                }
             };
             #endregion
             #endregion

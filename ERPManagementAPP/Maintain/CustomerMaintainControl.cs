@@ -483,6 +483,10 @@ namespace ERPManagementAPP.Maintain
         {
             CustomerSettings = apiMethod.Get_Customer();
             CustomergridControl.DataSource = CustomerSettings;
+            for (int i = 0; i < advBandedGridView1.Columns.Count; i++)
+            {
+                advBandedGridView1.Columns[i].BestFit();
+            }
         }
         public override void Refresh_Second_GridView(string Number)
         {
