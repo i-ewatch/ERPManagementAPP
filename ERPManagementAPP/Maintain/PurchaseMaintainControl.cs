@@ -345,7 +345,10 @@ namespace ERPManagementAPP.Maintain
         {
             Refresh_API();
             PurchaseMainSettings = apiMethod.Get_Purchase(det_PurchaseDate.Text.Replace("/", ""));
-            PurchasegridControl.DataSource = PurchaseMainSettings;
+            if (PurchaseMainSettings != null)
+            {
+                PurchasegridControl.DataSource = PurchaseMainSettings;
+            }
         }
         private void Refresh_API()
         {

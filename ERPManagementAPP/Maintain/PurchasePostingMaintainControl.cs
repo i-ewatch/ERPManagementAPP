@@ -261,15 +261,18 @@ namespace ERPManagementAPP.Maintain
         {
             Refersh_API();
             PurchaseMainSettings = apiMethod.Get_PurchasePosting();
-            foreach (var item in PurchaseMainSettings)
+            if (PurchaseMainSettings != null)
             {
-                if (item.PurchaseFlag == 2)
+                foreach (var item in PurchaseMainSettings)
                 {
-                    item.Total = -1 * item.Total;
-                    item.TotalTax = -1 * item.TotalTax;
+                    if (item.PurchaseFlag == 2)
+                    {
+                        item.Total = -1 * item.Total;
+                        item.TotalTax = -1 * item.TotalTax;
+                    }
                 }
+                Controller();
             }
-            Controller();
         }
         private void Refersh_API()
         {
@@ -283,83 +286,13 @@ namespace ERPManagementAPP.Maintain
         {
             FilterPurchaseMainSettings = new List<PurchaseMainSetting>();
             int SystemTime = DateTime.Now.Month;
-            foreach (var Companyitem in CompanySettings)
+            if (CompanySettings != null)
             {
-                switch (Companyitem.CheckoutType)
+                foreach (var Companyitem in CompanySettings)
                 {
-                    case 0://現金
-                        {
-                            List<PurchaseMainSetting> setting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
-                            if (setting != null)
-                            {
-                                foreach (var item in setting)
-                                {
-                                    FilterPurchaseMainSettings.Add(item);
-                                }
-                            }
-                        }
-                        break;
-                    case 1://月結30天
-                        {
-                            if (SystemTime == 1)
-                            {
-                                SystemTime = 11;
-                            }
-                            else if (SystemTime == 2)
-                            {
-                                SystemTime = 12;
-                            }
-                            else
-                            {
-                                SystemTime = SystemTime - 2;
-                            }
-                            List<PurchaseMainSetting> setting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
-                            if (setting != null)
-                            {
-                                foreach (var item in setting)
-                                {
-                                    if (SystemTime >= item.PurchaseDate.Month)
-                                    {
-                                        FilterPurchaseMainSettings.Add(item);
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case 2://月結60天
-                        {
-                            if (SystemTime == 1)
-                            {
-                                SystemTime = 10;
-                            }
-                            else if (SystemTime == 2)
-                            {
-                                SystemTime = 11;
-                            }
-                            else if (SystemTime == 3)
-                            {
-                                SystemTime = 12;
-                            }
-                            else
-                            {
-                                SystemTime = SystemTime - 3;
-                            }
-                            List<PurchaseMainSetting> setting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
-                            if (setting != null)
-                            {
-                                foreach (var item in setting)
-                                {
-                                    if (SystemTime >= item.PurchaseDate.Month)
-                                    {
-                                        FilterPurchaseMainSettings.Add(item);
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case 3://其他
-                        {
-                            if (cet_Other.CheckState == CheckState.Checked)
+                    switch (Companyitem.CheckoutType)
+                    {
+                        case 0://現金
                             {
                                 List<PurchaseMainSetting> setting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
                                 if (setting != null)
@@ -370,12 +303,85 @@ namespace ERPManagementAPP.Maintain
                                     }
                                 }
                             }
-                        }
-                        break;
+                            break;
+                        case 1://月結30天
+                            {
+                                if (SystemTime == 1)
+                                {
+                                    SystemTime = 11;
+                                }
+                                else if (SystemTime == 2)
+                                {
+                                    SystemTime = 12;
+                                }
+                                else
+                                {
+                                    SystemTime = SystemTime - 2;
+                                }
+                                List<PurchaseMainSetting> setting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
+                                if (setting != null)
+                                {
+                                    foreach (var item in setting)
+                                    {
+                                        if (SystemTime >= item.PurchaseDate.Month)
+                                        {
+                                            FilterPurchaseMainSettings.Add(item);
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case 2://月結60天
+                            {
+                                if (SystemTime == 1)
+                                {
+                                    SystemTime = 10;
+                                }
+                                else if (SystemTime == 2)
+                                {
+                                    SystemTime = 11;
+                                }
+                                else if (SystemTime == 3)
+                                {
+                                    SystemTime = 12;
+                                }
+                                else
+                                {
+                                    SystemTime = SystemTime - 3;
+                                }
+                                List<PurchaseMainSetting> setting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
+                                if (setting != null)
+                                {
+                                    foreach (var item in setting)
+                                    {
+                                        if (SystemTime >= item.PurchaseDate.Month)
+                                        {
+                                            FilterPurchaseMainSettings.Add(item);
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case 3://其他
+                            {
+                                if (cet_Other.CheckState == CheckState.Checked)
+                                {
+                                    List<PurchaseMainSetting> setting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
+                                    if (setting != null)
+                                    {
+                                        foreach (var item in setting)
+                                        {
+                                            FilterPurchaseMainSettings.Add(item);
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                    }
                 }
+                PurchasegridControl.DataSource = FilterPurchaseMainSettings;
+                gridView1.ExpandAllGroups();
             }
-            PurchasegridControl.DataSource = FilterPurchaseMainSettings;
-            gridView1.ExpandAllGroups();
         }
         #endregion
     }

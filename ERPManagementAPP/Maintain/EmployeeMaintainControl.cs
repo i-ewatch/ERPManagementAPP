@@ -78,11 +78,11 @@ namespace ERPManagementAPP.Maintain
             {
                 //if (Form1.EmployeeSetting.Token == 2)
                 //{
-                    EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, null, apiMethod, Form1);
-                    if (company.ShowDialog() == DialogResult.OK)
-                    {
-                        Refresh_Main_GridView();
-                    }
+                EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, null, apiMethod, Form1);
+                if (company.ShowDialog() == DialogResult.OK)
+                {
+                    Refresh_Main_GridView();
+                }
                 //}
                 //else
                 //{
@@ -97,11 +97,11 @@ namespace ERPManagementAPP.Maintain
                 {
                     //if (Form1.EmployeeSetting.Token == 2)
                     //{
-                        EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
-                        if (company.ShowDialog() == DialogResult.OK)
-                        {
-                            Refresh_Main_GridView();
-                        }
+                    EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
+                    if (company.ShowDialog() == DialogResult.OK)
+                    {
+                        Refresh_Main_GridView();
+                    }
                     //}
                     //else if (Form1.EmployeeSetting.Token == 1)
                     //{
@@ -127,12 +127,12 @@ namespace ERPManagementAPP.Maintain
             {
                 //if (Form1.EmployeeSetting.Token == 2)
                 //{
-                    FocuseMainGrid();
-                    EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
-                    if (company.ShowDialog() == DialogResult.OK)
-                    {
-                        Refresh_Main_GridView();
-                    }
+                FocuseMainGrid();
+                EmployeeEditForm company = new EmployeeEditForm(EmployeeSettings, FocuseEmployeeSetting, apiMethod, Form1);
+                if (company.ShowDialog() == DialogResult.OK)
+                {
+                    Refresh_Main_GridView();
+                }
                 //}
                 //else if (Form1.EmployeeSetting.Token == 1)
                 //{
@@ -159,22 +159,22 @@ namespace ERPManagementAPP.Maintain
              {
                  //if (Form1.EmployeeSetting.Token == 2)
                  //{
-                     FocuseMainGrid();
-                     string data = JsonConvert.SerializeObject(FocuseEmployeeSetting);
-                     string response = apiMethod.Delete_Employee(data);
-                     if (response == "200")
-                     {
-                         Refresh_Main_GridView();
-                         action.Caption = "刪除員工成功";
-                         action.Description = "";
-                         FlyoutDialog.Show(Form1, action);
-                     }
-                     else
-                     {
-                         action.Caption = "刪除員工失敗";
-                         action.Description = "";
-                         FlyoutDialog.Show(Form1, action);
-                     }
+                 FocuseMainGrid();
+                 string data = JsonConvert.SerializeObject(FocuseEmployeeSetting);
+                 string response = apiMethod.Delete_Employee(data);
+                 if (response == "200")
+                 {
+                     Refresh_Main_GridView();
+                     action.Caption = "刪除員工成功";
+                     action.Description = "";
+                     FlyoutDialog.Show(Form1, action);
+                 }
+                 else
+                 {
+                     action.Caption = "刪除員工失敗";
+                     action.Description = "";
+                     FlyoutDialog.Show(Form1, action);
+                 }
                  //}
                  //else
                  //{
@@ -245,7 +245,10 @@ namespace ERPManagementAPP.Maintain
         public override void Refresh_Main_GridView()
         {
             EmployeeSettings = apiMethod.Get_Employee();
-            EmployeegridControl.DataSource = EmployeeSettings;
+            if (EmployeeSettings != null)
+            {
+                EmployeegridControl.DataSource = EmployeeSettings;
+            }
         }
         public override void Refresh_Token()
         {

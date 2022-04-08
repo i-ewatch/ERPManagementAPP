@@ -95,7 +95,6 @@ namespace ERPManagementAPP.Maintain
                 }
             };
             #endregion
-            ChangeGridStr();
             #region 報表聚焦功能
             gridView1.FocusedRowChanged += (s, ex) =>
             {
@@ -238,8 +237,12 @@ namespace ERPManagementAPP.Maintain
             Refresh_API();
             PaymentItemSettings = apiMethod.Get_PaymentItem();
             PaymentSettings = apiMethod.Get_PaymentTransferDate();
-            gridControl1.DataSource = PaymentSettings;
-            gridView1.ExpandAllGroups();
+            if (PaymentSettings != null && EmployeeSettings != null)
+            {
+                gridControl1.DataSource = PaymentSettings;
+                gridView1.ExpandAllGroups();
+                ChangeGridStr();
+            }
         }
         private void Refresh_API()
         {

@@ -482,16 +482,22 @@ namespace ERPManagementAPP.Maintain
         public override void Refresh_Main_GridView()
         {
             CustomerSettings = apiMethod.Get_Customer();
-            CustomergridControl.DataSource = CustomerSettings;
-            for (int i = 0; i < advBandedGridView1.Columns.Count; i++)
+            if (CustomerSettings != null)
             {
-                advBandedGridView1.Columns[i].BestFit();
+                CustomergridControl.DataSource = CustomerSettings;
+                for (int i = 0; i < advBandedGridView1.Columns.Count; i++)
+                {
+                    advBandedGridView1.Columns[i].BestFit();
+                }
             }
         }
         public override void Refresh_Second_GridView(string Number)
         {
             CustomerDirectorySettings = apiMethod.Get_DirectoryCustomer(Number);
-            CustomerDirectorygridControl.DataSource = CustomerDirectorySettings;
+            if (CustomerDirectorySettings != null)
+            {
+                CustomerDirectorygridControl.DataSource = CustomerDirectorySettings;
+            }
         }
         public override void Refresh_Token()
         {

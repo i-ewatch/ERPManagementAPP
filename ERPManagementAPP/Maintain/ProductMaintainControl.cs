@@ -390,14 +390,20 @@ namespace ERPManagementAPP.Maintain
         {
             Refresh_API();
             ProductCategorySettings = apiMethod.Get_ProductGategory();
-            ProductCategorygridControl.DataSource = ProductCategorySettings;
-            Refresh_Second_GridView("");
+            if (ProductCategorySettings != null)
+            {
+                ProductCategorygridControl.DataSource = ProductCategorySettings;
+                Refresh_Second_GridView("");
+            }
         }
         public override void Refresh_Second_GridView(string Number)
         {
             ProductSettings = apiMethod.Get_Product();
-            ProductgridControl.DataSource = ProductSettings;
-            ChangeGridStr();
+            if (ProductSettings != null)
+            {
+                ProductgridControl.DataSource = ProductSettings;
+                ChangeGridStr();
+            }
         }
         private void Refresh_API()
         {

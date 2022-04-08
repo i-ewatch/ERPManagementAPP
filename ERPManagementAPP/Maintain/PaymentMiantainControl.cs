@@ -273,7 +273,7 @@ namespace ERPManagementAPP.Maintain
                 }
 
                 var paymentItemNo = PaymentItemSettings.SingleOrDefault(g => g.PaymentItemName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentItemNo").ToString());
-                if (paymentItemNo != null)FocusePaymentSetting.PaymentItemNo = paymentItemNo.PaymentItemNo;
+                if (paymentItemNo != null) FocusePaymentSetting.PaymentItemNo = paymentItemNo.PaymentItemNo;
 
                 FocusePaymentSetting.PaymentUse = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentUse").ToString();
 
@@ -413,30 +413,36 @@ namespace ERPManagementAPP.Maintain
         {
             Refresh_API();
             PaymentItemSettings = apiMethod.Get_PaymentItem();
-            gridControl2.DataSource = PaymentItemSettings;
-            Refresh_Second_GridView("");
+            if (PaymentItemSettings != null)
+            {
+                gridControl2.DataSource = PaymentItemSettings;
+                Refresh_Second_GridView("");
+            }
         }
         public override void Refresh_Second_GridView(string Number)
         {
             //PaymentSettings = apiMethod.Get_PaymentTransferDate();//未付款
             PaymentSettings = apiMethod.Get_PaymentMonth(det_PaymentDate.Text.Replace("/", ""));
-            foreach (var Employeeitem in EmployeeSettings)
+            if (PaymentSettings != null && EmployeeSettings != null)
             {
-                PaymentSettings.Where(g => g.EmployeeNumber == Employeeitem.EmployeeNumber).ToList().ForEach(t => t.EmployeeNumber = Employeeitem.EmployeeName);
-            }
-            foreach (var item in PaymentItemSettings)
-            {
-                PaymentSettings.Where(g => g.PaymentItemNo == item.PaymentItemNo).ToList().ForEach(t => t.PaymentItemNo = item.PaymentItemName);
-            }
-            gridControl1.DataSource = PaymentSettings;
-            for (int i = 0; i < gridView1.Columns.Count; i++)
-            {
-                if (gridView1.Columns[i].FieldName != "PaymentUse")
+                foreach (var Employeeitem in EmployeeSettings)
                 {
-                    gridView1.Columns[i].BestFit();
+                    PaymentSettings.Where(g => g.EmployeeNumber == Employeeitem.EmployeeNumber).ToList().ForEach(t => t.EmployeeNumber = Employeeitem.EmployeeName);
                 }
+                foreach (var item in PaymentItemSettings)
+                {
+                    PaymentSettings.Where(g => g.PaymentItemNo == item.PaymentItemNo).ToList().ForEach(t => t.PaymentItemNo = item.PaymentItemName);
+                }
+                gridControl1.DataSource = PaymentSettings;
+                for (int i = 0; i < gridView1.Columns.Count; i++)
+                {
+                    if (gridView1.Columns[i].FieldName != "PaymentUse")
+                    {
+                        gridView1.Columns[i].BestFit();
+                    }
+                }
+                ChangeGridStr();
             }
-            ChangeGridStr();
         }
         private void Refresh_API()
         {

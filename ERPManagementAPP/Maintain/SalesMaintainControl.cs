@@ -349,7 +349,10 @@ namespace ERPManagementAPP.Maintain
         {
             Refresh_API();
             SalesMainSettings = apiMethod.Get_Sales(det_SalesDate.Text.Replace("/", ""));
-            SalesgridControl.DataSource = SalesMainSettings;
+            if (SalesMainSettings != null)
+            {
+                SalesgridControl.DataSource = SalesMainSettings;
+            }
         }
         private void Refresh_API()
         {

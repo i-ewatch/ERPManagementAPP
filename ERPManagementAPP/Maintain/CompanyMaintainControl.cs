@@ -500,15 +500,22 @@ namespace ERPManagementAPP.Maintain
         public override void Refresh_Main_GridView()
         {
             CompanySettings = apiMethod.Get_Company();
-            CompanygridControl.DataSource = CompanySettings;
-            for (int i = 0; i < advBandedGridView1.Columns.Count; i++)
+            if (CompanySettings != null)
             {
-                advBandedGridView1.Columns[i].BestFit();
+                CompanygridControl.DataSource = CompanySettings;
+                for (int i = 0; i < advBandedGridView1.Columns.Count; i++)
+                {
+                    advBandedGridView1.Columns[i].BestFit();
+                }
             }
         }
         public override void Refresh_Second_GridView(string Number)
         {
-            CompanyDirectorygridControl.DataSource = apiMethod.Get_DirectoryCompany(Number);
+            CompanyDirectorySettings = apiMethod.Get_DirectoryCompany(Number);
+            if (CompanyDirectorySettings!= null)
+            {
+                CompanyDirectorygridControl.DataSource = CompanyDirectorySettings;
+            }
         }
         public override void Refresh_Token()
         {

@@ -282,15 +282,18 @@ namespace ERPManagementAPP.Maintain
         {
             Refresh_API();
             SalesMainSettings = apiMethod.Get_SalesPosting();
-            foreach (var item in SalesMainSettings)
+            if (SalesMainSettings != null)
             {
-                if (item.SalesFlag == 4)
+                foreach (var item in SalesMainSettings)
                 {
-                    item.Total = -1 * item.Total;
-                    item.TotalTax = -1 * item.TotalTax;
+                    if (item.SalesFlag == 4)
+                    {
+                        item.Total = -1 * item.Total;
+                        item.TotalTax = -1 * item.TotalTax;
+                    }
                 }
+                Controller();
             }
-            Controller();
         }
         private void Refresh_API()
         {
@@ -304,83 +307,13 @@ namespace ERPManagementAPP.Maintain
         {
             FilterSalesMainSettings = new List<SalesMainSetting>();
             int SystemTime = DateTime.Now.Month;
-            foreach (var Customeritem in CustomerSettings)
+            if (CustomerSettings != null)
             {
-                switch (Customeritem.CheckoutType)
+                foreach (var Customeritem in CustomerSettings)
                 {
-                    case 0://現金
-                        {
-                            List<SalesMainSetting> setting = SalesMainSettings.Where(g => g.SalesCustomerNumber == Customeritem.CustomerNumber).ToList();
-                            if (setting != null)
-                            {
-                                foreach (var item in setting)
-                                {
-                                    FilterSalesMainSettings.Add(item);
-                                }
-                            }
-                        }
-                        break;
-                    case 1://月結30天
-                        {
-                            if (SystemTime == 1)
-                            {
-                                SystemTime = 11;
-                            }
-                            else if (SystemTime == 2)
-                            {
-                                SystemTime = 12;
-                            }
-                            else
-                            {
-                                SystemTime = SystemTime - 2;
-                            }
-                            List<SalesMainSetting> setting = SalesMainSettings.Where(g => g.SalesCustomerNumber == Customeritem.CustomerNumber).ToList();
-                            if (setting != null)
-                            {
-                                foreach (var item in setting)
-                                {
-                                    if (SystemTime >= item.SalesDate.Month)
-                                    {
-                                        FilterSalesMainSettings.Add(item);
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case 2://月結60天
-                        {
-                            if (SystemTime == 1)
-                            {
-                                SystemTime = 10;
-                            }
-                            else if (SystemTime == 2)
-                            {
-                                SystemTime = 11;
-                            }
-                            else if (SystemTime == 3)
-                            {
-                                SystemTime = 12;
-                            }
-                            else
-                            {
-                                SystemTime = SystemTime - 3;
-                            }
-                            List<SalesMainSetting> setting = SalesMainSettings.Where(g => g.SalesCustomerNumber == Customeritem.CustomerNumber).ToList();
-                            if (setting != null)
-                            {
-                                foreach (var item in setting)
-                                {
-                                    if (SystemTime >= item.SalesDate.Month)
-                                    {
-                                        FilterSalesMainSettings.Add(item);
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case 3://其他
-                        {
-                            if (cet_Other.CheckState == CheckState.Checked)
+                    switch (Customeritem.CheckoutType)
+                    {
+                        case 0://現金
                             {
                                 List<SalesMainSetting> setting = SalesMainSettings.Where(g => g.SalesCustomerNumber == Customeritem.CustomerNumber).ToList();
                                 if (setting != null)
@@ -391,12 +324,85 @@ namespace ERPManagementAPP.Maintain
                                     }
                                 }
                             }
-                        }
-                        break;
+                            break;
+                        case 1://月結30天
+                            {
+                                if (SystemTime == 1)
+                                {
+                                    SystemTime = 11;
+                                }
+                                else if (SystemTime == 2)
+                                {
+                                    SystemTime = 12;
+                                }
+                                else
+                                {
+                                    SystemTime = SystemTime - 2;
+                                }
+                                List<SalesMainSetting> setting = SalesMainSettings.Where(g => g.SalesCustomerNumber == Customeritem.CustomerNumber).ToList();
+                                if (setting != null)
+                                {
+                                    foreach (var item in setting)
+                                    {
+                                        if (SystemTime >= item.SalesDate.Month)
+                                        {
+                                            FilterSalesMainSettings.Add(item);
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case 2://月結60天
+                            {
+                                if (SystemTime == 1)
+                                {
+                                    SystemTime = 10;
+                                }
+                                else if (SystemTime == 2)
+                                {
+                                    SystemTime = 11;
+                                }
+                                else if (SystemTime == 3)
+                                {
+                                    SystemTime = 12;
+                                }
+                                else
+                                {
+                                    SystemTime = SystemTime - 3;
+                                }
+                                List<SalesMainSetting> setting = SalesMainSettings.Where(g => g.SalesCustomerNumber == Customeritem.CustomerNumber).ToList();
+                                if (setting != null)
+                                {
+                                    foreach (var item in setting)
+                                    {
+                                        if (SystemTime >= item.SalesDate.Month)
+                                        {
+                                            FilterSalesMainSettings.Add(item);
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        case 3://其他
+                            {
+                                if (cet_Other.CheckState == CheckState.Checked)
+                                {
+                                    List<SalesMainSetting> setting = SalesMainSettings.Where(g => g.SalesCustomerNumber == Customeritem.CustomerNumber).ToList();
+                                    if (setting != null)
+                                    {
+                                        foreach (var item in setting)
+                                        {
+                                            FilterSalesMainSettings.Add(item);
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                    }
                 }
+                SalesgridControl.DataSource = FilterSalesMainSettings;
+                gridView1.ExpandAllGroups();
             }
-            SalesgridControl.DataSource = FilterSalesMainSettings;
-            gridView1.ExpandAllGroups();
         }
         #endregion
     }
