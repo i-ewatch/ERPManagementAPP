@@ -1,30 +1,36 @@
 ﻿using DevExpress.Utils;
 using DevExpress.XtraBars.Docking2010.Customization;
 using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
-using ERPManagementAPP.Maintain.SalesMaintainForm;
+using ERPManagementAPP.Maintain.OperatingMaintainForm;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ERPManagementAPP.Maintain
 {
-    public partial class SalesMaintainControl : Field4MaintainControl
+    public partial class OperatingMaintainControl : Field4MaintainControl
     {
         /// <summary>
         /// 產品資訊
         /// </summary>
         private List<ProductSetting> ProductSettings { get; set; }
         /// <summary>
-        /// 客戶資訊
+        /// 公司資訊
         /// </summary>
-        private List<CustomerSetting> CustomerSettings { get; set; }
+        private List<CompanySetting> CompanySettings { get; set; }
         /// <summary>
         /// 員工資訊
         /// </summary>
@@ -34,55 +40,55 @@ namespace ERPManagementAPP.Maintain
         /// </summary>
         private List<ProjectSetting> ProjectSettings { get; set; }
         /// <summary>
-        /// 聚焦銷貨表頭
+        /// 聚焦營運表頭
         /// </summary>
-        private SalesMainSetting FocuseSalesMainSetting { get; set; } = new SalesMainSetting();
+        private OperatingMainSetting FocuseOperatingMainSetting { get; set; } = new OperatingMainSetting();
         /// <summary>
         /// 總表頭
         /// </summary>
-        private List<SalesMainSetting> SalesMainSettings { get; set; } = new List<SalesMainSetting>();
+        private List<OperatingMainSetting> OperatingMainSettings { get; set; } = new List<OperatingMainSetting>();
         /// <summary>
-        /// 總銷貨資訊
+        /// 總營運資訊
         /// </summary>
-        private List<SalesSetting> SalesSettings { get; set; } = new List<SalesSetting>();
-        public SalesMaintainControl(APIMethod APIMethod, Form1 form1)
+        private List<OperatingSetting> OperatingSettings { get; set; } = new List<OperatingSetting>();
+        public OperatingMaintainControl(APIMethod APIMethod, Form1 form1)
         {
             InitializeComponent();
             Form1 = form1;
             apiMethod = APIMethod;
-            det_SalesDate.Text = DateTime.Now.ToString("yyyy/MM");
+            det_OperatingDate.Text = DateTime.Now.ToString("yyyy/MM");
             if (Form1.EmployeeSetting.Token > 0)
             {
                 Refresh_Main_GridView();
             }
             action.Commands.Add(FlyoutCommand.Yes);
-            #region 銷貨資料表
+            #region 營運資料表
             gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            #region 銷貨資訊報表按鈕
-            RepositoryItemButtonEdit Salesedit = new RepositoryItemButtonEdit();
-            Salesedit.ButtonClick += (s, e) =>
+            #region 營運資訊報表按鈕
+            RepositoryItemButtonEdit Operatingedit = new RepositoryItemButtonEdit();
+            Operatingedit.ButtonClick += (s, e) =>
             {
                 FocuseMainGrid();
                 if (e.Button.Kind == ButtonPredefines.Plus)
                 {
-                    if (FocuseSalesMainSetting.FileName != null)
+                    if (FocuseOperatingMainSetting.FileName != null)
                     {
-                        if (FocuseSalesMainSetting.FileName != "")
+                        if (FocuseOperatingMainSetting.FileName != "")
                         {
-                            byte[] File = apiMethod.Get_SalesAttachmentFile(FocuseSalesMainSetting.SalesCustomerNumber, FocuseSalesMainSetting.FileName);
+                            byte[] File = apiMethod.Get_OperatingAttachmentFile(FocuseOperatingMainSetting.OperatingCompanyNumber, FocuseOperatingMainSetting.FileName);
                             SaveFile(File, 0);
                         }
                     }
                 }
             };
-            Salesedit.Buttons[0].Kind = ButtonPredefines.Plus;
-            Salesedit.Buttons[0].Caption = "下載";
-            Salesedit.TextEditStyle = TextEditStyles.DisableTextEditor;
-            SalesgridControl.RepositoryItems.Add(Salesedit);
-            gridView1.Columns["FileName"].ColumnEdit = Salesedit;
+            Operatingedit.Buttons[0].Kind = ButtonPredefines.Plus;
+            Operatingedit.Buttons[0].Caption = "下載";
+            Operatingedit.TextEditStyle = TextEditStyles.DisableTextEditor;
+            OperatinggridControl.RepositoryItems.Add(Operatingedit);
+            gridView1.Columns["FileName"].ColumnEdit = Operatingedit;
             gridView1.Columns["FileName"].ShowButtonMode = ShowButtonModeEnum.ShowAlways;
             #endregion
-            #region 銷貨聚焦功能
+            #region 營運聚焦功能
             gridView1.FocusedRowChanged += (s, e) =>
             {
                 FocuseMainGrid();
@@ -97,32 +103,32 @@ namespace ERPManagementAPP.Maintain
             #region 報表修改字串功能
             gridView1.CustomDrawCell += (s, e) =>
             {
-                if (e.Column.FieldName == "SalesFlag")
+                if (e.Column.FieldName == "OperatingFlag")
                 {
                     e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
                     string Index = e.CellValue.ToString();
                     switch (Index)
                     {
-                        case "3":
+                        case "7":
                             {
-                                e.DisplayText = "銷貨";
+                                e.DisplayText = "營運";
                             }
                             break;
-                        case "4":
+                        case "8":
                             {
-                                e.DisplayText = "銷貨退回";
+                                e.DisplayText = "營運退出";
                             }
                             break;
                     }
                 }
-                //else if (e.Column.FieldName == "SalesCustomerNumber")
+                //else if (e.Column.FieldName == "OperatingCompanyNumber")
                 //{
                 //    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
                 //    string Index = e.CellValue.ToString();
-                //    CustomerSetting company = CustomerSettings.SingleOrDefault(g => g.CustomerNumber == Index);
+                //    CompanySetting company = CompanySettings.SingleOrDefault(g => g.CompanyNumber == Index);
                 //    if (company != null)
                 //    {
-                //        e.DisplayText = company.CustomerName;
+                //        e.DisplayText = company.CompanyName;
                 //    }
                 //}
                 //else if (e.Column.FieldName == "ProjectNumber")
@@ -138,7 +144,7 @@ namespace ERPManagementAPP.Maintain
                 //        }
                 //    }
                 //}
-                else if (e.Column.FieldName == "SalesTax")
+                else if (e.Column.FieldName == "OperatingTax")
                 {
                     e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
                     string Index = e.CellValue.ToString();
@@ -186,64 +192,64 @@ namespace ERPManagementAPP.Maintain
                 }
             };
             #endregion
-            #region 新增銷貨資訊
-            btn_Sales_Add.Click += (s, e) =>
+            #region 新增營運資訊
+            btn_Operating_Add.Click += (s, e) =>
             {
                 Refresh_API();
-                SalesEditForm purchaseEdit = new SalesEditForm(CustomerSettings, EmployeeSettings, ProductSettings, ProjectSettings, null, apiMethod, Form1);
+                OperatingEditForm purchaseEdit = new OperatingEditForm(CompanySettings, EmployeeSettings, ProductSettings, ProjectSettings, null, apiMethod, Form1);
                 if (purchaseEdit.ShowDialog() == DialogResult.OK)
                 {
                     Refresh_Main_GridView();
                 }
             };
             #endregion
-            #region 修改銷貨資訊
-            btn_Sales_Edit.Click += (s, e) =>
+            #region 修改營運資訊
+            btn_Operating_Edit.Click += (s, e) =>
             {
                 Refresh_API();
-                SalesSettings = APIMethod.Get_Sales(FocuseSalesMainSetting);
-                SalesEditForm purchaseEdit = new SalesEditForm(CustomerSettings, EmployeeSettings, ProductSettings, ProjectSettings, SalesSettings[0], apiMethod, Form1);
+                OperatingSettings = APIMethod.Get_Operating(FocuseOperatingMainSetting);
+                OperatingEditForm purchaseEdit = new OperatingEditForm(CompanySettings, EmployeeSettings, ProductSettings, ProjectSettings, OperatingSettings[0], apiMethod, Form1);
                 if (purchaseEdit.ShowDialog() == DialogResult.OK)
                 {
                     Refresh_Main_GridView();
                 }
             };
             #endregion
-            #region 雙擊修改銷貨資訊
-            SalesgridControl.DoubleClick += (s, e) =>
+            #region 雙擊修改營運資訊
+            OperatinggridControl.DoubleClick += (s, e) =>
             {
                 Refresh_API();
                 FocuseMainGrid();
-                SalesSettings = APIMethod.Get_Sales(FocuseSalesMainSetting);
-                SalesEditForm purchaseEdit = new SalesEditForm(CustomerSettings, EmployeeSettings, ProductSettings, ProjectSettings, SalesSettings[0], apiMethod, Form1);
+                OperatingSettings = APIMethod.Get_Operating(FocuseOperatingMainSetting);
+                OperatingEditForm purchaseEdit = new OperatingEditForm(CompanySettings, EmployeeSettings, ProductSettings, ProjectSettings, OperatingSettings[0], apiMethod, Form1);
                 if (purchaseEdit.ShowDialog() == DialogResult.OK)
                 {
                     Refresh_Main_GridView();
                 }
             };
             #endregion
-            #region 刪除銷貨資訊
-            btn_Sales_Delete.Click += (s, e) =>
+            #region 刪除營運資訊
+            btn_Operating_Delete.Click += (s, e) =>
             {
                 FocuseMainGrid();
-                string response = APIMethod.Delete_Sales(FocuseSalesMainSetting.SalesFlag, FocuseSalesMainSetting.SalesNumber);
+                string response = APIMethod.Delete_Operating(FocuseOperatingMainSetting.OperatingFlag, FocuseOperatingMainSetting.OperatingNumber);
                 if (response == "200")
                 {
                     Refresh_Main_GridView();
-                    action.Caption = "刪除銷貨資訊成功";
+                    action.Caption = "刪除營運資訊成功";
                     action.Description = "";
                     FlyoutDialog.Show(Form1, action);
                 }
                 else
                 {
-                    action.Caption = "刪除銷貨資訊失敗";
+                    action.Caption = "刪除營運資訊失敗";
                     action.Description = "";
                     FlyoutDialog.Show(Form1, action);
                 }
             };
             #endregion
             #region 產品類別資料查詢
-            btn_Sales_Search.Click += (s, e) =>
+            btn_Operating_Search.Click += (s, e) =>
             {
                 Refresh_Main_GridView();
             };
@@ -255,85 +261,75 @@ namespace ERPManagementAPP.Maintain
         {
             if (gridView1.FocusedRowHandle > -1 && gridView1.DataRowCount > 0)
             {
-                FocuseSalesMainSetting.SalesFlag = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesFlag").ToString());
-                FocuseSalesMainSetting.SalesNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesNumber").ToString();
-                FocuseSalesMainSetting.SalesDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesDate").ToString());
+                FocuseOperatingMainSetting.OperatingFlag = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "OperatingFlag").ToString());
+                FocuseOperatingMainSetting.OperatingNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "OperatingNumber").ToString();
+                FocuseOperatingMainSetting.OperatingDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "OperatingDate").ToString());
 
-                var salesCustomerNumber = CustomerSettings.SingleOrDefault(g => g.CustomerName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesCustomerNumber").ToString());
-                if (salesCustomerNumber!= null) FocuseSalesMainSetting.SalesCustomerNumber = salesCustomerNumber.CustomerNumber;
-                else FocuseSalesMainSetting.SalesCustomerNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesCustomerNumber").ToString();
+                var purchaseComanyNumber = CompanySettings.SingleOrDefault(g => g.CompanyName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "OperatingCompanyNumber").ToString());
+                if (purchaseComanyNumber != null) FocuseOperatingMainSetting.OperatingCompanyNumber = purchaseComanyNumber.CompanyNumber;
+                else FocuseOperatingMainSetting.OperatingCompanyNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "OperatingCompanyNumber").ToString();
+
+                FocuseOperatingMainSetting.OperatingTax = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "OperatingTax").ToString());
 
                 if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber") != null)
                 {
                     var projectNumber = ProjectSettings.SingleOrDefault(g => g.ProjectName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber").ToString());
-                    if (projectNumber != null) FocuseSalesMainSetting.ProjectNumber = projectNumber.ProjectNumber;
-                    else FocuseSalesMainSetting.ProjectNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber").ToString();
+                    if (projectNumber != null) FocuseOperatingMainSetting.ProjectNumber = projectNumber.ProjectNumber;
+                    else FocuseOperatingMainSetting.ProjectNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber").ToString();
                 }
                 else
                 {
-                    FocuseSalesMainSetting.ProjectNumber = null;
+                    FocuseOperatingMainSetting.ProjectNumber = null;
                 }
 
-                FocuseSalesMainSetting.SalesTax = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesTax").ToString());
-                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesInvoiceNo") != null)
+                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "OperatingInvoiceNo") != null)
                 {
-                    FocuseSalesMainSetting.SalesInvoiceNo = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesInvoiceNo").ToString();
+                    FocuseOperatingMainSetting.OperatingInvoiceNo = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "OperatingInvoiceNo").ToString();
                 }
                 else
                 {
-                    FocuseSalesMainSetting.SalesInvoiceNo = "";
+                    FocuseOperatingMainSetting.OperatingInvoiceNo = "";
                 }
-                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesEmployeeNumber") != null)
+                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "OperatingEmployeeNumber") != null)
                 {
-                    FocuseSalesMainSetting.SalesEmployeeNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesEmployeeNumber").ToString();
+                    FocuseOperatingMainSetting.OperatingEmployeeNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "OperatingEmployeeNumber").ToString();
                 }
                 else
                 {
-                    FocuseSalesMainSetting.SalesEmployeeNumber = "";
+                    FocuseOperatingMainSetting.OperatingEmployeeNumber = "";
                 }
                 if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Remark") != null)
                 {
-                    FocuseSalesMainSetting.Remark = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Remark").ToString();
+                    FocuseOperatingMainSetting.Remark = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Remark").ToString();
                 }
                 else
                 {
-                    FocuseSalesMainSetting.Remark = "";
+                    FocuseOperatingMainSetting.Remark = "";
                 }
-                FocuseSalesMainSetting.Total = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Total").ToString());
-                FocuseSalesMainSetting.Tax = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Tax").ToString());
-                FocuseSalesMainSetting.TotalTax = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TotalTax").ToString());
-                FocuseSalesMainSetting.Posting = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Posting").ToString());
+                FocuseOperatingMainSetting.Total = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Total").ToString());
+                FocuseOperatingMainSetting.Tax = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Tax").ToString());
+                FocuseOperatingMainSetting.TotalTax = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TotalTax").ToString());
+                FocuseOperatingMainSetting.Posting = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Posting").ToString());
                 if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "FileName") != null)
                 {
-                    FocuseSalesMainSetting.FileName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "FileName").ToString();
+                    FocuseOperatingMainSetting.FileName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "FileName").ToString();
                 }
                 else
                 {
-                    FocuseSalesMainSetting.FileName = "";
+                    FocuseOperatingMainSetting.FileName = "";
                 }
-                FocuseSalesMainSetting.TakeACut = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TakeACut").ToString());
-                FocuseSalesMainSetting.Cost = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Cost").ToString());
-                FocuseSalesMainSetting.ProfitSharing = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProfitSharing").ToString());
                 if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PostingDate") != null)
                 {
-                    FocuseSalesMainSetting.PostingDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PostingDate").ToString());
+                    FocuseOperatingMainSetting.PostingDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PostingDate").ToString());
                 }
                 else
                 {
-                    FocuseSalesMainSetting.PostingDate = null;
-                }
-                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProfitSharingDate") != null)
-                {
-                    FocuseSalesMainSetting.ProfitSharingDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProfitSharingDate").ToString());
-                }
-                else
-                {
-                    FocuseSalesMainSetting.ProfitSharingDate = null;
+                    FocuseOperatingMainSetting.PostingDate = null;
                 }
             }
             else
             {
-                FocuseSalesMainSetting = new SalesMainSetting();
+                FocuseOperatingMainSetting = new OperatingMainSetting();
             }
         }
         #endregion
@@ -346,7 +342,7 @@ namespace ERPManagementAPP.Maintain
                 if (File.Length > 147)
                 {
                     saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.FileName = FocuseSalesMainSetting.FileName;
+                    saveFileDialog.FileName = FocuseOperatingMainSetting.FileName;
                     saveFileDialog.Title = "Save File Path";
                     saveFileDialog.Filter = "All|*.*";
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -380,36 +376,37 @@ namespace ERPManagementAPP.Maintain
         public override void Refresh_Main_GridView()
         {
             Refresh_API();
-            SalesMainSettings = apiMethod.Get_Sales(det_SalesDate.Text.Replace("/", ""));
-            if (SalesMainSettings != null)
+            OperatingMainSettings = apiMethod.Get_Operating(det_OperatingDate.Text.Replace("/", ""));
+            if (OperatingMainSettings != null)
             {
-                foreach (var item in CustomerSettings)
+                foreach (var item in CompanySettings)
                 {
-                    SalesMainSettings.Where(g => g.SalesCustomerNumber == item.CustomerNumber).ToList().ForEach(t => t.SalesCustomerNumber = item.CustomerName);
+                    OperatingMainSettings.Where(g => g.OperatingCompanyNumber == item.CompanyNumber).ToList().ForEach(t => t.OperatingCompanyNumber = item.CompanyName);
                 }
                 foreach (var item in ProjectSettings)
                 {
-                    SalesMainSettings.Where(g => g.ProjectNumber == item.ProjectNumber).ToList().ForEach(t => t.ProjectNumber = item.ProjectName);
+                    OperatingMainSettings.Where(g => g.ProjectNumber == item.ProjectNumber).ToList().ForEach(t => t.ProjectNumber = item.ProjectName);
                 }
-                SalesgridControl.DataSource = SalesMainSettings;
+                OperatinggridControl.DataSource = OperatingMainSettings;
             }
         }
         private void Refresh_API()
         {
-            CustomerSettings = apiMethod.Get_Customer();
+            CompanySettings = apiMethod.Get_Company();
             EmployeeSettings = apiMethod.Get_Employee();
             ProductSettings = apiMethod.Get_Product();
             ProjectSettings = apiMethod.Get_Project();
+
         }
         public override void Refresh_Token()
         {
             if (Form1.EmployeeSetting.Token != 2)
             {
-                btn_Sales_Delete.Visible = false;
+                btn_Operating_Delete.Visible = false;
             }
             else
             {
-                btn_Sales_Delete.Visible = true;
+                btn_Operating_Delete.Visible = true;
             }
         }
     }

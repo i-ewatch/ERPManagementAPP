@@ -91,6 +91,12 @@ namespace ERPManagementAPP.Methods
             PickingAttachmenFile_url = $"{URL}/PickingAttachmentFile";
             PickingPosting_url = $"{URL}/Picking/PickingPosting";
             UpdatePickingMain_url = $"{URL}/Picking/UpdatePickingMain";
+
+            Operating_url = $"{URL}/Operating";
+            OperatingNumber_url = $"{URL}/Operating/OperatingNumber";
+            OperatingAttachmenFile_url = $"{URL}/OperatingAttachmentFile";
+            OperatingPosting_url = $"{URL}/Operating/OperatingPosting";
+            UpdateOperatingMain_url = $"{URL}/Operating/UpdateOperatingMain";
         }
         #region 登入資訊
         /// <summary>
@@ -279,6 +285,28 @@ namespace ERPManagementAPP.Methods
         /// 銷貨父更新(Put)
         /// </summary>
         private string UpdatePickingMain_url { get; set; }
+        #endregion
+        #region 營運資訊
+        /// <summary>
+        /// 營運資料(Get、Post、Put、Delete)
+        /// </summary>
+        private string Operating_url { get; set; }
+        /// <summary>
+        /// 營運資料查詢(年月份)
+        /// </summary>
+        private string OperatingNumber_url { get; set; }
+        /// <summary>
+        /// 營運檔案(Post、Get)
+        /// </summary>
+        private string OperatingAttachmenFile_url { get; set; }
+        /// <summary>
+        /// 未過帳營運資料(Get)
+        /// </summary>
+        private string OperatingPosting_url { get; set; }
+        /// <summary>
+        /// 營運父更新(Put)
+        /// </summary>
+        private string UpdateOperatingMain_url { get; set; }
         #endregion
 
         /*以下API功能----------------------------------------------------------------------------------------*/
@@ -3338,6 +3366,300 @@ namespace ERPManagementAPP.Methods
             catch (Exception ex)
             {
                 Log.Error(ex, "領料下載檔案API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region 營運API
+        #region 全部營運表頭(年月份)
+        /// <summary>
+        /// 全部營運表頭(年月份)
+        /// </summary>
+        /// <param name="OperatingNumber">年月份</param>
+        /// <returns></returns>
+        public List<OperatingMainSetting> Get_Operating(string OperatingNumber)
+        {
+            try
+            {
+                List<OperatingMainSetting> settings = null;
+                var option = new RestClientOptions(OperatingNumber_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddParameter("OperatingNumber", OperatingNumber, type: ParameterType.QueryString);
+                var response = clinet.ExecuteGetAsync<List<OperatingMainSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<OperatingMainSetting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "全部營運表頭(年月份)API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 查詢單筆【營運】或【營運退出】父子資料
+        /// <summary>
+        /// 查詢單筆【營運】或【營運退出】父子資料
+        /// </summary>
+        /// <param name="setting"></param>
+        /// <returns></returns>
+        public List<OperatingSetting> Get_Operating(OperatingMainSetting setting)
+        {
+            try
+            {
+                List<OperatingSetting> settings = null;
+                var option = new RestClientOptions(Operating_url + $"/{setting.OperatingFlag}/{setting.OperatingNumber}")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<OperatingSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<OperatingSetting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "查詢單筆【營運】或【營運退出】父子資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 查詢未過帳營運表頭
+        /// <summary>
+        /// 查詢未過帳營運表頭
+        /// </summary>
+        /// <returns></returns>
+        public List<OperatingMainSetting> Get_OperatingPosting()
+        {
+            try
+            {
+                List<OperatingMainSetting> settings = null;
+                var option = new RestClientOptions(OperatingPosting_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<OperatingMainSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<OperatingMainSetting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "查詢未過帳營運表頭API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 新增營運資料
+        /// <summary>
+        /// 新增營運資料
+        /// </summary>
+        /// <param name="PruchaseSetting"></param>
+        /// <returns></returns>
+        public string Post_Operating(string PruchaseSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Operating_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddBody(PruchaseSetting, ContentType.Json);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                ResponseDataMessage = response.Result.Content;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "新增營運資料API錯誤");
+                ResponseDataMessage = "";
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 修改營運資料
+        /// <summary>
+        /// 修改營運資料
+        /// </summary>
+        /// <param name="PruchaseSetting"></param>
+        /// <returns></returns>
+        public string Put_Operating(string PruchaseSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Operating_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(PruchaseSetting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "修改營運資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 更新過帳營運資料
+        /// <summary>
+        /// 更新過帳營運資料
+        /// </summary>
+        /// <param name="PruchaseMainSetting"></param>
+        /// <returns></returns>
+        public string Put_OperatingMain(string PruchaseMainSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(UpdateOperatingMain_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(PruchaseMainSetting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "更新過帳營運資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 刪除營運資料
+        /// <summary>
+        /// 刪除營運資料
+        /// </summary>
+        /// <param name="PruchaseSetting"></param>
+        /// <returns></returns>
+        public string Delete_Operating(int OperatingFlag, string OperatingNumber)
+        {
+            try
+            {
+                var option = new RestClientOptions($"{Operating_url}/{OperatingFlag}/{OperatingNumber}")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Delete);
+                var response = clinet.DeleteAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "刪除營運資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 營運上傳檔案
+        /// <summary>
+        /// 營運上傳檔案
+        /// </summary>
+        /// <param name="Path"></param>
+        /// <returns></returns>
+        public string Post_OperatingAttachmentFile(int OperatingFlag, string OperatingCompanyNumber, DateTime OperatingDate, string OperatingNumber, string Path)
+        {
+            try
+            {
+                var option = new RestClientOptions(OperatingAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddParameter("OperatingFlag", OperatingFlag, type: ParameterType.QueryString);
+                requsest.AddParameter("OperatingCompanyNumber", OperatingCompanyNumber, type: ParameterType.QueryString);
+                requsest.AddParameter("OperatingDate", OperatingDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
+                requsest.AddParameter("OperatingNumber", OperatingNumber, type: ParameterType.QueryString);
+                requsest.AddFile("AttachmentFile", Path);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "營運上傳檔案API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 營運下載檔案
+        /// <summary>
+        /// 營運下載檔案
+        /// </summary>
+        /// <param name="File">檔案名稱</param>
+        /// <returns></returns>
+        public byte[] Get_OperatingAttachmentFile(string OperatingCompanyNumber, string File)
+        {
+            try
+            {
+                var option = new RestClientOptions(OperatingAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
+                requsest.AddParameter("OperatingCompanyNumber", OperatingCompanyNumber, type: ParameterType.QueryString);
+                var response = clinet.DownloadDataAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return response.Result;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "營運下載檔案API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }

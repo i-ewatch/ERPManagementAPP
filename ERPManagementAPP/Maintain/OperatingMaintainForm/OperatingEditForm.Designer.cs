@@ -1,7 +1,7 @@
 ﻿
-namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
+namespace ERPManagementAPP.Maintain.OperatingMaintainForm
 {
-    partial class PurchaseEditForm
+    partial class OperatingEditForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,13 +29,9 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PurchaseEditForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OperatingEditForm));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.slt_ProductName = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colProductNumber = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colProductName1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.slt_PurchasecompanyNumber = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.slt_OperatingcompanyNumber = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colCompanyNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCompanyName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -46,7 +42,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.txt_productPrice = new DevExpress.XtraEditors.TextEdit();
             this.txt_productQty = new DevExpress.XtraEditors.TextEdit();
             this.cbt_Posting = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.cbt_PurchaseTax = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.cbt_OperatingTax = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txt_ProducUnit = new DevExpress.XtraEditors.TextEdit();
             this.txt_TotalTax = new DevExpress.XtraEditors.TextEdit();
             this.txt_Tax = new DevExpress.XtraEditors.TextEdit();
@@ -65,9 +61,9 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colPurchaseFlag = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colPurchaseNumber = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colPurchaseNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colOperatingFlag = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colOperatingNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colOperatingNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colProducNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colProductName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colProductUnit = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -75,14 +71,15 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.colProductPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colProductTotal = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cbt_EmployeeNumber = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.det_PurchaseDate = new DevExpress.XtraEditors.DateEdit();
-            this.txt_PurchaseNumber = new DevExpress.XtraEditors.TextEdit();
-            this.cbt_PurchaseFlag = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.txt_PurchaseInvoiceNo = new DevExpress.XtraEditors.TextEdit();
+            this.det_OperatingDate = new DevExpress.XtraEditors.DateEdit();
+            this.txt_OperatingNumber = new DevExpress.XtraEditors.TextEdit();
+            this.cbt_OperatingFlag = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txt_OperatingInvoiceNo = new DevExpress.XtraEditors.TextEdit();
             this.slt_ProjectNumber = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView21 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colProjectNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colProjectName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.txt_ProductName = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -108,19 +105,16 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slt_ProductName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slt_PurchasecompanyNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slt_OperatingcompanyNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
             this.panelControl5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txt_productPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_productQty.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbt_Posting.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbt_PurchaseTax.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbt_OperatingTax.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_ProducUnit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_TotalTax.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_Tax.Properties)).BeginInit();
@@ -138,13 +132,14 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbt_EmployeeNumber.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.det_PurchaseDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.det_PurchaseDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_PurchaseNumber.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbt_PurchaseFlag.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_PurchaseInvoiceNo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.det_OperatingDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.det_OperatingDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_OperatingNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbt_OperatingFlag.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_OperatingInvoiceNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slt_ProjectNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView21)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_ProductName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
@@ -170,18 +165,16 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem24)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
-            this.layoutControl1.Controls.Add(this.slt_ProductName);
-            this.layoutControl1.Controls.Add(this.slt_PurchasecompanyNumber);
+            this.layoutControl1.Controls.Add(this.slt_OperatingcompanyNumber);
             this.layoutControl1.Controls.Add(this.panelControl5);
             this.layoutControl1.Controls.Add(this.txt_productPrice);
             this.layoutControl1.Controls.Add(this.txt_productQty);
             this.layoutControl1.Controls.Add(this.cbt_Posting);
-            this.layoutControl1.Controls.Add(this.cbt_PurchaseTax);
+            this.layoutControl1.Controls.Add(this.cbt_OperatingTax);
             this.layoutControl1.Controls.Add(this.txt_ProducUnit);
             this.layoutControl1.Controls.Add(this.txt_TotalTax);
             this.layoutControl1.Controls.Add(this.txt_Tax);
@@ -191,83 +184,39 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.layoutControl1.Controls.Add(this.panelControl1);
             this.layoutControl1.Controls.Add(this.gridControl1);
             this.layoutControl1.Controls.Add(this.cbt_EmployeeNumber);
-            this.layoutControl1.Controls.Add(this.det_PurchaseDate);
-            this.layoutControl1.Controls.Add(this.txt_PurchaseNumber);
-            this.layoutControl1.Controls.Add(this.cbt_PurchaseFlag);
-            this.layoutControl1.Controls.Add(this.txt_PurchaseInvoiceNo);
+            this.layoutControl1.Controls.Add(this.det_OperatingDate);
+            this.layoutControl1.Controls.Add(this.txt_OperatingNumber);
+            this.layoutControl1.Controls.Add(this.cbt_OperatingFlag);
+            this.layoutControl1.Controls.Add(this.txt_OperatingInvoiceNo);
             this.layoutControl1.Controls.Add(this.slt_ProjectNumber);
+            this.layoutControl1.Controls.Add(this.txt_ProductName);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1242, 169, 650, 605);
             this.layoutControl1.Root = this.Root;
             this.layoutControl1.Size = new System.Drawing.Size(1178, 798);
-            this.layoutControl1.TabIndex = 0;
+            this.layoutControl1.TabIndex = 1;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // slt_ProductName
+            // slt_OperatingcompanyNumber
             // 
-            this.slt_ProductName.EditValue = "";
-            this.slt_ProductName.Location = new System.Drawing.Point(86, 188);
-            this.slt_ProductName.Name = "slt_ProductName";
-            this.slt_ProductName.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.slt_ProductName.Properties.Appearance.Options.UseFont = true;
-            this.slt_ProductName.Properties.AppearanceDropDown.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.slt_ProductName.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.slt_ProductName.Properties.AppearanceFocused.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.slt_ProductName.Properties.AppearanceFocused.Options.UseFont = true;
-            this.slt_ProductName.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.slt_OperatingcompanyNumber.EditValue = "";
+            this.slt_OperatingcompanyNumber.Location = new System.Drawing.Point(452, 132);
+            this.slt_OperatingcompanyNumber.Name = "slt_OperatingcompanyNumber";
+            this.slt_OperatingcompanyNumber.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.slt_OperatingcompanyNumber.Properties.Appearance.Options.UseFont = true;
+            this.slt_OperatingcompanyNumber.Properties.AppearanceDropDown.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.slt_OperatingcompanyNumber.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.slt_OperatingcompanyNumber.Properties.AppearanceFocused.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.slt_OperatingcompanyNumber.Properties.AppearanceFocused.Options.UseFont = true;
+            this.slt_OperatingcompanyNumber.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slt_ProductName.Properties.PopupView = this.gridView2;
-            this.slt_ProductName.Properties.ShowClearButton = false;
-            this.slt_ProductName.Size = new System.Drawing.Size(408, 26);
-            this.slt_ProductName.StyleController = this.layoutControl1;
-            this.slt_ProductName.TabIndex = 33;
-            // 
-            // gridView2
-            // 
-            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colProductNumber,
-            this.colProductName1});
-            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView2.OptionsView.ShowGroupPanel = false;
-            // 
-            // colProductNumber
-            // 
-            this.colProductNumber.Caption = "產品編號";
-            this.colProductNumber.FieldName = "ProductNumber";
-            this.colProductNumber.Name = "colProductNumber";
-            this.colProductNumber.Visible = true;
-            this.colProductNumber.VisibleIndex = 0;
-            // 
-            // colProductName1
-            // 
-            this.colProductName1.Caption = "產品名稱";
-            this.colProductName1.FieldName = "ProductName";
-            this.colProductName1.Name = "colProductName1";
-            this.colProductName1.Visible = true;
-            this.colProductName1.VisibleIndex = 1;
-            // 
-            // slt_PurchasecompanyNumber
-            // 
-            this.slt_PurchasecompanyNumber.EditValue = "";
-            this.slt_PurchasecompanyNumber.Location = new System.Drawing.Point(452, 132);
-            this.slt_PurchasecompanyNumber.Name = "slt_PurchasecompanyNumber";
-            this.slt_PurchasecompanyNumber.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.slt_PurchasecompanyNumber.Properties.Appearance.Options.UseFont = true;
-            this.slt_PurchasecompanyNumber.Properties.AppearanceDropDown.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.slt_PurchasecompanyNumber.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.slt_PurchasecompanyNumber.Properties.AppearanceFocused.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.slt_PurchasecompanyNumber.Properties.AppearanceFocused.Options.UseFont = true;
-            this.slt_PurchasecompanyNumber.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slt_PurchasecompanyNumber.Properties.PopupView = this.searchLookUpEdit1View;
-            this.slt_PurchasecompanyNumber.Properties.ShowClearButton = false;
-            this.slt_PurchasecompanyNumber.Size = new System.Drawing.Size(300, 26);
-            this.slt_PurchasecompanyNumber.StyleController = this.layoutControl1;
-            this.slt_PurchasecompanyNumber.TabIndex = 32;
+            this.slt_OperatingcompanyNumber.Properties.PopupView = this.searchLookUpEdit1View;
+            this.slt_OperatingcompanyNumber.Properties.ShowClearButton = false;
+            this.slt_OperatingcompanyNumber.Size = new System.Drawing.Size(300, 26);
+            this.slt_OperatingcompanyNumber.StyleController = this.layoutControl1;
+            this.slt_OperatingcompanyNumber.TabIndex = 32;
             // 
             // searchLookUpEdit1View
             // 
@@ -403,38 +352,38 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.cbt_Posting.StyleController = this.layoutControl1;
             this.cbt_Posting.TabIndex = 28;
             // 
-            // cbt_PurchaseTax
+            // cbt_OperatingTax
             // 
-            this.cbt_PurchaseTax.EditValue = "應稅";
-            this.cbt_PurchaseTax.Location = new System.Drawing.Point(630, 72);
-            this.cbt_PurchaseTax.Name = "cbt_PurchaseTax";
-            this.cbt_PurchaseTax.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.cbt_PurchaseTax.Properties.Appearance.Options.UseFont = true;
-            this.cbt_PurchaseTax.Properties.Appearance.Options.UseTextOptions = true;
-            this.cbt_PurchaseTax.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.cbt_PurchaseTax.Properties.AppearanceDropDown.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.cbt_PurchaseTax.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbt_PurchaseTax.Properties.AppearanceDropDown.Options.UseTextOptions = true;
-            this.cbt_PurchaseTax.Properties.AppearanceDropDown.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.cbt_PurchaseTax.Properties.AppearanceFocused.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.cbt_PurchaseTax.Properties.AppearanceFocused.Options.UseFont = true;
-            this.cbt_PurchaseTax.Properties.AppearanceFocused.Options.UseTextOptions = true;
-            this.cbt_PurchaseTax.Properties.AppearanceFocused.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.cbt_PurchaseTax.Properties.AppearanceItemSelected.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.cbt_PurchaseTax.Properties.AppearanceItemSelected.Options.UseFont = true;
-            this.cbt_PurchaseTax.Properties.AppearanceItemSelected.Options.UseTextOptions = true;
-            this.cbt_PurchaseTax.Properties.AppearanceItemSelected.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.cbt_PurchaseTax.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cbt_OperatingTax.EditValue = "應稅";
+            this.cbt_OperatingTax.Location = new System.Drawing.Point(630, 72);
+            this.cbt_OperatingTax.Name = "cbt_OperatingTax";
+            this.cbt_OperatingTax.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.cbt_OperatingTax.Properties.Appearance.Options.UseFont = true;
+            this.cbt_OperatingTax.Properties.Appearance.Options.UseTextOptions = true;
+            this.cbt_OperatingTax.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.cbt_OperatingTax.Properties.AppearanceDropDown.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.cbt_OperatingTax.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbt_OperatingTax.Properties.AppearanceDropDown.Options.UseTextOptions = true;
+            this.cbt_OperatingTax.Properties.AppearanceDropDown.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.cbt_OperatingTax.Properties.AppearanceFocused.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.cbt_OperatingTax.Properties.AppearanceFocused.Options.UseFont = true;
+            this.cbt_OperatingTax.Properties.AppearanceFocused.Options.UseTextOptions = true;
+            this.cbt_OperatingTax.Properties.AppearanceFocused.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.cbt_OperatingTax.Properties.AppearanceItemSelected.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.cbt_OperatingTax.Properties.AppearanceItemSelected.Options.UseFont = true;
+            this.cbt_OperatingTax.Properties.AppearanceItemSelected.Options.UseTextOptions = true;
+            this.cbt_OperatingTax.Properties.AppearanceItemSelected.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.cbt_OperatingTax.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbt_PurchaseTax.Properties.Items.AddRange(new object[] {
+            this.cbt_OperatingTax.Properties.Items.AddRange(new object[] {
             "應稅",
             "零稅",
             "免稅",
             "二聯"});
-            this.cbt_PurchaseTax.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbt_PurchaseTax.Size = new System.Drawing.Size(536, 26);
-            this.cbt_PurchaseTax.StyleController = this.layoutControl1;
-            this.cbt_PurchaseTax.TabIndex = 25;
+            this.cbt_OperatingTax.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbt_OperatingTax.Size = new System.Drawing.Size(536, 26);
+            this.cbt_OperatingTax.StyleController = this.layoutControl1;
+            this.cbt_OperatingTax.TabIndex = 25;
             // 
             // txt_ProducUnit
             // 
@@ -630,9 +579,9 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // gridView1
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colPurchaseFlag,
-            this.colPurchaseNumber,
-            this.colPurchaseNo,
+            this.colOperatingFlag,
+            this.colOperatingNumber,
+            this.colOperatingNo,
             this.colProducNumber,
             this.colProductName,
             this.colProductUnit,
@@ -643,26 +592,26 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
-            // colPurchaseFlag
+            // colOperatingFlag
             // 
-            this.colPurchaseFlag.Caption = "進貨旗標";
-            this.colPurchaseFlag.FieldName = "PurchaseFlag";
-            this.colPurchaseFlag.Name = "colPurchaseFlag";
+            this.colOperatingFlag.Caption = "營運旗標";
+            this.colOperatingFlag.FieldName = "OperatingFlag";
+            this.colOperatingFlag.Name = "colOperatingFlag";
             // 
-            // colPurchaseNumber
+            // colOperatingNumber
             // 
-            this.colPurchaseNumber.Caption = "進貨單號";
-            this.colPurchaseNumber.FieldName = "PurchaseNumber";
-            this.colPurchaseNumber.Name = "colPurchaseNumber";
+            this.colOperatingNumber.Caption = "營運單號";
+            this.colOperatingNumber.FieldName = "OperatingNumber";
+            this.colOperatingNumber.Name = "colOperatingNumber";
             // 
-            // colPurchaseNo
+            // colOperatingNo
             // 
-            this.colPurchaseNo.Caption = "進貨明細序號";
-            this.colPurchaseNo.FieldName = "PurchaseNo";
-            this.colPurchaseNo.Name = "colPurchaseNo";
-            this.colPurchaseNo.OptionsColumn.AllowEdit = false;
-            this.colPurchaseNo.Visible = true;
-            this.colPurchaseNo.VisibleIndex = 0;
+            this.colOperatingNo.Caption = "營運明細序號";
+            this.colOperatingNo.FieldName = "OperatingNo";
+            this.colOperatingNo.Name = "colOperatingNo";
+            this.colOperatingNo.OptionsColumn.AllowEdit = false;
+            this.colOperatingNo.Visible = true;
+            this.colOperatingNo.VisibleIndex = 0;
             // 
             // colProducNumber
             // 
@@ -737,82 +686,84 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.cbt_EmployeeNumber.StyleController = this.layoutControl1;
             this.cbt_EmployeeNumber.TabIndex = 8;
             // 
-            // det_PurchaseDate
+            // det_OperatingDate
             // 
-            this.det_PurchaseDate.EditValue = null;
-            this.det_PurchaseDate.Location = new System.Drawing.Point(86, 132);
-            this.det_PurchaseDate.Name = "det_PurchaseDate";
-            this.det_PurchaseDate.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.det_PurchaseDate.Properties.Appearance.Options.UseFont = true;
-            this.det_PurchaseDate.Properties.Appearance.Options.UseTextOptions = true;
-            this.det_PurchaseDate.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.det_PurchaseDate.Properties.AppearanceDropDown.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.det_PurchaseDate.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.det_PurchaseDate.Properties.AppearanceFocused.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.det_PurchaseDate.Properties.AppearanceFocused.Options.UseFont = true;
-            this.det_PurchaseDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.det_OperatingDate.EditValue = null;
+            this.det_OperatingDate.Location = new System.Drawing.Point(86, 132);
+            this.det_OperatingDate.Name = "det_OperatingDate";
+            this.det_OperatingDate.Properties.Appearance.BackColor = System.Drawing.Color.White;
+            this.det_OperatingDate.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.det_OperatingDate.Properties.Appearance.Options.UseBackColor = true;
+            this.det_OperatingDate.Properties.Appearance.Options.UseFont = true;
+            this.det_OperatingDate.Properties.Appearance.Options.UseTextOptions = true;
+            this.det_OperatingDate.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.det_OperatingDate.Properties.AppearanceDropDown.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.det_OperatingDate.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.det_OperatingDate.Properties.AppearanceFocused.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.det_OperatingDate.Properties.AppearanceFocused.Options.UseFont = true;
+            this.det_OperatingDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.det_PurchaseDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.det_OperatingDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.det_PurchaseDate.Properties.Mask.EditMask = "yyyy年MM月dd日";
-            this.det_PurchaseDate.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.det_PurchaseDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.det_PurchaseDate.Size = new System.Drawing.Size(288, 26);
-            this.det_PurchaseDate.StyleController = this.layoutControl1;
-            this.det_PurchaseDate.TabIndex = 6;
+            this.det_OperatingDate.Properties.Mask.EditMask = "yyyy年MM月dd日";
+            this.det_OperatingDate.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.det_OperatingDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.det_OperatingDate.Size = new System.Drawing.Size(288, 26);
+            this.det_OperatingDate.StyleController = this.layoutControl1;
+            this.det_OperatingDate.TabIndex = 6;
             // 
-            // txt_PurchaseNumber
+            // txt_OperatingNumber
             // 
-            this.txt_PurchaseNumber.Location = new System.Drawing.Point(630, 42);
-            this.txt_PurchaseNumber.Name = "txt_PurchaseNumber";
-            this.txt_PurchaseNumber.Properties.AllowFocused = false;
-            this.txt_PurchaseNumber.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.txt_PurchaseNumber.Properties.Appearance.Options.UseFont = true;
-            this.txt_PurchaseNumber.Properties.AppearanceReadOnly.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.txt_PurchaseNumber.Properties.AppearanceReadOnly.Options.UseFont = true;
-            this.txt_PurchaseNumber.Properties.ReadOnly = true;
-            this.txt_PurchaseNumber.Size = new System.Drawing.Size(536, 26);
-            this.txt_PurchaseNumber.StyleController = this.layoutControl1;
-            this.txt_PurchaseNumber.TabIndex = 5;
+            this.txt_OperatingNumber.Location = new System.Drawing.Point(630, 42);
+            this.txt_OperatingNumber.Name = "txt_OperatingNumber";
+            this.txt_OperatingNumber.Properties.AllowFocused = false;
+            this.txt_OperatingNumber.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.txt_OperatingNumber.Properties.Appearance.Options.UseFont = true;
+            this.txt_OperatingNumber.Properties.AppearanceReadOnly.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.txt_OperatingNumber.Properties.AppearanceReadOnly.Options.UseFont = true;
+            this.txt_OperatingNumber.Properties.ReadOnly = true;
+            this.txt_OperatingNumber.Size = new System.Drawing.Size(536, 26);
+            this.txt_OperatingNumber.StyleController = this.layoutControl1;
+            this.txt_OperatingNumber.TabIndex = 5;
             // 
-            // cbt_PurchaseFlag
+            // cbt_OperatingFlag
             // 
-            this.cbt_PurchaseFlag.EditValue = "進貨";
-            this.cbt_PurchaseFlag.Location = new System.Drawing.Point(86, 42);
-            this.cbt_PurchaseFlag.Name = "cbt_PurchaseFlag";
-            this.cbt_PurchaseFlag.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.cbt_PurchaseFlag.Properties.Appearance.Options.UseFont = true;
-            this.cbt_PurchaseFlag.Properties.Appearance.Options.UseTextOptions = true;
-            this.cbt_PurchaseFlag.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.cbt_PurchaseFlag.Properties.AppearanceDropDown.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.cbt_PurchaseFlag.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbt_PurchaseFlag.Properties.AppearanceDropDown.Options.UseTextOptions = true;
-            this.cbt_PurchaseFlag.Properties.AppearanceDropDown.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.cbt_PurchaseFlag.Properties.AppearanceFocused.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.cbt_PurchaseFlag.Properties.AppearanceFocused.Options.UseFont = true;
-            this.cbt_PurchaseFlag.Properties.AppearanceItemSelected.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.cbt_PurchaseFlag.Properties.AppearanceItemSelected.Options.UseFont = true;
-            this.cbt_PurchaseFlag.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cbt_OperatingFlag.EditValue = "營運";
+            this.cbt_OperatingFlag.Location = new System.Drawing.Point(86, 42);
+            this.cbt_OperatingFlag.Name = "cbt_OperatingFlag";
+            this.cbt_OperatingFlag.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.cbt_OperatingFlag.Properties.Appearance.Options.UseFont = true;
+            this.cbt_OperatingFlag.Properties.Appearance.Options.UseTextOptions = true;
+            this.cbt_OperatingFlag.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.cbt_OperatingFlag.Properties.AppearanceDropDown.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.cbt_OperatingFlag.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbt_OperatingFlag.Properties.AppearanceDropDown.Options.UseTextOptions = true;
+            this.cbt_OperatingFlag.Properties.AppearanceDropDown.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.cbt_OperatingFlag.Properties.AppearanceFocused.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.cbt_OperatingFlag.Properties.AppearanceFocused.Options.UseFont = true;
+            this.cbt_OperatingFlag.Properties.AppearanceItemSelected.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.cbt_OperatingFlag.Properties.AppearanceItemSelected.Options.UseFont = true;
+            this.cbt_OperatingFlag.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbt_PurchaseFlag.Properties.Items.AddRange(new object[] {
-            "進貨",
-            "進貨退貨"});
-            this.cbt_PurchaseFlag.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbt_PurchaseFlag.Size = new System.Drawing.Size(466, 26);
-            this.cbt_PurchaseFlag.StyleController = this.layoutControl1;
-            this.cbt_PurchaseFlag.TabIndex = 4;
+            this.cbt_OperatingFlag.Properties.Items.AddRange(new object[] {
+            "營運",
+            "營運退出"});
+            this.cbt_OperatingFlag.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbt_OperatingFlag.Size = new System.Drawing.Size(466, 26);
+            this.cbt_OperatingFlag.StyleController = this.layoutControl1;
+            this.cbt_OperatingFlag.TabIndex = 4;
             // 
-            // txt_PurchaseInvoiceNo
+            // txt_OperatingInvoiceNo
             // 
-            this.txt_PurchaseInvoiceNo.Location = new System.Drawing.Point(86, 72);
-            this.txt_PurchaseInvoiceNo.Name = "txt_PurchaseInvoiceNo";
-            this.txt_PurchaseInvoiceNo.Properties.AllowFocused = false;
-            this.txt_PurchaseInvoiceNo.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.txt_PurchaseInvoiceNo.Properties.Appearance.Options.UseFont = true;
-            this.txt_PurchaseInvoiceNo.Properties.MaxLength = 10;
-            this.txt_PurchaseInvoiceNo.Size = new System.Drawing.Size(466, 26);
-            this.txt_PurchaseInvoiceNo.StyleController = this.layoutControl1;
-            this.txt_PurchaseInvoiceNo.TabIndex = 5;
+            this.txt_OperatingInvoiceNo.Location = new System.Drawing.Point(86, 72);
+            this.txt_OperatingInvoiceNo.Name = "txt_OperatingInvoiceNo";
+            this.txt_OperatingInvoiceNo.Properties.AllowFocused = false;
+            this.txt_OperatingInvoiceNo.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.txt_OperatingInvoiceNo.Properties.Appearance.Options.UseFont = true;
+            this.txt_OperatingInvoiceNo.Properties.MaxLength = 10;
+            this.txt_OperatingInvoiceNo.Size = new System.Drawing.Size(466, 26);
+            this.txt_OperatingInvoiceNo.StyleController = this.layoutControl1;
+            this.txt_OperatingInvoiceNo.TabIndex = 5;
             // 
             // slt_ProjectNumber
             // 
@@ -864,6 +815,20 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.colProjectName.Visible = true;
             this.colProjectName.VisibleIndex = 1;
             // 
+            // txt_ProductName
+            // 
+            this.txt_ProductName.EditValue = "";
+            this.txt_ProductName.Location = new System.Drawing.Point(86, 188);
+            this.txt_ProductName.Name = "txt_ProductName";
+            this.txt_ProductName.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.txt_ProductName.Properties.Appearance.Options.UseFont = true;
+            this.txt_ProductName.Properties.AppearanceFocused.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.txt_ProductName.Properties.AppearanceFocused.Options.UseFont = true;
+            this.txt_ProductName.Properties.NullText = "[EditValue is null]";
+            this.txt_ProductName.Size = new System.Drawing.Size(408, 26);
+            this.txt_ProductName.StyleController = this.layoutControl1;
+            this.txt_ProductName.TabIndex = 33;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -901,18 +866,18 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // 
             this.layoutControlItem1.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem1.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem1.Control = this.cbt_PurchaseFlag;
+            this.layoutControlItem1.Control = this.cbt_OperatingFlag;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 30);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Size = new System.Drawing.Size(544, 30);
-            this.layoutControlItem1.Text = "進貨旗標*";
+            this.layoutControlItem1.Text = "營運旗標*";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(71, 20);
             // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem5.Control = this.txt_PurchaseInvoiceNo;
+            this.layoutControlItem5.Control = this.txt_OperatingInvoiceNo;
             this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem5.CustomizationFormText = "發票號碼";
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 60);
@@ -952,7 +917,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // 
             this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem3.Control = this.det_PurchaseDate;
+            this.layoutControlItem3.Control = this.det_OperatingDate;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 120);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(366, 30);
@@ -974,19 +939,19 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // 
             this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem2.Control = this.txt_PurchaseNumber;
+            this.layoutControlItem2.Control = this.txt_OperatingNumber;
             this.layoutControlItem2.CustomizationFormText = "進貨單號";
             this.layoutControlItem2.Location = new System.Drawing.Point(544, 30);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(614, 30);
-            this.layoutControlItem2.Text = "進貨單號";
+            this.layoutControlItem2.Text = "營運單號";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(71, 20);
             // 
             // layoutControlItem15
             // 
             this.layoutControlItem15.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem15.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem15.Control = this.cbt_PurchaseTax;
+            this.layoutControlItem15.Control = this.cbt_OperatingTax;
             this.layoutControlItem15.Location = new System.Drawing.Point(544, 60);
             this.layoutControlItem15.Name = "layoutControlItem15";
             this.layoutControlItem15.Size = new System.Drawing.Size(614, 30);
@@ -1122,7 +1087,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // 
             this.layoutControlItem22.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem22.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem22.Control = this.slt_PurchasecompanyNumber;
+            this.layoutControlItem22.Control = this.slt_OperatingcompanyNumber;
             this.layoutControlItem22.Location = new System.Drawing.Point(366, 120);
             this.layoutControlItem22.Name = "layoutControlItem22";
             this.layoutControlItem22.Size = new System.Drawing.Size(378, 30);
@@ -1133,7 +1098,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // 
             this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem4.Control = this.slt_ProductName;
+            this.layoutControlItem4.Control = this.txt_ProductName;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 176);
             this.layoutControlItem4.Name = "layoutControlItem4";
             this.layoutControlItem4.Size = new System.Drawing.Size(486, 30);
@@ -1153,14 +1118,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.layoutControlItem24.Text = "專案代碼";
             this.layoutControlItem24.TextSize = new System.Drawing.Size(71, 20);
             // 
-            // layoutControlItem16
-            // 
-            this.layoutControlItem16.Location = new System.Drawing.Point(0, 596);
-            this.layoutControlItem16.Name = "layoutControlItem16";
-            this.layoutControlItem16.Size = new System.Drawing.Size(1158, 25);
-            this.layoutControlItem16.TextSize = new System.Drawing.Size(50, 20);
-            // 
-            // PurchaseEditForm
+            // OperatingEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1169,21 +1127,19 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.Controls.Add(this.layoutControl1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "PurchaseEditForm";
+            this.Name = "OperatingEditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "PurchaseEditForm";
+            this.Text = "OperatingEditForm";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.slt_ProductName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slt_PurchasecompanyNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slt_OperatingcompanyNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).EndInit();
             this.panelControl5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txt_productPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_productQty.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbt_Posting.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbt_PurchaseTax.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbt_OperatingTax.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_ProducUnit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_TotalTax.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txt_Tax.Properties)).EndInit();
@@ -1203,13 +1159,14 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbt_EmployeeNumber.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.det_PurchaseDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.det_PurchaseDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_PurchaseNumber.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbt_PurchaseFlag.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_PurchaseInvoiceNo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.det_OperatingDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.det_OperatingDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_OperatingNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbt_OperatingFlag.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_OperatingInvoiceNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slt_ProjectNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView21)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_ProductName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
@@ -1235,7 +1192,6 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem22)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem24)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1243,83 +1199,79 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         #endregion
 
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraEditors.ComboBoxEdit cbt_PurchaseFlag;
-        private DevExpress.XtraLayout.LayoutControlGroup Root;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraEditors.DateEdit det_PurchaseDate;
-        private DevExpress.XtraEditors.TextEdit txt_PurchaseNumber;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
-        private DevExpress.XtraEditors.TextEdit txt_PurchaseInvoiceNo;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
-        private DevExpress.XtraEditors.ComboBoxEdit cbt_EmployeeNumber;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn colPurchaseFlag;
-        private DevExpress.XtraGrid.Columns.GridColumn colPurchaseNumber;
-        private DevExpress.XtraGrid.Columns.GridColumn colPurchaseNo;
-        private DevExpress.XtraGrid.Columns.GridColumn colProducNumber;
-        private DevExpress.XtraGrid.Columns.GridColumn colProductName;
-        private DevExpress.XtraGrid.Columns.GridColumn colProductUnit;
-        private DevExpress.XtraGrid.Columns.GridColumn colProductQty;
-        private DevExpress.XtraGrid.Columns.GridColumn colProductPrice;
-        private DevExpress.XtraGrid.Columns.GridColumn colProductTotal;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
-        private DevExpress.XtraEditors.PanelControl panelControl1;
-        private DevExpress.XtraEditors.MemoEdit mmt_Remark;
-        private DevExpress.XtraEditors.LabelControl labelControl5;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
+        private DevExpress.XtraEditors.SearchLookUpEdit slt_OperatingcompanyNumber;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn colCompanyNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colCompanyName;
+        private DevExpress.XtraEditors.PanelControl panelControl5;
+        private DevExpress.XtraEditors.SimpleButton btn_Clear;
+        private DevExpress.XtraEditors.SimpleButton btn_Delete;
+        private DevExpress.XtraEditors.SimpleButton btn_Add;
+        private DevExpress.XtraEditors.TextEdit txt_productPrice;
+        private DevExpress.XtraEditors.TextEdit txt_productQty;
+        private DevExpress.XtraEditors.ComboBoxEdit cbt_Posting;
+        private DevExpress.XtraEditors.ComboBoxEdit cbt_OperatingTax;
+        private DevExpress.XtraEditors.TextEdit txt_ProducUnit;
+        private DevExpress.XtraEditors.TextEdit txt_TotalTax;
+        private DevExpress.XtraEditors.TextEdit txt_Tax;
+        private DevExpress.XtraEditors.TextEdit txt_Total;
+        private DevExpress.XtraEditors.PanelControl panelControl4;
+        private DevExpress.XtraEditors.SimpleButton btn_Save;
+        private DevExpress.XtraEditors.SimpleButton btn_Cancel;
         private DevExpress.XtraEditors.PanelControl panelControl2;
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraEditors.SimpleButton btn_LoadFile;
         private DevExpress.XtraEditors.SimpleButton btn_ClearFile;
         private DevExpress.XtraEditors.TextEdit txt_FileName;
         private DevExpress.XtraEditors.LabelControl labelControl6;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraEditors.MemoEdit mmt_Remark;
+        private DevExpress.XtraEditors.LabelControl labelControl5;
+        private DevExpress.XtraGrid.GridControl gridControl1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Columns.GridColumn colOperatingFlag;
+        private DevExpress.XtraGrid.Columns.GridColumn colOperatingNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colOperatingNo;
+        private DevExpress.XtraGrid.Columns.GridColumn colProducNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colProductName;
+        private DevExpress.XtraGrid.Columns.GridColumn colProductUnit;
+        private DevExpress.XtraGrid.Columns.GridColumn colProductQty;
+        private DevExpress.XtraGrid.Columns.GridColumn colProductPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn colProductTotal;
+        private DevExpress.XtraEditors.ComboBoxEdit cbt_EmployeeNumber;
+        private DevExpress.XtraEditors.DateEdit det_OperatingDate;
+        private DevExpress.XtraEditors.TextEdit txt_OperatingNumber;
+        private DevExpress.XtraEditors.ComboBoxEdit cbt_OperatingFlag;
+        private DevExpress.XtraEditors.TextEdit txt_OperatingInvoiceNo;
+        private DevExpress.XtraEditors.SearchLookUpEdit slt_ProjectNumber;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView21;
+        private DevExpress.XtraGrid.Columns.GridColumn colProjectNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colProjectName;
+        private DevExpress.XtraLayout.LayoutControlGroup Root;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
-        private DevExpress.XtraEditors.PanelControl panelControl4;
-        private DevExpress.XtraEditors.SimpleButton btn_Save;
-        private DevExpress.XtraEditors.SimpleButton btn_Cancel;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
-        private DevExpress.XtraEditors.TextEdit txt_TotalTax;
-        private DevExpress.XtraEditors.TextEdit txt_Tax;
-        private DevExpress.XtraEditors.TextEdit txt_Total;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
-        private DevExpress.XtraEditors.ComboBoxEdit cbt_PurchaseTax;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
-        private DevExpress.XtraEditors.ComboBoxEdit cbt_Posting;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
-        private DevExpress.XtraEditors.TextEdit txt_productPrice;
-        private DevExpress.XtraEditors.TextEdit txt_productQty;
-        private DevExpress.XtraEditors.TextEdit txt_ProducUnit;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem19;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem20;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem21;
         private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItem1;
         private DevExpress.XtraLayout.SimpleSeparator simpleSeparator1;
-        private DevExpress.XtraEditors.PanelControl panelControl5;
-        private DevExpress.XtraEditors.SimpleButton btn_Delete;
-        private DevExpress.XtraEditors.SimpleButton btn_Add;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
-        private DevExpress.XtraEditors.SearchLookUpEdit slt_PurchasecompanyNumber;
-        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem22;
-        private DevExpress.XtraGrid.Columns.GridColumn colCompanyNumber;
-        private DevExpress.XtraGrid.Columns.GridColumn colCompanyName;
-        private DevExpress.XtraEditors.SearchLookUpEdit slt_ProductName;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
-        private DevExpress.XtraGrid.Columns.GridColumn colProductNumber;
-        private DevExpress.XtraGrid.Columns.GridColumn colProductName1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
-        private DevExpress.XtraEditors.SearchLookUpEdit slt_ProjectNumber;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView21;
-        private DevExpress.XtraGrid.Columns.GridColumn colProjectNumber;
-        private DevExpress.XtraGrid.Columns.GridColumn colProjectName;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem24;
-        private DevExpress.XtraEditors.SimpleButton btn_Clear;
+        private DevExpress.XtraEditors.TextEdit txt_ProductName;
     }
 }

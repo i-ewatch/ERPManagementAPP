@@ -50,6 +50,7 @@ namespace ERPManagementAPP
             this.Device_PartsnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.ProjectBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.AccountingBarGroup = new DevExpress.XtraNavBar.NavBarGroup();
+            this.OperatingBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.PurchasenavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.PickingBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.SalesnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
@@ -209,7 +210,8 @@ namespace ERPManagementAPP
             this.PaymentTransferDatenavBarItem,
             this.PartnernavBarItem,
             this.ProjectBarItem,
-            this.PickingBarItem});
+            this.PickingBarItem,
+            this.OperatingBarItem});
             this.navBarControl1.LinkSelectionMode = DevExpress.XtraNavBar.LinkSelectionModeType.OneInControl;
             this.navBarControl1.Location = new System.Drawing.Point(0, 23);
             this.navBarControl1.Name = "navBarControl1";
@@ -320,11 +322,29 @@ namespace ERPManagementAPP
             this.AccountingBarGroup.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("AccountingBarGroup.ImageOptions.LargeImage")));
             this.AccountingBarGroup.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("AccountingBarGroup.ImageOptions.SmallImage")));
             this.AccountingBarGroup.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.OperatingBarItem),
             new DevExpress.XtraNavBar.NavBarItemLink(this.PurchasenavBarItem),
             new DevExpress.XtraNavBar.NavBarItemLink(this.PickingBarItem),
             new DevExpress.XtraNavBar.NavBarItemLink(this.SalesnavBarItem),
             new DevExpress.XtraNavBar.NavBarItemLink(this.PaymentnavBarItem)});
             this.AccountingBarGroup.Name = "AccountingBarGroup";
+            // 
+            // OperatingBarItem
+            // 
+            this.OperatingBarItem.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.OperatingBarItem.Appearance.Options.UseFont = true;
+            this.OperatingBarItem.AppearanceDisabled.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.OperatingBarItem.AppearanceDisabled.Options.UseFont = true;
+            this.OperatingBarItem.AppearanceHotTracked.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.OperatingBarItem.AppearanceHotTracked.Options.UseFont = true;
+            this.OperatingBarItem.AppearancePressed.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.OperatingBarItem.AppearancePressed.Options.UseFont = true;
+            this.OperatingBarItem.Caption = "營運/營運退出";
+            this.OperatingBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("OperatingBarItem.ImageOptions.LargeImage")));
+            this.OperatingBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("OperatingBarItem.ImageOptions.SmallImage")));
+            this.OperatingBarItem.Name = "OperatingBarItem";
+            this.OperatingBarItem.Tag = "14";
+            this.OperatingBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
             // 
             // PurchasenavBarItem
             // 
@@ -393,7 +413,7 @@ namespace ERPManagementAPP
             // 
             this.PurchasePostingnavBarItem.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.PurchasePostingnavBarItem.Appearance.Options.UseFont = true;
-            this.PurchasePostingnavBarItem.Caption = "進貨/進貨退出";
+            this.PurchasePostingnavBarItem.Caption = "進貨營運總覽";
             this.PurchasePostingnavBarItem.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             this.PurchasePostingnavBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("PurchasePostingnavBarItem.ImageOptions.LargeImage")));
             this.PurchasePostingnavBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("PurchasePostingnavBarItem.ImageOptions.SmallImage")));
@@ -516,6 +536,7 @@ namespace ERPManagementAPP
         private DevExpress.XtraNavBar.NavBarItem PartnernavBarItem;
         private DevExpress.XtraNavBar.NavBarItem ProjectBarItem;
         private DevExpress.XtraNavBar.NavBarItem PickingBarItem;
+        private DevExpress.XtraNavBar.NavBarItem OperatingBarItem;
     }
 }
 

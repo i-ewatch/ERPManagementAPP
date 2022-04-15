@@ -98,13 +98,13 @@ namespace ERPManagementAPP.Maintain
             // 
             // ProductCategorygroupControl
             // 
-            this.ProductCategorygroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.ProductCategorygroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
             this.ProductCategorygroupControl.AppearanceCaption.Options.UseForeColor = true;
             this.ProductCategorygroupControl.Controls.Add(this.ProductCategorygridControl);
             this.ProductCategorygroupControl.Controls.Add(this.ProductCategorypanelControl);
-            this.ProductCategorygroupControl.Location = new System.Drawing.Point(881, 12);
+            this.ProductCategorygroupControl.Location = new System.Drawing.Point(874, 12);
             this.ProductCategorygroupControl.Name = "ProductCategorygroupControl";
-            this.ProductCategorygroupControl.Size = new System.Drawing.Size(385, 822);
+            this.ProductCategorygroupControl.Size = new System.Drawing.Size(392, 822);
             this.ProductCategorygroupControl.TabIndex = 5;
             this.ProductCategorygroupControl.Text = "產品類別";
             // 
@@ -114,7 +114,7 @@ namespace ERPManagementAPP.Maintain
             this.ProductCategorygridControl.Location = new System.Drawing.Point(2, 66);
             this.ProductCategorygridControl.MainView = this.gridView2;
             this.ProductCategorygridControl.Name = "ProductCategorygridControl";
-            this.ProductCategorygridControl.Size = new System.Drawing.Size(381, 754);
+            this.ProductCategorygridControl.Size = new System.Drawing.Size(388, 754);
             this.ProductCategorygridControl.TabIndex = 1;
             this.ProductCategorygridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -156,7 +156,7 @@ namespace ERPManagementAPP.Maintain
             this.ProductCategorypanelControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.ProductCategorypanelControl.Location = new System.Drawing.Point(2, 23);
             this.ProductCategorypanelControl.Name = "ProductCategorypanelControl";
-            this.ProductCategorypanelControl.Size = new System.Drawing.Size(381, 43);
+            this.ProductCategorypanelControl.Size = new System.Drawing.Size(388, 43);
             this.ProductCategorypanelControl.TabIndex = 0;
             // 
             // btn_ProductGategory_Refresh
@@ -205,7 +205,7 @@ namespace ERPManagementAPP.Maintain
             // 
             // ProductgroupControl
             // 
-            this.ProductgroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.ProductgroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
             this.ProductgroupControl.AppearanceCaption.Options.UseForeColor = true;
             this.ProductgroupControl.Controls.Add(this.ProductgridControl);
             this.ProductgroupControl.Controls.Add(this.ProductpanelControl);
@@ -413,9 +413,9 @@ namespace ERPManagementAPP.Maintain
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.ProductCategorygroupControl;
-            this.layoutControlItem2.Location = new System.Drawing.Point(869, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(862, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(389, 826);
+            this.layoutControlItem2.Size = new System.Drawing.Size(396, 826);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -424,7 +424,7 @@ namespace ERPManagementAPP.Maintain
             this.splitterItem1.AllowHotTrack = true;
             this.splitterItem1.Location = new System.Drawing.Point(857, 0);
             this.splitterItem1.Name = "splitterItem1";
-            this.splitterItem1.Size = new System.Drawing.Size(12, 826);
+            this.splitterItem1.Size = new System.Drawing.Size(5, 826);
             // 
             // ProductMaintainControl
             // 

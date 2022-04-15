@@ -1,38 +1,44 @@
 ﻿using DevExpress.XtraBars.Docking2010.Customization;
 using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
+using DevExpress.XtraEditors;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ERPManagementAPP.Maintain.SalesMaintainForm
+namespace ERPManagementAPP.Maintain.OperatingMaintainForm
 {
-    public partial class SalesEditForm : BaseEditForm
+    public partial class OperatingEditForm : BaseEditForm
     {
         /// <summary>
         /// 聚焦表身資訊
         /// </summary>
-        private SalesSubSetting FocuseSalesSubSetting { get; set; } = new SalesSubSetting();
+        private OperatingSubSetting FocuseOperatingSubSetting { get; set; } = new OperatingSubSetting();
         /// <summary>
         /// 表身資訊
         /// </summary>
-        private List<SalesSubSetting> SalesSubSettings { get; set; } = new List<SalesSubSetting>();
+        private List<OperatingSubSetting> OperatingSubSettings { get; set; } = new List<OperatingSubSetting>();
         /// <summary>
         /// 進貨資訊
         /// </summary>
-        private SalesSetting SalesSetting { get; set; } = new SalesSetting();
+        private OperatingSetting OperatingSetting { get; set; } = new OperatingSetting();
         /// <summary>
         /// 產品資訊
         /// </summary>
         private List<ProductSetting> ProductSettings { get; set; }
         /// <summary>
-        /// 客戶資訊
+        /// 公司資訊
         /// </summary>
-        private List<CustomerSetting> CustomerSettings { get; set; }
+        private List<CompanySetting> CompanySettings { get; set; }
         /// <summary>
         /// 員工資訊
         /// </summary>
@@ -42,9 +48,9 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         /// </summary>
         private List<ProjectSetting> ProjectSettings { get; set; }
         /// <summary>
-        /// 被選擇的客戶資訊
+        /// 被選擇的公司資訊
         /// </summary>
-        private CustomerSetting SelectCustomerSetting { get; set; }
+        private CompanySetting SelectCompanySetting { get; set; }
         /// <summary>
         /// 被選擇的產品資訊
         /// </summary>
@@ -73,61 +79,45 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         /// 稅後總計
         /// </summary>
         private double TotalTax = 0;
-        public SalesEditForm(List<CustomerSetting> customerSettings, List<EmployeeSetting> employeeSettings, List<ProductSetting> productSettings, List<ProjectSetting> projectSettings, SalesSetting salesSetting, APIMethod apiMethod, Form1 form1)
+        public OperatingEditForm(List<CompanySetting> companySettings, List<EmployeeSetting> employeeSettings, List<ProductSetting> productSettings, List<ProjectSetting> projectSettings, OperatingSetting purchaseSetting, APIMethod apiMethod, Form1 form1)
         {
             InitializeComponent();
             Form1 = form1;
             action.Commands.Add(FlyoutCommand.Yes);
-            CustomerSettings = customerSettings;
+            CompanySettings = companySettings;
             EmployeeSettings = employeeSettings;
             ProductSettings = productSettings;
-            SalesSetting = salesSetting;
+            OperatingSetting = purchaseSetting;
             ProjectSettings = projectSettings;
-            Create_slt_SalescustomerNumber_cbt();
+            Create_slt_OperatingcompanyNumber();
             Create_cbt_EmployeeNumber_cbt();
-            //Create_cbt_ProductName_cbt(); //2022/4/13 拔除下拉選項功能
-            Create_slt_ProjectNumber(); //2022/4/13 新增專案資訊
-            if (salesSetting != null && salesSetting.SalesNumber != null)
+            //Create_cbt_ProductName_cbt();
+            Create_slt_ProjectNumber();
+            if (purchaseSetting != null)
             {
-                cbt_SalesFlag.SelectedIndex = salesSetting.SalesFlag - 3;
-                txt_SalesNumber.Text = salesSetting.SalesNumber;
-                det_SalesDate.Text = salesSetting.SalesDate.ToString("yyyy年MM月dd日");
-                Show_ProductCustomerNumber_Index();
+                cbt_OperatingFlag.Enabled = false;
+                cbt_OperatingFlag.SelectedIndex = purchaseSetting.OperatingFlag - 7;
+                txt_OperatingNumber.Text = purchaseSetting.OperatingNumber;
+                det_OperatingDate.Text = purchaseSetting.OperatingDate.ToString("yyyy年MM月dd日");
+                Show_ProductCompanyNumber_Index();
                 Show_ProjectNumber_Index();
-                cbt_SalesTax.SelectedIndex = salesSetting.SalesTax;
-                txt_SalesInvoiceNo.Text = salesSetting.SalesInvoiceNo;
-                txt_TakeACut.EditValue = salesSetting.TakeACut;
+                cbt_OperatingTax.SelectedIndex = purchaseSetting.OperatingTax;
+                txt_OperatingInvoiceNo.Text = purchaseSetting.OperatingInvoiceNo;
                 Show_EmployeeNumber_Index();
-                mmt_Remark.Text = salesSetting.Remark;
-                cbt_Posting.SelectedIndex = salesSetting.Posting;
-                SalesSubSettings = salesSetting.SalesSub;
-                txt_Cost.EditValue = salesSetting.Cost;
+                mmt_Remark.Text = purchaseSetting.Remark;
+                cbt_Posting.SelectedIndex = purchaseSetting.Posting;
+                OperatingSubSettings = purchaseSetting.OperatingSub;
             }
             else
             {
-                det_SalesDate.EditValue = DateTime.Now;
-                txt_TakeACut.EditValue = 0;
-                txt_Cost.EditValue = 0;
+                det_OperatingDate.EditValue = DateTime.Now;
             }
             CacalculateData();
             RefreshData();
-            cbt_SalesTax.SelectedIndexChanged += (s, e) =>
+            cbt_OperatingTax.SelectedIndexChanged += (s, e) =>
             {
                 CacalculateData();
             };
-            #region 員工下拉選單變更
-            cbt_EmployeeNumber.EditValueChanged += (s, e) =>
-              {
-                  if (EmployeeSettings[cbt_EmployeeNumber.SelectedIndex].Token == 2)
-                  {
-                      txt_TakeACut.EditValue = 15;
-                  }
-                  else
-                  {
-                      txt_TakeACut.EditValue = 0;
-                  }
-              };
-            #endregion
             #region 載入檔案按鈕
             btn_LoadFile.Click += (s, e) =>
             {
@@ -196,12 +186,14 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             {
                 if (!string.IsNullOrEmpty(txt_ProducUnit.Text) && !string.IsNullOrEmpty(txt_productPrice.Text))
                 {
-                    SalesSubSettings.Add(new SalesSubSetting()
+                    OperatingSubSettings.Add(new OperatingSubSetting()
                     {
-                        SalesFlag = cbt_SalesFlag.SelectedIndex + 3,
-                        SalesNumber = "",
-                        SalesNo = SalesSubSettings.Count() + 1,
+                        OperatingFlag = cbt_OperatingFlag.SelectedIndex + 7,
+                        OperatingNumber = "",
+                        OperatingNo = OperatingSubSettings.Count() + 1,
+                        //ProductNumber = Get_cbt_ProductName_Number(),
                         ProductNumber = "",
+                        //ProductName = SelectProductSetting.ProductName,
                         ProductName = txt_ProductName.Text,
                         ProductUnit = txt_ProducUnit.Text,
                         ProductQty = Convert.ToDouble(txt_productQty.Text),
@@ -209,12 +201,13 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
                         ProductTotal = Convert.ToDouble(txt_productQty.Text) * Convert.ToDouble(txt_productPrice.Text)
                     });
                     txt_ProductName.Text = "";
-                    txt_productQty.Text = "";
+                    //slt_ProductName.EditValue = null;
                     //SelectProductSetting = null;
+                    txt_productQty.Text = "";
                     txt_productPrice.Text = "";
                     CacalculateData();
                     RefreshData();
-                    FocuseMainGrid();
+                    //FocuseMainGrid();
                 }
                 else
                 {
@@ -228,8 +221,9 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             btn_Clear.Click += (s, e) =>
             {
                 txt_ProductName.Text = "";
-                txt_ProducUnit.Text = "";
+                //slt_ProductName.EditValue = null;
                 //SelectProductSetting = null;
+                txt_ProducUnit.Text = "";
                 txt_productQty.Text = "";
                 txt_productPrice.Text = "";
             };
@@ -237,17 +231,17 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             #region 刪除細項
             btn_Delete.Click += (s, e) =>
             {
-                for (int i = 0; i < SalesSubSettings.Count; i++)
+                for (int i = 0; i < OperatingSubSettings.Count; i++)
                 {
-                    if (SalesSubSettings[i].SalesNo == FocuseSalesSubSetting.SalesNo)
+                    if (OperatingSubSettings[i].OperatingNo == FocuseOperatingSubSetting.OperatingNo)
                     {
-                        SalesSubSettings.RemoveAt(i);
+                        OperatingSubSettings.RemoveAt(i);
                     }
                 }
-                RefraeshSalesNo();
+                RefraeshOperatingNo();
                 CacalculateData();
                 RefreshData();
-                FocuseMainGrid();
+                //FocuseMainGrid();
             };
             #endregion
             #region 取消按鈕
@@ -259,7 +253,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             #region 儲存按鈕
             btn_Save.Click += (s, e) =>
             {
-                CheckNumber(salesSetting, apiMethod);
+                CheckNumber(purchaseSetting, apiMethod);
             };
             #endregion
         }
@@ -271,24 +265,24 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         {
             if (gridView1.FocusedRowHandle > -1 && gridView1.DataRowCount > 0)
             {
-                FocuseSalesSubSetting.SalesFlag = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesFlag").ToString()) - 1;
-                FocuseSalesSubSetting.SalesNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesNumber").ToString();
-                FocuseSalesSubSetting.SalesNo = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesNo").ToString());
-                FocuseSalesSubSetting.ProductNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductNumber").ToString();
-                FocuseSalesSubSetting.ProductName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductName").ToString();
-                FocuseSalesSubSetting.ProductUnit = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductUnit").ToString();
-                FocuseSalesSubSetting.ProductQty = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductQty").ToString());
-                FocuseSalesSubSetting.ProductPrice = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductPrice").ToString());
-                FocuseSalesSubSetting.ProductTotal = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductTotal").ToString());
+                FocuseOperatingSubSetting.OperatingFlag = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "OperatingFlag").ToString()) - 1;
+                FocuseOperatingSubSetting.OperatingNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "OperatingNumber").ToString();
+                FocuseOperatingSubSetting.OperatingNo = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "OperatingNo").ToString());
+                FocuseOperatingSubSetting.ProductNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductNumber").ToString();
+                FocuseOperatingSubSetting.ProductName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductName").ToString();
+                FocuseOperatingSubSetting.ProductUnit = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductUnit").ToString();
+                FocuseOperatingSubSetting.ProductQty = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductQty").ToString());
+                FocuseOperatingSubSetting.ProductPrice = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductPrice").ToString());
+                FocuseOperatingSubSetting.ProductTotal = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductTotal").ToString());
 
-                //txt_ProductName.Text = FocuseSalesSubSetting.ProductName;
-                //txt_ProducUnit.Text = FocuseSalesSubSetting.ProductUnit;
-                //txt_productQty.Text = FocuseSalesSubSetting.ProductQty.ToString();
-                //txt_productPrice.Text = FocuseSalesSubSetting.ProductPrice.ToString();
+                //Show_ProductNumber_Index();
+                //txt_ProducUnit.Text = FocuseOperatingSubSetting.ProductUnit;
+                //txt_productQty.Text = FocuseOperatingSubSetting.ProductQty.ToString();
+                //txt_productPrice.Text = FocuseOperatingSubSetting.ProductPrice.ToString();
             }
             else
             {
-                FocuseSalesSubSetting = new SalesSubSetting();
+                FocuseOperatingSubSetting = new OperatingSubSetting();
             }
         }
         #endregion
@@ -296,11 +290,11 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         /// <summary>
         /// 刷新細項編號
         /// </summary>
-        private void RefraeshSalesNo()
+        private void RefraeshOperatingNo()
         {
-            for (int i = 0; i < SalesSubSettings.Count; i++)
+            for (int i = 0; i < OperatingSubSettings.Count; i++)
             {
-                SalesSubSettings[i].SalesNo = i + 1;
+                OperatingSubSettings[i].OperatingNo = i + 1;
             }
         }
         #endregion
@@ -310,7 +304,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         /// </summary>
         private void RefreshData()
         {
-            gridControl1.DataSource = SalesSubSettings;
+            gridControl1.DataSource = OperatingSubSettings;
             gridControl1.RefreshDataSource();
         }
         #endregion
@@ -323,14 +317,14 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             Total = 0;
             Tax = 0;
             TotalTax = 0;
-            if (SalesSubSettings.Count > 0)
+            if (OperatingSubSettings.Count > 0)
             {
-                foreach (var item in SalesSubSettings)
+                foreach (var item in OperatingSubSettings)
                 {
                     Total += item.ProductTotal;
                 }
             }
-            if (cbt_SalesTax.SelectedIndex == 0)
+            if (cbt_OperatingTax.SelectedIndex == 0)
             {
                 Tax = Math.Round(Total * 0.05, 0);
             }
@@ -340,28 +334,28 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             txt_TotalTax.EditValue = $"{TotalTax.ToString()}";
         }
         #endregion
-        #region 客戶編號功能
+        #region 廠商編號功能
         /// <summary>
-        /// 創建客戶編號下拉選單
+        /// 創建廠商下拉選單
         /// </summary>
-        private void Create_slt_SalescustomerNumber_cbt()
+        private void Create_slt_OperatingcompanyNumber()
         {
-            slt_SalesCustomerNumber.Properties.DataSource = CustomerSettings;
-            slt_SalesCustomerNumber.Properties.DisplayMember = "CustomerName";
-            slt_SalesCustomerNumber.CustomDisplayText += (s, e) =>
+            slt_OperatingcompanyNumber.Properties.DataSource = CompanySettings;
+            slt_OperatingcompanyNumber.Properties.DisplayMember = "CompanyName";
+            slt_OperatingcompanyNumber.CustomDisplayText += (s, e) =>
             {
-                if (SalesSetting != null)
+                if (OperatingSetting != null)
                 {
-                    if (SelectCustomerSetting != null)
+                    if (SelectCompanySetting != null)
                     {
                         if (e.Value.ToString() != "")
                         {
-                            SelectCustomerSetting = e.Value as CustomerSetting;
-                            e.DisplayText = SelectCustomerSetting.CustomerName;
+                            SelectCompanySetting = e.Value as CompanySetting;
+                            e.DisplayText = SelectCompanySetting.CompanyName;
                         }
                         else
                         {
-                            e.DisplayText = SelectCustomerSetting.CustomerName;
+                            e.DisplayText = SelectCompanySetting.CompanyName;
                         }
                     }
                     else
@@ -371,25 +365,25 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
                 }
                 else
                 {
-                    SelectCustomerSetting = e.Value as CustomerSetting;
+                    SelectCompanySetting = e.Value as CompanySetting;
                 }
             };
         }
         /// <summary>
-        /// 顯示客戶選單項目
+        /// 顯示廠商選單項目
         /// </summary>
-        private void Show_ProductCustomerNumber_Index()
+        private void Show_ProductCompanyNumber_Index()
         {
-            for (int i = 0; i < CustomerSettings.Count; i++)
+            for (int i = 0; i < CompanySettings.Count; i++)
             {
-                if (CustomerSettings[i].CustomerNumber == SalesSetting.SalesCustomerNumber)
+                if (CompanySettings[i].CompanyNumber == OperatingSetting.OperatingCompanyNumber)
                 {
-                    SelectCustomerSetting = CustomerSettings[i];
+                    SelectCompanySetting = CompanySettings[i];
                     break;
                 }
                 else
                 {
-                    SelectCustomerSetting = null;
+                    SelectCompanySetting = null;
                 }
             }
         }
@@ -439,14 +433,10 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             {
                 foreach (var item in EmployeeSettings)
                 {
-                    if (item.EmployeeNumber == SalesSetting.SalesEmployeeNumber)
+                    if (item.EmployeeNumber == OperatingSetting.OperatingEmployeeNumber)
                     {
                         Index++;
                         cbt_EmployeeNumber.SelectedIndex = Index;
-                        if (item.Token == 2 && txt_TakeACut.EditValue.ToString() == "0")
-                        {
-                            txt_TakeACut.EditValue = 15;
-                        }
                     }
                     else
                     {
@@ -456,7 +446,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             }
         }
         #endregion
-        #region 產品編號功能 2022/4/13拔除此功能
+        #region 產品編號功能
         /// <summary>
         /// 創建產品編號下拉選單
         /// </summary>
@@ -477,6 +467,20 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         //            e.DisplayText = "";
         //        }
         //    };
+        //}
+        //private void Show_ProductNumber_Index()
+        //{
+        //    if (ProductSettings != null)
+        //    {
+        //        for (int i = 0; i < ProductSettings.Count; i++)
+        //        {
+        //            if (ProductSettings[i].ProductNumber == FocuseOperatingSubSetting.ProductNumber)
+        //            {
+        //                slt_ProductName.EditValue = ProductSettings[i];
+        //                break;
+        //            }
+        //        }
+        //    }
         //}
         /// <summary>
         /// 取得產品編號
@@ -502,7 +506,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             slt_ProjectNumber.Properties.DisplayMember = "ProjectName";
             slt_ProjectNumber.CustomDisplayText += (s, e) =>
             {
-                if (SalesSetting != null)
+                if (OperatingSetting != null)
                 {
                     if (SelectProjectSetting != null)
                     {
@@ -539,9 +543,10 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         {
             for (int i = 0; i < ProjectSettings.Count; i++)
             {
-                if (ProjectSettings[i].ProjectNumber == SalesSetting.ProjectNumber)
+                if (ProjectSettings[i].ProjectNumber == OperatingSetting.ProjectNumber)
                 {
                     SelectProjectSetting = ProjectSettings[i];
+                    break;
                 }
                 else
                 {
@@ -564,50 +569,45 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         }
         #endregion
         #region 檢查資料問題
-        private void CheckNumber(SalesSetting salesSetting, APIMethod apiMethod)
+        private void CheckNumber(OperatingSetting purchaseSetting, APIMethod apiMethod)
         {
             string response = "";
-            if (salesSetting != null && salesSetting.SalesNumber != null)
+            if (purchaseSetting != null && purchaseSetting.OperatingNumber != null)
             {
-                foreach (var item in SalesSubSettings)
+                foreach (var item in OperatingSubSettings)
                 {
-                    item.SalesNumber = txt_SalesNumber.Text;
+                    item.OperatingNumber = txt_OperatingNumber.Text;
                 }
                 action.Caption = "進貨修改錯誤";
-                salesSetting.SalesFlag = cbt_SalesFlag.SelectedIndex + 3;
-                salesSetting.SalesNumber = txt_SalesNumber.Text;
-                salesSetting.ProjectNumber = Get_slt_ProjectNumber();
-                salesSetting.SalesDate = Convert.ToDateTime(det_SalesDate.Text);
-                salesSetting.SalesCustomerNumber = SelectCustomerSetting.CustomerNumber;
-                salesSetting.SalesTax = cbt_SalesTax.SelectedIndex;
-                salesSetting.SalesInvoiceNo = txt_SalesInvoiceNo.Text;
-                salesSetting.SalesEmployeeNumber = Get_cbt_EmployeeNumber_Number();
-                salesSetting.Remark = mmt_Remark.Text;
-                salesSetting.Posting = cbt_Posting.SelectedIndex;
-                salesSetting.SalesSub = SalesSubSettings;
-                salesSetting.Total = Convert.ToDouble(txt_Total.EditValue);
-                salesSetting.Tax = Convert.ToDouble(txt_Tax.EditValue);
-                salesSetting.TotalTax = Convert.ToDouble(txt_TotalTax.EditValue);
-                salesSetting.TakeACut = Convert.ToInt32(txt_TakeACut.EditValue);
-                salesSetting.Cost = Convert.ToDouble(txt_Cost.EditValue);
-                double profitSharing = 0;
-                profitSharing = TotalTax - (TotalTax * salesSetting.TakeACut / 100) - salesSetting.Cost;
-                salesSetting.ProfitSharing = profitSharing;
-                if (salesSetting.Posting == 1)
+                purchaseSetting.OperatingFlag = cbt_OperatingFlag.SelectedIndex + 7;
+                purchaseSetting.OperatingNumber = txt_OperatingNumber.Text;
+                purchaseSetting.ProjectNumber = Get_slt_ProjectNumber();
+                purchaseSetting.OperatingDate = Convert.ToDateTime(det_OperatingDate.Text);
+                purchaseSetting.OperatingCompanyNumber = SelectCompanySetting.CompanyNumber;
+                purchaseSetting.OperatingTax = cbt_OperatingTax.SelectedIndex;
+                purchaseSetting.OperatingInvoiceNo = txt_OperatingInvoiceNo.Text;
+                purchaseSetting.OperatingEmployeeNumber = Get_cbt_EmployeeNumber_Number();
+                purchaseSetting.Remark = mmt_Remark.Text;
+                purchaseSetting.Posting = cbt_Posting.SelectedIndex;
+                purchaseSetting.OperatingSub = OperatingSubSettings;
+                purchaseSetting.Total = Convert.ToDouble(txt_Total.EditValue);
+                purchaseSetting.Tax = Convert.ToDouble(txt_Tax.EditValue);
+                purchaseSetting.TotalTax = Convert.ToDouble(txt_TotalTax.EditValue);
+                if (purchaseSetting.Posting == 1)
                 {
-                    salesSetting.PostingDate = DateTime.Now;
+                    purchaseSetting.PostingDate = DateTime.Now;
                 }
                 else
                 {
-                    salesSetting.PostingDate = null;
+                    purchaseSetting.PostingDate = null;
                 }
-                string value = JsonConvert.SerializeObject(salesSetting);
-                response = apiMethod.Put_Sales(value);
+                string value = JsonConvert.SerializeObject(purchaseSetting);
+                response = apiMethod.Put_Operating(value);
                 if (response == "200")
                 {
                     if (!string.IsNullOrEmpty(AttachmentFilePath))
                     {
-                        response = apiMethod.Post_SalesAttachmentFile(salesSetting.SalesFlag, salesSetting.SalesCustomerNumber, salesSetting.SalesDate, salesSetting.SalesNumber, AttachmentFilePath);
+                        response = apiMethod.Post_OperatingAttachmentFile(purchaseSetting.OperatingFlag, purchaseSetting.OperatingCompanyNumber, purchaseSetting.OperatingDate, purchaseSetting.OperatingNumber, AttachmentFilePath);
                         if (response == "200")
                         {
                             DialogResult = DialogResult.OK;
@@ -631,43 +631,38 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             }
             else
             {
-                if (!string.IsNullOrEmpty(det_SalesDate.Text) && SelectCustomerSetting != null && cbt_EmployeeNumber.SelectedIndex > -1)
+                if (!string.IsNullOrEmpty(det_OperatingDate.Text) && SelectCompanySetting != null && cbt_EmployeeNumber.SelectedIndex > -1)
                 {
-                    SalesSetting SalesSetting = new SalesSetting()
+                    OperatingSetting OperatingSetting = new OperatingSetting()
                     {
-                        SalesFlag = cbt_SalesFlag.SelectedIndex + 3,
-                        SalesNumber = txt_SalesNumber.Text,
+                        OperatingFlag = cbt_OperatingFlag.SelectedIndex + 7,
+                        OperatingNumber = txt_OperatingNumber.Text,
                         ProjectNumber = Get_slt_ProjectNumber(),
-                        SalesDate = Convert.ToDateTime(det_SalesDate.Text),
-                        SalesCustomerNumber = SelectCustomerSetting.CustomerNumber,
-                        SalesTax = cbt_SalesTax.SelectedIndex,
-                        SalesInvoiceNo = txt_SalesInvoiceNo.Text,
-                        SalesEmployeeNumber = Get_cbt_EmployeeNumber_Number(),
+                        OperatingDate = Convert.ToDateTime(det_OperatingDate.Text),
+                        OperatingCompanyNumber = SelectCompanySetting.CompanyNumber,
+                        OperatingTax = cbt_OperatingTax.SelectedIndex,
+                        OperatingInvoiceNo = txt_OperatingInvoiceNo.Text,
+                        OperatingEmployeeNumber = Get_cbt_EmployeeNumber_Number(),
                         Remark = mmt_Remark.Text,
                         Posting = cbt_Posting.SelectedIndex,
-                        SalesSub = SalesSubSettings,
-                        TakeACut = Convert.ToInt32(txt_TakeACut.EditValue),
-                        Cost = Convert.ToDouble(txt_Cost.EditValue)
+                        OperatingSub = OperatingSubSettings
                     };
-                    double profitSharing = 0;
-                    profitSharing = TotalTax - (TotalTax * SalesSetting.TakeACut / 100) - SalesSetting.Cost;
-                    SalesSetting.ProfitSharing = profitSharing;
-                    if (SalesSetting.Posting == 1)
+                    if (OperatingSetting.Posting == 1)
                     {
-                        SalesSetting.PostingDate = DateTime.Now;
+                        OperatingSetting.PostingDate = DateTime.Now;
                     }
                     else
                     {
-                        SalesSetting.PostingDate = null;
+                        OperatingSetting.PostingDate = null;
                     }
-                    string value = JsonConvert.SerializeObject(SalesSetting);
-                    response = apiMethod.Post_Sales(value);
+                    string value = JsonConvert.SerializeObject(OperatingSetting);
+                    response = apiMethod.Post_Operating(value);
                     if (response == "200")
                     {
                         if (!string.IsNullOrEmpty(AttachmentFilePath) && !string.IsNullOrEmpty(apiMethod.ResponseDataMessage))
                         {
-                            List<SalesSetting> settings = JsonConvert.DeserializeObject<List<SalesSetting>>(apiMethod.ResponseDataMessage);
-                            response = apiMethod.Post_SalesAttachmentFile(settings[0].SalesFlag, settings[0].SalesCustomerNumber, settings[0].SalesDate, settings[0].SalesNumber, AttachmentFilePath);
+                            List<OperatingSetting> settings = JsonConvert.DeserializeObject<List<OperatingSetting>>(apiMethod.ResponseDataMessage);
+                            response = apiMethod.Post_OperatingAttachmentFile(settings[0].OperatingFlag, settings[0].OperatingCompanyNumber, settings[0].OperatingDate, settings[0].OperatingNumber, AttachmentFilePath);
                             if (response == "200")
                             {
                                 DialogResult = DialogResult.OK;

@@ -71,7 +71,7 @@ namespace ERPManagementAPP.Maintain
             // 
             // EmployeegroupControl
             // 
-            this.EmployeegroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.EmployeegroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
             this.EmployeegroupControl.AppearanceCaption.Options.UseForeColor = true;
             this.EmployeegroupControl.Controls.Add(this.EmployeegridControl);
             this.EmployeegroupControl.Controls.Add(this.Company_BarpanelControl);

@@ -190,6 +190,18 @@
     <Compile Include="Maintain\HomeMaintainControl.Designer.cs">
       <DependentUpon>HomeMaintainControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Maintain\OperatingMaintainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Maintain\OperatingMaintainControl.Designer.cs">
+      <DependentUpon>OperatingMaintainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\OperatingMaintainForm\OperatingEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\OperatingMaintainForm\OperatingEditForm.Designer.cs">
+      <DependentUpon>OperatingEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Maintain\PartnerMaintainControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -305,6 +317,9 @@
     <Compile Include="Models\CustomerDirectorySetting.cs" />
     <Compile Include="Models\CustomerSetting.cs" />
     <Compile Include="Models\EmployeeSetting.cs" />
+    <Compile Include="Models\OperatingMainSetting.cs" />
+    <Compile Include="Models\OperatingSetting.cs" />
+    <Compile Include="Models\OperatingSubSetting.cs" />
     <Compile Include="Models\PaymentItemSetting.cs" />
     <Compile Include="Models\PaymentSetting.cs" />
     <Compile Include="Models\PickingMainSetting.cs" />
@@ -356,6 +371,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maintain\HomeMaintainControl.resx">
       <DependentUpon>HomeMaintainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\OperatingMaintainControl.resx">
+      <DependentUpon>OperatingMaintainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\OperatingMaintainForm\OperatingEditForm.resx">
+      <DependentUpon>OperatingEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maintain\PartnerMaintainControl.resx">
       <DependentUpon>PartnerMaintainControl.cs</DependentUpon>

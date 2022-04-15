@@ -119,13 +119,13 @@ namespace ERPManagementAPP.Maintain
             // 
             // CustomerDirectorygroupControl
             // 
-            this.CustomerDirectorygroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.CustomerDirectorygroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
             this.CustomerDirectorygroupControl.AppearanceCaption.Options.UseForeColor = true;
             this.CustomerDirectorygroupControl.Controls.Add(this.CustomerDirectorygridControl);
             this.CustomerDirectorygroupControl.Controls.Add(this.CompanyDirectory_BarpanelControl);
-            this.CustomerDirectorygroupControl.Location = new System.Drawing.Point(881, 12);
+            this.CustomerDirectorygroupControl.Location = new System.Drawing.Point(874, 12);
             this.CustomerDirectorygroupControl.Name = "CustomerDirectorygroupControl";
-            this.CustomerDirectorygroupControl.Size = new System.Drawing.Size(385, 822);
+            this.CustomerDirectorygroupControl.Size = new System.Drawing.Size(392, 822);
             this.CustomerDirectorygroupControl.TabIndex = 5;
             this.CustomerDirectorygroupControl.Text = "客戶通訊錄";
             // 
@@ -135,7 +135,7 @@ namespace ERPManagementAPP.Maintain
             this.CustomerDirectorygridControl.Location = new System.Drawing.Point(2, 66);
             this.CustomerDirectorygridControl.MainView = this.advBandedGridView2;
             this.CustomerDirectorygridControl.Name = "CustomerDirectorygridControl";
-            this.CustomerDirectorygridControl.Size = new System.Drawing.Size(381, 754);
+            this.CustomerDirectorygridControl.Size = new System.Drawing.Size(388, 754);
             this.CustomerDirectorygridControl.TabIndex = 3;
             this.CustomerDirectorygridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.advBandedGridView2});
@@ -301,7 +301,7 @@ namespace ERPManagementAPP.Maintain
             this.CompanyDirectory_BarpanelControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.CompanyDirectory_BarpanelControl.Location = new System.Drawing.Point(2, 23);
             this.CompanyDirectory_BarpanelControl.Name = "CompanyDirectory_BarpanelControl";
-            this.CompanyDirectory_BarpanelControl.Size = new System.Drawing.Size(381, 43);
+            this.CompanyDirectory_BarpanelControl.Size = new System.Drawing.Size(388, 43);
             this.CompanyDirectory_BarpanelControl.TabIndex = 2;
             // 
             // btn_CustomerDirectory_Refresh
@@ -350,7 +350,7 @@ namespace ERPManagementAPP.Maintain
             // 
             // CutomergroupControl
             // 
-            this.CutomergroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.CutomergroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
             this.CutomergroupControl.AppearanceCaption.Options.UseForeColor = true;
             this.CutomergroupControl.Controls.Add(this.CustomergridControl);
             this.CutomergroupControl.Controls.Add(this.Company_BarpanelControl);
@@ -653,9 +653,9 @@ namespace ERPManagementAPP.Maintain
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.CustomerDirectorygroupControl;
-            this.layoutControlItem2.Location = new System.Drawing.Point(869, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(862, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(389, 826);
+            this.layoutControlItem2.Size = new System.Drawing.Size(396, 826);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -664,7 +664,7 @@ namespace ERPManagementAPP.Maintain
             this.splitterItem1.AllowHotTrack = true;
             this.splitterItem1.Location = new System.Drawing.Point(857, 0);
             this.splitterItem1.Name = "splitterItem1";
-            this.splitterItem1.Size = new System.Drawing.Size(12, 826);
+            this.splitterItem1.Size = new System.Drawing.Size(5, 826);
             // 
             // CustomerMaintainControl
             // 

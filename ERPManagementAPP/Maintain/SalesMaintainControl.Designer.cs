@@ -37,6 +37,7 @@ namespace ERPManagementAPP.Maintain
             this.colSalesFlag = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSalesNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSalesCustomerNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colProjectNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSalesTax = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSalesInvoiceNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTotal = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -53,7 +54,6 @@ namespace ERPManagementAPP.Maintain
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.colProjectNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PruchasegroupControl)).BeginInit();
@@ -81,7 +81,7 @@ namespace ERPManagementAPP.Maintain
             // 
             // PruchasegroupControl
             // 
-            this.PruchasegroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.PruchasegroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
             this.PruchasegroupControl.AppearanceCaption.Options.UseForeColor = true;
             this.PruchasegroupControl.Controls.Add(this.SalesgridControl);
             this.PruchasegroupControl.Controls.Add(this.Company_BarpanelControl);
@@ -146,6 +146,15 @@ namespace ERPManagementAPP.Maintain
             this.colSalesCustomerNumber.OptionsColumn.AllowEdit = false;
             this.colSalesCustomerNumber.Visible = true;
             this.colSalesCustomerNumber.VisibleIndex = 2;
+            // 
+            // colProjectNumber
+            // 
+            this.colProjectNumber.Caption = "專案代碼";
+            this.colProjectNumber.FieldName = "ProjectNumber";
+            this.colProjectNumber.Name = "colProjectNumber";
+            this.colProjectNumber.OptionsColumn.AllowEdit = false;
+            this.colProjectNumber.Visible = true;
+            this.colProjectNumber.VisibleIndex = 3;
             // 
             // colSalesTax
             // 
@@ -328,15 +337,6 @@ namespace ERPManagementAPP.Maintain
             this.layoutControlItem1.Size = new System.Drawing.Size(1258, 826);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // colProjectNumber
-            // 
-            this.colProjectNumber.Caption = "專案代碼";
-            this.colProjectNumber.FieldName = "ProjectNumber";
-            this.colProjectNumber.Name = "colProjectNumber";
-            this.colProjectNumber.OptionsColumn.AllowEdit = false;
-            this.colProjectNumber.Visible = true;
-            this.colProjectNumber.VisibleIndex = 3;
             // 
             // SalesMaintainControl
             // 

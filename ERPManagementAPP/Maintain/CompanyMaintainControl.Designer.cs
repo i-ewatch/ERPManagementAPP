@@ -121,13 +121,13 @@ namespace ERPManagementAPP.Maintain
             // 
             // CompanyDirectorygroupControl
             // 
-            this.CompanyDirectorygroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.CompanyDirectorygroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
             this.CompanyDirectorygroupControl.AppearanceCaption.Options.UseForeColor = true;
             this.CompanyDirectorygroupControl.Controls.Add(this.CompanyDirectorygridControl);
             this.CompanyDirectorygroupControl.Controls.Add(this.CompanyDirectory_BarpanelControl);
-            this.CompanyDirectorygroupControl.Location = new System.Drawing.Point(881, 12);
+            this.CompanyDirectorygroupControl.Location = new System.Drawing.Point(874, 12);
             this.CompanyDirectorygroupControl.Name = "CompanyDirectorygroupControl";
-            this.CompanyDirectorygroupControl.Size = new System.Drawing.Size(385, 822);
+            this.CompanyDirectorygroupControl.Size = new System.Drawing.Size(392, 822);
             this.CompanyDirectorygroupControl.TabIndex = 5;
             this.CompanyDirectorygroupControl.Text = "公司通訊錄";
             // 
@@ -137,7 +137,7 @@ namespace ERPManagementAPP.Maintain
             this.CompanyDirectorygridControl.Location = new System.Drawing.Point(2, 66);
             this.CompanyDirectorygridControl.MainView = this.advBandedGridView2;
             this.CompanyDirectorygridControl.Name = "CompanyDirectorygridControl";
-            this.CompanyDirectorygridControl.Size = new System.Drawing.Size(381, 754);
+            this.CompanyDirectorygridControl.Size = new System.Drawing.Size(388, 754);
             this.CompanyDirectorygridControl.TabIndex = 2;
             this.CompanyDirectorygridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.advBandedGridView2});
@@ -303,7 +303,7 @@ namespace ERPManagementAPP.Maintain
             this.CompanyDirectory_BarpanelControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.CompanyDirectory_BarpanelControl.Location = new System.Drawing.Point(2, 23);
             this.CompanyDirectory_BarpanelControl.Name = "CompanyDirectory_BarpanelControl";
-            this.CompanyDirectory_BarpanelControl.Size = new System.Drawing.Size(381, 43);
+            this.CompanyDirectory_BarpanelControl.Size = new System.Drawing.Size(388, 43);
             this.CompanyDirectory_BarpanelControl.TabIndex = 1;
             // 
             // btn_CompanyDirectory_Refresh
@@ -352,7 +352,7 @@ namespace ERPManagementAPP.Maintain
             // 
             // CompanygroupControl
             // 
-            this.CompanygroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.CompanygroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
             this.CompanygroupControl.AppearanceCaption.Options.UseForeColor = true;
             this.CompanygroupControl.Controls.Add(this.CompanygridControl);
             this.CompanygroupControl.Controls.Add(this.Company_BarpanelControl);
@@ -678,9 +678,9 @@ namespace ERPManagementAPP.Maintain
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.CompanyDirectorygroupControl;
-            this.layoutControlItem2.Location = new System.Drawing.Point(869, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(862, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(389, 826);
+            this.layoutControlItem2.Size = new System.Drawing.Size(396, 826);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -689,7 +689,7 @@ namespace ERPManagementAPP.Maintain
             this.splitterItem1.AllowHotTrack = true;
             this.splitterItem1.Location = new System.Drawing.Point(857, 0);
             this.splitterItem1.Name = "splitterItem1";
-            this.splitterItem1.Size = new System.Drawing.Size(12, 826);
+            this.splitterItem1.Size = new System.Drawing.Size(5, 826);
             // 
             // CompanyMaintainControl
             // 

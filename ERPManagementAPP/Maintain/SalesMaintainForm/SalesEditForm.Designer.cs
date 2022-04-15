@@ -262,7 +262,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             // 
             // txt_ProductName
             // 
-            this.txt_ProductName.Location = new System.Drawing.Point(86, 187);
+            this.txt_ProductName.Location = new System.Drawing.Point(86, 188);
             this.txt_ProductName.Name = "txt_ProductName";
             this.txt_ProductName.Size = new System.Drawing.Size(403, 22);
             this.txt_ProductName.StyleController = this.layoutControl1;
@@ -377,10 +377,10 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             // 
             // gridControl1
             // 
-            this.gridControl1.Location = new System.Drawing.Point(12, 252);
+            this.gridControl1.Location = new System.Drawing.Point(12, 253);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1154, 377);
+            this.gridControl1.Size = new System.Drawing.Size(1154, 376);
             this.gridControl1.TabIndex = 39;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -482,7 +482,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             this.panelControl5.Controls.Add(this.btn_Clear);
             this.panelControl5.Controls.Add(this.btn_Delete);
             this.panelControl5.Controls.Add(this.btn_Add);
-            this.panelControl5.Location = new System.Drawing.Point(12, 217);
+            this.panelControl5.Location = new System.Drawing.Point(12, 218);
             this.panelControl5.Name = "panelControl5";
             this.panelControl5.Size = new System.Drawing.Size(1154, 31);
             this.panelControl5.TabIndex = 38;
@@ -692,7 +692,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             // 
             // txt_ProducUnit
             // 
-            this.txt_ProducUnit.Location = new System.Drawing.Point(567, 187);
+            this.txt_ProducUnit.Location = new System.Drawing.Point(567, 188);
             this.txt_ProducUnit.Name = "txt_ProducUnit";
             this.txt_ProducUnit.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_ProducUnit.Properties.Appearance.Options.UseFont = true;
@@ -702,7 +702,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             // 
             // txt_productQty
             // 
-            this.txt_productQty.Location = new System.Drawing.Point(794, 187);
+            this.txt_productQty.Location = new System.Drawing.Point(794, 188);
             this.txt_productQty.Name = "txt_productQty";
             this.txt_productQty.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_productQty.Properties.Appearance.Options.UseFont = true;
@@ -714,7 +714,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             // 
             // txt_productPrice
             // 
-            this.txt_productPrice.Location = new System.Drawing.Point(1019, 187);
+            this.txt_productPrice.Location = new System.Drawing.Point(1019, 188);
             this.txt_productPrice.Name = "txt_productPrice";
             this.txt_productPrice.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_productPrice.Properties.Appearance.Options.UseFont = true;
@@ -993,7 +993,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             // 
             this.simpleLabelItem1.AllowHotTrack = false;
             this.simpleLabelItem1.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.simpleLabelItem1.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.simpleLabelItem1.AppearanceItemCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
             this.simpleLabelItem1.AppearanceItemCaption.Options.UseFont = true;
             this.simpleLabelItem1.AppearanceItemCaption.Options.UseForeColor = true;
             this.simpleLabelItem1.AppearanceItemCaption.Options.UseTextOptions = true;
@@ -1009,7 +1009,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             this.simpleSeparator1.AllowHotTrack = false;
             this.simpleSeparator1.Location = new System.Drawing.Point(0, 174);
             this.simpleSeparator1.Name = "simpleSeparator1";
-            this.simpleSeparator1.Size = new System.Drawing.Size(1158, 1);
+            this.simpleSeparator1.Size = new System.Drawing.Size(1158, 2);
             // 
             // layoutControlItem19
             // 
@@ -1018,7 +1018,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             this.layoutControlItem19.Control = this.txt_ProducUnit;
             this.layoutControlItem19.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem19.CustomizationFormText = "產品單位";
-            this.layoutControlItem19.Location = new System.Drawing.Point(481, 175);
+            this.layoutControlItem19.Location = new System.Drawing.Point(481, 176);
             this.layoutControlItem19.Name = "layoutControlItem19";
             this.layoutControlItem19.Size = new System.Drawing.Size(227, 30);
             this.layoutControlItem19.Text = "產品單位";
@@ -1031,7 +1031,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             this.layoutControlItem20.Control = this.txt_productQty;
             this.layoutControlItem20.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem20.CustomizationFormText = "產品數量";
-            this.layoutControlItem20.Location = new System.Drawing.Point(708, 175);
+            this.layoutControlItem20.Location = new System.Drawing.Point(708, 176);
             this.layoutControlItem20.Name = "layoutControlItem20";
             this.layoutControlItem20.Size = new System.Drawing.Size(225, 30);
             this.layoutControlItem20.Text = "產品數量";
@@ -1044,7 +1044,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             this.layoutControlItem21.Control = this.txt_productPrice;
             this.layoutControlItem21.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem21.CustomizationFormText = "產品單價";
-            this.layoutControlItem21.Location = new System.Drawing.Point(933, 175);
+            this.layoutControlItem21.Location = new System.Drawing.Point(933, 176);
             this.layoutControlItem21.Name = "layoutControlItem21";
             this.layoutControlItem21.Size = new System.Drawing.Size(225, 30);
             this.layoutControlItem21.Text = "產品單價";
@@ -1053,7 +1053,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             // layoutControlItem10
             // 
             this.layoutControlItem10.Control = this.panelControl5;
-            this.layoutControlItem10.Location = new System.Drawing.Point(0, 205);
+            this.layoutControlItem10.Location = new System.Drawing.Point(0, 206);
             this.layoutControlItem10.Name = "layoutControlItem10";
             this.layoutControlItem10.Size = new System.Drawing.Size(1158, 35);
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
@@ -1062,9 +1062,9 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             // layoutControlItem11
             // 
             this.layoutControlItem11.Control = this.gridControl1;
-            this.layoutControlItem11.Location = new System.Drawing.Point(0, 240);
+            this.layoutControlItem11.Location = new System.Drawing.Point(0, 241);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(1158, 381);
+            this.layoutControlItem11.Size = new System.Drawing.Size(1158, 380);
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextVisible = false;
             // 
@@ -1179,7 +1179,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             this.layoutControlItem18.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem18.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem18.Control = this.txt_ProductName;
-            this.layoutControlItem18.Location = new System.Drawing.Point(0, 175);
+            this.layoutControlItem18.Location = new System.Drawing.Point(0, 176);
             this.layoutControlItem18.Name = "layoutControlItem18";
             this.layoutControlItem18.Size = new System.Drawing.Size(481, 30);
             this.layoutControlItem18.Text = "產品名稱";

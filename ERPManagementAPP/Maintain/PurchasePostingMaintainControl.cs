@@ -27,9 +27,13 @@ namespace ERPManagementAPP.Maintain
         /// </summary>
         private PurchaseMainSetting FocusePurchaseMainSetting { get; set; } = new PurchaseMainSetting();
         /// <summary>
-        /// 總表頭
+        /// 總進貨表頭
         /// </summary>
         private List<PurchaseMainSetting> PurchaseMainSettings { get; set; } = new List<PurchaseMainSetting>();
+        /// <summary>
+        /// 總營運表頭
+        /// </summary>
+        private List<OperatingMainSetting> OperatingMainSettings { get; set; } = new List<OperatingMainSetting>();
         /// <summary>
         /// 篩選總表頭
         /// </summary>
@@ -48,21 +52,61 @@ namespace ERPManagementAPP.Maintain
                 FocuseMainGrid();
                 if (e.Button.Kind == ButtonPredefines.Plus)
                 {
-                    if (FocusePurchaseMainSetting.Posting == 0)
+                    if (FocusePurchaseMainSetting.PurchaseFlag ==1 || FocusePurchaseMainSetting.PurchaseFlag == 2)
                     {
-                        foreach (var item in FilterPurchaseMainSettings)
+                        if (FocusePurchaseMainSetting.Posting == 0)
                         {
-                            if (item.PurchaseNumber == FocusePurchaseMainSetting.PurchaseNumber)
+                            foreach (var item in FilterPurchaseMainSettings)
                             {
-                                item.Posting = 1;
-                                item.PostingDate = DateTime.Now;
-                                FocusePurchaseMainSetting.Posting = 1;
-                                FocusePurchaseMainSetting.PostingDate = DateTime.Now;
-                                string value = JsonConvert.SerializeObject(FocusePurchaseMainSetting);
-                                apiMethod.Put_PurchaseMain(value);
+                                if (item.PurchaseNumber == FocusePurchaseMainSetting.PurchaseNumber)
+                                {
+                                    item.Posting = 1;
+                                    item.PostingDate = DateTime.Now;
+                                    FocusePurchaseMainSetting.Posting = 1;
+                                    FocusePurchaseMainSetting.PostingDate = DateTime.Now;
+                                    string value = JsonConvert.SerializeObject(FocusePurchaseMainSetting);
+                                    apiMethod.Put_PurchaseMain(value);
+                                }
                             }
                         }
                     }
+                    else if (FocusePurchaseMainSetting.PurchaseFlag == 7 || FocusePurchaseMainSetting.PurchaseFlag == 8)
+                    {
+                        if (FocusePurchaseMainSetting.Posting == 0)
+                        {
+                            foreach (var item in FilterPurchaseMainSettings)
+                            {
+                                if (item.PurchaseNumber == FocusePurchaseMainSetting.PurchaseNumber)
+                                {
+                                    item.Posting = 1;
+                                    item.PostingDate = DateTime.Now;
+                                    FocusePurchaseMainSetting.Posting = 1;
+                                    FocusePurchaseMainSetting.PostingDate = DateTime.Now;
+                                    OperatingMainSetting setting = new OperatingMainSetting()
+                                    {
+                                        OperatingFlag = item.PurchaseFlag,
+                                        OperatingNumber = item.PurchaseNumber,
+                                        OperatingDate = item.PurchaseDate,
+                                        OperatingCompanyNumber = item.PurchaseCompanyNumber,
+                                        ProjectNumber = item.ProjectNumber,
+                                        OperatingTax = item.PurchaseTax,
+                                        OperatingInvoiceNo = item.PurchaseInvoiceNo,
+                                        OperatingEmployeeNumber = item.PurchaseEmployeeNumber,
+                                        Remark = item.Remark,
+                                        Total = item.Total,
+                                        Tax = item.Tax,
+                                        TotalTax = item.TotalTax,
+                                        FileName = item.FileName,
+                                        Posting = item.Posting,
+                                        PostingDate = item.PostingDate
+                                    };
+                                    string value = JsonConvert.SerializeObject(setting);
+                                    apiMethod.Put_OperatingMain(value);
+                                }
+                            }
+                        }
+                    }
+                   
                 }
             };
             PurchasePostingedit.Buttons[0].Kind = ButtonPredefines.Plus;
@@ -154,6 +198,16 @@ namespace ERPManagementAPP.Maintain
                         case "2":
                             {
                                 e.DisplayText = "進貨退出";
+                            }
+                            break;
+                        case "7":
+                            {
+                                e.DisplayText = "營運";
+                            }
+                            break;
+                        case "8":
+                            {
+                                e.DisplayText = "營運退出";
                             }
                             break;
                     }
@@ -261,6 +315,7 @@ namespace ERPManagementAPP.Maintain
         {
             Refersh_API();
             PurchaseMainSettings = apiMethod.Get_PurchasePosting();
+            OperatingMainSettings = apiMethod.Get_OperatingPosting();
             if (PurchaseMainSettings != null)
             {
                 foreach (var item in PurchaseMainSettings)
@@ -272,6 +327,17 @@ namespace ERPManagementAPP.Maintain
                     }
                 }
                 Controller();
+            }
+            if (OperatingMainSettings != null)
+            {
+                foreach (var item in OperatingMainSettings)
+                {
+                    if (item.OperatingFlag == 8)
+                    {
+                        item.Total = -1 * item.Total;
+                        item.TotalTax = -1 * item.TotalTax;
+                    }
+                }
             }
         }
         private void Refersh_API()
@@ -294,12 +360,38 @@ namespace ERPManagementAPP.Maintain
                     {
                         case 0://現金
                             {
-                                List<PurchaseMainSetting> setting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
-                                if (setting != null)
+                                List<PurchaseMainSetting> PurchaseSetting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
+                                List<OperatingMainSetting> OperatingMainSetting   = OperatingMainSettings.Where(g =>g.OperatingCompanyNumber == Companyitem.CompanyNumber).ToList();
+                                if (PurchaseSetting != null)
                                 {
-                                    foreach (var item in setting)
+                                    foreach (var item in PurchaseSetting)
                                     {
                                         FilterPurchaseMainSettings.Add(item);
+                                    }
+                                }
+                                if (OperatingMainSetting != null)
+                                {
+                                    foreach (var item in OperatingMainSetting)
+                                    {
+                                        PurchaseMainSetting setting = new PurchaseMainSetting()
+                                        {
+                                            PurchaseFlag = item.OperatingFlag,
+                                            PurchaseNumber = item.OperatingNumber,
+                                            PurchaseDate = item.OperatingDate,
+                                            PurchaseCompanyNumber = item.OperatingCompanyNumber,
+                                            ProjectNumber = item.ProjectNumber,
+                                            PurchaseTax = item.OperatingTax,
+                                            PurchaseInvoiceNo = item.OperatingInvoiceNo,
+                                            PurchaseEmployeeNumber = item.OperatingEmployeeNumber,
+                                            Remark = item.Remark,
+                                            Total = item.Total,
+                                            Tax = item.Tax,
+                                            TotalTax = item.TotalTax,
+                                            FileName = item.FileName,
+                                            Posting = item.Posting,
+                                            PostingDate = item.PostingDate
+                                        };
+                                        FilterPurchaseMainSettings.Add(setting);
                                     }
                                 }
                             }
@@ -318,15 +410,41 @@ namespace ERPManagementAPP.Maintain
                                 {
                                     SystemTime = SystemTime - 2;
                                 }
-                                List<PurchaseMainSetting> setting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
-                                if (setting != null)
+                                List<PurchaseMainSetting> PurchaseSetting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
+                                List<OperatingMainSetting> OperatingMainSetting = OperatingMainSettings.Where(g => g.OperatingCompanyNumber == Companyitem.CompanyNumber).ToList();
+                                if (PurchaseSetting != null)
                                 {
-                                    foreach (var item in setting)
+                                    foreach (var item in PurchaseSetting)
                                     {
                                         if (SystemTime >= item.PurchaseDate.Month)
                                         {
                                             FilterPurchaseMainSettings.Add(item);
                                         }
+                                    }
+                                }
+                                if (OperatingMainSetting != null)
+                                {
+                                    foreach (var item in OperatingMainSetting)
+                                    {
+                                        PurchaseMainSetting setting = new PurchaseMainSetting()
+                                        {
+                                            PurchaseFlag = item.OperatingFlag,
+                                            PurchaseNumber = item.OperatingNumber,
+                                            PurchaseDate = item.OperatingDate,
+                                            PurchaseCompanyNumber = item.OperatingCompanyNumber,
+                                            ProjectNumber = item.ProjectNumber,
+                                            PurchaseTax = item.OperatingTax,
+                                            PurchaseInvoiceNo = item.OperatingInvoiceNo,
+                                            PurchaseEmployeeNumber = item.OperatingEmployeeNumber,
+                                            Remark = item.Remark,
+                                            Total = item.Total,
+                                            Tax = item.Tax,
+                                            TotalTax = item.TotalTax,
+                                            FileName = item.FileName,
+                                            Posting = item.Posting,
+                                            PostingDate = item.PostingDate
+                                        };
+                                        FilterPurchaseMainSettings.Add(setting);
                                     }
                                 }
                             }
@@ -349,15 +467,41 @@ namespace ERPManagementAPP.Maintain
                                 {
                                     SystemTime = SystemTime - 3;
                                 }
-                                List<PurchaseMainSetting> setting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
-                                if (setting != null)
+                                List<PurchaseMainSetting> PurchaseSetting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
+                                List<OperatingMainSetting> OperatingMainSetting = OperatingMainSettings.Where(g => g.OperatingCompanyNumber == Companyitem.CompanyNumber).ToList();
+                                if (PurchaseSetting != null)
                                 {
-                                    foreach (var item in setting)
+                                    foreach (var item in PurchaseSetting)
                                     {
                                         if (SystemTime >= item.PurchaseDate.Month)
                                         {
                                             FilterPurchaseMainSettings.Add(item);
                                         }
+                                    }
+                                }
+                                if (OperatingMainSetting != null)
+                                {
+                                    foreach (var item in OperatingMainSetting)
+                                    {
+                                        PurchaseMainSetting setting = new PurchaseMainSetting()
+                                        {
+                                            PurchaseFlag = item.OperatingFlag,
+                                            PurchaseNumber = item.OperatingNumber,
+                                            PurchaseDate = item.OperatingDate,
+                                            PurchaseCompanyNumber = item.OperatingCompanyNumber,
+                                            ProjectNumber = item.ProjectNumber,
+                                            PurchaseTax = item.OperatingTax,
+                                            PurchaseInvoiceNo = item.OperatingInvoiceNo,
+                                            PurchaseEmployeeNumber = item.OperatingEmployeeNumber,
+                                            Remark = item.Remark,
+                                            Total = item.Total,
+                                            Tax = item.Tax,
+                                            TotalTax = item.TotalTax,
+                                            FileName = item.FileName,
+                                            Posting = item.Posting,
+                                            PostingDate = item.PostingDate
+                                        };
+                                        FilterPurchaseMainSettings.Add(setting);
                                     }
                                 }
                             }
@@ -366,12 +510,38 @@ namespace ERPManagementAPP.Maintain
                             {
                                 if (cet_Other.CheckState == CheckState.Checked)
                                 {
-                                    List<PurchaseMainSetting> setting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
-                                    if (setting != null)
+                                    List<PurchaseMainSetting> PurchaseSetting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
+                                    List<OperatingMainSetting> OperatingMainSetting = OperatingMainSettings.Where(g => g.OperatingCompanyNumber == Companyitem.CompanyNumber).ToList();
+                                    if (PurchaseSetting != null)
                                     {
-                                        foreach (var item in setting)
+                                        foreach (var item in PurchaseSetting)
                                         {
                                             FilterPurchaseMainSettings.Add(item);
+                                        }
+                                    }
+                                    if (OperatingMainSetting != null)
+                                    {
+                                        foreach (var item in OperatingMainSetting)
+                                        {
+                                            PurchaseMainSetting setting = new PurchaseMainSetting()
+                                            {
+                                                PurchaseFlag = item.OperatingFlag,
+                                                PurchaseNumber = item.OperatingNumber,
+                                                PurchaseDate = item.OperatingDate,
+                                                PurchaseCompanyNumber = item.OperatingCompanyNumber,
+                                                ProjectNumber = item.ProjectNumber,
+                                                PurchaseTax = item.OperatingTax,
+                                                PurchaseInvoiceNo = item.OperatingInvoiceNo,
+                                                PurchaseEmployeeNumber = item.OperatingEmployeeNumber,
+                                                Remark = item.Remark,
+                                                Total = item.Total,
+                                                Tax = item.Tax,
+                                                TotalTax = item.TotalTax,
+                                                FileName = item.FileName,
+                                                Posting = item.Posting,
+                                                PostingDate = item.PostingDate
+                                            };
+                                            FilterPurchaseMainSettings.Add(setting);
                                         }
                                     }
                                 }

@@ -38,6 +38,10 @@ namespace ERPManagementAPP.Maintain
         /// 總員工資料
         /// </summary>
         private List<EmployeeSetting> EmployeeSettings { get; set; } = new List<EmployeeSetting>();
+        /// <summary>
+        /// 專案資訊
+        /// </summary>
+        private List<ProjectSetting> ProjectSettings { get; set; }
         public PaymentMiantainControl(APIMethod APIMethod, Form1 form1)
         {
             InitializeComponent();
@@ -170,20 +174,20 @@ namespace ERPManagementAPP.Maintain
             #region 新增代墊代付
             btn_Payment_Add.Click += (s, e) =>
             {
-                PaymentEditForm product = new PaymentEditForm(PaymentSettings, null, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
+                PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, null, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
                 if (product.ShowDialog() == DialogResult.OK)
                 {
-                    Refresh_Second_GridView("");
+                    Refresh_Main_GridView();
                 }
             };
             #endregion
             #region 修改代墊代付
             btn_Payment_Edit.Click += (s, e) =>
             {
-                PaymentEditForm product = new PaymentEditForm(PaymentSettings, FocusePaymentSetting, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
+                PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, FocusePaymentSetting, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
                 if (product.ShowDialog() == DialogResult.OK)
                 {
-                    Refresh_Second_GridView("");
+                    Refresh_Main_GridView();
                 }
             };
             #endregion
@@ -191,10 +195,10 @@ namespace ERPManagementAPP.Maintain
             gridControl1.DoubleClick += (s, e) =>
             {
                 FocuseSecondGrid();
-                PaymentEditForm product = new PaymentEditForm(PaymentSettings, FocusePaymentSetting, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
+                PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, FocusePaymentSetting, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
                 if (product.ShowDialog() == DialogResult.OK)
                 {
-                    Refresh_Second_GridView("");
+                    Refresh_Main_GridView();
                 }
             };
             #endregion
@@ -220,7 +224,7 @@ namespace ERPManagementAPP.Maintain
             #region 產品資料刷新
             btn_Payment_Refresh.Click += (s, e) =>
             {
-                if (PaymentItemSettings == null)
+                if (PaymentItemSettings != null)
                 {
                     Refresh_Main_GridView();
                 }
@@ -271,14 +275,24 @@ namespace ERPManagementAPP.Maintain
                 {
                     FocusePaymentSetting.PaymentInvoiceNo = null;
                 }
-
+                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber") != null)
+                {
+                    var projectNumber = ProjectSettings.SingleOrDefault(g => g.ProjectName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber").ToString());
+                    if (projectNumber != null) FocusePaymentSetting.ProjectNumber = projectNumber.ProjectNumber;
+                }
+                else
+                {
+                    FocusePaymentSetting.ProjectNumber = null;
+                }
                 var paymentItemNo = PaymentItemSettings.SingleOrDefault(g => g.PaymentItemName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentItemNo").ToString());
                 if (paymentItemNo != null) FocusePaymentSetting.PaymentItemNo = paymentItemNo.PaymentItemNo;
+                else FocusePaymentSetting.PaymentItemNo = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentItemNo").ToString();
 
                 FocusePaymentSetting.PaymentUse = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentUse").ToString();
 
                 var employee = EmployeeSettings.SingleOrDefault(g => g.EmployeeName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "EmployeeNumber").ToString());
                 if (employee != null) FocusePaymentSetting.EmployeeNumber = employee.EmployeeNumber;
+                else FocusePaymentSetting.EmployeeNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "EmployeeNumber").ToString();
 
                 FocusePaymentSetting.PaymentAmount = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentAmount").ToString());
                 FocusePaymentSetting.PaymentMethod = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentMethod").ToString());
@@ -367,6 +381,19 @@ namespace ERPManagementAPP.Maintain
                             break;
                     }
                 }
+                //else if (e.Column.FieldName == "ProjectNumber")
+                //{
+                //    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
+                //    if (e.CellValue != null)
+                //    {
+                //        string Index = e.CellValue.ToString();
+                //        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
+                //        if (project != null)
+                //        {
+                //            e.DisplayText = project.ProjectName;
+                //        }
+                //    }
+                //}
             };
         }
         #endregion
@@ -425,13 +452,17 @@ namespace ERPManagementAPP.Maintain
             PaymentSettings = apiMethod.Get_PaymentMonth(det_PaymentDate.Text.Replace("/", ""));
             if (PaymentSettings != null && EmployeeSettings != null)
             {
-                foreach (var Employeeitem in EmployeeSettings)
+                foreach (var Employeeitem in EmployeeSettings) //員工 代碼改為名稱
                 {
                     PaymentSettings.Where(g => g.EmployeeNumber == Employeeitem.EmployeeNumber).ToList().ForEach(t => t.EmployeeNumber = Employeeitem.EmployeeName);
                 }
-                foreach (var item in PaymentItemSettings)
+                foreach (var item in PaymentItemSettings)//代墊代付品項 代碼改為名稱
                 {
                     PaymentSettings.Where(g => g.PaymentItemNo == item.PaymentItemNo).ToList().ForEach(t => t.PaymentItemNo = item.PaymentItemName);
+                }
+                foreach (var item in ProjectSettings)
+                {
+                    PaymentSettings.Where(g => g.ProjectNumber == item.ProjectNumber).ToList().ForEach(t => t.ProjectNumber = item.ProjectName);
                 }
                 gridControl1.DataSource = PaymentSettings;
                 for (int i = 0; i < gridView1.Columns.Count; i++)
@@ -447,6 +478,7 @@ namespace ERPManagementAPP.Maintain
         private void Refresh_API()
         {
             EmployeeSettings = apiMethod.Get_Employee();
+            ProjectSettings = apiMethod.Get_Project();
         }
         public override void Refresh_Token()
         {

@@ -499,7 +499,7 @@ namespace ERPManagementAPP.Maintain.PickingMaintainForm
                     {
                         if (e.Value == null)
                         {
-                            SelectProjectSetting.ProjectNumber = "";
+                            SelectProjectSetting = null;
                             e.DisplayText = "";
                         }
                         else if (e.Value.ToString() != "")
@@ -546,7 +546,7 @@ namespace ERPManagementAPP.Maintain.PickingMaintainForm
         /// <returns></returns>
         private string Get_slt_ProjectNumber()
         {
-            string value = "";
+            string value = null;
             if (SelectProjectSetting != null)
             {
                 value = SelectProjectSetting.ProjectNumber;

@@ -1,5 +1,8 @@
-﻿using DevExpress.XtraBars.Docking2010.Customization;
+﻿using DevExpress.Utils.Win;
+using DevExpress.XtraBars.Docking2010.Customization;
 using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
+using DevExpress.XtraEditors;
+using DevExpress.XtraLayout;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using Newtonsoft.Json;
@@ -16,16 +19,26 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
         private List<EmployeeSetting> EmployeeSettings { get; set; }
         private List<PaymentItemSetting> PaymentItemSettings { get; set; }
         private PaymentSetting PaymentSetting { get; set; }
-        public PaymentEditForm(List<PaymentSetting> paymentSettings, PaymentSetting paymentSetting, List<EmployeeSetting> employeeSettings, List<PaymentItemSetting> paymentItemSettings, APIMethod apiMethod, Form1 form1)
+        /// <summary>
+        /// 專案資訊
+        /// </summary>
+        private List<ProjectSetting> ProjectSettings { get; set; } = new List<ProjectSetting>();
+        /// <summary>
+        /// 被選擇的專案資訊
+        /// </summary>
+        private ProjectSetting SelectProjectSetting { get; set; }
+        public PaymentEditForm(List<PaymentSetting> paymentSettings, List<ProjectSetting> projectSettings, PaymentSetting paymentSetting, List<EmployeeSetting> employeeSettings, List<PaymentItemSetting> paymentItemSettings, APIMethod apiMethod, Form1 form1)
         {
             InitializeComponent();
             Form1 = form1;
             PaymentSetting = paymentSetting;
             EmployeeSettings = employeeSettings;
             PaymentItemSettings = paymentItemSettings;
+            ProjectSettings = projectSettings;
             action.Commands.Add(FlyoutCommand.Yes);
             Create_PaymentItemNo_cbt();
             Create_EmployeeNumber_cbt();
+            Create_slt_ProjectNumber();
             if (paymentSetting != null && paymentSetting.PaymentNumber != null)//修改
             {
                 action.Caption = "代墊代付修改錯誤";
@@ -35,6 +48,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
                 det_PaymentDate.EditValue = paymentSetting.PaymentDate;
                 txt_PaymentInvoiceNo.Text = paymentSetting.PaymentInvoiceNo;
                 Show_PaymentItemNo_Index();
+                Show_ProjectNumber_Index();
                 Show_EmployeeNumber_Index();
                 txt_PaymentAmoumt.EditValue = paymentSetting.PaymentAmount;
                 cbt_PaymentMethod.SelectedIndex = paymentSetting.PaymentMethod;
@@ -51,6 +65,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
                     Show_EmployeeNumber_Index(Form1.EmployeeSetting.EmployeeName);
                 }
             }
+
             #region 載入檔案按鈕
             btn_LoadFile.Click += (s, e) =>
             {
@@ -83,6 +98,27 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
                 DialogResult = DialogResult.Cancel;
             };
             #endregion
+            //slt_ProjectNumber.Popup += (s, e) =>
+            //{
+            //    IPopupControl popupControl = s as IPopupControl;
+            //    LayoutControl layoutControl = popupControl.PopupWindow.Controls[3].Controls[0] as LayoutControl;
+            //    SimpleButton clearButton = ((LayoutControlItem)layoutControl.Items.FindByName("lciClear")).Control as SimpleButton;
+            //    if (clearButton != null)
+            //    {
+            //        clearButton.Click += (sender, ex) =>
+            //        {
+            //            if (ProjectSettings.Count > 0)
+            //            {
+            //                ProjectSettings.Clear();
+            //            }
+            //            foreach (var item in projectSettings)
+            //            {
+            //                ProjectSettings.Add(item);
+            //            }
+            //            SelectProjectSetting = null;
+            //        };
+            //    }
+            //};
         }
         #region 品項代碼功能
         /// <summary>
@@ -139,6 +175,77 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
                     }
                 }
             }
+        }
+        #endregion
+        #region 專案代碼功能
+        /// <summary>
+        /// 創建專案代碼下拉選單
+        /// </summary>
+        private void Create_slt_ProjectNumber()
+        {
+            slt_ProjectNumber.Properties.DataSource = ProjectSettings;
+            slt_ProjectNumber.Properties.DisplayMember = "ProjectName";
+            slt_ProjectNumber.CustomDisplayText += (s, e) =>
+            {
+                if (PaymentSetting != null)
+                {
+                    if (SelectProjectSetting != null)
+                    {
+                        if (e.Value == null)
+                        {
+                            SelectProjectSetting = null;
+                            e.DisplayText = "";
+                        }
+                        else if (e.Value.ToString() != "")
+                        {
+                            SelectProjectSetting = e.Value as ProjectSetting;
+                            e.DisplayText = SelectProjectSetting.ProjectName;
+                        }
+                        else
+                        {
+                            e.DisplayText = SelectProjectSetting.ProjectName;
+                        }
+                    }
+                    else
+                    {
+                        SelectProjectSetting = e.Value as ProjectSetting;
+                    }
+                }
+                else
+                {
+                    SelectProjectSetting = e.Value as ProjectSetting;
+                }
+            };
+        }
+        /// <summary>
+        /// 顯示專案代碼項目
+        /// </summary>
+        private void Show_ProjectNumber_Index()
+        {
+            for (int i = 0; i < ProjectSettings.Count; i++)
+            {
+                if (ProjectSettings[i].ProjectNumber == PaymentSetting.ProjectNumber)
+                {
+                    SelectProjectSetting = ProjectSettings[i];
+                }
+                else
+                {
+                    SelectProjectSetting = null;
+                }
+            }
+        }
+        /// <summary>
+        /// 取得專案代碼
+        /// </summary>
+        /// <returns></returns>
+        private string Get_slt_ProjectNumber()
+        {
+            string value = null;
+            if (SelectProjectSetting != null)
+            {
+                value = SelectProjectSetting.ProjectNumber;
+            }
+            return value;
         }
         #endregion
         #region 申請人功能
@@ -221,6 +328,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             }
         }
         #endregion
+        #region 檢查資料問題
         /// <summary>
         /// 檢查資料問題
         /// </summary>
@@ -237,6 +345,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             }
             if (paymentSetting != null && paymentSetting.PaymentNumber != null)
             {
+                paymentSetting.ProjectNumber = Get_slt_ProjectNumber();
                 paymentSetting.PaymentInvoiceNo = txt_PaymentInvoiceNo.Text;
                 paymentSetting.PaymentItemNo = Get_PaymentItemNo_No();
                 paymentSetting.EmployeeNumber = Get_EmployeeNumber_Number();
@@ -286,6 +395,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
                 {
                     PaymentSetting setting = new PaymentSetting()
                     {
+                        ProjectNumber = Get_slt_ProjectNumber(),
                         PaymentDate = Convert.ToDateTime(det_PaymentDate.EditValue),
                         PaymentInvoiceNo = txt_PaymentInvoiceNo.Text,
                         PaymentItemNo = Get_PaymentItemNo_No(),
@@ -338,5 +448,6 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
                 }
             }
         }
+        #endregion
     }
 }

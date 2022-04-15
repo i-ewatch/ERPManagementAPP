@@ -217,7 +217,7 @@ namespace ERPManagementAPP
                     label.Appearance.ForeColor = Color.White;
                     label.Appearance.BackColor = Color.Red;
                     label.AutoSizeMode = LabelAutoSizeMode.None;
-                    label.Text = APIMethod.ErrorStr;
+                    label.Text = "無網路或伺服器未開啟!";
                     ErrorflyoutPanel.Controls.Add(label);
                     ErrorflyoutPanel.Options.AnchorType = DevExpress.Utils.Win.PopupToolWindowAnchor.Bottom;
                     ErrorflyoutPanel.ShowPopup();

@@ -35,6 +35,7 @@ namespace ERPManagementAPP.Maintain
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colPaymentNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colProjectNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPaymentDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPaymentInvoiceNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPaymentItemNo = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -46,10 +47,10 @@ namespace ERPManagementAPP.Maintain
             this.colTransferDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFileName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.btn_TransferDate = new DevExpress.XtraEditors.SimpleButton();
             this.btn_Payment_Refresh = new DevExpress.XtraEditors.SimpleButton();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btn_TransferDate = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -75,7 +76,7 @@ namespace ERPManagementAPP.Maintain
             // 
             // groupControl1
             // 
-            this.groupControl1.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.groupControl1.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
             this.groupControl1.AppearanceCaption.Options.UseForeColor = true;
             this.groupControl1.Controls.Add(this.gridControl1);
             this.groupControl1.Controls.Add(this.panelControl1);
@@ -100,6 +101,7 @@ namespace ERPManagementAPP.Maintain
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colPaymentNumber,
+            this.colProjectNumber,
             this.colPaymentDate,
             this.colPaymentInvoiceNo,
             this.colPaymentItemNo,
@@ -123,6 +125,14 @@ namespace ERPManagementAPP.Maintain
             this.colPaymentNumber.Visible = true;
             this.colPaymentNumber.VisibleIndex = 0;
             // 
+            // colProjectNumber
+            // 
+            this.colProjectNumber.Caption = "專案代碼";
+            this.colProjectNumber.FieldName = "ProjectNumber";
+            this.colProjectNumber.Name = "colProjectNumber";
+            this.colProjectNumber.Visible = true;
+            this.colProjectNumber.VisibleIndex = 1;
+            // 
             // colPaymentDate
             // 
             this.colPaymentDate.Caption = "日期";
@@ -130,7 +140,7 @@ namespace ERPManagementAPP.Maintain
             this.colPaymentDate.Name = "colPaymentDate";
             this.colPaymentDate.OptionsColumn.AllowEdit = false;
             this.colPaymentDate.Visible = true;
-            this.colPaymentDate.VisibleIndex = 1;
+            this.colPaymentDate.VisibleIndex = 2;
             // 
             // colPaymentInvoiceNo
             // 
@@ -139,7 +149,7 @@ namespace ERPManagementAPP.Maintain
             this.colPaymentInvoiceNo.Name = "colPaymentInvoiceNo";
             this.colPaymentInvoiceNo.OptionsColumn.AllowEdit = false;
             this.colPaymentInvoiceNo.Visible = true;
-            this.colPaymentInvoiceNo.VisibleIndex = 2;
+            this.colPaymentInvoiceNo.VisibleIndex = 3;
             // 
             // colPaymentItemNo
             // 
@@ -148,7 +158,7 @@ namespace ERPManagementAPP.Maintain
             this.colPaymentItemNo.Name = "colPaymentItemNo";
             this.colPaymentItemNo.OptionsColumn.AllowEdit = false;
             this.colPaymentItemNo.Visible = true;
-            this.colPaymentItemNo.VisibleIndex = 3;
+            this.colPaymentItemNo.VisibleIndex = 4;
             // 
             // colPaymentUse
             // 
@@ -165,7 +175,7 @@ namespace ERPManagementAPP.Maintain
             this.colEmployeeNumber.OptionsColumn.AllowEdit = false;
             this.colEmployeeNumber.OptionsFilter.AllowAutoFilter = false;
             this.colEmployeeNumber.Visible = true;
-            this.colEmployeeNumber.VisibleIndex = 4;
+            this.colEmployeeNumber.VisibleIndex = 5;
             // 
             // colPaymentAmount
             // 
@@ -176,7 +186,7 @@ namespace ERPManagementAPP.Maintain
             this.colPaymentAmount.Name = "colPaymentAmount";
             this.colPaymentAmount.OptionsColumn.AllowEdit = false;
             this.colPaymentAmount.Visible = true;
-            this.colPaymentAmount.VisibleIndex = 5;
+            this.colPaymentAmount.VisibleIndex = 6;
             // 
             // colPaymentMethod
             // 
@@ -185,7 +195,7 @@ namespace ERPManagementAPP.Maintain
             this.colPaymentMethod.Name = "colPaymentMethod";
             this.colPaymentMethod.OptionsColumn.AllowEdit = false;
             this.colPaymentMethod.Visible = true;
-            this.colPaymentMethod.VisibleIndex = 6;
+            this.colPaymentMethod.VisibleIndex = 7;
             // 
             // colRemark
             // 
@@ -217,6 +227,17 @@ namespace ERPManagementAPP.Maintain
             this.panelControl1.Size = new System.Drawing.Size(1250, 43);
             this.panelControl1.TabIndex = 1;
             // 
+            // btn_TransferDate
+            // 
+            this.btn_TransferDate.AllowFocus = false;
+            this.btn_TransferDate.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_TransferDate.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_TransferDate.ImageOptions.Image")));
+            this.btn_TransferDate.Location = new System.Drawing.Point(85, 0);
+            this.btn_TransferDate.Name = "btn_TransferDate";
+            this.btn_TransferDate.Size = new System.Drawing.Size(111, 43);
+            this.btn_TransferDate.TabIndex = 32;
+            this.btn_TransferDate.Text = "全部過帳";
+            // 
             // btn_Payment_Refresh
             // 
             this.btn_Payment_Refresh.AllowFocus = false;
@@ -246,17 +267,6 @@ namespace ERPManagementAPP.Maintain
             this.layoutControlItem1.Size = new System.Drawing.Size(1258, 826);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // btn_TransferDate
-            // 
-            this.btn_TransferDate.AllowFocus = false;
-            this.btn_TransferDate.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btn_TransferDate.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
-            this.btn_TransferDate.Location = new System.Drawing.Point(85, 0);
-            this.btn_TransferDate.Name = "btn_TransferDate";
-            this.btn_TransferDate.Size = new System.Drawing.Size(111, 43);
-            this.btn_TransferDate.TabIndex = 32;
-            this.btn_TransferDate.Text = "全部過帳";
             // 
             // PaymentTransferMaintainControl
             // 
@@ -301,5 +311,6 @@ namespace ERPManagementAPP.Maintain
         private DevExpress.XtraGrid.Columns.GridColumn colTransferDate;
         private DevExpress.XtraGrid.Columns.GridColumn colFileName;
         private DevExpress.XtraEditors.SimpleButton btn_TransferDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colProjectNumber;
     }
 }

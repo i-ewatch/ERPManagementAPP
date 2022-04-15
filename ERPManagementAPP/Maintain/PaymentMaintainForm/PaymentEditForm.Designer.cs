@@ -54,6 +54,10 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.btn_ClearFile = new DevExpress.XtraEditors.SimpleButton();
             this.txt_FileName = new DevExpress.XtraEditors.TextEdit();
             this.labelControl22 = new DevExpress.XtraEditors.LabelControl();
+            this.slt_ProjectNumber = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colProjectNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colProjectName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -68,6 +72,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
@@ -93,6 +98,8 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             ((System.ComponentModel.ISupportInitialize)(this.panelControl31)).BeginInit();
             this.panelControl31.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txt_FileName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slt_ProjectNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
@@ -107,6 +114,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem24)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -123,6 +131,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.layoutControl1.Controls.Add(this.det_PaymentDate);
             this.layoutControl1.Controls.Add(this.txt_PaymentNumber);
             this.layoutControl1.Controls.Add(this.panelControl22);
+            this.layoutControl1.Controls.Add(this.slt_ProjectNumber);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
@@ -136,9 +145,9 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.panelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl4.Controls.Add(this.btn_Save);
             this.panelControl4.Controls.Add(this.btn_Cancel);
-            this.panelControl4.Location = new System.Drawing.Point(393, 461);
+            this.panelControl4.Location = new System.Drawing.Point(393, 441);
             this.panelControl4.Name = "panelControl4";
-            this.panelControl4.Size = new System.Drawing.Size(377, 33);
+            this.panelControl4.Size = new System.Drawing.Size(377, 53);
             this.panelControl4.TabIndex = 20;
             // 
             // btn_Save
@@ -147,7 +156,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.btn_Save.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Save.ImageOptions.Image")));
             this.btn_Save.Location = new System.Drawing.Point(189, 0);
             this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(94, 33);
+            this.btn_Save.Size = new System.Drawing.Size(94, 53);
             this.btn_Save.TabIndex = 1;
             this.btn_Save.Text = "Save";
             // 
@@ -157,14 +166,14 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.btn_Cancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Cancel.ImageOptions.Image")));
             this.btn_Cancel.Location = new System.Drawing.Point(283, 0);
             this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.Size = new System.Drawing.Size(94, 33);
+            this.btn_Cancel.Size = new System.Drawing.Size(94, 53);
             this.btn_Cancel.TabIndex = 0;
             this.btn_Cancel.Text = "Cancel";
             // 
             // det_TransferDate
             // 
             this.det_TransferDate.EditValue = null;
-            this.det_TransferDate.Location = new System.Drawing.Point(111, 389);
+            this.det_TransferDate.Location = new System.Drawing.Point(111, 378);
             this.det_TransferDate.Name = "det_TransferDate";
             this.det_TransferDate.Properties.Appearance.Options.UseTextOptions = true;
             this.det_TransferDate.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -184,9 +193,9 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.panelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl2.Controls.Add(this.mmt_Remark);
             this.panelControl2.Controls.Add(this.labelControl2);
-            this.panelControl2.Location = new System.Drawing.Point(12, 260);
+            this.panelControl2.Location = new System.Drawing.Point(12, 269);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(758, 125);
+            this.panelControl2.Size = new System.Drawing.Size(758, 105);
             this.panelControl2.TabIndex = 12;
             // 
             // mmt_Remark
@@ -195,7 +204,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.mmt_Remark.Location = new System.Drawing.Point(100, 0);
             this.mmt_Remark.Name = "mmt_Remark";
             this.mmt_Remark.Properties.MaxLength = 250;
-            this.mmt_Remark.Size = new System.Drawing.Size(658, 125);
+            this.mmt_Remark.Size = new System.Drawing.Size(658, 105);
             this.mmt_Remark.TabIndex = 1;
             // 
             // labelControl2
@@ -212,7 +221,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             // cbt_PaymentMethod
             // 
             this.cbt_PaymentMethod.EditValue = "隨薪資轉帳";
-            this.cbt_PaymentMethod.Location = new System.Drawing.Point(649, 102);
+            this.cbt_PaymentMethod.Location = new System.Drawing.Point(649, 132);
             this.cbt_PaymentMethod.Name = "cbt_PaymentMethod";
             this.cbt_PaymentMethod.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.cbt_PaymentMethod.Properties.Appearance.Options.UseFont = true;
@@ -242,7 +251,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             // 
             // txt_PaymentAmoumt
             // 
-            this.txt_PaymentAmoumt.Location = new System.Drawing.Point(397, 102);
+            this.txt_PaymentAmoumt.Location = new System.Drawing.Point(397, 132);
             this.txt_PaymentAmoumt.Name = "txt_PaymentAmoumt";
             this.txt_PaymentAmoumt.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_PaymentAmoumt.Properties.Appearance.Options.UseFont = true;
@@ -255,7 +264,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             // 
             // cbt_EmployeeNumber
             // 
-            this.cbt_EmployeeNumber.Location = new System.Drawing.Point(111, 102);
+            this.cbt_EmployeeNumber.Location = new System.Drawing.Point(111, 132);
             this.cbt_EmployeeNumber.Name = "cbt_EmployeeNumber";
             this.cbt_EmployeeNumber.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.cbt_EmployeeNumber.Properties.Appearance.Options.UseFont = true;
@@ -285,9 +294,9 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl1.Controls.Add(this.mmt_PaymentUse);
             this.panelControl1.Controls.Add(this.labelControl1);
-            this.panelControl1.Location = new System.Drawing.Point(12, 132);
+            this.panelControl1.Location = new System.Drawing.Point(12, 162);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(758, 124);
+            this.panelControl1.Size = new System.Drawing.Size(758, 103);
             this.panelControl1.TabIndex = 8;
             // 
             // mmt_PaymentUse
@@ -296,7 +305,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.mmt_PaymentUse.Location = new System.Drawing.Point(103, 0);
             this.mmt_PaymentUse.Name = "mmt_PaymentUse";
             this.mmt_PaymentUse.Properties.MaxLength = 100;
-            this.mmt_PaymentUse.Size = new System.Drawing.Size(655, 124);
+            this.mmt_PaymentUse.Size = new System.Drawing.Size(655, 103);
             this.mmt_PaymentUse.TabIndex = 1;
             // 
             // labelControl1
@@ -312,7 +321,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             // 
             // cbt_PaymentItemNo
             // 
-            this.cbt_PaymentItemNo.Location = new System.Drawing.Point(492, 72);
+            this.cbt_PaymentItemNo.Location = new System.Drawing.Point(492, 102);
             this.cbt_PaymentItemNo.Name = "cbt_PaymentItemNo";
             this.cbt_PaymentItemNo.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.cbt_PaymentItemNo.Properties.Appearance.Options.UseFont = true;
@@ -339,7 +348,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             // 
             // txt_PaymentInvoiceNo
             // 
-            this.txt_PaymentInvoiceNo.Location = new System.Drawing.Point(111, 72);
+            this.txt_PaymentInvoiceNo.Location = new System.Drawing.Point(111, 102);
             this.txt_PaymentInvoiceNo.Name = "txt_PaymentInvoiceNo";
             this.txt_PaymentInvoiceNo.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_PaymentInvoiceNo.Properties.Appearance.Options.UseFont = true;
@@ -351,10 +360,10 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             // det_PaymentDate
             // 
             this.det_PaymentDate.EditValue = null;
-            this.det_PaymentDate.Location = new System.Drawing.Point(111, 42);
+            this.det_PaymentDate.Location = new System.Drawing.Point(111, 72);
             this.det_PaymentDate.Name = "det_PaymentDate";
             this.det_PaymentDate.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.det_PaymentDate.Properties.Appearance.ForeColor = System.Drawing.Color.White;
+            this.det_PaymentDate.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
             this.det_PaymentDate.Properties.Appearance.Options.UseFont = true;
             this.det_PaymentDate.Properties.Appearance.Options.UseForeColor = true;
             this.det_PaymentDate.Properties.Appearance.Options.UseTextOptions = true;
@@ -406,9 +415,9 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.panelControl22.Controls.Add(this.panelControl31);
             this.panelControl22.Controls.Add(this.txt_FileName);
             this.panelControl22.Controls.Add(this.labelControl22);
-            this.panelControl22.Location = new System.Drawing.Point(12, 415);
+            this.panelControl22.Location = new System.Drawing.Point(12, 404);
             this.panelControl22.Name = "panelControl22";
-            this.panelControl22.Size = new System.Drawing.Size(377, 79);
+            this.panelControl22.Size = new System.Drawing.Size(377, 90);
             this.panelControl22.TabIndex = 17;
             // 
             // panelControl31
@@ -419,7 +428,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.panelControl31.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelControl31.Location = new System.Drawing.Point(166, 46);
             this.panelControl31.Name = "panelControl31";
-            this.panelControl31.Size = new System.Drawing.Size(211, 33);
+            this.panelControl31.Size = new System.Drawing.Size(211, 44);
             this.panelControl31.TabIndex = 19;
             // 
             // btn_LoadFile
@@ -428,7 +437,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.btn_LoadFile.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_LoadFile.ImageOptions.Image")));
             this.btn_LoadFile.Location = new System.Drawing.Point(7, 0);
             this.btn_LoadFile.Name = "btn_LoadFile";
-            this.btn_LoadFile.Size = new System.Drawing.Size(102, 33);
+            this.btn_LoadFile.Size = new System.Drawing.Size(102, 44);
             this.btn_LoadFile.TabIndex = 1;
             this.btn_LoadFile.Text = "Load File";
             // 
@@ -438,7 +447,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.btn_ClearFile.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_ClearFile.ImageOptions.Image")));
             this.btn_ClearFile.Location = new System.Drawing.Point(109, 0);
             this.btn_ClearFile.Name = "btn_ClearFile";
-            this.btn_ClearFile.Size = new System.Drawing.Size(102, 33);
+            this.btn_ClearFile.Size = new System.Drawing.Size(102, 44);
             this.btn_ClearFile.TabIndex = 0;
             this.btn_ClearFile.Text = "Clear File";
             // 
@@ -464,6 +473,56 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.labelControl22.TabIndex = 1;
             this.labelControl22.Text = "附件名稱";
             // 
+            // slt_ProjectNumber
+            // 
+            this.slt_ProjectNumber.EditValue = "";
+            this.slt_ProjectNumber.Location = new System.Drawing.Point(111, 42);
+            this.slt_ProjectNumber.Name = "slt_ProjectNumber";
+            this.slt_ProjectNumber.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.slt_ProjectNumber.Properties.Appearance.Options.UseFont = true;
+            this.slt_ProjectNumber.Properties.Appearance.Options.UseTextOptions = true;
+            this.slt_ProjectNumber.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.slt_ProjectNumber.Properties.AppearanceDropDown.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.slt_ProjectNumber.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.slt_ProjectNumber.Properties.AppearanceDropDown.Options.UseTextOptions = true;
+            this.slt_ProjectNumber.Properties.AppearanceDropDown.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.slt_ProjectNumber.Properties.AppearanceFocused.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.slt_ProjectNumber.Properties.AppearanceFocused.Options.UseFont = true;
+            this.slt_ProjectNumber.Properties.AppearanceFocused.Options.UseTextOptions = true;
+            this.slt_ProjectNumber.Properties.AppearanceFocused.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.slt_ProjectNumber.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.slt_ProjectNumber.Properties.PopupView = this.gridView2;
+            this.slt_ProjectNumber.Size = new System.Drawing.Size(659, 26);
+            this.slt_ProjectNumber.StyleController = this.layoutControl1;
+            this.slt_ProjectNumber.TabIndex = 45;
+            // 
+            // gridView2
+            // 
+            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colProjectNumber,
+            this.colProjectName});
+            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
+            // colProjectNumber
+            // 
+            this.colProjectNumber.Caption = "專案代碼";
+            this.colProjectNumber.FieldName = "ProjectNumber";
+            this.colProjectNumber.Name = "colProjectNumber";
+            this.colProjectNumber.Visible = true;
+            this.colProjectNumber.VisibleIndex = 0;
+            // 
+            // colProjectName
+            // 
+            this.colProjectName.Caption = "專案名稱";
+            this.colProjectName.FieldName = "ProjectName";
+            this.colProjectName.Name = "colProjectName";
+            this.colProjectName.Visible = true;
+            this.colProjectName.VisibleIndex = 1;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -481,7 +540,8 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.layoutControlItem9,
             this.layoutControlItem10,
             this.layoutControlItem11,
-            this.layoutControlItem12});
+            this.layoutControlItem12,
+            this.layoutControlItem24});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(782, 506);
             this.Root.TextVisible = false;
@@ -500,9 +560,9 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(381, 403);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(381, 392);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(381, 46);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(381, 37);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem2
@@ -510,7 +570,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem2.Control = this.det_PaymentDate;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 30);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 60);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(762, 30);
             this.layoutControlItem2.Text = "日期*";
@@ -521,7 +581,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem3.Control = this.txt_PaymentInvoiceNo;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 60);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 90);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(381, 30);
             this.layoutControlItem3.Text = "發票號碼";
@@ -532,7 +592,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem4.Control = this.cbt_PaymentItemNo;
-            this.layoutControlItem4.Location = new System.Drawing.Point(381, 60);
+            this.layoutControlItem4.Location = new System.Drawing.Point(381, 90);
             this.layoutControlItem4.Name = "layoutControlItem4";
             this.layoutControlItem4.Size = new System.Drawing.Size(381, 30);
             this.layoutControlItem4.Text = "品項代碼*";
@@ -541,9 +601,9 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.panelControl1;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 120);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 150);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(762, 128);
+            this.layoutControlItem5.Size = new System.Drawing.Size(762, 107);
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
             // 
@@ -552,7 +612,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.layoutControlItem6.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem6.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem6.Control = this.cbt_EmployeeNumber;
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 90);
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 120);
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.Size = new System.Drawing.Size(286, 30);
             this.layoutControlItem6.Text = "申請人*";
@@ -563,7 +623,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.layoutControlItem7.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem7.Control = this.txt_PaymentAmoumt;
-            this.layoutControlItem7.Location = new System.Drawing.Point(286, 90);
+            this.layoutControlItem7.Location = new System.Drawing.Point(286, 120);
             this.layoutControlItem7.Name = "layoutControlItem7";
             this.layoutControlItem7.Size = new System.Drawing.Size(252, 30);
             this.layoutControlItem7.Text = "金額*";
@@ -574,7 +634,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.layoutControlItem8.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem8.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem8.Control = this.cbt_PaymentMethod;
-            this.layoutControlItem8.Location = new System.Drawing.Point(538, 90);
+            this.layoutControlItem8.Location = new System.Drawing.Point(538, 120);
             this.layoutControlItem8.Name = "layoutControlItem8";
             this.layoutControlItem8.Size = new System.Drawing.Size(224, 30);
             this.layoutControlItem8.Text = "請款方式*";
@@ -583,9 +643,9 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.panelControl2;
-            this.layoutControlItem9.Location = new System.Drawing.Point(0, 248);
+            this.layoutControlItem9.Location = new System.Drawing.Point(0, 257);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(762, 129);
+            this.layoutControlItem9.Size = new System.Drawing.Size(762, 109);
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
             // 
@@ -594,7 +654,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.layoutControlItem10.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.layoutControlItem10.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem10.Control = this.det_TransferDate;
-            this.layoutControlItem10.Location = new System.Drawing.Point(0, 377);
+            this.layoutControlItem10.Location = new System.Drawing.Point(0, 366);
             this.layoutControlItem10.Name = "layoutControlItem10";
             this.layoutControlItem10.Size = new System.Drawing.Size(762, 26);
             this.layoutControlItem10.Text = "匯款收款日期";
@@ -605,9 +665,9 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.layoutControlItem11.Control = this.panelControl22;
             this.layoutControlItem11.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem11.CustomizationFormText = "layoutControlItem9";
-            this.layoutControlItem11.Location = new System.Drawing.Point(0, 403);
+            this.layoutControlItem11.Location = new System.Drawing.Point(0, 392);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(381, 83);
+            this.layoutControlItem11.Size = new System.Drawing.Size(381, 94);
             this.layoutControlItem11.Text = "layoutControlItem9";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextVisible = false;
@@ -615,11 +675,24 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             // layoutControlItem12
             // 
             this.layoutControlItem12.Control = this.panelControl4;
-            this.layoutControlItem12.Location = new System.Drawing.Point(381, 449);
+            this.layoutControlItem12.Location = new System.Drawing.Point(381, 429);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(381, 37);
+            this.layoutControlItem12.Size = new System.Drawing.Size(381, 57);
             this.layoutControlItem12.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem12.TextVisible = false;
+            // 
+            // layoutControlItem24
+            // 
+            this.layoutControlItem24.AppearanceItemCaption.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.layoutControlItem24.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem24.Control = this.slt_ProjectNumber;
+            this.layoutControlItem24.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem24.CustomizationFormText = "專案代碼";
+            this.layoutControlItem24.Location = new System.Drawing.Point(0, 30);
+            this.layoutControlItem24.Name = "layoutControlItem24";
+            this.layoutControlItem24.Size = new System.Drawing.Size(762, 30);
+            this.layoutControlItem24.Text = "專案代碼";
+            this.layoutControlItem24.TextSize = new System.Drawing.Size(96, 20);
             // 
             // PaymentEditForm
             // 
@@ -661,6 +734,8 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             ((System.ComponentModel.ISupportInitialize)(this.panelControl31)).EndInit();
             this.panelControl31.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txt_FileName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slt_ProjectNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
@@ -675,6 +750,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem24)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -719,5 +795,10 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
         private DevExpress.XtraEditors.SimpleButton btn_Save;
         private DevExpress.XtraEditors.SimpleButton btn_Cancel;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraEditors.SearchLookUpEdit slt_ProjectNumber;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.Columns.GridColumn colProjectNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colProjectName;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem24;
     }
 }

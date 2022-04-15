@@ -33,6 +33,10 @@ namespace ERPManagementAPP.Maintain
         /// 總員工資料
         /// </summary>
         private List<EmployeeSetting> EmployeeSettings { get; set; } = new List<EmployeeSetting>();
+        /// <summary>
+        /// 專案資訊
+        /// </summary>
+        private List<ProjectSetting> ProjectSettings { get; set; }
         public PaymentTransferMaintainControl(APIMethod APIMethod, Form1 form1)
         {
             InitializeComponent();
@@ -191,6 +195,19 @@ namespace ERPManagementAPP.Maintain
                             break;
                     }
                 }
+                else if (e.Column.FieldName == "ProjectNumber")
+                {
+                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
+                    if (e.CellValue != null)
+                    {
+                        string Index = e.CellValue.ToString();
+                        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
+                        if (project != null)
+                        {
+                            e.DisplayText = project.ProjectName;
+                        }
+                    }
+                }
             };
         }
         #endregion
@@ -247,6 +264,7 @@ namespace ERPManagementAPP.Maintain
         private void Refresh_API()
         {
             EmployeeSettings = apiMethod.Get_Employee();
+            ProjectSettings = apiMethod.Get_Project();
         }
     }
 }

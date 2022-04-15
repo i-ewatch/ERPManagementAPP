@@ -81,7 +81,7 @@ namespace ERPManagementAPP.Maintain
             // 
             // PruchasegroupControl
             // 
-            this.PruchasegroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.PruchasegroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
             this.PruchasegroupControl.AppearanceCaption.Options.UseForeColor = true;
             this.PruchasegroupControl.Controls.Add(this.PickinggridControl);
             this.PruchasegroupControl.Controls.Add(this.Company_BarpanelControl);
@@ -181,7 +181,7 @@ namespace ERPManagementAPP.Maintain
             this.colTotal.Name = "colTotal";
             this.colTotal.OptionsColumn.AllowEdit = false;
             this.colTotal.Visible = true;
-            this.colTotal.VisibleIndex = 6;
+            this.colTotal.VisibleIndex = 5;
             // 
             // colTotalTax
             // 
@@ -192,7 +192,7 @@ namespace ERPManagementAPP.Maintain
             this.colTotalTax.Name = "colTotalTax";
             this.colTotalTax.OptionsColumn.AllowEdit = false;
             this.colTotalTax.Visible = true;
-            this.colTotalTax.VisibleIndex = 7;
+            this.colTotalTax.VisibleIndex = 6;
             // 
             // colPosting
             // 
@@ -208,7 +208,7 @@ namespace ERPManagementAPP.Maintain
             this.colRemark.Name = "colRemark";
             this.colRemark.OptionsColumn.AllowEdit = false;
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 8;
+            this.colRemark.VisibleIndex = 7;
             // 
             // colFileName
             // 
@@ -216,7 +216,7 @@ namespace ERPManagementAPP.Maintain
             this.colFileName.FieldName = "FileName";
             this.colFileName.Name = "colFileName";
             this.colFileName.Visible = true;
-            this.colFileName.VisibleIndex = 9;
+            this.colFileName.VisibleIndex = 8;
             // 
             // Company_BarpanelControl
             // 

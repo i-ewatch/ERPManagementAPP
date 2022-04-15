@@ -460,7 +460,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         }
         private void Show_ProductNumber_Index()
         {
-            if (ProductSettings!= null)
+            if (ProductSettings != null)
             {
                 for (int i = 0; i < ProductSettings.Count; i++)
                 {
@@ -502,7 +502,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
                     {
                         if (e.Value == null)
                         {
-                            SelectProjectSetting.ProjectNumber = "";
+                            SelectProjectSetting = null;
                             e.DisplayText = "";
                         }
                         else if (e.Value.ToString() != "")
@@ -550,7 +550,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         /// <returns></returns>
         private string Get_slt_ProjectNumber()
         {
-            string value = "";
+            string value = null;
             if (SelectProjectSetting != null)
             {
                 value = SelectProjectSetting.ProjectNumber;

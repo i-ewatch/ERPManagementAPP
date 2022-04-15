@@ -9,6 +9,10 @@ namespace ERPManagementAPP.Models
         /// </summary>
         public string PaymentNumber { get; set; }
         /// <summary>
+        /// 專案代碼
+        /// </summary>
+        public string ProjectNumber { get; set; }
+        /// <summary>
         /// 日期
         /// </summary>
         public DateTime PaymentDate { get; set; }

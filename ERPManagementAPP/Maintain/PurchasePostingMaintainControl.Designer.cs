@@ -44,12 +44,12 @@ namespace ERPManagementAPP.Maintain
             this.colPosting = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFileName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPostingDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.btn_Purchase_Search = new DevExpress.XtraEditors.SimpleButton();
             this.cet_Other = new DevExpress.XtraEditors.CheckEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.colPostingDate = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -76,7 +76,7 @@ namespace ERPManagementAPP.Maintain
             // 
             // groupControl1
             // 
-            this.groupControl1.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.groupControl1.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
             this.groupControl1.AppearanceCaption.Options.UseForeColor = true;
             this.groupControl1.Controls.Add(this.PurchasegridControl);
             this.groupControl1.Controls.Add(this.panelControl1);
@@ -84,7 +84,7 @@ namespace ERPManagementAPP.Maintain
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(1254, 822);
             this.groupControl1.TabIndex = 4;
-            this.groupControl1.Text = "進貨/進貨退出";
+            this.groupControl1.Text = "進貨營運管理";
             // 
             // PurchasegridControl
             // 
@@ -117,7 +117,7 @@ namespace ERPManagementAPP.Maintain
             // 
             // colPurchaseFlag
             // 
-            this.colPurchaseFlag.Caption = "進貨旗標";
+            this.colPurchaseFlag.Caption = "旗標";
             this.colPurchaseFlag.FieldName = "PurchaseFlag";
             this.colPurchaseFlag.Name = "colPurchaseFlag";
             this.colPurchaseFlag.OptionsColumn.AllowEdit = false;
@@ -126,7 +126,7 @@ namespace ERPManagementAPP.Maintain
             // 
             // colPurchaseNumber
             // 
-            this.colPurchaseNumber.Caption = "進貨日期";
+            this.colPurchaseNumber.Caption = "日期";
             this.colPurchaseNumber.FieldName = "PurchaseNumber";
             this.colPurchaseNumber.Name = "colPurchaseNumber";
             this.colPurchaseNumber.OptionsColumn.AllowEdit = false;
@@ -204,6 +204,14 @@ namespace ERPManagementAPP.Maintain
             this.colFileName.FieldName = "FileName";
             this.colFileName.Name = "colFileName";
             // 
+            // colPostingDate
+            // 
+            this.colPostingDate.Caption = "過帳日期";
+            this.colPostingDate.FieldName = "PostingDate";
+            this.colPostingDate.Name = "colPostingDate";
+            this.colPostingDate.Visible = true;
+            this.colPostingDate.VisibleIndex = 8;
+            // 
             // panelControl1
             // 
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
@@ -258,14 +266,6 @@ namespace ERPManagementAPP.Maintain
             this.layoutControlItem1.Size = new System.Drawing.Size(1258, 826);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // colPostingDate
-            // 
-            this.colPostingDate.Caption = "過帳日期";
-            this.colPostingDate.FieldName = "PostingDate";
-            this.colPostingDate.Name = "colPostingDate";
-            this.colPostingDate.Visible = true;
-            this.colPostingDate.VisibleIndex = 8;
             // 
             // PurchasePostingMaintainControl
             // 

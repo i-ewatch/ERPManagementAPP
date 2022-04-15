@@ -45,6 +45,7 @@ namespace ERPManagementAPP.Maintain
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colPaymentNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colProjectNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPaymentDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPaymentInvoiceNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPaymentItemNo = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -102,13 +103,13 @@ namespace ERPManagementAPP.Maintain
             // 
             // groupControl2
             // 
-            this.groupControl2.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.groupControl2.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
             this.groupControl2.AppearanceCaption.Options.UseForeColor = true;
             this.groupControl2.Controls.Add(this.gridControl2);
             this.groupControl2.Controls.Add(this.panelControl2);
-            this.groupControl2.Location = new System.Drawing.Point(881, 12);
+            this.groupControl2.Location = new System.Drawing.Point(874, 12);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(385, 819);
+            this.groupControl2.Size = new System.Drawing.Size(392, 819);
             this.groupControl2.TabIndex = 5;
             this.groupControl2.Text = "請款品項";
             // 
@@ -118,7 +119,7 @@ namespace ERPManagementAPP.Maintain
             this.gridControl2.Location = new System.Drawing.Point(2, 66);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(381, 751);
+            this.gridControl2.Size = new System.Drawing.Size(388, 751);
             this.gridControl2.TabIndex = 1;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -160,7 +161,7 @@ namespace ERPManagementAPP.Maintain
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl2.Location = new System.Drawing.Point(2, 23);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(381, 43);
+            this.panelControl2.Size = new System.Drawing.Size(388, 43);
             this.panelControl2.TabIndex = 0;
             // 
             // btn_PaymentItem_Refresh
@@ -209,7 +210,7 @@ namespace ERPManagementAPP.Maintain
             // 
             // groupControl1
             // 
-            this.groupControl1.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.groupControl1.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
             this.groupControl1.AppearanceCaption.Options.UseForeColor = true;
             this.groupControl1.Controls.Add(this.gridControl1);
             this.groupControl1.Controls.Add(this.panelControl1);
@@ -234,6 +235,7 @@ namespace ERPManagementAPP.Maintain
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colPaymentNumber,
+            this.colProjectNumber,
             this.colPaymentDate,
             this.colPaymentInvoiceNo,
             this.colPaymentItemNo,
@@ -258,6 +260,15 @@ namespace ERPManagementAPP.Maintain
             this.colPaymentNumber.Visible = true;
             this.colPaymentNumber.VisibleIndex = 0;
             // 
+            // colProjectNumber
+            // 
+            this.colProjectNumber.Caption = "專案代碼";
+            this.colProjectNumber.FieldName = "ProjectNumber";
+            this.colProjectNumber.Name = "colProjectNumber";
+            this.colProjectNumber.OptionsColumn.AllowEdit = false;
+            this.colProjectNumber.Visible = true;
+            this.colProjectNumber.VisibleIndex = 1;
+            // 
             // colPaymentDate
             // 
             this.colPaymentDate.Caption = "日期";
@@ -265,7 +276,7 @@ namespace ERPManagementAPP.Maintain
             this.colPaymentDate.Name = "colPaymentDate";
             this.colPaymentDate.OptionsColumn.AllowEdit = false;
             this.colPaymentDate.Visible = true;
-            this.colPaymentDate.VisibleIndex = 1;
+            this.colPaymentDate.VisibleIndex = 2;
             // 
             // colPaymentInvoiceNo
             // 
@@ -274,7 +285,7 @@ namespace ERPManagementAPP.Maintain
             this.colPaymentInvoiceNo.Name = "colPaymentInvoiceNo";
             this.colPaymentInvoiceNo.OptionsColumn.AllowEdit = false;
             this.colPaymentInvoiceNo.Visible = true;
-            this.colPaymentInvoiceNo.VisibleIndex = 2;
+            this.colPaymentInvoiceNo.VisibleIndex = 3;
             // 
             // colPaymentItemNo
             // 
@@ -283,7 +294,7 @@ namespace ERPManagementAPP.Maintain
             this.colPaymentItemNo.Name = "colPaymentItemNo";
             this.colPaymentItemNo.OptionsColumn.AllowEdit = false;
             this.colPaymentItemNo.Visible = true;
-            this.colPaymentItemNo.VisibleIndex = 3;
+            this.colPaymentItemNo.VisibleIndex = 4;
             // 
             // colPaymentUse
             // 
@@ -292,7 +303,7 @@ namespace ERPManagementAPP.Maintain
             this.colPaymentUse.Name = "colPaymentUse";
             this.colPaymentUse.OptionsColumn.AllowEdit = false;
             this.colPaymentUse.Visible = true;
-            this.colPaymentUse.VisibleIndex = 4;
+            this.colPaymentUse.VisibleIndex = 5;
             // 
             // colEmployeeNumber
             // 
@@ -302,7 +313,7 @@ namespace ERPManagementAPP.Maintain
             this.colEmployeeNumber.OptionsColumn.AllowEdit = false;
             this.colEmployeeNumber.OptionsFilter.AllowAutoFilter = false;
             this.colEmployeeNumber.Visible = true;
-            this.colEmployeeNumber.VisibleIndex = 5;
+            this.colEmployeeNumber.VisibleIndex = 6;
             // 
             // colPaymentAmount
             // 
@@ -313,7 +324,7 @@ namespace ERPManagementAPP.Maintain
             this.colPaymentAmount.Name = "colPaymentAmount";
             this.colPaymentAmount.OptionsColumn.AllowEdit = false;
             this.colPaymentAmount.Visible = true;
-            this.colPaymentAmount.VisibleIndex = 6;
+            this.colPaymentAmount.VisibleIndex = 7;
             // 
             // colPaymentMethod
             // 
@@ -322,7 +333,7 @@ namespace ERPManagementAPP.Maintain
             this.colPaymentMethod.Name = "colPaymentMethod";
             this.colPaymentMethod.OptionsColumn.AllowEdit = false;
             this.colPaymentMethod.Visible = true;
-            this.colPaymentMethod.VisibleIndex = 7;
+            this.colPaymentMethod.VisibleIndex = 8;
             // 
             // colRemark
             // 
@@ -331,7 +342,7 @@ namespace ERPManagementAPP.Maintain
             this.colRemark.Name = "colRemark";
             this.colRemark.OptionsColumn.AllowEdit = false;
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 8;
+            this.colRemark.VisibleIndex = 9;
             // 
             // colTransferDate
             // 
@@ -340,7 +351,7 @@ namespace ERPManagementAPP.Maintain
             this.colTransferDate.Name = "colTransferDate";
             this.colTransferDate.OptionsColumn.AllowEdit = false;
             this.colTransferDate.Visible = true;
-            this.colTransferDate.VisibleIndex = 9;
+            this.colTransferDate.VisibleIndex = 10;
             // 
             // colFileName
             // 
@@ -348,7 +359,7 @@ namespace ERPManagementAPP.Maintain
             this.colFileName.FieldName = "FileName";
             this.colFileName.Name = "colFileName";
             this.colFileName.Visible = true;
-            this.colFileName.VisibleIndex = 10;
+            this.colFileName.VisibleIndex = 11;
             // 
             // panelControl1
             // 
@@ -471,9 +482,9 @@ namespace ERPManagementAPP.Maintain
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.groupControl2;
-            this.layoutControlItem2.Location = new System.Drawing.Point(869, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(862, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(389, 823);
+            this.layoutControlItem2.Size = new System.Drawing.Size(396, 823);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -482,7 +493,7 @@ namespace ERPManagementAPP.Maintain
             this.splitterItem1.AllowHotTrack = true;
             this.splitterItem1.Location = new System.Drawing.Point(857, 0);
             this.splitterItem1.Name = "splitterItem1";
-            this.splitterItem1.Size = new System.Drawing.Size(12, 823);
+            this.splitterItem1.Size = new System.Drawing.Size(5, 823);
             // 
             // PaymentMiantainControl
             // 
@@ -553,5 +564,6 @@ namespace ERPManagementAPP.Maintain
         private DevExpress.XtraEditors.DateEdit det_PaymentDate;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraGrid.Columns.GridColumn colEmployeeNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colProjectNumber;
     }
 }
