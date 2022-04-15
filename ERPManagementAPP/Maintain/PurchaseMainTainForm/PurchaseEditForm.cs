@@ -1,21 +1,12 @@
 ﻿using DevExpress.XtraBars.Docking2010.Customization;
 using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
-using DevExpress.XtraEditors;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Grid;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
@@ -47,6 +38,10 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         /// </summary>
         private List<EmployeeSetting> EmployeeSettings { get; set; }
         /// <summary>
+        /// 專案資訊
+        /// </summary>
+        private List<ProjectSetting> ProjectSettings { get; set; }
+        /// <summary>
         /// 被選擇的公司資訊
         /// </summary>
         private CompanySetting SelectCompanySetting { get; set; }
@@ -54,6 +49,10 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         /// 被選擇的產品資訊
         /// </summary>
         private ProductSetting SelectProductSetting { get; set; }
+        /// <summary>
+        /// 被選擇的專案資訊
+        /// </summary>
+        private ProjectSetting SelectProjectSetting { get; set; }
         /// <summary>
         /// 產品數量
         /// </summary>
@@ -74,7 +73,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         /// 稅後總計
         /// </summary>
         private double TotalTax = 0;
-        public PurchaseEditForm(List<CompanySetting> companySettings, List<EmployeeSetting> employeeSettings, List<ProductSetting> productSettings, PurchaseSetting purchaseSetting, APIMethod apiMethod, Form1 form1)
+        public PurchaseEditForm(List<CompanySetting> companySettings, List<EmployeeSetting> employeeSettings, List<ProductSetting> productSettings, List<ProjectSetting> projectSettings, PurchaseSetting purchaseSetting, APIMethod apiMethod, Form1 form1)
         {
             InitializeComponent();
             Form1 = form1;
@@ -83,9 +82,11 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             EmployeeSettings = employeeSettings;
             ProductSettings = productSettings;
             PurchaseSetting = purchaseSetting;
+            ProjectSettings = projectSettings;
             Create_slt_PurchasecompanyNumber();
             Create_cbt_EmployeeNumber_cbt();
             Create_cbt_ProductName_cbt();
+            Create_slt_ProjectNumber();
             if (purchaseSetting != null)
             {
                 cbt_PurchaseFlag.Enabled = false;
@@ -93,6 +94,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
                 txt_PurchaseNumber.Text = purchaseSetting.PurchaseNumber;
                 det_PurchaseDate.Text = purchaseSetting.PurchaseDate.ToString("yyyy年MM月dd日");
                 Show_ProductCompanyNumber_Index();
+                Show_ProjectNumber_Index();
                 cbt_PurchaseTax.SelectedIndex = purchaseSetting.PurchaseTax;
                 txt_PurchaseInvoiceNo.Text = purchaseSetting.PurchaseInvoiceNo;
                 Show_EmployeeNumber_Index();
@@ -196,7 +198,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
                     txt_productPrice.Text = "";
                     CacalculateData();
                     RefreshData();
-                    FocuseMainGrid();
+                    //FocuseMainGrid();
                 }
                 else
                 {
@@ -229,7 +231,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
                 RefraeshPurchaseNo();
                 CacalculateData();
                 RefreshData();
-                FocuseMainGrid();
+                //FocuseMainGrid();
             };
             #endregion
             #region 取消按鈕
@@ -258,11 +260,15 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
                 FocusePurchaseSubSetting.PurchaseNo = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseNo").ToString());
                 FocusePurchaseSubSetting.ProductNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductNumber").ToString();
                 FocusePurchaseSubSetting.ProductName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductName").ToString();
-                FocusePurchaseSubSetting.ProductName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductName").ToString();
                 FocusePurchaseSubSetting.ProductUnit = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductUnit").ToString();
                 FocusePurchaseSubSetting.ProductQty = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductQty").ToString());
                 FocusePurchaseSubSetting.ProductPrice = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductPrice").ToString());
                 FocusePurchaseSubSetting.ProductTotal = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductTotal").ToString());
+
+                //Show_ProductNumber_Index();
+                //txt_ProducUnit.Text = FocusePurchaseSubSetting.ProductUnit;
+                //txt_productQty.Text = FocusePurchaseSubSetting.ProductQty.ToString();
+                //txt_productPrice.Text = FocusePurchaseSubSetting.ProductPrice.ToString();
             }
             else
             {
@@ -452,6 +458,20 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
                 }
             };
         }
+        private void Show_ProductNumber_Index()
+        {
+            if (ProductSettings!= null)
+            {
+                for (int i = 0; i < ProductSettings.Count; i++)
+                {
+                    if (ProductSettings[i].ProductNumber == FocusePurchaseSubSetting.ProductNumber)
+                    {
+                        slt_ProductName.EditValue = ProductSettings[i];
+                        break;
+                    }
+                }
+            }
+        }
         /// <summary>
         /// 取得產品編號
         /// </summary>
@@ -462,6 +482,78 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             if (SelectProductSetting != null)
             {
                 value = SelectProductSetting.ProductNumber;
+            }
+            return value;
+        }
+        #endregion
+        #region 專案代碼功能 2022/4/13新增此功能
+        /// <summary>
+        /// 創建專案代碼下拉選單
+        /// </summary>
+        private void Create_slt_ProjectNumber()
+        {
+            slt_ProjectNumber.Properties.DataSource = ProjectSettings;
+            slt_ProjectNumber.Properties.DisplayMember = "ProjectName";
+            slt_ProjectNumber.CustomDisplayText += (s, e) =>
+            {
+                if (PurchaseSetting != null)
+                {
+                    if (SelectProjectSetting != null)
+                    {
+                        if (e.Value == null)
+                        {
+                            SelectProjectSetting.ProjectNumber = "";
+                            e.DisplayText = "";
+                        }
+                        else if (e.Value.ToString() != "")
+                        {
+                            SelectProjectSetting = e.Value as ProjectSetting;
+                            e.DisplayText = SelectProjectSetting.ProjectName;
+                        }
+                        else
+                        {
+                            e.DisplayText = SelectProjectSetting.ProjectName;
+                        }
+                    }
+                    else
+                    {
+                        SelectProjectSetting = e.Value as ProjectSetting;
+                    }
+                }
+                else
+                {
+                    SelectProjectSetting = e.Value as ProjectSetting;
+                }
+            };
+        }
+        /// <summary>
+        /// 顯示專案代碼項目
+        /// </summary>
+        private void Show_ProjectNumber_Index()
+        {
+            for (int i = 0; i < ProjectSettings.Count; i++)
+            {
+                if (ProjectSettings[i].ProjectNumber == PurchaseSetting.ProjectNumber)
+                {
+                    SelectProjectSetting = ProjectSettings[i];
+                    break;
+                }
+                else
+                {
+                    SelectProjectSetting = null;
+                }
+            }
+        }
+        /// <summary>
+        /// 取得專案代碼
+        /// </summary>
+        /// <returns></returns>
+        private string Get_slt_ProjectNumber()
+        {
+            string value = "";
+            if (SelectProjectSetting != null)
+            {
+                value = SelectProjectSetting.ProjectNumber;
             }
             return value;
         }
@@ -479,6 +571,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
                 action.Caption = "進貨修改錯誤";
                 purchaseSetting.PurchaseFlag = cbt_PurchaseFlag.SelectedIndex + 1;
                 purchaseSetting.PurchaseNumber = txt_PurchaseNumber.Text;
+                purchaseSetting.ProjectNumber = Get_slt_ProjectNumber();
                 purchaseSetting.PurchaseDate = Convert.ToDateTime(det_PurchaseDate.Text);
                 purchaseSetting.PurchaseCompanyNumber = SelectCompanySetting.CompanyNumber;
                 purchaseSetting.PurchaseTax = cbt_PurchaseTax.SelectedIndex;
@@ -490,7 +583,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
                 purchaseSetting.Total = Convert.ToDouble(txt_Total.EditValue);
                 purchaseSetting.Tax = Convert.ToDouble(txt_Tax.EditValue);
                 purchaseSetting.TotalTax = Convert.ToDouble(txt_TotalTax.EditValue);
-                if (purchaseSetting.PurchaseFlag == 2)
+                if (purchaseSetting.Posting == 1)
                 {
                     purchaseSetting.PostingDate = DateTime.Now;
                 }
@@ -534,6 +627,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
                     {
                         PurchaseFlag = cbt_PurchaseFlag.SelectedIndex + 1,
                         PurchaseNumber = txt_PurchaseNumber.Text,
+                        ProjectNumber = Get_slt_ProjectNumber(),
                         PurchaseDate = Convert.ToDateTime(det_PurchaseDate.Text),
                         PurchaseCompanyNumber = SelectCompanySetting.CompanyNumber,
                         PurchaseTax = cbt_PurchaseTax.SelectedIndex,
@@ -543,7 +637,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
                         Posting = cbt_Posting.SelectedIndex,
                         PurchaseSub = PurchaseSubSettings
                     };
-                    if (PurchaseSetting.PurchaseFlag == 2)
+                    if (PurchaseSetting.Posting == 1)
                     {
                         PurchaseSetting.PostingDate = DateTime.Now;
                     }

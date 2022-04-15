@@ -4,7 +4,7 @@ using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
-using ERPManagementAPP.Maintain.PurchaseMainTainForm;
+using ERPManagementAPP.Maintain.PickingMaintainForm;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using System;
@@ -15,16 +15,16 @@ using System.Windows.Forms;
 
 namespace ERPManagementAPP.Maintain
 {
-    public partial class PurchaseMaintainControl : Field4MaintainControl
+    public partial class PickingMaintainControl : Field4MaintainControl
     {
         /// <summary>
         /// 產品資訊
         /// </summary>
         private List<ProductSetting> ProductSettings { get; set; }
         /// <summary>
-        /// 公司資訊
+        /// 客戶資訊
         /// </summary>
-        private List<CompanySetting> CompanySettings { get; set; }
+        private List<CustomerSetting> CustomerSettings { get; set; }
         /// <summary>
         /// 員工資訊
         /// </summary>
@@ -34,55 +34,55 @@ namespace ERPManagementAPP.Maintain
         /// </summary>
         private List<ProjectSetting> ProjectSettings { get; set; }
         /// <summary>
-        /// 聚焦進貨表頭
+        /// 聚焦領料表頭
         /// </summary>
-        private PurchaseMainSetting FocusePurchaseMainSetting { get; set; } = new PurchaseMainSetting();
+        private PickingMainSetting FocusePickingMainSetting { get; set; } = new PickingMainSetting();
         /// <summary>
         /// 總表頭
         /// </summary>
-        private List<PurchaseMainSetting> PurchaseMainSettings { get; set; } = new List<PurchaseMainSetting>();
+        private List<PickingMainSetting> PickingMainSettings { get; set; } = new List<PickingMainSetting>();
         /// <summary>
-        /// 總進貨資訊
+        /// 總領料資訊
         /// </summary>
-        private List<PurchaseSetting> PurchaseSettings { get; set; } = new List<PurchaseSetting>();
-        public PurchaseMaintainControl(APIMethod APIMethod, Form1 form1)
+        private List<PickingSetting> PickingSettings { get; set; } = new List<PickingSetting>();
+        public PickingMaintainControl(APIMethod APIMethod, Form1 form1)
         {
             InitializeComponent();
             Form1 = form1;
             apiMethod = APIMethod;
-            det_PurchaseDate.Text = DateTime.Now.ToString("yyyy/MM");
+            det_PickingDate.Text = DateTime.Now.ToString("yyyy/MM");
             if (Form1.EmployeeSetting.Token > 0)
             {
                 Refresh_Main_GridView();
             }
             action.Commands.Add(FlyoutCommand.Yes);
-            #region 進貨資料表
+            #region 領料資料表
             gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            #region 進貨資訊報表按鈕
-            RepositoryItemButtonEdit Purchaseedit = new RepositoryItemButtonEdit();
-            Purchaseedit.ButtonClick += (s, e) =>
+            #region 領料資訊報表按鈕
+            RepositoryItemButtonEdit Pickingedit = new RepositoryItemButtonEdit();
+            Pickingedit.ButtonClick += (s, e) =>
             {
                 FocuseMainGrid();
                 if (e.Button.Kind == ButtonPredefines.Plus)
                 {
-                    if (FocusePurchaseMainSetting.FileName != null)
+                    if (FocusePickingMainSetting.FileName != null)
                     {
-                        if (FocusePurchaseMainSetting.FileName != "")
+                        if (FocusePickingMainSetting.FileName != "")
                         {
-                            byte[] File = apiMethod.Get_PurchaseAttachmentFile(FocusePurchaseMainSetting.PurchaseCompanyNumber, FocusePurchaseMainSetting.FileName);
+                            byte[] File = apiMethod.Get_PickingAttachmentFile(FocusePickingMainSetting.PickingCustomerNumber, FocusePickingMainSetting.FileName);
                             SaveFile(File, 0);
                         }
                     }
                 }
             };
-            Purchaseedit.Buttons[0].Kind = ButtonPredefines.Plus;
-            Purchaseedit.Buttons[0].Caption = "下載";
-            Purchaseedit.TextEditStyle = TextEditStyles.DisableTextEditor;
-            PurchasegridControl.RepositoryItems.Add(Purchaseedit);
-            gridView1.Columns["FileName"].ColumnEdit = Purchaseedit;
+            Pickingedit.Buttons[0].Kind = ButtonPredefines.Plus;
+            Pickingedit.Buttons[0].Caption = "下載";
+            Pickingedit.TextEditStyle = TextEditStyles.DisableTextEditor;
+            PickinggridControl.RepositoryItems.Add(Pickingedit);
+            gridView1.Columns["FileName"].ColumnEdit = Pickingedit;
             gridView1.Columns["FileName"].ShowButtonMode = ShowButtonModeEnum.ShowAlways;
             #endregion
-            #region 進貨聚焦功能
+            #region 領料聚焦功能
             gridView1.FocusedRowChanged += (s, e) =>
             {
                 FocuseMainGrid();
@@ -97,32 +97,32 @@ namespace ERPManagementAPP.Maintain
             #region 報表修改字串功能
             gridView1.CustomDrawCell += (s, e) =>
             {
-                if (e.Column.FieldName == "PurchaseFlag")
+                if (e.Column.FieldName == "PickingFlag")
                 {
                     e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
                     string Index = e.CellValue.ToString();
                     switch (Index)
                     {
-                        case "1":
+                        case "5":
                             {
-                                e.DisplayText = "進貨";
+                                e.DisplayText = "領料";
                             }
                             break;
-                        case "2":
+                        case "6":
                             {
-                                e.DisplayText = "進貨退出";
+                                e.DisplayText = "領料退回";
                             }
                             break;
                     }
                 }
-                else if (e.Column.FieldName == "PurchaseCompanyNumber")
+                else if (e.Column.FieldName == "PickingCustomerNumber")
                 {
                     e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
                     string Index = e.CellValue.ToString();
-                    CompanySetting company = CompanySettings.SingleOrDefault(g => g.CompanyNumber == Index);
+                    CustomerSetting company = CustomerSettings.SingleOrDefault(g => g.CustomerNumber == Index);
                     if (company != null)
                     {
-                        e.DisplayText = company.CompanyName;
+                        e.DisplayText = company.CustomerName;
                     }
                 }
                 else if (e.Column.FieldName == "ProjectNumber")
@@ -138,7 +138,7 @@ namespace ERPManagementAPP.Maintain
                         }
                     }
                 }
-                else if (e.Column.FieldName == "PurchaseTax")
+                else if (e.Column.FieldName == "PickingTax")
                 {
                     e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
                     string Index = e.CellValue.ToString();
@@ -186,64 +186,64 @@ namespace ERPManagementAPP.Maintain
                 }
             };
             #endregion
-            #region 新增進貨資訊
-            btn_Purchase_Add.Click += (s, e) =>
+            #region 新增領料資訊
+            btn_Picking_Add.Click += (s, e) =>
             {
                 Refresh_API();
-                PurchaseEditForm purchaseEdit = new PurchaseEditForm(CompanySettings, EmployeeSettings, ProductSettings, ProjectSettings, null, apiMethod, Form1);
+                PickingEditForm purchaseEdit = new PickingEditForm(CustomerSettings, EmployeeSettings, ProductSettings, ProjectSettings, null, apiMethod, Form1);
                 if (purchaseEdit.ShowDialog() == DialogResult.OK)
                 {
                     Refresh_Main_GridView();
                 }
             };
             #endregion
-            #region 修改進貨資訊
-            btn_Purchase_Edit.Click += (s, e) =>
+            #region 修改領料資訊
+            btn_Picking_Edit.Click += (s, e) =>
             {
                 Refresh_API();
-                PurchaseSettings = APIMethod.Get_Purchase(FocusePurchaseMainSetting);
-                PurchaseEditForm purchaseEdit = new PurchaseEditForm(CompanySettings, EmployeeSettings, ProductSettings, ProjectSettings, PurchaseSettings[0], apiMethod, Form1);
+                PickingSettings = APIMethod.Get_Picking(FocusePickingMainSetting);
+                PickingEditForm purchaseEdit = new PickingEditForm(CustomerSettings, EmployeeSettings, ProductSettings, ProjectSettings, PickingSettings[0], apiMethod, Form1);
                 if (purchaseEdit.ShowDialog() == DialogResult.OK)
                 {
                     Refresh_Main_GridView();
                 }
             };
             #endregion
-            #region 雙擊修改進貨資訊
-            PurchasegridControl.DoubleClick += (s, e) =>
+            #region 雙擊修改領料資訊
+            PickinggridControl.DoubleClick += (s, e) =>
             {
                 Refresh_API();
                 FocuseMainGrid();
-                PurchaseSettings = APIMethod.Get_Purchase(FocusePurchaseMainSetting);
-                PurchaseEditForm purchaseEdit = new PurchaseEditForm(CompanySettings, EmployeeSettings, ProductSettings, ProjectSettings, PurchaseSettings[0], apiMethod, Form1);
+                PickingSettings = APIMethod.Get_Picking(FocusePickingMainSetting);
+                PickingEditForm purchaseEdit = new PickingEditForm(CustomerSettings, EmployeeSettings, ProductSettings, ProjectSettings, PickingSettings[0], apiMethod, Form1);
                 if (purchaseEdit.ShowDialog() == DialogResult.OK)
                 {
                     Refresh_Main_GridView();
                 }
             };
             #endregion
-            #region 刪除進貨資訊
-            btn_Purchase_Delete.Click += (s, e) =>
+            #region 刪除領料資訊
+            btn_Picking_Delete.Click += (s, e) =>
             {
                 FocuseMainGrid();
-                string response = APIMethod.Delete_Purchase(FocusePurchaseMainSetting.PurchaseFlag, FocusePurchaseMainSetting.PurchaseNumber);
+                string response = APIMethod.Delete_Picking(FocusePickingMainSetting.PickingFlag, FocusePickingMainSetting.PickingNumber);
                 if (response == "200")
                 {
                     Refresh_Main_GridView();
-                    action.Caption = "刪除進貨資訊成功";
+                    action.Caption = "刪除領料資訊成功";
                     action.Description = "";
                     FlyoutDialog.Show(Form1, action);
                 }
                 else
                 {
-                    action.Caption = "刪除進貨資訊失敗";
+                    action.Caption = "刪除領料資訊失敗";
                     action.Description = "";
                     FlyoutDialog.Show(Form1, action);
                 }
             };
             #endregion
             #region 產品類別資料查詢
-            btn_Purchase_Search.Click += (s, e) =>
+            btn_Picking_Search.Click += (s, e) =>
             {
                 Refresh_Main_GridView();
             };
@@ -255,67 +255,70 @@ namespace ERPManagementAPP.Maintain
         {
             if (gridView1.FocusedRowHandle > -1 && gridView1.DataRowCount > 0)
             {
-                FocusePurchaseMainSetting.PurchaseFlag = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseFlag").ToString());
-                FocusePurchaseMainSetting.PurchaseNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseNumber").ToString();
-                FocusePurchaseMainSetting.PurchaseDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseDate").ToString());
-                FocusePurchaseMainSetting.PurchaseCompanyNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseCompanyNumber").ToString();
-                FocusePurchaseMainSetting.PurchaseTax = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseTax").ToString());
-                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber") != null)
+                FocusePickingMainSetting.PickingFlag = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PickingFlag").ToString());
+                FocusePickingMainSetting.PickingNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PickingNumber").ToString();
+                FocusePickingMainSetting.PickingDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PickingDate").ToString());
+                FocusePickingMainSetting.PickingCustomerNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PickingCustomerNumber").ToString();
+                FocusePickingMainSetting.PickingTax = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PickingTax").ToString());
+                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PickingInvoiceNo") != null)
                 {
-                    FocusePurchaseMainSetting.ProjectNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber").ToString();
+                    FocusePickingMainSetting.PickingInvoiceNo = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PickingInvoiceNo").ToString();
                 }
                 else
                 {
-                    FocusePurchaseMainSetting.ProjectNumber = null;
+                    FocusePickingMainSetting.PickingInvoiceNo = "";
                 }
-                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseInvoiceNo") != null)
+                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PickingEmployeeNumber") != null)
                 {
-                    FocusePurchaseMainSetting.PurchaseInvoiceNo = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseInvoiceNo").ToString();
-                }
-                else
-                {
-                    FocusePurchaseMainSetting.PurchaseInvoiceNo = "";
-                }
-                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseEmployeeNumber") != null)
-                {
-                    FocusePurchaseMainSetting.PurchaseEmployeeNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseEmployeeNumber").ToString();
+                    FocusePickingMainSetting.PickingEmployeeNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PickingEmployeeNumber").ToString();
                 }
                 else
                 {
-                    FocusePurchaseMainSetting.PurchaseEmployeeNumber = "";
+                    FocusePickingMainSetting.PickingEmployeeNumber = "";
                 }
                 if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Remark") != null)
                 {
-                    FocusePurchaseMainSetting.Remark = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Remark").ToString();
+                    FocusePickingMainSetting.Remark = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Remark").ToString();
                 }
                 else
                 {
-                    FocusePurchaseMainSetting.Remark = "";
+                    FocusePickingMainSetting.Remark = "";
                 }
-                FocusePurchaseMainSetting.Total = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Total").ToString());
-                FocusePurchaseMainSetting.Tax = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Tax").ToString());
-                FocusePurchaseMainSetting.TotalTax = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TotalTax").ToString());
-                FocusePurchaseMainSetting.Posting = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Posting").ToString());
+                FocusePickingMainSetting.Total = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Total").ToString());
+                FocusePickingMainSetting.Tax = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Tax").ToString());
+                FocusePickingMainSetting.TotalTax = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TotalTax").ToString());
+                FocusePickingMainSetting.Posting = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Posting").ToString());
                 if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "FileName") != null)
                 {
-                    FocusePurchaseMainSetting.FileName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "FileName").ToString();
+                    FocusePickingMainSetting.FileName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "FileName").ToString();
                 }
                 else
                 {
-                    FocusePurchaseMainSetting.FileName = "";
+                    FocusePickingMainSetting.FileName = "";
                 }
+                FocusePickingMainSetting.TakeACut = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TakeACut").ToString());
+                FocusePickingMainSetting.Cost = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Cost").ToString());
+                FocusePickingMainSetting.ProfitSharing = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProfitSharing").ToString());
                 if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PostingDate") != null)
                 {
-                    FocusePurchaseMainSetting.PostingDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PostingDate").ToString());
+                    FocusePickingMainSetting.PostingDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PostingDate").ToString());
                 }
                 else
                 {
-                    FocusePurchaseMainSetting.PostingDate = null;
+                    FocusePickingMainSetting.PostingDate = null;
+                }
+                if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProfitSharingDate") != null)
+                {
+                    FocusePickingMainSetting.ProfitSharingDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProfitSharingDate").ToString());
+                }
+                else
+                {
+                    FocusePickingMainSetting.ProfitSharingDate = null;
                 }
             }
             else
             {
-                FocusePurchaseMainSetting = new PurchaseMainSetting();
+                FocusePickingMainSetting = new PickingMainSetting();
             }
         }
         #endregion
@@ -328,7 +331,7 @@ namespace ERPManagementAPP.Maintain
                 if (File.Length > 147)
                 {
                     saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.FileName = FocusePurchaseMainSetting.FileName;
+                    saveFileDialog.FileName = FocusePickingMainSetting.FileName;
                     saveFileDialog.Title = "Save File Path";
                     saveFileDialog.Filter = "All|*.*";
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -362,29 +365,28 @@ namespace ERPManagementAPP.Maintain
         public override void Refresh_Main_GridView()
         {
             Refresh_API();
-            PurchaseMainSettings = apiMethod.Get_Purchase(det_PurchaseDate.Text.Replace("/", ""));
-            if (PurchaseMainSettings != null)
+            PickingMainSettings = apiMethod.Get_Picking(det_PickingDate.Text.Replace("/", ""));
+            if (PickingMainSettings != null)
             {
-                PurchasegridControl.DataSource = PurchaseMainSettings;
+                PickinggridControl.DataSource = PickingMainSettings;
             }
         }
         private void Refresh_API()
         {
-            CompanySettings = apiMethod.Get_Company();
+            CustomerSettings = apiMethod.Get_Customer();
             EmployeeSettings = apiMethod.Get_Employee();
             ProductSettings = apiMethod.Get_Product();
             ProjectSettings = apiMethod.Get_Project();
-
         }
         public override void Refresh_Token()
         {
             if (Form1.EmployeeSetting.Token != 2)
             {
-                btn_Purchase_Delete.Visible = false;
+                btn_Picking_Delete.Visible = false;
             }
             else
             {
-                btn_Purchase_Delete.Visible = true;
+                btn_Picking_Delete.Visible = true;
             }
         }
     }

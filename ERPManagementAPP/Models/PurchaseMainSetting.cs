@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ERPManagementAPP.Models
 {
@@ -24,6 +20,10 @@ namespace ERPManagementAPP.Models
         /// 廠商編號
         /// </summary>
         public string PurchaseCompanyNumber { get; set; }
+        /// <summary>
+        /// 專案代碼
+        /// </summary>
+        public string ProjectNumber { get; set; }
         /// <summary>
         /// 稅別
         /// </summary>

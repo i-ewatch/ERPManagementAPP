@@ -287,7 +287,7 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(98, 78);
             this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "FootPrint*";
+            this.labelControl1.Text = "FootPrint";
             // 
             // cbt_ProductType
             // 

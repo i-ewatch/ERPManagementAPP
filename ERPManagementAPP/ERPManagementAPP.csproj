@@ -220,6 +220,18 @@
     <Compile Include="Maintain\PaymentTransferMaintainControl.Designer.cs">
       <DependentUpon>PaymentTransferMaintainControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Maintain\PickingMaintainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Maintain\PickingMaintainControl.Designer.cs">
+      <DependentUpon>PickingMaintainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\PickingMaintainForm\PickingEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\PickingMaintainForm\PickingEditForm.Designer.cs">
+      <DependentUpon>PickingEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Maintain\ProductMaintainControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -237,6 +249,18 @@
     </Compile>
     <Compile Include="Maintain\ProductMaintainForm\ProductEditForm.Designer.cs">
       <DependentUpon>ProductEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\ProjectMaintainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Maintain\ProjectMaintainControl.Designer.cs">
+      <DependentUpon>ProjectMaintainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\ProjectMaintainForm\ProjectEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\ProjectMaintainForm\ProjectEditForm.Designer.cs">
+      <DependentUpon>ProjectEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Maintain\PurchaseMaintainControl.cs">
       <SubType>UserControl</SubType>
@@ -283,8 +307,13 @@
     <Compile Include="Models\EmployeeSetting.cs" />
     <Compile Include="Models\PaymentItemSetting.cs" />
     <Compile Include="Models\PaymentSetting.cs" />
+    <Compile Include="Models\PickingMainSetting.cs" />
+    <Compile Include="Models\PickingSetting.cs" />
+    <Compile Include="Models\PickingSubSetting.cs" />
     <Compile Include="Models\ProductCategorySetting.cs" />
     <Compile Include="Models\ProductSetting.cs" />
+    <Compile Include="Models\ProjectEmployeeSetting.cs" />
+    <Compile Include="Models\ProjectSetting.cs" />
     <Compile Include="Models\PurchaseMainSetting.cs" />
     <Compile Include="Models\PurchaseSetting.cs" />
     <Compile Include="Models\PurchaseSubSetting.cs" />
@@ -343,6 +372,12 @@
     <EmbeddedResource Include="Maintain\PaymentTransferMaintainControl.resx">
       <DependentUpon>PaymentTransferMaintainControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\PickingMaintainControl.resx">
+      <DependentUpon>PickingMaintainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\PickingMaintainForm\PickingEditForm.resx">
+      <DependentUpon>PickingEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maintain\ProductMaintainControl.resx">
       <DependentUpon>ProductMaintainControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -351,6 +386,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Maintain\ProductMaintainForm\ProductEditForm.resx">
       <DependentUpon>ProductEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\ProjectMaintainControl.resx">
+      <DependentUpon>ProjectMaintainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\ProjectMaintainForm\ProjectEditForm.resx">
+      <DependentUpon>ProjectEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maintain\PurchaseMaintainControl.resx">
       <DependentUpon>PurchaseMaintainControl.cs</DependentUpon>
@@ -395,6 +436,7 @@
   <ItemGroup>
     <Content Include="ewatch.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

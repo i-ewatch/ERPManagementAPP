@@ -43,7 +43,7 @@ namespace ERPManagementAPP.Methods
             }
             catch (Exception ex)
             {
-                Log.Error(ex, " 跑馬燈資訊設定載入錯誤");
+                Log.Error(ex, " URL資訊設定載入錯誤");
             }
             return setting;
         }
@@ -67,7 +67,7 @@ namespace ERPManagementAPP.Methods
             }
             catch (Exception ex)
             {
-                Log.Error(ex, " 跑馬燈資訊設定載入錯誤");
+                Log.Error(ex, " 帳號密碼資訊設定載入錯誤");
             }
             return setting;
         }

@@ -30,6 +30,10 @@ namespace ERPManagementAPP.Maintain
         /// </summary>
         private List<EmployeeSetting> EmployeeSettings { get; set; }
         /// <summary>
+        /// 專案資訊
+        /// </summary>
+        private List<ProjectSetting> ProjectSettings { get; set; }
+        /// <summary>
         /// 聚焦銷貨表頭
         /// </summary>
         private SalesMainSetting FocuseSalesMainSetting { get; set; } = new SalesMainSetting();
@@ -106,7 +110,7 @@ namespace ERPManagementAPP.Maintain
                             break;
                         case "4":
                             {
-                                e.DisplayText = "銷貨退出";
+                                e.DisplayText = "銷貨退回";
                             }
                             break;
                     }
@@ -119,6 +123,19 @@ namespace ERPManagementAPP.Maintain
                     if (company != null)
                     {
                         e.DisplayText = company.CustomerName;
+                    }
+                }
+                else if (e.Column.FieldName == "ProjectNumber")
+                {
+                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
+                    if (e.CellValue != null)
+                    {
+                        string Index = e.CellValue.ToString();
+                        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
+                        if (project != null)
+                        {
+                            e.DisplayText = project.ProjectName;
+                        }
                     }
                 }
                 else if (e.Column.FieldName == "SalesTax")
@@ -173,7 +190,7 @@ namespace ERPManagementAPP.Maintain
             btn_Sales_Add.Click += (s, e) =>
             {
                 Refresh_API();
-                SalesEditForm purchaseEdit = new SalesEditForm(CustomerSettings, EmployeeSettings, ProductSettings, null, apiMethod, Form1);
+                SalesEditForm purchaseEdit = new SalesEditForm(CustomerSettings, EmployeeSettings, ProductSettings, ProjectSettings, null, apiMethod, Form1);
                 if (purchaseEdit.ShowDialog() == DialogResult.OK)
                 {
                     Refresh_Main_GridView();
@@ -185,7 +202,7 @@ namespace ERPManagementAPP.Maintain
             {
                 Refresh_API();
                 SalesSettings = APIMethod.Get_Sales(FocuseSalesMainSetting);
-                SalesEditForm purchaseEdit = new SalesEditForm(CustomerSettings, EmployeeSettings, ProductSettings, SalesSettings[0], apiMethod, Form1);
+                SalesEditForm purchaseEdit = new SalesEditForm(CustomerSettings, EmployeeSettings, ProductSettings, ProjectSettings, SalesSettings[0], apiMethod, Form1);
                 if (purchaseEdit.ShowDialog() == DialogResult.OK)
                 {
                     Refresh_Main_GridView();
@@ -198,7 +215,7 @@ namespace ERPManagementAPP.Maintain
                 Refresh_API();
                 FocuseMainGrid();
                 SalesSettings = APIMethod.Get_Sales(FocuseSalesMainSetting);
-                SalesEditForm purchaseEdit = new SalesEditForm(CustomerSettings, EmployeeSettings, ProductSettings, SalesSettings[0], apiMethod, Form1);
+                SalesEditForm purchaseEdit = new SalesEditForm(CustomerSettings, EmployeeSettings, ProductSettings, ProjectSettings, SalesSettings[0], apiMethod, Form1);
                 if (purchaseEdit.ShowDialog() == DialogResult.OK)
                 {
                     Refresh_Main_GridView();
@@ -359,6 +376,7 @@ namespace ERPManagementAPP.Maintain
             CustomerSettings = apiMethod.Get_Customer();
             EmployeeSettings = apiMethod.Get_Employee();
             ProductSettings = apiMethod.Get_Product();
+            ProjectSettings = apiMethod.Get_Project();
         }
         public override void Refresh_Token()
         {

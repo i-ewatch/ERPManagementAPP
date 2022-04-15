@@ -48,18 +48,20 @@ namespace ERPManagementAPP
             this.CustermernavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.EmployeenavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.Device_PartsnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
+            this.ProjectBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.AccountingBarGroup = new DevExpress.XtraNavBar.NavBarGroup();
             this.PurchasenavBarItem = new DevExpress.XtraNavBar.NavBarItem();
+            this.PickingBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.SalesnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.PaymentnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.PaymentManagementBarGroup = new DevExpress.XtraNavBar.NavBarGroup();
             this.PurchasePostingnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.SalesPostingnavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.PaymentTransferDatenavBarItem = new DevExpress.XtraNavBar.NavBarItem();
+            this.PartnernavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             this.LoginimageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.pcl_View = new DevExpress.XtraEditors.PanelControl();
-            this.PartnernavBarItem = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.MainbarManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LoginimageCollection)).BeginInit();
@@ -130,7 +132,7 @@ namespace ERPManagementAPP
             this.TimebarStaticItem.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.TimebarStaticItem.Caption = "Online Time";
             this.TimebarStaticItem.Id = 1;
-            this.TimebarStaticItem.ItemAppearance.Normal.ForeColor = System.Drawing.Color.White;
+            this.TimebarStaticItem.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.TimebarStaticItem.ItemAppearance.Normal.Options.UseForeColor = true;
             this.TimebarStaticItem.Name = "TimebarStaticItem";
             // 
@@ -140,7 +142,7 @@ namespace ERPManagementAPP
             this.ConnectbarStaticItem.Border = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.ConnectbarStaticItem.Caption = "Connection";
             this.ConnectbarStaticItem.Id = 3;
-            this.ConnectbarStaticItem.ItemAppearance.Normal.ForeColor = System.Drawing.Color.White;
+            this.ConnectbarStaticItem.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.ConnectbarStaticItem.ItemAppearance.Normal.Options.UseForeColor = true;
             this.ConnectbarStaticItem.Name = "ConnectbarStaticItem";
             // 
@@ -150,31 +152,31 @@ namespace ERPManagementAPP
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.MainbarManager;
-            this.barDockControlTop.Size = new System.Drawing.Size(1462, 25);
+            this.barDockControlTop.Size = new System.Drawing.Size(1486, 23);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 868);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 904);
             this.barDockControlBottom.Manager = this.MainbarManager;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1462, 27);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1486, 26);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 25);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 23);
             this.barDockControlLeft.Manager = this.MainbarManager;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 843);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 881);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1462, 25);
+            this.barDockControlRight.Location = new System.Drawing.Point(1486, 23);
             this.barDockControlRight.Manager = this.MainbarManager;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 843);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 881);
             // 
             // barStaticItem1
             // 
@@ -205,14 +207,16 @@ namespace ERPManagementAPP
             this.PurchasePostingnavBarItem,
             this.SalesPostingnavBarItem,
             this.PaymentTransferDatenavBarItem,
-            this.PartnernavBarItem});
+            this.PartnernavBarItem,
+            this.ProjectBarItem,
+            this.PickingBarItem});
             this.navBarControl1.LinkSelectionMode = DevExpress.XtraNavBar.LinkSelectionModeType.OneInControl;
-            this.navBarControl1.Location = new System.Drawing.Point(0, 25);
+            this.navBarControl1.Location = new System.Drawing.Point(0, 23);
             this.navBarControl1.Name = "navBarControl1";
             this.navBarControl1.OptionsNavPane.ExpandedWidth = 184;
             this.navBarControl1.OptionsNavPane.ShowOverflowPanel = false;
             this.navBarControl1.PaintStyleKind = DevExpress.XtraNavBar.NavBarViewKind.NavigationPane;
-            this.navBarControl1.Size = new System.Drawing.Size(184, 843);
+            this.navBarControl1.Size = new System.Drawing.Size(184, 881);
             this.navBarControl1.TabIndex = 0;
             this.navBarControl1.Tag = "";
             this.navBarControl1.Text = "navBarControl1";
@@ -236,7 +240,8 @@ namespace ERPManagementAPP
             new DevExpress.XtraNavBar.NavBarItemLink(this.CompanynavBarItem),
             new DevExpress.XtraNavBar.NavBarItemLink(this.CustermernavBarItem),
             new DevExpress.XtraNavBar.NavBarItemLink(this.EmployeenavBarItem),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.Device_PartsnavBarItem)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.Device_PartsnavBarItem),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.ProjectBarItem)});
             this.BasicDatanavBarGroup.Name = "BasicDatanavBarGroup";
             // 
             // CompanynavBarItem
@@ -283,6 +288,23 @@ namespace ERPManagementAPP
             this.Device_PartsnavBarItem.Tag = "4";
             this.Device_PartsnavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
             // 
+            // ProjectBarItem
+            // 
+            this.ProjectBarItem.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.ProjectBarItem.Appearance.Options.UseFont = true;
+            this.ProjectBarItem.AppearanceDisabled.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.ProjectBarItem.AppearanceDisabled.Options.UseFont = true;
+            this.ProjectBarItem.AppearanceHotTracked.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.ProjectBarItem.AppearanceHotTracked.Options.UseFont = true;
+            this.ProjectBarItem.AppearancePressed.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.ProjectBarItem.AppearancePressed.Options.UseFont = true;
+            this.ProjectBarItem.Caption = "專案資料";
+            this.ProjectBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("ProjectBarItem.ImageOptions.LargeImage")));
+            this.ProjectBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("ProjectBarItem.ImageOptions.SmallImage")));
+            this.ProjectBarItem.Name = "ProjectBarItem";
+            this.ProjectBarItem.Tag = "12";
+            this.ProjectBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
+            // 
             // AccountingBarGroup
             // 
             this.AccountingBarGroup.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
@@ -299,6 +321,7 @@ namespace ERPManagementAPP
             this.AccountingBarGroup.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("AccountingBarGroup.ImageOptions.SmallImage")));
             this.AccountingBarGroup.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.PurchasenavBarItem),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.PickingBarItem),
             new DevExpress.XtraNavBar.NavBarItemLink(this.SalesnavBarItem),
             new DevExpress.XtraNavBar.NavBarItemLink(this.PaymentnavBarItem)});
             this.AccountingBarGroup.Name = "AccountingBarGroup";
@@ -313,6 +336,17 @@ namespace ERPManagementAPP
             this.PurchasenavBarItem.Name = "PurchasenavBarItem";
             this.PurchasenavBarItem.Tag = "5";
             this.PurchasenavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
+            // 
+            // PickingBarItem
+            // 
+            this.PickingBarItem.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.PickingBarItem.Appearance.Options.UseFont = true;
+            this.PickingBarItem.Caption = "領料/領料退回";
+            this.PickingBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("PickingBarItem.ImageOptions.LargeImage")));
+            this.PickingBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("PickingBarItem.ImageOptions.SmallImage")));
+            this.PickingBarItem.Name = "PickingBarItem";
+            this.PickingBarItem.Tag = "13";
+            this.PickingBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
             // 
             // SalesnavBarItem
             // 
@@ -391,6 +425,19 @@ namespace ERPManagementAPP
             this.PaymentTransferDatenavBarItem.Tag = "10";
             this.PaymentTransferDatenavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
             // 
+            // PartnernavBarItem
+            // 
+            this.PartnernavBarItem.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.PartnernavBarItem.Appearance.Options.UseFont = true;
+            this.PartnernavBarItem.AppearanceHotTracked.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.PartnernavBarItem.AppearanceHotTracked.Options.UseFont = true;
+            this.PartnernavBarItem.Caption = "合作夥伴分潤";
+            this.PartnernavBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("PartnernavBarItem.ImageOptions.LargeImage")));
+            this.PartnernavBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("PartnernavBarItem.ImageOptions.SmallImage")));
+            this.PartnernavBarItem.Name = "PartnernavBarItem";
+            this.PartnernavBarItem.Tag = "11";
+            this.PartnernavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
+            // 
             // LoginimageCollection
             // 
             this.LoginimageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("LoginimageCollection.ImageStream")));
@@ -406,29 +453,16 @@ namespace ERPManagementAPP
             // 
             this.pcl_View.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pcl_View.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pcl_View.Location = new System.Drawing.Point(184, 25);
+            this.pcl_View.Location = new System.Drawing.Point(184, 23);
             this.pcl_View.Name = "pcl_View";
-            this.pcl_View.Size = new System.Drawing.Size(1278, 843);
+            this.pcl_View.Size = new System.Drawing.Size(1302, 881);
             this.pcl_View.TabIndex = 14;
-            // 
-            // PartnernavBarItem
-            // 
-            this.PartnernavBarItem.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.PartnernavBarItem.Appearance.Options.UseFont = true;
-            this.PartnernavBarItem.AppearanceHotTracked.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.PartnernavBarItem.AppearanceHotTracked.Options.UseFont = true;
-            this.PartnernavBarItem.Caption = "合作夥伴分潤";
-            this.PartnernavBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("PartnernavBarItem.ImageOptions.LargeImage")));
-            this.PartnernavBarItem.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("PartnernavBarItem.ImageOptions.SmallImage")));
-            this.PartnernavBarItem.Name = "PartnernavBarItem";
-            this.PartnernavBarItem.Tag = "11";
-            this.PartnernavBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1462, 895);
+            this.ClientSize = new System.Drawing.Size(1486, 930);
             this.Controls.Add(this.pcl_View);
             this.Controls.Add(this.navBarControl1);
             this.Controls.Add(this.barDockControlLeft);
@@ -480,6 +514,8 @@ namespace ERPManagementAPP
         private DevExpress.XtraNavBar.NavBarItem PaymentTransferDatenavBarItem;
         private DevExpress.XtraBars.BarStaticItem ConnectbarStaticItem;
         private DevExpress.XtraNavBar.NavBarItem PartnernavBarItem;
+        private DevExpress.XtraNavBar.NavBarItem ProjectBarItem;
+        private DevExpress.XtraNavBar.NavBarItem PickingBarItem;
     }
 }
 

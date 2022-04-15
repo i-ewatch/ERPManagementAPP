@@ -53,6 +53,7 @@ namespace ERPManagementAPP.Maintain
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.colProjectNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PruchasegroupControl)).BeginInit();
@@ -107,6 +108,7 @@ namespace ERPManagementAPP.Maintain
             this.colSalesFlag,
             this.colSalesNumber,
             this.colSalesCustomerNumber,
+            this.colProjectNumber,
             this.colSalesTax,
             this.colSalesInvoiceNo,
             this.colTotal,
@@ -152,7 +154,7 @@ namespace ERPManagementAPP.Maintain
             this.colSalesTax.Name = "colSalesTax";
             this.colSalesTax.OptionsColumn.AllowEdit = false;
             this.colSalesTax.Visible = true;
-            this.colSalesTax.VisibleIndex = 3;
+            this.colSalesTax.VisibleIndex = 4;
             // 
             // colSalesInvoiceNo
             // 
@@ -161,7 +163,7 @@ namespace ERPManagementAPP.Maintain
             this.colSalesInvoiceNo.Name = "colSalesInvoiceNo";
             this.colSalesInvoiceNo.OptionsColumn.AllowEdit = false;
             this.colSalesInvoiceNo.Visible = true;
-            this.colSalesInvoiceNo.VisibleIndex = 4;
+            this.colSalesInvoiceNo.VisibleIndex = 5;
             // 
             // colTotal
             // 
@@ -172,7 +174,7 @@ namespace ERPManagementAPP.Maintain
             this.colTotal.Name = "colTotal";
             this.colTotal.OptionsColumn.AllowEdit = false;
             this.colTotal.Visible = true;
-            this.colTotal.VisibleIndex = 5;
+            this.colTotal.VisibleIndex = 6;
             // 
             // colTotalTax
             // 
@@ -183,7 +185,7 @@ namespace ERPManagementAPP.Maintain
             this.colTotalTax.Name = "colTotalTax";
             this.colTotalTax.OptionsColumn.AllowEdit = false;
             this.colTotalTax.Visible = true;
-            this.colTotalTax.VisibleIndex = 6;
+            this.colTotalTax.VisibleIndex = 7;
             // 
             // colPosting
             // 
@@ -192,7 +194,7 @@ namespace ERPManagementAPP.Maintain
             this.colPosting.Name = "colPosting";
             this.colPosting.OptionsColumn.AllowEdit = false;
             this.colPosting.Visible = true;
-            this.colPosting.VisibleIndex = 7;
+            this.colPosting.VisibleIndex = 8;
             // 
             // colRemark
             // 
@@ -201,7 +203,7 @@ namespace ERPManagementAPP.Maintain
             this.colRemark.Name = "colRemark";
             this.colRemark.OptionsColumn.AllowEdit = false;
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 8;
+            this.colRemark.VisibleIndex = 9;
             // 
             // colFileName
             // 
@@ -209,7 +211,7 @@ namespace ERPManagementAPP.Maintain
             this.colFileName.FieldName = "FileName";
             this.colFileName.Name = "colFileName";
             this.colFileName.Visible = true;
-            this.colFileName.VisibleIndex = 9;
+            this.colFileName.VisibleIndex = 10;
             // 
             // Company_BarpanelControl
             // 
@@ -230,7 +232,7 @@ namespace ERPManagementAPP.Maintain
             // 
             this.btn_Sales_Delete.AllowFocus = false;
             this.btn_Sales_Delete.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btn_Sales_Delete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Purchase_Delete.ImageOptions.Image")));
+            this.btn_Sales_Delete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Sales_Delete.ImageOptions.Image")));
             this.btn_Sales_Delete.Location = new System.Drawing.Point(468, 0);
             this.btn_Sales_Delete.Name = "btn_Sales_Delete";
             this.btn_Sales_Delete.Size = new System.Drawing.Size(85, 43);
@@ -241,7 +243,7 @@ namespace ERPManagementAPP.Maintain
             // 
             this.btn_Sales_Edit.AllowFocus = false;
             this.btn_Sales_Edit.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btn_Sales_Edit.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Purchase_Edit.ImageOptions.Image")));
+            this.btn_Sales_Edit.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Sales_Edit.ImageOptions.Image")));
             this.btn_Sales_Edit.Location = new System.Drawing.Point(383, 0);
             this.btn_Sales_Edit.Name = "btn_Sales_Edit";
             this.btn_Sales_Edit.Size = new System.Drawing.Size(85, 43);
@@ -252,7 +254,7 @@ namespace ERPManagementAPP.Maintain
             // 
             this.btn_Sales_Add.AllowFocus = false;
             this.btn_Sales_Add.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btn_Sales_Add.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Purchase_Add.ImageOptions.Image")));
+            this.btn_Sales_Add.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Sales_Add.ImageOptions.Image")));
             this.btn_Sales_Add.Location = new System.Drawing.Point(298, 0);
             this.btn_Sales_Add.Name = "btn_Sales_Add";
             this.btn_Sales_Add.Size = new System.Drawing.Size(85, 43);
@@ -263,7 +265,7 @@ namespace ERPManagementAPP.Maintain
             // 
             this.btn_Sales_Search.AllowFocus = false;
             this.btn_Sales_Search.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btn_Sales_Search.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Purchase_Search.ImageOptions.Image")));
+            this.btn_Sales_Search.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Sales_Search.ImageOptions.Image")));
             this.btn_Sales_Search.Location = new System.Drawing.Point(213, 0);
             this.btn_Sales_Search.Name = "btn_Sales_Search";
             this.btn_Sales_Search.Size = new System.Drawing.Size(85, 43);
@@ -327,6 +329,15 @@ namespace ERPManagementAPP.Maintain
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
+            // colProjectNumber
+            // 
+            this.colProjectNumber.Caption = "專案代碼";
+            this.colProjectNumber.FieldName = "ProjectNumber";
+            this.colProjectNumber.Name = "colProjectNumber";
+            this.colProjectNumber.OptionsColumn.AllowEdit = false;
+            this.colProjectNumber.Visible = true;
+            this.colProjectNumber.VisibleIndex = 3;
+            // 
             // SalesMaintainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -375,5 +386,6 @@ namespace ERPManagementAPP.Maintain
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn colProjectNumber;
     }
 }

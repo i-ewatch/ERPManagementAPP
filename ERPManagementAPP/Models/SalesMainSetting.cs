@@ -21,6 +21,10 @@ namespace ERPManagementAPP.Models
         /// </summary>
         public string SalesCustomerNumber { get; set; }
         /// <summary>
+        /// 專案代碼
+        /// </summary>
+        public string ProjectNumber { get; set; }
+        /// <summary>
         /// 稅別
         /// </summary>
         public int SalesTax { get; set; }

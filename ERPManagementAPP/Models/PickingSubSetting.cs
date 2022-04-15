@@ -1,19 +1,20 @@
 ﻿namespace ERPManagementAPP.Models
 {
-    public class PurchaseSubSetting
+    public class PickingSubSetting
     {
         /// <summary>
-        /// 進貨旗標 
+        /// 領料旗標 
         /// </summary>
-        public int PurchaseFlag { get; set; }
+        /// [Range(5, 6, ErrorMessage = "5.領料，6.領料退回")]
+        public int PickingFlag { get; set; }
         /// <summary>
-        /// 進貨單號
+        /// 領料單號
         /// </summary>
-        public string PurchaseNumber { get; set; }
+        public string PickingNumber { get; set; }
         /// <summary>
-        /// 進貨明細序號
+        /// 領料明細序號
         /// </summary>
-        public int PurchaseNo { get; set; }
+        public int PickingNo { get; set; }
         /// <summary>
         /// 產品編號
         /// </summary>
@@ -38,5 +39,13 @@
         /// 產品小計
         /// </summary>
         public double ProductTotal { get; set; }
+        /// <summary>
+        /// 產品單項成本
+        /// </summary>
+        public double Cost { get; set; }
+        /// <summary>
+        /// 成本小計
+        /// </summary>
+        public double CostTotal { get; set; }
     }
 }

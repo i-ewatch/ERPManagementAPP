@@ -1,7 +1,8 @@
-﻿using DevExpress.XtraNavBar;
+﻿using DevExpress.Utils;
+using DevExpress.XtraEditors;
+using DevExpress.XtraNavBar;
 using ERPManagementAPP.Configuration;
 using ERPManagementAPP.Emuns;
-using ERPManagementAPP.Maintain.AccountMaintainForm;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using ERPManagementAPP.Modules;
@@ -14,6 +15,10 @@ namespace ERPManagementAPP
 {
     public partial class Form1 : DevExpress.XtraEditors.XtraForm
     {
+        /// <summary>
+        /// 錯誤泡泡視窗
+        /// </summary>
+        private FlyoutPanel ErrorflyoutPanel;
         /// <summary>
         /// API功能
         /// </summary>
@@ -179,21 +184,44 @@ namespace ERPManagementAPP
         {
             if (APIMethod.ClientFlag)
             {
+                if (ErrorflyoutPanel != null)
+                {
+                    ErrorflyoutPanel.HidePopup();
+                    ErrorflyoutPanel = null;
+                }
                 if (ConnectbarStaticItem.ItemAppearance.Normal.ForeColor == Color.Red)
                 {
-                    ConnectbarStaticItem.ItemAppearance.Normal.ForeColor = Color.White;
+                    ConnectbarStaticItem.ItemAppearance.Normal.ForeColor = Color.Black;
                 }
                 TimebarStaticItem.Caption = $"系統時間 : {DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")} ";
                 ConnectbarStaticItem.Caption = $"最後通訊時間 : {APIMethod.ErrorStr}";
             }
             else
             {
-                if (ConnectbarStaticItem.ItemAppearance.Normal.ForeColor == Color.White)
+                if (ConnectbarStaticItem.ItemAppearance.Normal.ForeColor == Color.Black)
                 {
                     ConnectbarStaticItem.ItemAppearance.Normal.ForeColor = Color.Red;
                 }
                 TimebarStaticItem.Caption = $"系統時間 : {DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")} ";
                 ConnectbarStaticItem.Caption = APIMethod.ErrorStr;
+                if (ErrorflyoutPanel == null)
+                {
+                    ErrorflyoutPanel = new FlyoutPanel()
+                    {
+                        OwnerControl = this,
+                        Size = new Size(this.Size.Width, 20)
+                    };
+                    LabelControl label = new LabelControl() { Dock = DockStyle.Fill };
+                    label.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
+                    label.Appearance.Font = new Font("微軟正黑體", 12, FontStyle.Bold);
+                    label.Appearance.ForeColor = Color.White;
+                    label.Appearance.BackColor = Color.Red;
+                    label.AutoSizeMode = LabelAutoSizeMode.None;
+                    label.Text = APIMethod.ErrorStr;
+                    ErrorflyoutPanel.Controls.Add(label);
+                    ErrorflyoutPanel.Options.AnchorType = DevExpress.Utils.Win.PopupToolWindowAnchor.Bottom;
+                    ErrorflyoutPanel.ShowPopup();
+                }
             }
 
         }

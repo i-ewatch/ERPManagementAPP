@@ -76,12 +76,21 @@ namespace ERPManagementAPP.Methods
             Sales_url = $"{URL}/Sales";
             SalesNumber_url = $"{URL}/Sales/SalesNumber";
             SalesAttachmenFile_url = $"{URL}/SalesAttachmentFile";
-            SalesPosting_url= $"{URL}/Sales/SalesPosting";
+            SalesPosting_url = $"{URL}/Sales/SalesPosting";
             UpdateSalesMain_url = $"{URL}/Sales/UpdateSalesMain";
 
             Payment_url = $"{URL}/Payment";
             PaymentAttachmenFile_url = $"{URL}/PaymentAttachmentFile";
             PaymentItem_url = $"{URL}/PaymentItem";
+
+            Project_url = $"{URL}/Project";
+            ProjectAttachmenFile_url = $"{URL}/ProjectAttachmentFile";
+
+            Picking_url = $"{URL}/Picking";
+            PickingNumber_url = $"{URL}/Picking/PickingNumber";
+            PickingAttachmenFile_url = $"{URL}/PickingAttachmentFile";
+            PickingPosting_url = $"{URL}/Picking/PickingPosting";
+            UpdatePickingMain_url = $"{URL}/Picking/UpdatePickingMain";
         }
         #region 登入資訊
         /// <summary>
@@ -239,6 +248,38 @@ namespace ERPManagementAPP.Methods
         /// </summary>
         private string PaymentItem_url { get; set; }
         #endregion
+        #region 專案資訊
+        /// <summary>
+        /// 專案資料(Get、Post、Put、Delete)
+        /// </summary>
+        private string Project_url { get; set; }
+        /// <summary>
+        /// 專案檔案(Post、Put)
+        /// </summary>
+        private string ProjectAttachmenFile_url { get; set; }
+        #endregion
+        #region 領料資訊
+        /// <summary>
+        /// 領料資料(Get、Post、Put、Delete)
+        /// </summary>
+        private string Picking_url { get; set; }
+        /// <summary>
+        ///  領料資料查詢(年月份)
+        /// </summary>
+        private string PickingNumber_url { get; set; }
+        /// <summary>
+        /// 領料檔案(Post、Get)
+        /// </summary>
+        private string PickingAttachmenFile_url { get; set; }
+        /// <summary>
+        /// 未過帳銷貨資料(Get)
+        /// </summary>
+        private string PickingPosting_url { get; set; }
+        /// <summary>
+        /// 銷貨父更新(Put)
+        /// </summary>
+        private string UpdatePickingMain_url { get; set; }
+        #endregion
 
         /*以下API功能----------------------------------------------------------------------------------------*/
         #region 登入API
@@ -248,7 +289,7 @@ namespace ERPManagementAPP.Methods
         /// <param name="Account">帳號</param>
         /// <param name="PassWord">密碼</param>
         /// <returns></returns>
-        public List<EmployeeSetting> Get_Login(string Account,string PassWord)
+        public List<EmployeeSetting> Get_Login(string Account, string PassWord)
         {
             try
             {
@@ -2053,7 +2094,6 @@ namespace ERPManagementAPP.Methods
         /// <summary>
         /// 進貨上傳檔案
         /// </summary>
-        /// <param name="PruchaseSetting"></param>
         /// <param name="Path"></param>
         /// <returns></returns>
         public string Post_PurchaseAttachmentFile(int PurchaseFlag, string PurchaseCompanyNumber, DateTime PurchaseDate, string PurchaseNumber, string Path)
@@ -2414,6 +2454,183 @@ namespace ERPManagementAPP.Methods
         #endregion
         #endregion
 
+        #region 專案API
+        #region 查詢全部【專案】父子資料
+        /// <summary>
+        /// 查詢全部【專案】父子資料
+        /// </summary>
+        /// <returns></returns>
+        public List<ProjectSetting> Get_Project()
+        {
+            try
+            {
+                List<ProjectSetting> settings = null;
+                var option = new RestClientOptions(Project_url) { Timeout = time };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<ProjectSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<ProjectSetting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "查詢全部【專案】父子資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 新增專案父子
+        /// <summary>
+        /// 新增專案父子
+        /// </summary>
+        /// <param name="projectSetting"></param>
+        /// <returns></returns>
+        public string Post_Project(string projectSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Project_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddBody(projectSetting, ContentType.Json);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                ResponseDataMessage = response.Result.Content;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "新增專案父子資料API錯誤");
+                ResponseDataMessage = "";
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 修改專案父子
+        public string Put_Project(string ProjectSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Project_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(ProjectSetting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "修改專案父子資料API錯誤");
+                ResponseDataMessage = "";
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 刪除專案父子
+        public string Delete_Project(string ProjectNumber)
+        {
+            try
+            {
+                var option = new RestClientOptions($"{Purchase_url}/{ProjectNumber}")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Delete);
+                var response = clinet.DeleteAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "刪除專案父子資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 專案上傳檔案
+        /// <summary>
+        /// 專案上傳檔案
+        /// </summary>
+        /// <param name="ProjectNumber"></param>
+        /// <param name="Path"></param>
+        /// <returns></returns>
+        public string Post_ProjectAttachmentFile(string ProjectNumber, string Path)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProjectAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddParameter("ProjectNumber", ProjectNumber, type: ParameterType.QueryString);
+                requsest.AddFile("AttachmentFile", Path);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "專案上傳檔案API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 專案下載檔案
+        public byte[] Get_ProjectAttachmentFile(string ProjectNumber, string File)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProjectAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
+                requsest.AddParameter("ProjectNumber", ProjectNumber, type: ParameterType.QueryString);
+                var response = clinet.DownloadDataAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return response.Result;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "專案下載檔案API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #endregion
+
         #region 代墊代付API
         #region 全部代墊代付資料
         /// <summary>
@@ -2457,7 +2674,7 @@ namespace ERPManagementAPP.Methods
             try
             {
                 List<PaymentSetting> settings = null;
-                var option = new RestClientOptions(Payment_url+"/TransferDate")
+                var option = new RestClientOptions(Payment_url + "/TransferDate")
                 {
                     Timeout = time
                 };
@@ -2490,7 +2707,7 @@ namespace ERPManagementAPP.Methods
             try
             {
                 List<PaymentSetting> settings = null;
-                var option = new RestClientOptions(Payment_url+"/YearDate")
+                var option = new RestClientOptions(Payment_url + "/YearDate")
                 {
                     Timeout = time
                 };
@@ -2647,7 +2864,7 @@ namespace ERPManagementAPP.Methods
         }
         #endregion
         #region 代墊代付上傳檔案
-        public string Post_PaymentAttachmentFile(string PaymentNumber,string Path)
+        public string Post_PaymentAttachmentFile(string PaymentNumber, string Path)
         {
             try
             {
@@ -2674,7 +2891,7 @@ namespace ERPManagementAPP.Methods
         }
         #endregion
         #region 代墊代付下載檔案
-        public byte[] Get_PaymentAttachmentFile(string PaymentNumber,string File)
+        public byte[] Get_PaymentAttachmentFile(string PaymentNumber, string File)
         {
             try
             {
@@ -2826,6 +3043,301 @@ namespace ERPManagementAPP.Methods
             {
                 Log.Error(ex, "刪除代墊代付品項資料API錯誤");
                 ResponseDataMessage = "";
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region 領料API
+        #region 全部領料表頭(年月份)
+        /// <summary>
+        /// 全部領料表頭(年月份)
+        /// </summary>
+        /// <param name="PickingNumber">年月份</param>
+        /// <returns></returns>
+        public List<PickingMainSetting> Get_Picking(string PickingNumber)
+        {
+            try
+            {
+                List<PickingMainSetting> settings = null;
+                var option = new RestClientOptions(PickingNumber_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddParameter("PickingNumber", PickingNumber, type: ParameterType.QueryString);
+                var response = clinet.ExecuteGetAsync<List<PickingMainSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<PickingMainSetting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "全部領料表頭(年月份)API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 查詢單筆【領料】或【領料退出】父子資料
+        /// <summary>
+        /// 查詢單筆【領料】或【領料退出】父子資料
+        /// </summary>
+        /// <param name="setting"></param>
+        /// <returns></returns>
+        public List<PickingSetting> Get_Picking(PickingMainSetting setting)
+        {
+            try
+            {
+                List<PickingSetting> settings = null;
+                var option = new RestClientOptions(Picking_url + $"/{setting.PickingFlag}/{setting.PickingNumber}")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<PickingSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<PickingSetting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "查詢單筆【領料】或【領料退出】父子資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 查詢未過帳領料表頭
+        /// <summary>
+        /// 查詢未過帳領料表頭
+        /// </summary>
+        /// <returns></returns>
+        public List<PickingMainSetting> Get_PickingPosting()
+        {
+            try
+            {
+                List<PickingMainSetting> settings = null;
+                var option = new RestClientOptions(PickingPosting_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<PickingMainSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<PickingMainSetting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "查詢未過帳領料表頭API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 新增領料資料
+        /// <summary>
+        /// 新增領料資料
+        /// </summary>
+        /// <param name="PruchaseSetting"></param>
+        /// <returns></returns>
+        public string Post_Picking(string PruchaseSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Picking_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddBody(PruchaseSetting, ContentType.Json);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                ResponseDataMessage = response.Result.Content;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "新增領料資料API錯誤");
+                ResponseDataMessage = "";
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 修改領料資料
+        /// <summary>
+        /// 修改領料資料
+        /// </summary>
+        /// <param name="PruchaseSetting"></param>
+        /// <returns></returns>
+        public string Put_Picking(string PruchaseSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Picking_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(PruchaseSetting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "修改領料資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 更新過帳領料資料
+        /// <summary>
+        /// 更新過帳領料資料
+        /// </summary>
+        /// <param name="PruchaseMainSetting"></param>
+        /// <returns></returns>
+        public string Put_PickingMain(string PickingMainSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(UpdatePickingMain_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(PickingMainSetting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "更新過帳領料資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 刪除領料資料
+        /// <summary>
+        /// 刪除領料資料
+        /// </summary>
+        /// <param name="PruchaseSetting"></param>
+        /// <returns></returns>
+        public string Delete_Picking(int PickingFlag, string PickingNumber)
+        {
+            try
+            {
+                var option = new RestClientOptions($"{Picking_url}/{PickingFlag}/{PickingNumber}")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Delete);
+                var response = clinet.DeleteAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "刪除領料資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 領料上傳檔案
+        /// <summary>
+        /// 領料上傳檔案
+        /// </summary>
+        /// <param name="PruchaseSetting"></param>
+        /// <param name="Path"></param>
+        /// <returns></returns>
+        public string Post_PickingAttachmentFile(int PickingFlag, string PickingCompanyNumber, DateTime PickingDate, string PickingNumber, string Path)
+        {
+            try
+            {
+                var option = new RestClientOptions(PickingAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddParameter("PickingFlag", PickingFlag, type: ParameterType.QueryString);
+                requsest.AddParameter("PickingCustomerNumber", PickingCompanyNumber, type: ParameterType.QueryString);
+                requsest.AddParameter("PickingDate", PickingDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
+                requsest.AddParameter("PickingNumber", PickingNumber, type: ParameterType.QueryString);
+                requsest.AddFile("AttachmentFile", Path);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "領料上傳檔案API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 領料下載檔案
+        /// <summary>
+        /// 領料下載檔案
+        /// </summary>
+        /// <param name="File">檔案名稱</param>
+        /// <returns></returns>
+        public byte[] Get_PickingAttachmentFile(string PickingCompanyNumber, string File)
+        {
+            try
+            {
+                var option = new RestClientOptions(PickingAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
+                requsest.AddParameter("PickingCustomerNumber", PickingCompanyNumber, type: ParameterType.QueryString);
+                var response = clinet.DownloadDataAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return response.Result;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "領料下載檔案API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }

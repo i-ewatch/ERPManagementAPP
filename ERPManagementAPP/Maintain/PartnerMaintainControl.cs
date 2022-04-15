@@ -1,23 +1,17 @@
 ﻿using DevExpress.Data;
 using DevExpress.Utils;
+using DevExpress.XtraBars.Docking2010.Customization;
 using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ERPManagementAPP.Maintain
@@ -54,46 +48,46 @@ namespace ERPManagementAPP.Maintain
             action.Commands.Add(FlyoutCommand.Yes);
             #region 銷貨資料表
             gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            #region 銷貨資訊報表按鈕
-            RepositoryItemButtonEdit Salesedit = new RepositoryItemButtonEdit();
-            Salesedit.ButtonClick += (s, e) =>
-            {
-                FocuseMainGrid();
-                if (e.Button.Kind == ButtonPredefines.Plus)
-                {
-                    foreach (var item in SalesMainSettings)
-                    {
-                        if (item.SalesNumber == FocuseSalesMainSetting.SalesNumber)
-                        {
-                            if (item.Posting == 1)
-                            {
-                                if (item.ProfitSharingDate == null)
-                                {
-                                    item.ProfitSharingDate = DateTime.Now;
-                                    FocuseSalesMainSetting.ProfitSharingDate = DateTime.Now;
-                                    string value = JsonConvert.SerializeObject(FocuseSalesMainSetting);
-                                    apiMethod.Put_SalesMain(value);
-                                    break;
-                                }
-                                else
-                                {
-                                    break;
-                                }
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                    }
-                }
-            };
-            Salesedit.Buttons[0].Kind = ButtonPredefines.Plus;
-            Salesedit.Buttons[0].Caption = "分潤日期";
-            Salesedit.TextEditStyle = TextEditStyles.DisableTextEditor;
-            SalesgridControl.RepositoryItems.Add(Salesedit);
-            gridView1.Columns["ProfitSharingDate"].ColumnEdit = Salesedit;
-            gridView1.Columns["ProfitSharingDate"].ShowButtonMode = ShowButtonModeEnum.ShowAlways;
+            #region 銷貨資訊報表按鈕 2022/4/13拔除
+            //RepositoryItemButtonEdit Salesedit = new RepositoryItemButtonEdit();
+            //Salesedit.ButtonClick += (s, e) =>
+            //{
+            //    FocuseMainGrid();
+            //    if (e.Button.Kind == ButtonPredefines.Plus)
+            //    {
+            //        foreach (var item in SalesMainSettings)
+            //        {
+            //            if (item.SalesNumber == FocuseSalesMainSetting.SalesNumber)
+            //            {
+            //                if (item.Posting == 1)
+            //                {
+            //                    if (item.ProfitSharingDate == null)
+            //                    {
+            //                        item.ProfitSharingDate = DateTime.Now;
+            //                        FocuseSalesMainSetting.ProfitSharingDate = DateTime.Now;
+            //                        string value = JsonConvert.SerializeObject(FocuseSalesMainSetting);
+            //                        apiMethod.Put_SalesMain(value);
+            //                        break;
+            //                    }
+            //                    else
+            //                    {
+            //                        break;
+            //                    }
+            //                }
+            //                else
+            //                {
+            //                    break;
+            //                }
+            //            }
+            //        }
+            //    }
+            //};
+            //Salesedit.Buttons[0].Kind = ButtonPredefines.Plus;
+            //Salesedit.Buttons[0].Caption = "分潤日期";
+            //Salesedit.TextEditStyle = TextEditStyles.DisableTextEditor;
+            //SalesgridControl.RepositoryItems.Add(Salesedit);
+            //gridView1.Columns["ProfitSharingDate"].ColumnEdit = Salesedit;
+            //gridView1.Columns["ProfitSharingDate"].ShowButtonMode = ShowButtonModeEnum.ShowAlways;
             #endregion
             #region 群組功能
             gridView1.Columns["SalesEmployeeNumber"].Group();
@@ -211,10 +205,19 @@ namespace ERPManagementAPP.Maintain
             #region 產品類別資料查詢
             btn_Sales_Search.Click += (s, e) =>
             {
+                if (cbt_Posting.SelectedIndex == 2 && cbt_ProfitSharing.SelectedIndex == 1)
+                {
+                    btn_TransferDate.Visible = true;
+                }
+                else
+                {
+                    btn_TransferDate.Visible = false;
+                }
                 Refresh_Main_GridView();
             };
             #endregion
             #endregion
+            #region 報表匯出按鈕
             btn_Export.Click += (s, e) =>
               {
                   if (gridView1.Columns.Count > 0 && SalesgridControl.DataSource != null)
@@ -231,6 +234,29 @@ namespace ERPManagementAPP.Maintain
                       }
                   }
               };
+            #endregion
+            #region 全部分潤按鈕 2022/4/13新增
+            btn_TransferDate.Click += (s, e) =>
+            {
+                action.Caption = "代墊代付是否全部過帳完成";
+                if (FlyoutDialog.Show(Form1, action) == DialogResult.Yes)
+                {
+                    foreach (var item in SalesMainSettings)
+                    {
+                        if (item.ProfitSharingDate == null)
+                        {
+                            item.ProfitSharingDate = DateTime.Now;
+                            string value = JsonConvert.SerializeObject(item);
+                            apiMethod.Put_SalesMain(value);
+                            Thread.Sleep(80);
+                        }
+                    }
+                    action1.Caption = "代墊代付全部過帳完成";
+                    FlyoutDialog.Show(Form1, action1);
+                    Refresh_Main_GridView();
+                }
+            } ;
+            #endregion
         }
         #region 聚焦主資料表功能
         private void FocuseMainGrid()

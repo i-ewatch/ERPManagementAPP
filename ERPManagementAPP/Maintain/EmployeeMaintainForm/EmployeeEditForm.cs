@@ -3,7 +3,6 @@ using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -9,22 +9,22 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ERPManagementAPP.Maintain.SalesMaintainForm
+namespace ERPManagementAPP.Maintain.PickingMaintainForm
 {
-    public partial class SalesEditForm : BaseEditForm
+    public partial class PickingEditForm : BaseEditForm
     {
         /// <summary>
         /// 聚焦表身資訊
         /// </summary>
-        private SalesSubSetting FocuseSalesSubSetting { get; set; } = new SalesSubSetting();
+        private PickingSubSetting FocusePickingSubSetting { get; set; } = new PickingSubSetting();
         /// <summary>
         /// 表身資訊
         /// </summary>
-        private List<SalesSubSetting> SalesSubSettings { get; set; } = new List<SalesSubSetting>();
+        private List<PickingSubSetting> PickingSubSettings { get; set; } = new List<PickingSubSetting>();
         /// <summary>
         /// 進貨資訊
         /// </summary>
-        private SalesSetting SalesSetting { get; set; } = new SalesSetting();
+        private PickingSetting PickingSetting { get; set; } = new PickingSetting();
         /// <summary>
         /// 產品資訊
         /// </summary>
@@ -56,24 +56,24 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         /// <summary>
         /// 產品數量
         /// </summary>
-        private double ProductQty = 0;
+        private double ProductQty { get; set; } = 0;
         /// <summary>
         /// 產品單價
         /// </summary>
-        private double ProductPrice = 0;
+        private double ProductPrice { get; set; } = 0;
         /// <summary>
         /// 合計
         /// </summary>
-        private double Total = 0;
+        private double Total { get; set; } = 0;
         /// <summary>
         /// 稅金
         /// </summary>
-        private double Tax = 0;
+        private double Tax { get; set; } = 0;
         /// <summary>
         /// 稅後總計
         /// </summary>
-        private double TotalTax = 0;
-        public SalesEditForm(List<CustomerSetting> customerSettings, List<EmployeeSetting> employeeSettings, List<ProductSetting> productSettings, List<ProjectSetting> projectSettings, SalesSetting salesSetting, APIMethod apiMethod, Form1 form1)
+        private double TotalTax { get; set; } = 0;
+        public PickingEditForm(List<CustomerSetting> customerSettings, List<EmployeeSetting> employeeSettings, List<ProductSetting> productSettings, List<ProjectSetting> projectSettings, PickingSetting pickingSetting, APIMethod apiMethod, Form1 form1)
         {
             InitializeComponent();
             Form1 = form1;
@@ -81,53 +81,34 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             CustomerSettings = customerSettings;
             EmployeeSettings = employeeSettings;
             ProductSettings = productSettings;
-            SalesSetting = salesSetting;
+            PickingSetting = pickingSetting;
             ProjectSettings = projectSettings;
             Create_slt_SalescustomerNumber_cbt();
             Create_cbt_EmployeeNumber_cbt();
-            //Create_cbt_ProductName_cbt(); //2022/4/13 拔除下拉選項功能
-            Create_slt_ProjectNumber(); //2022/4/13 新增專案資訊
-            if (salesSetting != null && salesSetting.SalesNumber != null)
+            Create_cbt_ProductName_cbt();
+            Create_slt_ProjectNumber();
+            if (pickingSetting != null && pickingSetting.PickingNumber != null)
             {
-                cbt_SalesFlag.SelectedIndex = salesSetting.SalesFlag - 3;
-                txt_SalesNumber.Text = salesSetting.SalesNumber;
-                det_SalesDate.Text = salesSetting.SalesDate.ToString("yyyy年MM月dd日");
+                cbt_PickingFlag.SelectedIndex = pickingSetting.PickingFlag - 5;
+                txt_PickingNumber.Text = pickingSetting.PickingNumber;
+                det_PickingDate.Text = pickingSetting.PickingDate.ToString("yyyy年MM月dd日");
                 Show_ProductCustomerNumber_Index();
                 Show_ProjectNumber_Index();
-                cbt_SalesTax.SelectedIndex = salesSetting.SalesTax;
-                txt_SalesInvoiceNo.Text = salesSetting.SalesInvoiceNo;
-                txt_TakeACut.EditValue = salesSetting.TakeACut;
+                cbt_PickingTax.SelectedIndex = pickingSetting.PickingTax;
                 Show_EmployeeNumber_Index();
-                mmt_Remark.Text = salesSetting.Remark;
-                cbt_Posting.SelectedIndex = salesSetting.Posting;
-                SalesSubSettings = salesSetting.SalesSub;
-                txt_Cost.EditValue = salesSetting.Cost;
+                mmt_Remark.Text = pickingSetting.Remark;
+                PickingSubSettings = pickingSetting.PickingSub;
             }
             else
             {
-                det_SalesDate.EditValue = DateTime.Now;
-                txt_TakeACut.EditValue = 0;
-                txt_Cost.EditValue = 0;
+                det_PickingDate.EditValue = DateTime.Now;
             }
             CacalculateData();
             RefreshData();
-            cbt_SalesTax.SelectedIndexChanged += (s, e) =>
+            cbt_PickingTax.SelectedIndexChanged += (s, e) =>
             {
                 CacalculateData();
             };
-            #region 員工下拉選單變更
-            cbt_EmployeeNumber.EditValueChanged += (s, e) =>
-              {
-                  if (EmployeeSettings[cbt_EmployeeNumber.SelectedIndex].Token == 2)
-                  {
-                      txt_TakeACut.EditValue = 15;
-                  }
-                  else
-                  {
-                      txt_TakeACut.EditValue = 0;
-                  }
-              };
-            #endregion
             #region 載入檔案按鈕
             btn_LoadFile.Click += (s, e) =>
             {
@@ -196,25 +177,25 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             {
                 if (!string.IsNullOrEmpty(txt_ProducUnit.Text) && !string.IsNullOrEmpty(txt_productPrice.Text))
                 {
-                    SalesSubSettings.Add(new SalesSubSetting()
+                    PickingSubSettings.Add(new PickingSubSetting()
                     {
-                        SalesFlag = cbt_SalesFlag.SelectedIndex + 3,
-                        SalesNumber = "",
-                        SalesNo = SalesSubSettings.Count() + 1,
-                        ProductNumber = "",
-                        ProductName = txt_ProductName.Text,
+                        PickingFlag = cbt_PickingFlag.SelectedIndex + 5,
+                        PickingNumber = "",
+                        PickingNo = PickingSubSettings.Count() + 1,
+                        ProductNumber = SelectProductSetting.ProductNumber,
+                        ProductName = SelectProductSetting.ProductName,
                         ProductUnit = txt_ProducUnit.Text,
                         ProductQty = Convert.ToDouble(txt_productQty.Text),
                         ProductPrice = Convert.ToDouble(txt_productPrice.Text),
                         ProductTotal = Convert.ToDouble(txt_productQty.Text) * Convert.ToDouble(txt_productPrice.Text)
                     });
-                    txt_ProductName.Text = "";
+                    slt_ProductName.Text = "";
                     txt_productQty.Text = "";
-                    //SelectProductSetting = null;
+                    SelectProductSetting = null;
                     txt_productPrice.Text = "";
                     CacalculateData();
                     RefreshData();
-                    FocuseMainGrid();
+                    //FocuseMainGrid();
                 }
                 else
                 {
@@ -227,9 +208,9 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             #region 表身輸入框清除
             btn_Clear.Click += (s, e) =>
             {
-                txt_ProductName.Text = "";
+                slt_ProductName.Text = "";
                 txt_ProducUnit.Text = "";
-                //SelectProductSetting = null;
+                SelectProductSetting = null;
                 txt_productQty.Text = "";
                 txt_productPrice.Text = "";
             };
@@ -237,17 +218,17 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             #region 刪除細項
             btn_Delete.Click += (s, e) =>
             {
-                for (int i = 0; i < SalesSubSettings.Count; i++)
+                for (int i = 0; i < PickingSubSettings.Count; i++)
                 {
-                    if (SalesSubSettings[i].SalesNo == FocuseSalesSubSetting.SalesNo)
+                    if (PickingSubSettings[i].PickingNo == FocusePickingSubSetting.PickingNo)
                     {
-                        SalesSubSettings.RemoveAt(i);
+                        PickingSubSettings.RemoveAt(i);
                     }
                 }
                 RefraeshSalesNo();
                 CacalculateData();
                 RefreshData();
-                FocuseMainGrid();
+                //FocuseMainGrid();
             };
             #endregion
             #region 取消按鈕
@@ -259,7 +240,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             #region 儲存按鈕
             btn_Save.Click += (s, e) =>
             {
-                CheckNumber(salesSetting, apiMethod);
+                CheckNumber(PickingSetting, apiMethod);
             };
             #endregion
         }
@@ -271,24 +252,24 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         {
             if (gridView1.FocusedRowHandle > -1 && gridView1.DataRowCount > 0)
             {
-                FocuseSalesSubSetting.SalesFlag = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesFlag").ToString()) - 1;
-                FocuseSalesSubSetting.SalesNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesNumber").ToString();
-                FocuseSalesSubSetting.SalesNo = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesNo").ToString());
-                FocuseSalesSubSetting.ProductNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductNumber").ToString();
-                FocuseSalesSubSetting.ProductName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductName").ToString();
-                FocuseSalesSubSetting.ProductUnit = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductUnit").ToString();
-                FocuseSalesSubSetting.ProductQty = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductQty").ToString());
-                FocuseSalesSubSetting.ProductPrice = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductPrice").ToString());
-                FocuseSalesSubSetting.ProductTotal = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductTotal").ToString());
+                FocusePickingSubSetting.PickingFlag = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PickingFlag").ToString()) - 1;
+                FocusePickingSubSetting.PickingNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PickingNumber").ToString();
+                FocusePickingSubSetting.PickingNo = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PickingNo").ToString());
+                FocusePickingSubSetting.ProductNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductNumber").ToString();
+                FocusePickingSubSetting.ProductName = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductName").ToString();
+                FocusePickingSubSetting.ProductUnit = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductUnit").ToString();
+                FocusePickingSubSetting.ProductQty = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductQty").ToString());
+                FocusePickingSubSetting.ProductPrice = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductPrice").ToString());
+                FocusePickingSubSetting.ProductTotal = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductTotal").ToString());
 
-                //txt_ProductName.Text = FocuseSalesSubSetting.ProductName;
-                //txt_ProducUnit.Text = FocuseSalesSubSetting.ProductUnit;
-                //txt_productQty.Text = FocuseSalesSubSetting.ProductQty.ToString();
-                //txt_productPrice.Text = FocuseSalesSubSetting.ProductPrice.ToString();
+                //Show_ProductNumber_Index();
+                //txt_ProducUnit.Text = FocusePickingSubSetting.ProductUnit;
+                //txt_productQty.Text = FocusePickingSubSetting.ProductQty.ToString();
+                //txt_productPrice.Text = FocusePickingSubSetting.ProductPrice.ToString();
             }
             else
             {
-                FocuseSalesSubSetting = new SalesSubSetting();
+                FocusePickingSubSetting = new PickingSubSetting();
             }
         }
         #endregion
@@ -298,9 +279,9 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         /// </summary>
         private void RefraeshSalesNo()
         {
-            for (int i = 0; i < SalesSubSettings.Count; i++)
+            for (int i = 0; i < PickingSubSettings.Count; i++)
             {
-                SalesSubSettings[i].SalesNo = i + 1;
+                PickingSubSettings[i].PickingNo = i + 1;
             }
         }
         #endregion
@@ -310,7 +291,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         /// </summary>
         private void RefreshData()
         {
-            gridControl1.DataSource = SalesSubSettings;
+            gridControl1.DataSource = PickingSubSettings;
             gridControl1.RefreshDataSource();
         }
         #endregion
@@ -323,14 +304,14 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             Total = 0;
             Tax = 0;
             TotalTax = 0;
-            if (SalesSubSettings.Count > 0)
+            if (PickingSubSettings.Count > 0)
             {
-                foreach (var item in SalesSubSettings)
+                foreach (var item in PickingSubSettings)
                 {
                     Total += item.ProductTotal;
                 }
             }
-            if (cbt_SalesTax.SelectedIndex == 0)
+            if (cbt_PickingTax.SelectedIndex == 0)
             {
                 Tax = Math.Round(Total * 0.05, 0);
             }
@@ -346,11 +327,11 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         /// </summary>
         private void Create_slt_SalescustomerNumber_cbt()
         {
-            slt_SalesCustomerNumber.Properties.DataSource = CustomerSettings;
-            slt_SalesCustomerNumber.Properties.DisplayMember = "CustomerName";
-            slt_SalesCustomerNumber.CustomDisplayText += (s, e) =>
+            slt_PickingCustomerNumber.Properties.DataSource = CustomerSettings;
+            slt_PickingCustomerNumber.Properties.DisplayMember = "CustomerName";
+            slt_PickingCustomerNumber.CustomDisplayText += (s, e) =>
             {
-                if (SalesSetting != null)
+                if (PickingSetting != null)
                 {
                     if (SelectCustomerSetting != null)
                     {
@@ -382,7 +363,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         {
             for (int i = 0; i < CustomerSettings.Count; i++)
             {
-                if (CustomerSettings[i].CustomerNumber == SalesSetting.SalesCustomerNumber)
+                if (CustomerSettings[i].CustomerNumber == PickingSetting.PickingCustomerNumber)
                 {
                     SelectCustomerSetting = CustomerSettings[i];
                     break;
@@ -439,14 +420,10 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             {
                 foreach (var item in EmployeeSettings)
                 {
-                    if (item.EmployeeNumber == SalesSetting.SalesEmployeeNumber)
+                    if (item.EmployeeNumber == PickingSetting.PickingEmployeeNumber)
                     {
                         Index++;
                         cbt_EmployeeNumber.SelectedIndex = Index;
-                        if (item.Token == 2 && txt_TakeACut.EditValue.ToString() == "0")
-                        {
-                            txt_TakeACut.EditValue = 15;
-                        }
                     }
                     else
                     {
@@ -456,43 +433,57 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             }
         }
         #endregion
-        #region 產品編號功能 2022/4/13拔除此功能
+        #region 產品編號功能
         /// <summary>
         /// 創建產品編號下拉選單
         /// </summary>
         /// <param name="companySettings"></param>
-        //private void Create_cbt_ProductName_cbt()
-        //{
-        //    slt_ProductName.Properties.DataSource = ProductSettings;
-        //    slt_ProductName.Properties.DisplayMember = "ProductName";
-        //    slt_ProductName.CustomDisplayText += (s, e) =>
-        //    {
-        //        SelectProductSetting = e.Value as ProductSetting;
-        //        if (SelectProductSetting != null)
-        //        {
-        //            e.DisplayText = SelectProductSetting.ProductName;
-        //        }
-        //        else
-        //        {
-        //            e.DisplayText = "";
-        //        }
-        //    };
-        //}
+        private void Create_cbt_ProductName_cbt()
+        {
+            slt_ProductName.Properties.DataSource = ProductSettings;
+            slt_ProductName.Properties.DisplayMember = "ProductName";
+            slt_ProductName.CustomDisplayText += (s, e) =>
+            {
+                SelectProductSetting = e.Value as ProductSetting;
+                if (SelectProductSetting != null)
+                {
+                    e.DisplayText = SelectProductSetting.ProductName;
+                }
+                else
+                {
+                    e.DisplayText = "";
+                }
+            };
+        }
+        private void Show_ProductNumber_Index()
+        {
+            if (ProductSettings != null)
+            {
+                for (int i = 0; i < ProductSettings.Count; i++)
+                {
+                    if (ProductSettings[i].ProductNumber == FocusePickingSubSetting.ProductNumber)
+                    {
+                        slt_ProductName.EditValue = ProductSettings[i];
+                        break;
+                    }
+                }
+            }
+        }
         /// <summary>
         /// 取得產品編號
         /// </summary>
         /// <returns></returns>
-        //private string Get_cbt_ProductName_Number()
-        //{
-        //    string value = "";
-        //    if (SelectProductSetting != null)
-        //    {
-        //        value = SelectProductSetting.ProductNumber;
-        //    }
-        //    return value;
-        //}
+        private string Get_cbt_ProductName_Number()
+        {
+            string value = "";
+            if (SelectProductSetting != null)
+            {
+                value = SelectProductSetting.ProductNumber;
+            }
+            return value;
+        }
         #endregion
-        #region 專案代碼功能 2022/4/13新增此功能
+        #region 專案代碼功能
         /// <summary>
         /// 創建專案代碼下拉選單
         /// </summary>
@@ -502,7 +493,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             slt_ProjectNumber.Properties.DisplayMember = "ProjectName";
             slt_ProjectNumber.CustomDisplayText += (s, e) =>
             {
-                if (SalesSetting != null)
+                if (PickingSetting != null)
                 {
                     if (SelectProjectSetting != null)
                     {
@@ -539,7 +530,7 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         {
             for (int i = 0; i < ProjectSettings.Count; i++)
             {
-                if (ProjectSettings[i].ProjectNumber == SalesSetting.ProjectNumber)
+                if (ProjectSettings[i].ProjectNumber == PickingSetting.ProjectNumber)
                 {
                     SelectProjectSetting = ProjectSettings[i];
                 }
@@ -564,34 +555,34 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
         }
         #endregion
         #region 檢查資料問題
-        private void CheckNumber(SalesSetting salesSetting, APIMethod apiMethod)
+        private void CheckNumber(PickingSetting salesSetting, APIMethod apiMethod)
         {
             string response = "";
-            if (salesSetting != null && salesSetting.SalesNumber != null)
+            if (salesSetting != null && salesSetting.PickingNumber != null)
             {
-                foreach (var item in SalesSubSettings)
+                foreach (var item in PickingSubSettings)
                 {
-                    item.SalesNumber = txt_SalesNumber.Text;
+                    item.PickingNumber = txt_PickingNumber.Text;
                 }
                 action.Caption = "進貨修改錯誤";
-                salesSetting.SalesFlag = cbt_SalesFlag.SelectedIndex + 3;
-                salesSetting.SalesNumber = txt_SalesNumber.Text;
+                salesSetting.PickingFlag = cbt_PickingFlag.SelectedIndex + 5;
+                salesSetting.PickingNumber = txt_PickingNumber.Text;
                 salesSetting.ProjectNumber = Get_slt_ProjectNumber();
-                salesSetting.SalesDate = Convert.ToDateTime(det_SalesDate.Text);
-                salesSetting.SalesCustomerNumber = SelectCustomerSetting.CustomerNumber;
-                salesSetting.SalesTax = cbt_SalesTax.SelectedIndex;
-                salesSetting.SalesInvoiceNo = txt_SalesInvoiceNo.Text;
-                salesSetting.SalesEmployeeNumber = Get_cbt_EmployeeNumber_Number();
+                salesSetting.PickingDate = Convert.ToDateTime(det_PickingDate.Text);
+                salesSetting.PickingCustomerNumber = SelectCustomerSetting.CustomerNumber;
+                salesSetting.PickingTax = cbt_PickingTax.SelectedIndex;
+                salesSetting.PickingInvoiceNo = null;
+                salesSetting.PickingEmployeeNumber = Get_cbt_EmployeeNumber_Number();
                 salesSetting.Remark = mmt_Remark.Text;
-                salesSetting.Posting = cbt_Posting.SelectedIndex;
-                salesSetting.SalesSub = SalesSubSettings;
+                salesSetting.Posting = 0;
+                salesSetting.PickingSub = PickingSubSettings;
                 salesSetting.Total = Convert.ToDouble(txt_Total.EditValue);
                 salesSetting.Tax = Convert.ToDouble(txt_Tax.EditValue);
                 salesSetting.TotalTax = Convert.ToDouble(txt_TotalTax.EditValue);
-                salesSetting.TakeACut = Convert.ToInt32(txt_TakeACut.EditValue);
-                salesSetting.Cost = Convert.ToDouble(txt_Cost.EditValue);
+                salesSetting.TakeACut = 0;
+                salesSetting.Cost = 0;
                 double profitSharing = 0;
-                profitSharing = TotalTax - (TotalTax * salesSetting.TakeACut / 100) - salesSetting.Cost;
+                //profitSharing = TotalTax - (TotalTax * salesSetting.TakeACut / 100) - salesSetting.Cost;
                 salesSetting.ProfitSharing = profitSharing;
                 if (salesSetting.Posting == 1)
                 {
@@ -602,12 +593,12 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
                     salesSetting.PostingDate = null;
                 }
                 string value = JsonConvert.SerializeObject(salesSetting);
-                response = apiMethod.Put_Sales(value);
+                response = apiMethod.Put_Picking(value);
                 if (response == "200")
                 {
                     if (!string.IsNullOrEmpty(AttachmentFilePath))
                     {
-                        response = apiMethod.Post_SalesAttachmentFile(salesSetting.SalesFlag, salesSetting.SalesCustomerNumber, salesSetting.SalesDate, salesSetting.SalesNumber, AttachmentFilePath);
+                        response = apiMethod.Post_PickingAttachmentFile(salesSetting.PickingFlag, salesSetting.PickingCustomerNumber, salesSetting.PickingDate, salesSetting.PickingNumber, AttachmentFilePath);
                         if (response == "200")
                         {
                             DialogResult = DialogResult.OK;
@@ -631,43 +622,43 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             }
             else
             {
-                if (!string.IsNullOrEmpty(det_SalesDate.Text) && SelectCustomerSetting != null && cbt_EmployeeNumber.SelectedIndex > -1)
+                if (!string.IsNullOrEmpty(det_PickingDate.Text) && SelectCustomerSetting != null && cbt_EmployeeNumber.SelectedIndex > -1)
                 {
-                    SalesSetting SalesSetting = new SalesSetting()
+                    PickingSetting PickingSetting = new PickingSetting()
                     {
-                        SalesFlag = cbt_SalesFlag.SelectedIndex + 3,
-                        SalesNumber = txt_SalesNumber.Text,
+                        PickingFlag = cbt_PickingFlag.SelectedIndex + 5,
+                        PickingNumber = txt_PickingNumber.Text,
                         ProjectNumber = Get_slt_ProjectNumber(),
-                        SalesDate = Convert.ToDateTime(det_SalesDate.Text),
-                        SalesCustomerNumber = SelectCustomerSetting.CustomerNumber,
-                        SalesTax = cbt_SalesTax.SelectedIndex,
-                        SalesInvoiceNo = txt_SalesInvoiceNo.Text,
-                        SalesEmployeeNumber = Get_cbt_EmployeeNumber_Number(),
+                        PickingDate = Convert.ToDateTime(det_PickingDate.Text),
+                        PickingCustomerNumber = SelectCustomerSetting.CustomerNumber,
+                        PickingTax = cbt_PickingTax.SelectedIndex,
+                        PickingInvoiceNo = null,
+                        PickingEmployeeNumber = Get_cbt_EmployeeNumber_Number(),
                         Remark = mmt_Remark.Text,
-                        Posting = cbt_Posting.SelectedIndex,
-                        SalesSub = SalesSubSettings,
-                        TakeACut = Convert.ToInt32(txt_TakeACut.EditValue),
-                        Cost = Convert.ToDouble(txt_Cost.EditValue)
+                        Posting = 0,
+                        PickingSub = PickingSubSettings,
+                        TakeACut = 0,
+                        Cost = 0
                     };
                     double profitSharing = 0;
-                    profitSharing = TotalTax - (TotalTax * SalesSetting.TakeACut / 100) - SalesSetting.Cost;
-                    SalesSetting.ProfitSharing = profitSharing;
-                    if (SalesSetting.Posting == 1)
+                    //profitSharing = TotalTax - (TotalTax * PickingSetting.TakeACut / 100) - PickingSetting.Cost;
+                    PickingSetting.ProfitSharing = profitSharing;
+                    if (PickingSetting.Posting == 1)
                     {
-                        SalesSetting.PostingDate = DateTime.Now;
+                        PickingSetting.PostingDate = DateTime.Now;
                     }
                     else
                     {
-                        SalesSetting.PostingDate = null;
+                        PickingSetting.PostingDate = null;
                     }
-                    string value = JsonConvert.SerializeObject(SalesSetting);
-                    response = apiMethod.Post_Sales(value);
+                    string value = JsonConvert.SerializeObject(PickingSetting);
+                    response = apiMethod.Post_Picking(value);
                     if (response == "200")
                     {
                         if (!string.IsNullOrEmpty(AttachmentFilePath) && !string.IsNullOrEmpty(apiMethod.ResponseDataMessage))
                         {
-                            List<SalesSetting> settings = JsonConvert.DeserializeObject<List<SalesSetting>>(apiMethod.ResponseDataMessage);
-                            response = apiMethod.Post_SalesAttachmentFile(settings[0].SalesFlag, settings[0].SalesCustomerNumber, settings[0].SalesDate, settings[0].SalesNumber, AttachmentFilePath);
+                            List<PickingSetting> settings = JsonConvert.DeserializeObject<List<PickingSetting>>(apiMethod.ResponseDataMessage);
+                            response = apiMethod.Post_PickingAttachmentFile(settings[0].PickingFlag, settings[0].PickingCustomerNumber, settings[0].PickingDate, settings[0].PickingNumber, AttachmentFilePath);
                             if (response == "200")
                             {
                                 DialogResult = DialogResult.OK;

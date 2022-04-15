@@ -51,6 +51,7 @@ namespace ERPManagementAPP.Maintain
             this.colProfitSharingDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSalesEmployeeNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Company_BarpanelControl = new DevExpress.XtraEditors.PanelControl();
+            this.btn_TransferDate = new DevExpress.XtraEditors.SimpleButton();
             this.btn_Export = new DevExpress.XtraEditors.SimpleButton();
             this.btn_Sales_Search = new DevExpress.XtraEditors.SimpleButton();
             this.cbt_ProfitSharing = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -287,6 +288,7 @@ namespace ERPManagementAPP.Maintain
             // Company_BarpanelControl
             // 
             this.Company_BarpanelControl.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.Company_BarpanelControl.Controls.Add(this.btn_TransferDate);
             this.Company_BarpanelControl.Controls.Add(this.btn_Export);
             this.Company_BarpanelControl.Controls.Add(this.btn_Sales_Search);
             this.Company_BarpanelControl.Controls.Add(this.cbt_ProfitSharing);
@@ -302,6 +304,18 @@ namespace ERPManagementAPP.Maintain
             this.Company_BarpanelControl.Name = "Company_BarpanelControl";
             this.Company_BarpanelControl.Size = new System.Drawing.Size(1250, 43);
             this.Company_BarpanelControl.TabIndex = 4;
+            // 
+            // btn_TransferDate
+            // 
+            this.btn_TransferDate.AllowFocus = false;
+            this.btn_TransferDate.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_TransferDate.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_TransferDate.ImageOptions.Image")));
+            this.btn_TransferDate.Location = new System.Drawing.Point(931, 0);
+            this.btn_TransferDate.Name = "btn_TransferDate";
+            this.btn_TransferDate.Size = new System.Drawing.Size(97, 43);
+            this.btn_TransferDate.TabIndex = 38;
+            this.btn_TransferDate.Text = "全部分潤";
+            this.btn_TransferDate.Visible = false;
             // 
             // btn_Export
             // 
@@ -576,5 +590,6 @@ namespace ERPManagementAPP.Maintain
         private DevExpress.XtraEditors.ComboBoxEdit cbt_ProfitSharing;
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.SimpleButton btn_Export;
+        private DevExpress.XtraEditors.SimpleButton btn_TransferDate;
     }
 }
