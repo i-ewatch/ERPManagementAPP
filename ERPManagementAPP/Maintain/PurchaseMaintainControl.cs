@@ -95,12 +95,11 @@ namespace ERPManagementAPP.Maintain
             };
             #endregion
             #region 報表修改字串功能
-            gridView1.CustomDrawCell += (s, e) =>
+            gridView1.CustomColumnDisplayText += (s, e) =>
             {
                 if (e.Column.FieldName == "PurchaseFlag")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     switch (Index)
                     {
                         case "1":
@@ -115,33 +114,30 @@ namespace ERPManagementAPP.Maintain
                             break;
                     }
                 }
-                //else if (e.Column.FieldName == "PurchaseCompanyNumber")
-                //{
-                //    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                //    string Index = e.CellValue.ToString();
-                //    CompanySetting company = CompanySettings.SingleOrDefault(g => g.CompanyNumber == Index);
-                //    if (company != null)
-                //    {
-                //        e.DisplayText = company.CompanyName;
-                //    }
-                //}
-                //else if (e.Column.FieldName == "ProjectNumber")
-                //{
-                //    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                //    if (e.CellValue != null)
-                //    {
-                //        string Index = e.CellValue.ToString();
-                //        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
-                //        if (project != null)
-                //        {
-                //            e.DisplayText = project.ProjectName;
-                //        }
-                //    }
-                //}
+                else if (e.Column.FieldName == "PurchaseCompanyNumber")
+                {
+                    string Index = e.DisplayText.ToString();
+                    CompanySetting company = CompanySettings.SingleOrDefault(g => g.CompanyNumber == Index);
+                    if (company != null)
+                    {
+                        e.DisplayText = company.CompanyName;
+                    }
+                }
+                else if (e.Column.FieldName == "ProjectNumber")
+                {
+                    if (e.DisplayText != null)
+                    {
+                        string Index = e.DisplayText.ToString();
+                        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
+                        if (project != null)
+                        {
+                            e.DisplayText = project.ProjectName;
+                        }
+                    }
+                }
                 else if (e.Column.FieldName == "PurchaseTax")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     switch (Index)
                     {
                         case "0":
@@ -168,8 +164,7 @@ namespace ERPManagementAPP.Maintain
                 }
                 else if (e.Column.FieldName == "Posting")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     switch (Index)
                     {
                         case "0":
@@ -259,17 +254,13 @@ namespace ERPManagementAPP.Maintain
                 FocusePurchaseMainSetting.PurchaseNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseNumber").ToString();
                 FocusePurchaseMainSetting.PurchaseDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseDate").ToString());
 
-                var purchaseComanyNumber = CompanySettings.SingleOrDefault(g => g.CompanyName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseCompanyNumber").ToString());
-                if (purchaseComanyNumber != null) FocusePurchaseMainSetting.PurchaseCompanyNumber = purchaseComanyNumber.CompanyNumber;
-                else FocusePurchaseMainSetting.PurchaseCompanyNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseCompanyNumber").ToString();
+                FocusePurchaseMainSetting.PurchaseCompanyNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseCompanyNumber").ToString();
 
                 FocusePurchaseMainSetting.PurchaseTax = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PurchaseTax").ToString());
 
                 if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber") != null)
                 {
-                    var projectNumber = ProjectSettings.SingleOrDefault(g => g.ProjectName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber").ToString());
-                    if (projectNumber != null) FocusePurchaseMainSetting.ProjectNumber = projectNumber.ProjectNumber;
-                    else FocusePurchaseMainSetting.ProjectNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber").ToString();
+                    FocusePurchaseMainSetting.ProjectNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber").ToString();
                 }
                 else
                 {
@@ -373,14 +364,6 @@ namespace ERPManagementAPP.Maintain
             PurchaseMainSettings = apiMethod.Get_Purchase(det_PurchaseDate.Text.Replace("/", ""));
             if (PurchaseMainSettings != null)
             {
-                foreach (var item in CompanySettings)
-                {
-                    PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == item.CompanyNumber).ToList().ForEach(t => t.PurchaseCompanyNumber = item.CompanyName);
-                }
-                foreach (var item in ProjectSettings)
-                {
-                    PurchaseMainSettings.Where(g => g.ProjectNumber == item.ProjectNumber).ToList().ForEach(t => t.ProjectNumber = item.ProjectName);
-                }
                 PurchasegridControl.DataSource = PurchaseMainSettings;
             }
         }

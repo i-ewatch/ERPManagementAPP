@@ -152,12 +152,11 @@ namespace ERPManagementAPP.Maintain
             };
             #endregion
             #region 報表修改字串功能
-            gridView1.CustomDrawCell += (s, e) =>
+            gridView1.CustomColumnDisplayText += (s, e) =>
             {
                 if (e.Column.FieldName == "SalesFlag")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     switch (Index)
                     {
                         case "3":
@@ -174,10 +173,9 @@ namespace ERPManagementAPP.Maintain
                 }
                 else if (e.Column.FieldName == "ProjectNumber")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                    if (e.CellValue != null && ProjectSettings != null)
+                    if (e.DisplayText != null && ProjectSettings != null)
                     {
-                        string Index = e.CellValue.ToString();
+                        string Index = e.DisplayText.ToString();
                         ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
                         if (project != null)
                         {
@@ -187,8 +185,7 @@ namespace ERPManagementAPP.Maintain
                 }
                 else if (e.Column.FieldName == "SalesCustomerNumber")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     CustomerSetting company = CustomerSettings.SingleOrDefault(g => g.CustomerNumber == Index);
                     if (company != null)
                     {
@@ -197,8 +194,7 @@ namespace ERPManagementAPP.Maintain
                 }
                 else if (e.Column.FieldName == "Posting")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     switch (Index)
                     {
                         case "0":

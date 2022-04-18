@@ -277,22 +277,17 @@ namespace ERPManagementAPP.Maintain
                 }
                 if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber") != null)
                 {
-                    var projectNumber = ProjectSettings.SingleOrDefault(g => g.ProjectName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber").ToString());
-                    if (projectNumber != null) FocusePaymentSetting.ProjectNumber = projectNumber.ProjectNumber;
+                    FocusePaymentSetting.ProjectNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber").ToString();
                 }
                 else
                 {
                     FocusePaymentSetting.ProjectNumber = null;
                 }
-                var paymentItemNo = PaymentItemSettings.SingleOrDefault(g => g.PaymentItemName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentItemNo").ToString());
-                if (paymentItemNo != null) FocusePaymentSetting.PaymentItemNo = paymentItemNo.PaymentItemNo;
-                else FocusePaymentSetting.PaymentItemNo = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentItemNo").ToString();
+                FocusePaymentSetting.PaymentItemNo = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentItemNo").ToString();
 
                 FocusePaymentSetting.PaymentUse = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentUse").ToString();
 
-                var employee = EmployeeSettings.SingleOrDefault(g => g.EmployeeName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "EmployeeNumber").ToString());
-                if (employee != null) FocusePaymentSetting.EmployeeNumber = employee.EmployeeNumber;
-                else FocusePaymentSetting.EmployeeNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "EmployeeNumber").ToString();
+                FocusePaymentSetting.EmployeeNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "EmployeeNumber").ToString();
 
                 FocusePaymentSetting.PaymentAmount = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentAmount").ToString());
                 FocusePaymentSetting.PaymentMethod = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaymentMethod").ToString());
@@ -333,40 +328,39 @@ namespace ERPManagementAPP.Maintain
         /// </summary>
         private void ChangeGridStr()
         {
-            gridView1.CustomDrawCell += (s, e) =>
+            gridView1.CustomColumnDisplayText += (s, e) =>
             {
-                //if (e.Column.FieldName == "PaymentItemNo")
-                //{
-                //    if (e.CellValue != null)
-                //    {
-                //        string Index = e.CellValue.ToString();
-                //        foreach (var item in PaymentItemSettings)
-                //        {
-                //            if (item.PaymentItemNo == Index)
-                //            {
-                //                e.DisplayText = item.PaymentItemName;
-                //            }
-                //        }
-                //    }
-                //}
-                //else if (e.Column.FieldName == "EmployeeNumber")
-                //{
-                //    if (e.CellValue != null)
-                //    {
-                //        string Index = e.CellValue.ToString();
-                //        foreach (var item in EmployeeSettings)
-                //        {
-                //            if (item.EmployeeNumber == Index)
-                //            {
-                //                e.DisplayText = item.EmployeeName;
-                //            }
-                //        }
-                //    }
-                //}
+                if (e.Column.FieldName == "PaymentItemNo")
+                {
+                    if (e.DisplayText != null)
+                    {
+                        string Index = e.DisplayText.ToString();
+                        foreach (var item in PaymentItemSettings)
+                        {
+                            if (item.PaymentItemNo == Index)
+                            {
+                                e.DisplayText = item.PaymentItemName;
+                            }
+                        }
+                    }
+                }
+                else if (e.Column.FieldName == "EmployeeNumber")
+                {
+                    if (e.DisplayText != null)
+                    {
+                        string Index = e.DisplayText.ToString();
+                        foreach (var item in EmployeeSettings)
+                        {
+                            if (item.EmployeeNumber == Index)
+                            {
+                                e.DisplayText = item.EmployeeName;
+                            }
+                        }
+                    }
+                }
                 if (e.Column.FieldName == "PaymentMethod")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     switch (Index)
                     {
                         case "0":
@@ -381,19 +375,18 @@ namespace ERPManagementAPP.Maintain
                             break;
                     }
                 }
-                //else if (e.Column.FieldName == "ProjectNumber")
-                //{
-                //    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                //    if (e.CellValue != null)
-                //    {
-                //        string Index = e.CellValue.ToString();
-                //        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
-                //        if (project != null)
-                //        {
-                //            e.DisplayText = project.ProjectName;
-                //        }
-                //    }
-                //}
+                else if (e.Column.FieldName == "ProjectNumber")
+                {
+                    if (e.DisplayText != null)
+                    {
+                        string Index = e.DisplayText.ToString();
+                        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
+                        if (project != null)
+                        {
+                            e.DisplayText = project.ProjectName;
+                        }
+                    }
+                }
             };
         }
         #endregion
@@ -452,18 +445,6 @@ namespace ERPManagementAPP.Maintain
             PaymentSettings = apiMethod.Get_PaymentMonth(det_PaymentDate.Text.Replace("/", ""));
             if (PaymentSettings != null && EmployeeSettings != null)
             {
-                foreach (var Employeeitem in EmployeeSettings) //員工 代碼改為名稱
-                {
-                    PaymentSettings.Where(g => g.EmployeeNumber == Employeeitem.EmployeeNumber).ToList().ForEach(t => t.EmployeeNumber = Employeeitem.EmployeeName);
-                }
-                foreach (var item in PaymentItemSettings)//代墊代付品項 代碼改為名稱
-                {
-                    PaymentSettings.Where(g => g.PaymentItemNo == item.PaymentItemNo).ToList().ForEach(t => t.PaymentItemNo = item.PaymentItemName);
-                }
-                foreach (var item in ProjectSettings)
-                {
-                    PaymentSettings.Where(g => g.ProjectNumber == item.ProjectNumber).ToList().ForEach(t => t.ProjectNumber = item.ProjectName);
-                }
                 gridControl1.DataSource = PaymentSettings;
                 for (int i = 0; i < gridView1.Columns.Count; i++)
                 {

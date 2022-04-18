@@ -233,12 +233,11 @@ namespace ERPManagementAPP.Maintain
         /// </summary>
         private void ChangeGridStr()
         {
-            gridView1.CustomDrawCell += (s, e) =>
+            gridView1.CustomColumnDisplayText += (s, e) =>
             {
                 if (e.Column.FieldName == "ProductType")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     switch (Index)
                     {
                         case "0":
@@ -255,9 +254,9 @@ namespace ERPManagementAPP.Maintain
                 }
                 else if (e.Column.FieldName == "ProductCategory")
                 {
-                    if (e.CellValue != null)
+                    if (e.DisplayText != null)
                     {
-                        string Index = e.CellValue.ToString();
+                        string Index = e.DisplayText.ToString();
                         foreach (var item in ProductCategorySettings)
                         {
                             if (item.CategoryNumber == Index)

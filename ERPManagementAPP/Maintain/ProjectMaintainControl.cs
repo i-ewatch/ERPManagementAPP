@@ -150,12 +150,11 @@ namespace ERPManagementAPP.Maintain
             #region 專案成員資料表
             gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
             #region 報表修改字串功能
-            gridView2.CustomDrawCell += (s, e) =>
+            gridView2.CustomColumnDisplayText += (s, e) =>
             {
                 if (e.Column.FieldName == "EmployeeNumber")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     for (int i = 0; i < EmployeeSettings.Count; i++)
                     {
                         if (Index == EmployeeSettings[i].EmployeeNumber)

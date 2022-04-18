@@ -147,13 +147,13 @@ namespace ERPManagementAPP.Maintain
         /// </summary>
         private void ChangeGridStr()
         {
-            gridView1.CustomDrawCell += (s, e) =>
+            gridView1.CustomColumnDisplayText += (s, e) =>
             {
                 if (e.Column.FieldName == "PaymentItemNo")
                 {
-                    if (e.CellValue != null)
+                    if (e.DisplayText != null)
                     {
-                        string Index = e.CellValue.ToString();
+                        string Index = e.DisplayText.ToString();
                         foreach (var item in PaymentItemSettings)
                         {
                             if (item.PaymentItemNo == Index)
@@ -165,9 +165,9 @@ namespace ERPManagementAPP.Maintain
                 }
                 else if (e.Column.FieldName == "EmployeeNumber")
                 {
-                    if (e.CellValue != null)
+                    if (e.DisplayText != null)
                     {
-                        string Index = e.CellValue.ToString();
+                        string Index = e.DisplayText.ToString();
                         foreach (var item in EmployeeSettings)
                         {
                             if (item.EmployeeNumber == Index)
@@ -179,8 +179,7 @@ namespace ERPManagementAPP.Maintain
                 }
                 else if (e.Column.FieldName == "PaymentMethod")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     switch (Index)
                     {
                         case "0":
@@ -197,10 +196,9 @@ namespace ERPManagementAPP.Maintain
                 }
                 else if (e.Column.FieldName == "ProjectNumber")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                    if (e.CellValue != null)
+                    if (e.DisplayText != null)
                     {
-                        string Index = e.CellValue.ToString();
+                        string Index = e.DisplayText.ToString();
                         ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
                         if (project != null)
                         {

@@ -95,12 +95,11 @@ namespace ERPManagementAPP.Maintain
             };
             #endregion
             #region 報表修改字串功能
-            gridView1.CustomDrawCell += (s, e) =>
+            gridView1.CustomColumnDisplayText += (s, e) =>
             {
                 if (e.Column.FieldName == "SalesFlag")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     switch (Index)
                     {
                         case "3":
@@ -115,33 +114,30 @@ namespace ERPManagementAPP.Maintain
                             break;
                     }
                 }
-                //else if (e.Column.FieldName == "SalesCustomerNumber")
-                //{
-                //    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                //    string Index = e.CellValue.ToString();
-                //    CustomerSetting company = CustomerSettings.SingleOrDefault(g => g.CustomerNumber == Index);
-                //    if (company != null)
-                //    {
-                //        e.DisplayText = company.CustomerName;
-                //    }
-                //}
-                //else if (e.Column.FieldName == "ProjectNumber")
-                //{
-                //    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                //    if (e.CellValue != null)
-                //    {
-                //        string Index = e.CellValue.ToString();
-                //        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
-                //        if (project != null)
-                //        {
-                //            e.DisplayText = project.ProjectName;
-                //        }
-                //    }
-                //}
+                else if (e.Column.FieldName == "SalesCustomerNumber")
+                {
+                    string Index = e.DisplayText.ToString();
+                    CustomerSetting company = CustomerSettings.SingleOrDefault(g => g.CustomerNumber == Index);
+                    if (company != null)
+                    {
+                        e.DisplayText = company.CustomerName;
+                    }
+                }
+                else if (e.Column.FieldName == "ProjectNumber")
+                {
+                    if (e.DisplayText != null)
+                    {
+                        string Index = e.DisplayText.ToString();
+                        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
+                        if (project != null)
+                        {
+                            e.DisplayText = project.ProjectName;
+                        }
+                    }
+                }
                 else if (e.Column.FieldName == "SalesTax")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     switch (Index)
                     {
                         case "0":
@@ -168,8 +164,7 @@ namespace ERPManagementAPP.Maintain
                 }
                 else if (e.Column.FieldName == "Posting")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     switch (Index)
                     {
                         case "0":
@@ -258,16 +253,11 @@ namespace ERPManagementAPP.Maintain
                 FocuseSalesMainSetting.SalesFlag = Convert.ToInt32(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesFlag").ToString());
                 FocuseSalesMainSetting.SalesNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesNumber").ToString();
                 FocuseSalesMainSetting.SalesDate = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesDate").ToString());
-
-                var salesCustomerNumber = CustomerSettings.SingleOrDefault(g => g.CustomerName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesCustomerNumber").ToString());
-                if (salesCustomerNumber!= null) FocuseSalesMainSetting.SalesCustomerNumber = salesCustomerNumber.CustomerNumber;
-                else FocuseSalesMainSetting.SalesCustomerNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesCustomerNumber").ToString();
+                FocuseSalesMainSetting.SalesCustomerNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SalesCustomerNumber").ToString();
 
                 if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber") != null)
                 {
-                    var projectNumber = ProjectSettings.SingleOrDefault(g => g.ProjectName == gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber").ToString());
-                    if (projectNumber != null) FocuseSalesMainSetting.ProjectNumber = projectNumber.ProjectNumber;
-                    else FocuseSalesMainSetting.ProjectNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber").ToString();
+                    FocuseSalesMainSetting.ProjectNumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProjectNumber").ToString();
                 }
                 else
                 {
@@ -383,14 +373,6 @@ namespace ERPManagementAPP.Maintain
             SalesMainSettings = apiMethod.Get_Sales(det_SalesDate.Text.Replace("/", ""));
             if (SalesMainSettings != null)
             {
-                foreach (var item in CustomerSettings)
-                {
-                    SalesMainSettings.Where(g => g.SalesCustomerNumber == item.CustomerNumber).ToList().ForEach(t => t.SalesCustomerNumber = item.CustomerName);
-                }
-                foreach (var item in ProjectSettings)
-                {
-                    SalesMainSettings.Where(g => g.ProjectNumber == item.ProjectNumber).ToList().ForEach(t => t.ProjectNumber = item.ProjectName);
-                }
                 SalesgridControl.DataSource = SalesMainSettings;
             }
         }

@@ -4,6 +4,7 @@ using DevExpress.XtraBars.Docking2010.Customization;
 using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraPrinting;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using Newtonsoft.Json;
@@ -46,6 +47,7 @@ namespace ERPManagementAPP.Maintain
                 Refresh_Main_GridView();
             }
             action.Commands.Add(FlyoutCommand.Yes);
+            action1.Commands.Add(FlyoutCommand.Yes);
             #region 銷貨資料表
             gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             #region 銷貨資訊報表按鈕 2022/4/13拔除
@@ -124,12 +126,11 @@ namespace ERPManagementAPP.Maintain
             };
             #endregion
             #region 報表修改字串功能
-            gridView1.CustomDrawCell += (s, e) =>
+            gridView1.CustomColumnDisplayText += (s, e) =>
             {
                 if (e.Column.FieldName == "SalesFlag")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     switch (Index)
                     {
                         case "3":
@@ -144,20 +145,18 @@ namespace ERPManagementAPP.Maintain
                             break;
                     }
                 }
-                //else if (e.Column.FieldName == "SalesCustomerNumber")
-                //{
-                //    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                //    string Index = e.CellValue.ToString();
-                //    CustomerSetting company = CustomerSettings.SingleOrDefault(g => g.CustomerNumber == Index);
-                //    if (company != null)
-                //    {
-                //        e.DisplayText = company.CustomerName;
-                //    }
-                //}
+                else if (e.Column.FieldName == "SalesCustomerNumber")
+                {
+                    string Index = e.DisplayText.ToString();
+                    CustomerSetting company = CustomerSettings.SingleOrDefault(g => g.CustomerNumber == Index);
+                    if (company != null)
+                    {
+                        e.DisplayText = company.CustomerName;
+                    }
+                }
                 else if (e.Column.FieldName == "SalesTax")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     switch (Index)
                     {
                         case "0":
@@ -184,8 +183,7 @@ namespace ERPManagementAPP.Maintain
                 }
                 else if (e.Column.FieldName == "Posting")
                 {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                    string Index = e.CellValue.ToString();
+                    string Index = e.DisplayText.ToString();
                     switch (Index)
                     {
                         case "0":
@@ -229,7 +227,9 @@ namespace ERPManagementAPP.Maintain
                           saveFile.AddExtension = true;//設定自動在檔名中新增副檔名
                           if (saveFile.ShowDialog() == DialogResult.OK)
                           {
-                              SalesgridControl.ExportToXlsx(saveFile.FileName);
+                              var options = new XlsxExportOptions();
+                              options.TextExportMode = TextExportMode.Text;
+                              SalesgridControl.ExportToXlsx(saveFile.FileName, options);
                           }
                       }
                   }
@@ -238,11 +238,7 @@ namespace ERPManagementAPP.Maintain
             #region 全部分潤按鈕 2022/4/13新增
             btn_TransferDate.Click += (s, e) =>
             {
-                action.Caption = "代墊代付是否全部過帳完成";
-                foreach (var item in CustomerSettings)
-                {
-                    SalesMainSettings.Where(g => g.SalesCustomerNumber == item.CustomerName).ToList().ForEach(t => t.SalesCustomerNumber = item.CustomerNumber);
-                }
+                action.Caption = "代墊代付是否全部過帳";
                 if (FlyoutDialog.Show(Form1, action) == DialogResult.Yes)
                 {
                     foreach (var item in SalesMainSettings)
@@ -424,10 +420,6 @@ namespace ERPManagementAPP.Maintain
                         item.TotalTax = -1 * item.TotalTax;
                         item.ProfitSharing = -1 * item.ProfitSharing;
                     }
-                }
-                foreach (var item in CustomerSettings)
-                {
-                    SalesMainSettings.Where(g => g.SalesCustomerNumber == item.CustomerNumber).ToList().ForEach(t => t.SalesCustomerNumber = item.CustomerName);
                 }
                 SalesgridControl.DataSource = SalesMainSettings;
                 gridView1.ExpandAllGroups();
