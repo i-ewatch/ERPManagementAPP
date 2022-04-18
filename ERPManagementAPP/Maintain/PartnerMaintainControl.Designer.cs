@@ -251,6 +251,8 @@ namespace ERPManagementAPP.Maintain
             // colCost
             // 
             this.colCost.Caption = "成本";
+            this.colCost.DisplayFormat.FormatString = "C0";
+            this.colCost.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colCost.FieldName = "Cost";
             this.colCost.Name = "colCost";
             this.colCost.OptionsColumn.AllowEdit = false;

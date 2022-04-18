@@ -2577,7 +2577,7 @@ namespace ERPManagementAPP.Methods
         {
             try
             {
-                var option = new RestClientOptions($"{Purchase_url}/{ProjectNumber}")
+                var option = new RestClientOptions($"{Project_url}/{ProjectNumber}")
                 {
                     Timeout = time
                 };

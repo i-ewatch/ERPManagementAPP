@@ -35,6 +35,10 @@ namespace ERPManagementAPP.Maintain
         /// </summary>
         private List<OperatingMainSetting> OperatingMainSettings { get; set; } = new List<OperatingMainSetting>();
         /// <summary>
+        /// 專案資訊
+        /// </summary>
+        private List<ProjectSetting> ProjectSettings { get; set; }
+        /// <summary>
         /// 篩選總表頭
         /// </summary>
         private List<PurchaseMainSetting> FilterPurchaseMainSettings { get; set; } = new List<PurchaseMainSetting>();
@@ -52,7 +56,7 @@ namespace ERPManagementAPP.Maintain
                 FocuseMainGrid();
                 if (e.Button.Kind == ButtonPredefines.Plus)
                 {
-                    if (FocusePurchaseMainSetting.PurchaseFlag ==1 || FocusePurchaseMainSetting.PurchaseFlag == 2)
+                    if (FocusePurchaseMainSetting.PurchaseFlag == 1 || FocusePurchaseMainSetting.PurchaseFlag == 2)
                     {
                         if (FocusePurchaseMainSetting.Posting == 0)
                         {
@@ -106,7 +110,7 @@ namespace ERPManagementAPP.Maintain
                             }
                         }
                     }
-                   
+
                 }
             };
             PurchasePostingedit.Buttons[0].Kind = ButtonPredefines.Plus;
@@ -210,6 +214,19 @@ namespace ERPManagementAPP.Maintain
                                 e.DisplayText = "營運退出";
                             }
                             break;
+                    }
+                }
+                else if (e.Column.FieldName == "ProjectNumber")
+                {
+                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
+                    if (e.CellValue != null && ProjectSettings != null)
+                    {
+                        string Index = e.CellValue.ToString();
+                        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
+                        if (project != null)
+                        {
+                            e.DisplayText = project.ProjectName;
+                        }
                     }
                 }
                 else if (e.Column.FieldName == "PurchaseCompanyNumber")
@@ -343,6 +360,7 @@ namespace ERPManagementAPP.Maintain
         private void Refersh_API()
         {
             CompanySettings = apiMethod.Get_Company();
+            ProjectSettings = apiMethod.Get_Project();
         }
         #region 未過戶廠商篩選功能
         /// <summary>
@@ -361,7 +379,7 @@ namespace ERPManagementAPP.Maintain
                         case 0://現金
                             {
                                 List<PurchaseMainSetting> PurchaseSetting = PurchaseMainSettings.Where(g => g.PurchaseCompanyNumber == Companyitem.CompanyNumber).ToList();
-                                List<OperatingMainSetting> OperatingMainSetting   = OperatingMainSettings.Where(g =>g.OperatingCompanyNumber == Companyitem.CompanyNumber).ToList();
+                                List<OperatingMainSetting> OperatingMainSetting = OperatingMainSettings.Where(g => g.OperatingCompanyNumber == Companyitem.CompanyNumber).ToList();
                                 if (PurchaseSetting != null)
                                 {
                                     foreach (var item in PurchaseSetting)

@@ -144,16 +144,16 @@ namespace ERPManagementAPP.Maintain
                             break;
                     }
                 }
-                else if (e.Column.FieldName == "SalesCustomerNumber")
-                {
-                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-                    string Index = e.CellValue.ToString();
-                    CustomerSetting company = CustomerSettings.SingleOrDefault(g => g.CustomerNumber == Index);
-                    if (company != null)
-                    {
-                        e.DisplayText = company.CustomerName;
-                    }
-                }
+                //else if (e.Column.FieldName == "SalesCustomerNumber")
+                //{
+                //    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
+                //    string Index = e.CellValue.ToString();
+                //    CustomerSetting company = CustomerSettings.SingleOrDefault(g => g.CustomerNumber == Index);
+                //    if (company != null)
+                //    {
+                //        e.DisplayText = company.CustomerName;
+                //    }
+                //}
                 else if (e.Column.FieldName == "SalesTax")
                 {
                     e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
@@ -239,6 +239,10 @@ namespace ERPManagementAPP.Maintain
             btn_TransferDate.Click += (s, e) =>
             {
                 action.Caption = "代墊代付是否全部過帳完成";
+                foreach (var item in CustomerSettings)
+                {
+                    SalesMainSettings.Where(g => g.SalesCustomerNumber == item.CustomerName).ToList().ForEach(t => t.SalesCustomerNumber = item.CustomerNumber);
+                }
                 if (FlyoutDialog.Show(Form1, action) == DialogResult.Yes)
                 {
                     foreach (var item in SalesMainSettings)
@@ -255,7 +259,7 @@ namespace ERPManagementAPP.Maintain
                     FlyoutDialog.Show(Form1, action1);
                     Refresh_Main_GridView();
                 }
-            } ;
+            };
             #endregion
         }
         #region 聚焦主資料表功能
@@ -421,8 +425,16 @@ namespace ERPManagementAPP.Maintain
                         item.ProfitSharing = -1 * item.ProfitSharing;
                     }
                 }
+                foreach (var item in CustomerSettings)
+                {
+                    SalesMainSettings.Where(g => g.SalesCustomerNumber == item.CustomerNumber).ToList().ForEach(t => t.SalesCustomerNumber = item.CustomerName);
+                }
                 SalesgridControl.DataSource = SalesMainSettings;
                 gridView1.ExpandAllGroups();
+                for (int i = 0; i < gridView1.Columns.Count; i++)
+                {
+                    gridView1.Columns[i].BestFit();
+                }
             }
         }
         private void Refresh_API()

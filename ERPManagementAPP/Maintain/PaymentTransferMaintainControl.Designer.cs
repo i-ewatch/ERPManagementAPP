@@ -130,6 +130,7 @@ namespace ERPManagementAPP.Maintain
             this.colProjectNumber.Caption = "專案代碼";
             this.colProjectNumber.FieldName = "ProjectNumber";
             this.colProjectNumber.Name = "colProjectNumber";
+            this.colProjectNumber.OptionsColumn.AllowEdit = false;
             this.colProjectNumber.Visible = true;
             this.colProjectNumber.VisibleIndex = 1;
             // 

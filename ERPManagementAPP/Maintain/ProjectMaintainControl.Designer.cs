@@ -204,6 +204,7 @@ namespace ERPManagementAPP.Maintain
             this.colFileName});
             this.advBandedGridView1.GridControl = this.gridControl1;
             this.advBandedGridView1.Name = "advBandedGridView1";
+            this.advBandedGridView1.OptionsView.ShowBands = false;
             this.advBandedGridView1.OptionsView.ShowGroupPanel = false;
             // 
             // gridBand1

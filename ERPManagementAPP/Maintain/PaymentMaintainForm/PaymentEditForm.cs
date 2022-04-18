@@ -98,27 +98,6 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
                 DialogResult = DialogResult.Cancel;
             };
             #endregion
-            //slt_ProjectNumber.Popup += (s, e) =>
-            //{
-            //    IPopupControl popupControl = s as IPopupControl;
-            //    LayoutControl layoutControl = popupControl.PopupWindow.Controls[3].Controls[0] as LayoutControl;
-            //    SimpleButton clearButton = ((LayoutControlItem)layoutControl.Items.FindByName("lciClear")).Control as SimpleButton;
-            //    if (clearButton != null)
-            //    {
-            //        clearButton.Click += (sender, ex) =>
-            //        {
-            //            if (ProjectSettings.Count > 0)
-            //            {
-            //                ProjectSettings.Clear();
-            //            }
-            //            foreach (var item in projectSettings)
-            //            {
-            //                ProjectSettings.Add(item);
-            //            }
-            //            SelectProjectSetting = null;
-            //        };
-            //    }
-            //};
         }
         #region 品項代碼功能
         /// <summary>
@@ -445,6 +424,11 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
                         action.Description = response;
                         FlyoutDialog.Show(Form1, action);
                     }
+                }
+                else
+                {
+                    action.Description = "資料未填選完整";
+                    FlyoutDialog.Show(Form1, action);
                 }
             }
         }

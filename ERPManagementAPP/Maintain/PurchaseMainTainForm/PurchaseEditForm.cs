@@ -674,6 +674,11 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
                         FlyoutDialog.Show(Form1, action);
                     }
                 }
+                else
+                {
+                    action.Description = "資料未填選完整";
+                    FlyoutDialog.Show(Form1, action);
+                }
             }
         }
         #endregion

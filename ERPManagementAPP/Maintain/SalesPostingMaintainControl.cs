@@ -23,6 +23,10 @@ namespace ERPManagementAPP.Maintain
         /// </summary>
         private List<CustomerSetting> CustomerSettings { get; set; }
         /// <summary>
+        /// 專案資訊
+        /// </summary>
+        private List<ProjectSetting> ProjectSettings { get; set; }
+        /// <summary>
         /// 聚焦銷貨表頭
         /// </summary>
         private SalesMainSetting FocuseSalesMainSetting { get; set; } = new SalesMainSetting();
@@ -168,6 +172,19 @@ namespace ERPManagementAPP.Maintain
                             break;
                     }
                 }
+                else if (e.Column.FieldName == "ProjectNumber")
+                {
+                    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
+                    if (e.CellValue != null && ProjectSettings != null)
+                    {
+                        string Index = e.CellValue.ToString();
+                        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
+                        if (project != null)
+                        {
+                            e.DisplayText = project.ProjectName;
+                        }
+                    }
+                }
                 else if (e.Column.FieldName == "SalesCustomerNumber")
                 {
                     e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
@@ -298,6 +315,7 @@ namespace ERPManagementAPP.Maintain
         private void Refresh_API()
         {
             CustomerSettings = apiMethod.Get_Customer();
+            ProjectSettings = apiMethod.Get_Project();
         }
         #region 未過帳客戶篩選功能
         /// <summary>

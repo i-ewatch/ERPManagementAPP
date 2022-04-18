@@ -50,6 +50,7 @@ namespace ERPManagementAPP.Maintain
             this.cet_Other = new DevExpress.XtraEditors.CheckEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.colProjectNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -101,6 +102,7 @@ namespace ERPManagementAPP.Maintain
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colSalesFlag,
+            this.colProjectNumber,
             this.colSalesNumber,
             this.colSalesCustomerNumber,
             this.colSalesTax,
@@ -131,7 +133,7 @@ namespace ERPManagementAPP.Maintain
             this.colSalesNumber.Name = "colSalesNumber";
             this.colSalesNumber.OptionsColumn.AllowEdit = false;
             this.colSalesNumber.Visible = true;
-            this.colSalesNumber.VisibleIndex = 1;
+            this.colSalesNumber.VisibleIndex = 2;
             // 
             // colSalesCustomerNumber
             // 
@@ -140,7 +142,7 @@ namespace ERPManagementAPP.Maintain
             this.colSalesCustomerNumber.Name = "colSalesCustomerNumber";
             this.colSalesCustomerNumber.OptionsColumn.AllowEdit = false;
             this.colSalesCustomerNumber.Visible = true;
-            this.colSalesCustomerNumber.VisibleIndex = 2;
+            this.colSalesCustomerNumber.VisibleIndex = 3;
             // 
             // colSalesTax
             // 
@@ -156,7 +158,7 @@ namespace ERPManagementAPP.Maintain
             this.colSalesInvoiceNo.Name = "colSalesInvoiceNo";
             this.colSalesInvoiceNo.OptionsColumn.AllowEdit = false;
             this.colSalesInvoiceNo.Visible = true;
-            this.colSalesInvoiceNo.VisibleIndex = 3;
+            this.colSalesInvoiceNo.VisibleIndex = 4;
             // 
             // colTotal
             // 
@@ -167,7 +169,7 @@ namespace ERPManagementAPP.Maintain
             this.colTotal.Name = "colTotal";
             this.colTotal.OptionsColumn.AllowEdit = false;
             this.colTotal.Visible = true;
-            this.colTotal.VisibleIndex = 4;
+            this.colTotal.VisibleIndex = 5;
             // 
             // colTotalTax
             // 
@@ -178,7 +180,7 @@ namespace ERPManagementAPP.Maintain
             this.colTotalTax.Name = "colTotalTax";
             this.colTotalTax.OptionsColumn.AllowEdit = false;
             this.colTotalTax.Visible = true;
-            this.colTotalTax.VisibleIndex = 5;
+            this.colTotalTax.VisibleIndex = 6;
             // 
             // colPosting
             // 
@@ -186,7 +188,7 @@ namespace ERPManagementAPP.Maintain
             this.colPosting.FieldName = "Posting";
             this.colPosting.Name = "colPosting";
             this.colPosting.Visible = true;
-            this.colPosting.VisibleIndex = 6;
+            this.colPosting.VisibleIndex = 7;
             // 
             // colRemark
             // 
@@ -195,7 +197,7 @@ namespace ERPManagementAPP.Maintain
             this.colRemark.Name = "colRemark";
             this.colRemark.OptionsColumn.AllowEdit = false;
             this.colRemark.Visible = true;
-            this.colRemark.VisibleIndex = 7;
+            this.colRemark.VisibleIndex = 8;
             // 
             // colPostingDate
             // 
@@ -203,7 +205,7 @@ namespace ERPManagementAPP.Maintain
             this.colPostingDate.FieldName = "PostingDate";
             this.colPostingDate.Name = "colPostingDate";
             this.colPostingDate.Visible = true;
-            this.colPostingDate.VisibleIndex = 8;
+            this.colPostingDate.VisibleIndex = 9;
             // 
             // colFileName
             // 
@@ -266,6 +268,15 @@ namespace ERPManagementAPP.Maintain
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
+            // colProjectNumber
+            // 
+            this.colProjectNumber.Caption = "專案代碼";
+            this.colProjectNumber.FieldName = "ProjectNumber";
+            this.colProjectNumber.Name = "colProjectNumber";
+            this.colProjectNumber.OptionsColumn.AllowEdit = false;
+            this.colProjectNumber.Visible = true;
+            this.colProjectNumber.VisibleIndex = 1;
+            // 
             // SalesPostingMaintainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -310,5 +321,6 @@ namespace ERPManagementAPP.Maintain
         private DevExpress.XtraGrid.Columns.GridColumn colRemark;
         private DevExpress.XtraGrid.Columns.GridColumn colFileName;
         private DevExpress.XtraGrid.Columns.GridColumn colPostingDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colProjectNumber;
     }
 }
