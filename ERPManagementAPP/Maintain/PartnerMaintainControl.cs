@@ -5,6 +5,7 @@ using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraPrinting;
+using DevExpress.XtraSplashScreen;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using Newtonsoft.Json;
@@ -332,102 +333,108 @@ namespace ERPManagementAPP.Maintain
         #endregion
         public override void Refresh_Main_GridView()
         {
-            Refresh_API();
-            var salesMainSettings = apiMethod.Get_Sales(det_SalesDate.Text.Replace("/", ""));
-            if (salesMainSettings != null)
+            handle = SplashScreenManager.ShowOverlayForm(FindForm());
+            for (int i = 0; i < length; i++)
             {
-                SalesMainSettings = new List<SalesMainSetting>();
-                if (cbt_Employee.SelectedIndex == 0)//查詢全部合作夥伴
+                Refresh_API();
+                var salesMainSettings = apiMethod.Get_Sales(det_SalesDate.Text.Replace("/", ""));
+                if (salesMainSettings != null)
                 {
-                    foreach (var item in EmployeeSettings)
+                    SalesMainSettings = new List<SalesMainSetting>();
+                    if (cbt_Employee.SelectedIndex == 0)//查詢全部合作夥伴
+                    {
+                        foreach (var item in EmployeeSettings)
+                        {
+                            if (cbt_Posting.SelectedIndex == 0)//查詢過帳全部
+                            {
+                                if (cbt_ProfitSharing.SelectedIndex == 0)//查詢分潤全部
+                                {
+                                    SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == item.EmployeeNumber).ToList());
+                                }
+                                else if (cbt_ProfitSharing.SelectedIndex == 1)//查詢全部未分潤
+                                {
+                                    SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == item.EmployeeNumber && g.ProfitSharingDate == null).ToList());
+                                }
+                                else if (cbt_ProfitSharing.SelectedIndex == 2)//查詢全部分潤
+                                {
+                                    SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == item.EmployeeNumber && g.ProfitSharingDate != null).ToList());
+                                }
+                            }
+                            else//查詢全部過帳/未過帳
+                            {
+                                if (cbt_ProfitSharing.SelectedIndex == 0)//查詢分潤全部
+                                {
+                                    SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == item.EmployeeNumber && g.Posting == cbt_Posting.SelectedIndex - 1).ToList());
+                                }
+                                else if (cbt_ProfitSharing.SelectedIndex == 1)//查詢全部未分潤
+                                {
+                                    SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == item.EmployeeNumber && g.Posting == cbt_Posting.SelectedIndex - 1 && g.ProfitSharingDate == null).ToList());
+                                }
+                                else if (cbt_ProfitSharing.SelectedIndex == 2)//查詢全部分潤
+                                {
+                                    SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == item.EmployeeNumber && g.Posting == cbt_Posting.SelectedIndex - 1 && g.ProfitSharingDate != null).ToList());
+                                }
+                            }
+                        }
+                    }
+                    else//查詢單一合作夥伴
                     {
                         if (cbt_Posting.SelectedIndex == 0)//查詢過帳全部
                         {
                             if (cbt_ProfitSharing.SelectedIndex == 0)//查詢分潤全部
                             {
-                                SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == item.EmployeeNumber).ToList());
+                                SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == EmployeeSettings[cbt_Employee.SelectedIndex - 1].EmployeeNumber).ToList());
                             }
                             else if (cbt_ProfitSharing.SelectedIndex == 1)//查詢全部未分潤
                             {
-                                SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == item.EmployeeNumber && g.ProfitSharingDate == null).ToList());
+                                SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == EmployeeSettings[cbt_Employee.SelectedIndex - 1].EmployeeNumber && g.ProfitSharingDate == null).ToList());
                             }
                             else if (cbt_ProfitSharing.SelectedIndex == 2)//查詢全部分潤
                             {
-                                SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == item.EmployeeNumber && g.ProfitSharingDate != null).ToList());
+                                SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == EmployeeSettings[cbt_Employee.SelectedIndex - 1].EmployeeNumber && g.ProfitSharingDate != null).ToList());
                             }
                         }
                         else//查詢全部過帳/未過帳
                         {
                             if (cbt_ProfitSharing.SelectedIndex == 0)//查詢分潤全部
                             {
-                                SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == item.EmployeeNumber && g.Posting == cbt_Posting.SelectedIndex - 1).ToList());
+                                SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == EmployeeSettings[cbt_Employee.SelectedIndex - 1].EmployeeNumber && g.Posting == cbt_Posting.SelectedIndex - 1).ToList());
                             }
                             else if (cbt_ProfitSharing.SelectedIndex == 1)//查詢全部未分潤
                             {
-                                SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == item.EmployeeNumber && g.Posting == cbt_Posting.SelectedIndex - 1 && g.ProfitSharingDate == null).ToList());
+                                SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == EmployeeSettings[cbt_Employee.SelectedIndex - 1].EmployeeNumber && g.Posting == cbt_Posting.SelectedIndex - 1 && g.ProfitSharingDate == null).ToList());
                             }
                             else if (cbt_ProfitSharing.SelectedIndex == 2)//查詢全部分潤
                             {
-                                SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == item.EmployeeNumber && g.Posting == cbt_Posting.SelectedIndex - 1 && g.ProfitSharingDate != null).ToList());
+                                SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == EmployeeSettings[cbt_Employee.SelectedIndex - 1].EmployeeNumber && g.Posting == cbt_Posting.SelectedIndex - 1 && g.ProfitSharingDate != null).ToList());
                             }
                         }
                     }
-                }
-                else//查詢單一合作夥伴
-                {
-                    if (cbt_Posting.SelectedIndex == 0)//查詢過帳全部
-                    {
-                        if (cbt_ProfitSharing.SelectedIndex == 0)//查詢分潤全部
-                        {
-                            SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == EmployeeSettings[cbt_Employee.SelectedIndex - 1].EmployeeNumber).ToList());
-                        }
-                        else if (cbt_ProfitSharing.SelectedIndex == 1)//查詢全部未分潤
-                        {
-                            SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == EmployeeSettings[cbt_Employee.SelectedIndex - 1].EmployeeNumber && g.ProfitSharingDate == null).ToList());
-                        }
-                        else if (cbt_ProfitSharing.SelectedIndex == 2)//查詢全部分潤
-                        {
-                            SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == EmployeeSettings[cbt_Employee.SelectedIndex - 1].EmployeeNumber && g.ProfitSharingDate != null).ToList());
-                        }
-                    }
-                    else//查詢全部過帳/未過帳
-                    {
-                        if (cbt_ProfitSharing.SelectedIndex == 0)//查詢分潤全部
-                        {
-                            SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == EmployeeSettings[cbt_Employee.SelectedIndex - 1].EmployeeNumber && g.Posting == cbt_Posting.SelectedIndex - 1).ToList());
-                        }
-                        else if (cbt_ProfitSharing.SelectedIndex == 1)//查詢全部未分潤
-                        {
-                            SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == EmployeeSettings[cbt_Employee.SelectedIndex - 1].EmployeeNumber && g.Posting == cbt_Posting.SelectedIndex - 1 && g.ProfitSharingDate == null).ToList());
-                        }
-                        else if (cbt_ProfitSharing.SelectedIndex == 2)//查詢全部分潤
-                        {
-                            SalesMainSettings.AddRange(salesMainSettings.Where(g => g.SalesEmployeeNumber == EmployeeSettings[cbt_Employee.SelectedIndex - 1].EmployeeNumber && g.Posting == cbt_Posting.SelectedIndex - 1 && g.ProfitSharingDate != null).ToList());
-                        }
-                    }
-                }
 
-                foreach (var item in SalesMainSettings)
-                {
-                    EmployeeSetting employee = EmployeeSettings.SingleOrDefault(g => g.EmployeeNumber == item.SalesEmployeeNumber);
-                    if (employee != null)
+                    foreach (var item in SalesMainSettings)
                     {
-                        item.SalesEmployeeNumber = employee.EmployeeName;
+                        EmployeeSetting employee = EmployeeSettings.SingleOrDefault(g => g.EmployeeNumber == item.SalesEmployeeNumber);
+                        if (employee != null)
+                        {
+                            item.SalesEmployeeNumber = employee.EmployeeName;
+                        }
+                        if (item.SalesFlag == 4)
+                        {
+                            item.Total = -1 * item.Total;
+                            item.TotalTax = -1 * item.TotalTax;
+                            item.ProfitSharing = -1 * item.ProfitSharing;
+                        }
                     }
-                    if (item.SalesFlag == 4)
+                    SalesgridControl.DataSource = SalesMainSettings;
+                    gridView1.ExpandAllGroups();
+                    for (int index = 0; index < gridView1.Columns.Count; index++)
                     {
-                        item.Total = -1 * item.Total;
-                        item.TotalTax = -1 * item.TotalTax;
-                        item.ProfitSharing = -1 * item.ProfitSharing;
+                        gridView1.Columns[index].BestFit();
                     }
                 }
-                SalesgridControl.DataSource = SalesMainSettings;
-                gridView1.ExpandAllGroups();
-                for (int i = 0; i < gridView1.Columns.Count; i++)
-                {
-                    gridView1.Columns[i].BestFit();
-                }
+                break;
             }
+            CloseProgressPanel(handle);
         }
         private void Refresh_API()
         {

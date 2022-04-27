@@ -4,6 +4,7 @@ using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraSplashScreen;
 using ERPManagementAPP.Maintain.OperatingMaintainForm;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
@@ -362,12 +363,18 @@ namespace ERPManagementAPP.Maintain
         #endregion
         public override void Refresh_Main_GridView()
         {
-            Refresh_API();
-            OperatingMainSettings = apiMethod.Get_Operating(det_OperatingDate.Text.Replace("/", ""));
-            if (OperatingMainSettings != null)
+            handle = SplashScreenManager.ShowOverlayForm(FindForm());
+            for (int i = 0; i < length; i++)
             {
-                OperatinggridControl.DataSource = OperatingMainSettings;
+                Refresh_API();
+                OperatingMainSettings = apiMethod.Get_Operating(det_OperatingDate.Text.Replace("/", ""));
+                if (OperatingMainSettings != null)
+                {
+                    OperatinggridControl.DataSource = OperatingMainSettings;
+                    break;
+                }
             }
+            CloseProgressPanel(handle);
         }
         private void Refresh_API()
         {

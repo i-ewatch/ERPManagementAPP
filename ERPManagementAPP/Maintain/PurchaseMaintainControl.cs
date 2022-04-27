@@ -4,6 +4,7 @@ using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraSplashScreen;
 using ERPManagementAPP.Maintain.PurchaseMainTainForm;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
@@ -360,12 +361,18 @@ namespace ERPManagementAPP.Maintain
         #endregion
         public override void Refresh_Main_GridView()
         {
-            Refresh_API();
-            PurchaseMainSettings = apiMethod.Get_Purchase(det_PurchaseDate.Text.Replace("/", ""));
-            if (PurchaseMainSettings != null)
+            handle = SplashScreenManager.ShowOverlayForm(FindForm());
+            for (int i = 0; i < length; i++)
             {
-                PurchasegridControl.DataSource = PurchaseMainSettings;
+                Refresh_API();
+                PurchaseMainSettings = apiMethod.Get_Purchase(det_PurchaseDate.Text.Replace("/", ""));
+                if (PurchaseMainSettings != null)
+                {
+                    PurchasegridControl.DataSource = PurchaseMainSettings;
+                    break;
+                }
             }
+            CloseProgressPanel(handle);
         }
         private void Refresh_API()
         {

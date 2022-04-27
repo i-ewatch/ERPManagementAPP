@@ -4,6 +4,7 @@ using DevExpress.XtraBars.Docking2010.Customization;
 using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraSplashScreen;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using Newtonsoft.Json;
@@ -249,15 +250,20 @@ namespace ERPManagementAPP.Maintain
         #endregion
         public override void Refresh_Main_GridView()
         {
-            Refresh_API();
-            PaymentItemSettings = apiMethod.Get_PaymentItem();
-            PaymentSettings = apiMethod.Get_PaymentTransferDate();
-            if (PaymentSettings != null && EmployeeSettings != null)
+            handle = SplashScreenManager.ShowOverlayForm(FindForm());
+            for (int i = 0; i < length; i++)
             {
-                gridControl1.DataSource = PaymentSettings;
-                gridView1.ExpandAllGroups();
-                ChangeGridStr();
+                Refresh_API();
+                PaymentItemSettings = apiMethod.Get_PaymentItem();
+                PaymentSettings = apiMethod.Get_PaymentTransferDate();
+                if (PaymentSettings != null && EmployeeSettings != null)
+                {
+                    gridControl1.DataSource = PaymentSettings;
+                    gridView1.ExpandAllGroups();
+                    ChangeGridStr();
+                }
             }
+            CloseProgressPanel(handle);
         }
         private void Refresh_API()
         {

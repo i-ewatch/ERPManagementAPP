@@ -4,6 +4,7 @@ using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraSplashScreen;
 using ERPManagementAPP.Maintain.PickingMaintainForm;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
@@ -359,12 +360,18 @@ namespace ERPManagementAPP.Maintain
         #endregion
         public override void Refresh_Main_GridView()
         {
-            Refresh_API();
-            PickingMainSettings = apiMethod.Get_Picking(det_PickingDate.Text.Replace("/", ""));
-            if (PickingMainSettings != null)
+            handle = SplashScreenManager.ShowOverlayForm(FindForm());
+            for (int i = 0; i < length; i++)
             {
-                PickinggridControl.DataSource = PickingMainSettings;
+                Refresh_API();
+                PickingMainSettings = apiMethod.Get_Picking(det_PickingDate.Text.Replace("/", ""));
+                if (PickingMainSettings != null)
+                {
+                    PickinggridControl.DataSource = PickingMainSettings;
+                    break;
+                }
             }
+            CloseProgressPanel(handle);
         }
         private void Refresh_API()
         {

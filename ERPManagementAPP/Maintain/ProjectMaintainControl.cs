@@ -4,6 +4,7 @@ using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraSplashScreen;
 using ERPManagementAPP.Maintain.ProjectMaintainForm;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
@@ -267,17 +268,22 @@ namespace ERPManagementAPP.Maintain
         #endregion
         public override void Refresh_Main_GridView()
         {
-            EmployeeSettings = apiMethod.Get_Employee();
-            ProjectSettings = apiMethod.Get_Project();
-            if (ProjectSettings != null)
+            handle = SplashScreenManager.ShowOverlayForm(FindForm());
+            for (int i = 0; i < length; i++)
             {
-                gridControl1.DataSource = ProjectSettings;
-
-                for (int i = 0; i < advBandedGridView1.Columns.Count; i++)
+                EmployeeSettings = apiMethod.Get_Employee();
+                ProjectSettings = apiMethod.Get_Project();
+                if (ProjectSettings != null)
                 {
-                    advBandedGridView1.Columns[i].BestFit();
+                    gridControl1.DataSource = ProjectSettings;
+                    for (int index = 0; index < advBandedGridView1.Columns.Count; index++)
+                    {
+                        advBandedGridView1.Columns[index].BestFit();
+                    }
+                    break;
                 }
             }
+            CloseProgressPanel(handle);
         }
         public override void Refresh_Second_GridView(string Number)
         {

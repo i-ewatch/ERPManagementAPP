@@ -35,6 +35,7 @@ namespace ERPManagementAPP.Maintain
             this.SalesgridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colSalesFlag = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colProjectNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSalesNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSalesCustomerNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSalesTax = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -50,7 +51,6 @@ namespace ERPManagementAPP.Maintain
             this.cet_Other = new DevExpress.XtraEditors.CheckEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.colProjectNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -125,6 +125,15 @@ namespace ERPManagementAPP.Maintain
             this.colSalesFlag.OptionsColumn.AllowEdit = false;
             this.colSalesFlag.Visible = true;
             this.colSalesFlag.VisibleIndex = 0;
+            // 
+            // colProjectNumber
+            // 
+            this.colProjectNumber.Caption = "專案代碼";
+            this.colProjectNumber.FieldName = "ProjectNumber";
+            this.colProjectNumber.Name = "colProjectNumber";
+            this.colProjectNumber.OptionsColumn.AllowEdit = false;
+            this.colProjectNumber.Visible = true;
+            this.colProjectNumber.VisibleIndex = 1;
             // 
             // colSalesNumber
             // 
@@ -240,6 +249,7 @@ namespace ERPManagementAPP.Maintain
             this.cet_Other.Dock = System.Windows.Forms.DockStyle.Left;
             this.cet_Other.Location = new System.Drawing.Point(0, 0);
             this.cet_Other.Name = "cet_Other";
+            this.cet_Other.Properties.AllowFocused = false;
             this.cet_Other.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.cet_Other.Properties.Appearance.Options.UseFont = true;
             this.cet_Other.Properties.Appearance.Options.UseTextOptions = true;
@@ -267,15 +277,6 @@ namespace ERPManagementAPP.Maintain
             this.layoutControlItem1.Size = new System.Drawing.Size(1258, 826);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // colProjectNumber
-            // 
-            this.colProjectNumber.Caption = "專案代碼";
-            this.colProjectNumber.FieldName = "ProjectNumber";
-            this.colProjectNumber.Name = "colProjectNumber";
-            this.colProjectNumber.OptionsColumn.AllowEdit = false;
-            this.colProjectNumber.Visible = true;
-            this.colProjectNumber.VisibleIndex = 1;
             // 
             // SalesPostingMaintainControl
             // 

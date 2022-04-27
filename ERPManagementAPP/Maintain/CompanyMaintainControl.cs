@@ -4,6 +4,7 @@ using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraSplashScreen;
 using ERPManagementAPP.Maintain.CompanyMaintainForm;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
@@ -270,7 +271,9 @@ namespace ERPManagementAPP.Maintain
             #region 廠商通訊錄刷新
             btn_CompanyDirectory_Refresh.Click += (s, e) =>
             {
+                handle = SplashScreenManager.ShowOverlayForm(FindForm());
                 Refresh_Second_GridView(FocuseCompanySetting.CompanyNumber);
+                CloseProgressPanel(handle);
             };
             #endregion
             #endregion
@@ -499,22 +502,32 @@ namespace ERPManagementAPP.Maintain
         #endregion
         public override void Refresh_Main_GridView()
         {
-            CompanySettings = apiMethod.Get_Company();
-            if (CompanySettings != null)
+            handle = SplashScreenManager.ShowOverlayForm(FindForm());
+            for (int i = 0; i < length; i++)
             {
-                CompanygridControl.DataSource = CompanySettings;
-                for (int i = 0; i < advBandedGridView1.Columns.Count; i++)
+                CompanySettings = apiMethod.Get_Company();
+                if (CompanySettings != null)
                 {
-                    advBandedGridView1.Columns[i].BestFit();
+                    CompanygridControl.DataSource = CompanySettings;
+                    for (int index = 0; index < advBandedGridView1.Columns.Count; index++)
+                    {
+                        advBandedGridView1.Columns[index].BestFit();
+                    }
+                    break;
                 }
             }
+            CloseProgressPanel(handle);
         }
         public override void Refresh_Second_GridView(string Number)
         {
-            CompanyDirectorySettings = apiMethod.Get_DirectoryCompany(Number);
-            if (CompanyDirectorySettings!= null)
+            for (int i = 0; i < length; i++)
             {
-                CompanyDirectorygridControl.DataSource = CompanyDirectorySettings;
+                CompanyDirectorySettings = apiMethod.Get_DirectoryCompany(Number);
+                if (CompanyDirectorySettings != null)
+                {
+                    CompanyDirectorygridControl.DataSource = CompanyDirectorySettings;
+                    break;
+                }
             }
         }
         public override void Refresh_Token()

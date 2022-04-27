@@ -4,6 +4,7 @@ using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraSplashScreen;
 using ERPManagementAPP.Maintain.CustomerMaintainForm;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
@@ -268,7 +269,9 @@ namespace ERPManagementAPP.Maintain
             #region 客戶通訊錄刷新
             btn_CustomerDirectory_Refresh.Click += (s, e) =>
             {
+                handle = SplashScreenManager.ShowOverlayForm(FindForm());
                 Refresh_Second_GridView(FocuseCustomerSetting.CustomerNumber);
+                CloseProgressPanel(handle);
             };
             #endregion
             #endregion
@@ -481,22 +484,32 @@ namespace ERPManagementAPP.Maintain
         #endregion
         public override void Refresh_Main_GridView()
         {
-            CustomerSettings = apiMethod.Get_Customer();
-            if (CustomerSettings != null)
+            handle = SplashScreenManager.ShowOverlayForm(FindForm());
+            for (int i = 0; i < length; i++)
             {
-                CustomergridControl.DataSource = CustomerSettings;
-                for (int i = 0; i < advBandedGridView1.Columns.Count; i++)
+                CustomerSettings = apiMethod.Get_Customer();
+                if (CustomerSettings != null)
                 {
-                    advBandedGridView1.Columns[i].BestFit();
+                    CustomergridControl.DataSource = CustomerSettings;
+                    for (int index = 0; index < advBandedGridView1.Columns.Count; index++)
+                    {
+                        advBandedGridView1.Columns[index].BestFit();
+                    }
                 }
+                break;
             }
+            CloseProgressPanel(handle);
         }
         public override void Refresh_Second_GridView(string Number)
         {
-            CustomerDirectorySettings = apiMethod.Get_DirectoryCustomer(Number);
-            if (CustomerDirectorySettings != null)
+            for (int i = 0; i < length; i++)
             {
-                CustomerDirectorygridControl.DataSource = CustomerDirectorySettings;
+                CustomerDirectorySettings = apiMethod.Get_DirectoryCustomer(Number);
+                if (CustomerDirectorySettings != null)
+                {
+                    CustomerDirectorygridControl.DataSource = CustomerDirectorySettings;
+                    break;
+                }
             }
         }
         public override void Refresh_Token()

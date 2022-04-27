@@ -5,6 +5,7 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraSplashScreen;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using Newtonsoft.Json;
@@ -326,32 +327,38 @@ namespace ERPManagementAPP.Maintain
         #endregion
         public override void Refresh_Main_GridView()
         {
-            Refersh_API();
-            PurchaseMainSettings = apiMethod.Get_PurchasePosting();
-            OperatingMainSettings = apiMethod.Get_OperatingPosting();
-            if (PurchaseMainSettings != null)
+            handle = SplashScreenManager.ShowOverlayForm(FindForm());
+            for (int i = 0; i < length; i++)
             {
-                foreach (var item in PurchaseMainSettings)
+                Refersh_API();
+                PurchaseMainSettings = apiMethod.Get_PurchasePosting();
+                OperatingMainSettings = apiMethod.Get_OperatingPosting();
+                if (PurchaseMainSettings != null)
                 {
-                    if (item.PurchaseFlag == 2)
+                    foreach (var item in PurchaseMainSettings)
                     {
-                        item.Total = -1 * item.Total;
-                        item.TotalTax = -1 * item.TotalTax;
+                        if (item.PurchaseFlag == 2)
+                        {
+                            item.Total = -1 * item.Total;
+                            item.TotalTax = -1 * item.TotalTax;
+                        }
                     }
+                    Controller();
                 }
-                Controller();
-            }
-            if (OperatingMainSettings != null)
-            {
-                foreach (var item in OperatingMainSettings)
+                if (OperatingMainSettings != null)
                 {
-                    if (item.OperatingFlag == 8)
+                    foreach (var item in OperatingMainSettings)
                     {
-                        item.Total = -1 * item.Total;
-                        item.TotalTax = -1 * item.TotalTax;
+                        if (item.OperatingFlag == 8)
+                        {
+                            item.Total = -1 * item.Total;
+                            item.TotalTax = -1 * item.TotalTax;
+                        }
                     }
+                    break;
                 }
             }
+            CloseProgressPanel(handle);
         }
         private void Refersh_API()
         {

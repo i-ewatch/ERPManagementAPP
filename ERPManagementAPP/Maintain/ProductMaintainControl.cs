@@ -4,6 +4,7 @@ using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraSplashScreen;
 using ERPManagementAPP.Maintain.ProductMaintainForm;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
@@ -218,11 +219,13 @@ namespace ERPManagementAPP.Maintain
             #region 產品資料刷新
             btn_Product_Refresh.Click += (s, e) =>
               {
+                  handle = SplashScreenManager.ShowOverlayForm(FindForm());
                   if (ProductCategorySettings == null)
                   {
                       Refresh_Main_GridView();
                   }
                   Refresh_Second_GridView("");
+                  CloseProgressPanel(handle);
               };
             #endregion
             #endregion
@@ -387,13 +390,19 @@ namespace ERPManagementAPP.Maintain
         #endregion
         public override void Refresh_Main_GridView()
         {
-            Refresh_API();
-            ProductCategorySettings = apiMethod.Get_ProductGategory();
-            if (ProductCategorySettings != null)
+            handle = SplashScreenManager.ShowOverlayForm(FindForm());
+            for (int i = 0; i < length; i++)
             {
-                ProductCategorygridControl.DataSource = ProductCategorySettings;
-                Refresh_Second_GridView("");
+                Refresh_API();
+                ProductCategorySettings = apiMethod.Get_ProductGategory();
+                if (ProductCategorySettings != null)
+                {
+                    ProductCategorygridControl.DataSource = ProductCategorySettings;
+                    Refresh_Second_GridView("");
+                    break;
+                }
             }
+            CloseProgressPanel(handle);
         }
         public override void Refresh_Second_GridView(string Number)
         {

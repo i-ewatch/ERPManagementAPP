@@ -5,6 +5,7 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraSplashScreen;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using Newtonsoft.Json;
@@ -293,20 +294,26 @@ namespace ERPManagementAPP.Maintain
         #endregion
         public override void Refresh_Main_GridView()
         {
-            Refresh_API();
-            SalesMainSettings = apiMethod.Get_SalesPosting();
-            if (SalesMainSettings != null)
+            handle = SplashScreenManager.ShowOverlayForm(FindForm());
+            for (int i = 0; i < length; i++)
             {
-                foreach (var item in SalesMainSettings)
+                Refresh_API();
+                SalesMainSettings = apiMethod.Get_SalesPosting();
+                if (SalesMainSettings != null)
                 {
-                    if (item.SalesFlag == 4)
+                    foreach (var item in SalesMainSettings)
                     {
-                        item.Total = -1 * item.Total;
-                        item.TotalTax = -1 * item.TotalTax;
+                        if (item.SalesFlag == 4)
+                        {
+                            item.Total = -1 * item.Total;
+                            item.TotalTax = -1 * item.TotalTax;
+                        }
                     }
+                    Controller();
+                    break;
                 }
-                Controller();
             }
+            CloseProgressPanel(handle);
         }
         private void Refresh_API()
         {

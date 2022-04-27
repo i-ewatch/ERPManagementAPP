@@ -4,6 +4,7 @@ using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraSplashScreen;
 using ERPManagementAPP.Maintain.PaymentMaintainForm;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
@@ -431,13 +432,19 @@ namespace ERPManagementAPP.Maintain
         #endregion
         public override void Refresh_Main_GridView()
         {
-            Refresh_API();
-            PaymentItemSettings = apiMethod.Get_PaymentItem();
-            if (PaymentItemSettings != null)
+            handle = SplashScreenManager.ShowOverlayForm(FindForm());
+            for (int i = 0; i < length; i++)
             {
-                gridControl2.DataSource = PaymentItemSettings;
-                Refresh_Second_GridView("");
+                Refresh_API();
+                PaymentItemSettings = apiMethod.Get_PaymentItem();
+                if (PaymentItemSettings != null)
+                {
+                    gridControl2.DataSource = PaymentItemSettings;
+                    Refresh_Second_GridView("");
+                    break;
+                }
             }
+            CloseProgressPanel(handle);
         }
         public override void Refresh_Second_GridView(string Number)
         {

@@ -1,6 +1,7 @@
 ﻿using DevExpress.Utils;
 using DevExpress.XtraBars.Docking2010.Customization;
 using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
+using DevExpress.XtraSplashScreen;
 using ERPManagementAPP.Maintain.EmployeeMaintainForm;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
@@ -244,11 +245,16 @@ namespace ERPManagementAPP.Maintain
         #endregion
         public override void Refresh_Main_GridView()
         {
-            EmployeeSettings = apiMethod.Get_Employee();
-            if (EmployeeSettings != null)
+            handle = SplashScreenManager.ShowOverlayForm(FindForm());
+            for (int i = 0; i < length; i++)
             {
-                EmployeegridControl.DataSource = EmployeeSettings;
+                EmployeeSettings = apiMethod.Get_Employee();
+                if (EmployeeSettings != null)
+                {
+                    EmployeegridControl.DataSource = EmployeeSettings;
+                }
             }
+            CloseProgressPanel(handle);
         }
         public override void Refresh_Token()
         {
