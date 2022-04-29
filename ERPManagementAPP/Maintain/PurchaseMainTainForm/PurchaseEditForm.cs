@@ -597,7 +597,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
                 {
                     if (!string.IsNullOrEmpty(AttachmentFilePath))
                     {
-                        response = apiMethod.Post_PurchaseAttachmentFile(purchaseSetting.PurchaseFlag, purchaseSetting.PurchaseCompanyNumber, purchaseSetting.PurchaseDate, purchaseSetting.PurchaseNumber, AttachmentFilePath);
+                        response = apiMethod.Post_PurchaseAttachmentFile(purchaseSetting.PurchaseFlag, purchaseSetting.PurchaseDate, purchaseSetting.PurchaseNumber, AttachmentFilePath);
                         if (response == "200")
                         {
                             DialogResult = DialogResult.OK;
@@ -652,7 +652,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
                         if (!string.IsNullOrEmpty(AttachmentFilePath) && !string.IsNullOrEmpty(apiMethod.ResponseDataMessage))
                         {
                             List<PurchaseSetting> settings = JsonConvert.DeserializeObject<List<PurchaseSetting>>(apiMethod.ResponseDataMessage);
-                            response = apiMethod.Post_PurchaseAttachmentFile(settings[0].PurchaseFlag, settings[0].PurchaseCompanyNumber, settings[0].PurchaseDate, settings[0].PurchaseNumber, AttachmentFilePath);
+                            response = apiMethod.Post_PurchaseAttachmentFile(settings[0].PurchaseFlag, settings[0].PurchaseDate, settings[0].PurchaseNumber, AttachmentFilePath);
                             if (response == "200")
                             {
                                 DialogResult = DialogResult.OK;

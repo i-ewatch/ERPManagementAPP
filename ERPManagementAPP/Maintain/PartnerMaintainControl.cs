@@ -42,7 +42,6 @@ namespace ERPManagementAPP.Maintain
             Form1 = form1;
             apiMethod = APIMethod;
             det_SalesDate.Text = DateTime.Now.ToString("yyyy/MM");
-            Refresh_API();
             if (Form1.EmployeeSetting.Token > 0)
             {
                 Refresh_Main_GridView();

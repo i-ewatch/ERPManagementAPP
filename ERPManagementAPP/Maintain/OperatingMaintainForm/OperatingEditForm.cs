@@ -607,7 +607,7 @@ namespace ERPManagementAPP.Maintain.OperatingMaintainForm
                 {
                     if (!string.IsNullOrEmpty(AttachmentFilePath))
                     {
-                        response = apiMethod.Post_OperatingAttachmentFile(purchaseSetting.OperatingFlag, purchaseSetting.OperatingCompanyNumber, purchaseSetting.OperatingDate, purchaseSetting.OperatingNumber, AttachmentFilePath);
+                        response = apiMethod.Post_OperatingAttachmentFile(purchaseSetting.OperatingFlag, purchaseSetting.OperatingDate, purchaseSetting.OperatingNumber, AttachmentFilePath);
                         if (response == "200")
                         {
                             DialogResult = DialogResult.OK;
@@ -662,7 +662,7 @@ namespace ERPManagementAPP.Maintain.OperatingMaintainForm
                         if (!string.IsNullOrEmpty(AttachmentFilePath) && !string.IsNullOrEmpty(apiMethod.ResponseDataMessage))
                         {
                             List<OperatingSetting> settings = JsonConvert.DeserializeObject<List<OperatingSetting>>(apiMethod.ResponseDataMessage);
-                            response = apiMethod.Post_OperatingAttachmentFile(settings[0].OperatingFlag, settings[0].OperatingCompanyNumber, settings[0].OperatingDate, settings[0].OperatingNumber, AttachmentFilePath);
+                            response = apiMethod.Post_OperatingAttachmentFile(settings[0].OperatingFlag, settings[0].OperatingDate, settings[0].OperatingNumber, AttachmentFilePath);
                             if (response == "200")
                             {
                                 DialogResult = DialogResult.OK;

@@ -2124,7 +2124,7 @@ namespace ERPManagementAPP.Methods
         /// </summary>
         /// <param name="Path"></param>
         /// <returns></returns>
-        public string Post_PurchaseAttachmentFile(int PurchaseFlag, string PurchaseCompanyNumber, DateTime PurchaseDate, string PurchaseNumber, string Path)
+        public string Post_PurchaseAttachmentFile(int PurchaseFlag, DateTime PurchaseDate, string PurchaseNumber, string Path)
         {
             try
             {
@@ -2135,7 +2135,6 @@ namespace ERPManagementAPP.Methods
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
                 requsest.AddParameter("PurchaseFlag", PurchaseFlag, type: ParameterType.QueryString);
-                requsest.AddParameter("PurchaseCompanyNumber", PurchaseCompanyNumber, type: ParameterType.QueryString);
                 requsest.AddParameter("PurchaseDate", PurchaseDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
                 requsest.AddParameter("PurchaseNumber", PurchaseNumber, type: ParameterType.QueryString);
                 requsest.AddFile("AttachmentFile", Path);
@@ -2159,7 +2158,7 @@ namespace ERPManagementAPP.Methods
         /// </summary>
         /// <param name="File">檔案名稱</param>
         /// <returns></returns>
-        public byte[] Get_PurchaseAttachmentFile(string PurchaseCompanyNumber, string File)
+        public byte[] Get_PurchaseAttachmentFile(string PurchaseNumber, string File)
         {
             try
             {
@@ -2170,7 +2169,7 @@ namespace ERPManagementAPP.Methods
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
                 requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
-                requsest.AddParameter("PurchaseCompanyNumber", PurchaseCompanyNumber, type: ParameterType.QueryString);
+                requsest.AddParameter("PurchaseNumber", PurchaseNumber, type: ParameterType.QueryString);
                 var response = clinet.DownloadDataAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
@@ -3604,7 +3603,7 @@ namespace ERPManagementAPP.Methods
         /// </summary>
         /// <param name="Path"></param>
         /// <returns></returns>
-        public string Post_OperatingAttachmentFile(int OperatingFlag, string OperatingCompanyNumber, DateTime OperatingDate, string OperatingNumber, string Path)
+        public string Post_OperatingAttachmentFile(int OperatingFlag, DateTime OperatingDate, string OperatingNumber, string Path)
         {
             try
             {
@@ -3615,7 +3614,6 @@ namespace ERPManagementAPP.Methods
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
                 requsest.AddParameter("OperatingFlag", OperatingFlag, type: ParameterType.QueryString);
-                requsest.AddParameter("OperatingCompanyNumber", OperatingCompanyNumber, type: ParameterType.QueryString);
                 requsest.AddParameter("OperatingDate", OperatingDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
                 requsest.AddParameter("OperatingNumber", OperatingNumber, type: ParameterType.QueryString);
                 requsest.AddFile("AttachmentFile", Path);
@@ -3639,7 +3637,7 @@ namespace ERPManagementAPP.Methods
         /// </summary>
         /// <param name="File">檔案名稱</param>
         /// <returns></returns>
-        public byte[] Get_OperatingAttachmentFile(string OperatingCompanyNumber, string File)
+        public byte[] Get_OperatingAttachmentFile(string OperatingNumber, string File)
         {
             try
             {
@@ -3650,7 +3648,7 @@ namespace ERPManagementAPP.Methods
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
                 requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
-                requsest.AddParameter("OperatingCompanyNumber", OperatingCompanyNumber, type: ParameterType.QueryString);
+                requsest.AddParameter("OperatingNumber", OperatingNumber, type: ParameterType.QueryString);
                 var response = clinet.DownloadDataAsync(requsest);
                 response.Wait();
                 ClientFlag = true;

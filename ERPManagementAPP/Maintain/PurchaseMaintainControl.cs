@@ -70,7 +70,7 @@ namespace ERPManagementAPP.Maintain
                     {
                         if (FocusePurchaseMainSetting.FileName != "")
                         {
-                            byte[] File = apiMethod.Get_PurchaseAttachmentFile(FocusePurchaseMainSetting.PurchaseCompanyNumber, FocusePurchaseMainSetting.FileName);
+                            byte[] File = apiMethod.Get_PurchaseAttachmentFile(FocusePurchaseMainSetting.PurchaseNumber, FocusePurchaseMainSetting.FileName);
                             SaveFile(File, 0);
                         }
                     }

@@ -71,7 +71,7 @@ namespace ERPManagementAPP.Maintain
                     {
                         if (FocuseOperatingMainSetting.FileName != "")
                         {
-                            byte[] File = apiMethod.Get_OperatingAttachmentFile(FocuseOperatingMainSetting.OperatingCompanyNumber, FocuseOperatingMainSetting.FileName);
+                            byte[] File = apiMethod.Get_OperatingAttachmentFile(FocuseOperatingMainSetting.OperatingNumber, FocuseOperatingMainSetting.FileName);
                             SaveFile(File, 0);
                         }
                     }
