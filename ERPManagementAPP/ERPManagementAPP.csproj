@@ -256,11 +256,23 @@
     <Compile Include="Maintain\ProductMaintainForm\ProductCategoryEditForm.Designer.cs">
       <DependentUpon>ProductCategoryEditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Maintain\ProductMaintainForm\ProductDepartmentEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\ProductMaintainForm\ProductDepartmentEditForm.Designer.cs">
+      <DependentUpon>ProductDepartmentEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Maintain\ProductMaintainForm\ProductEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Maintain\ProductMaintainForm\ProductEditForm.Designer.cs">
       <DependentUpon>ProductEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintain\ProductMaintainForm\ProductItemEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintain\ProductMaintainForm\ProductItemEditForm.Designer.cs">
+      <DependentUpon>ProductItemEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Maintain\ProjectMaintainControl.cs">
       <SubType>UserControl</SubType>
@@ -326,6 +338,12 @@
     <Compile Include="Models\PickingSetting.cs" />
     <Compile Include="Models\PickingSubSetting.cs" />
     <Compile Include="Models\ProductCategorySetting.cs" />
+    <Compile Include="Models\ProductDepartmentSetting.cs" />
+    <Compile Include="Models\ProductItem1Setting.cs" />
+    <Compile Include="Models\ProductItem2Setting.cs" />
+    <Compile Include="Models\ProductItem3Setting.cs" />
+    <Compile Include="Models\ProductItem4Setting.cs" />
+    <Compile Include="Models\ProductItem5Setting.cs" />
     <Compile Include="Models\ProductSetting.cs" />
     <Compile Include="Models\ProjectEmployeeSetting.cs" />
     <Compile Include="Models\ProjectSetting.cs" />
@@ -405,8 +423,14 @@
     <EmbeddedResource Include="Maintain\ProductMaintainForm\ProductCategoryEditForm.resx">
       <DependentUpon>ProductCategoryEditForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\ProductMaintainForm\ProductDepartmentEditForm.resx">
+      <DependentUpon>ProductDepartmentEditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Maintain\ProductMaintainForm\ProductEditForm.resx">
       <DependentUpon>ProductEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintain\ProductMaintainForm\ProductItemEditForm.resx">
+      <DependentUpon>ProductItemEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Maintain\ProjectMaintainControl.resx">
       <DependentUpon>ProjectMaintainControl.cs</DependentUpon>

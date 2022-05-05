@@ -65,7 +65,13 @@ namespace ERPManagementAPP.Methods
             ProductType_url = $"{URL}/ProductNumber/ProductType";
             ProductNumber_url = $"{URL}/ProductNumber";
             ProductAttachmentFile_url = $"{URL}/ProductAttachmentFile";
-            ProductGategory_url = $"{URL}/ProductCategory";
+            //ProductGategory_url = $"{URL}/ProductCategory"; //不使用 2022/5/4
+            ProductDepartment_url = $"{URL}/ProductDepartment";
+            ProductItem1_url = $"{URL}/ProductItem1";
+            ProductItem2_url = $"{URL}/ProductItem2";
+            ProductItem3_url = $"{URL}/ProductItem3";
+            ProductItem4_url = $"{URL}/ProductItem4";
+            ProductItem5_url = $"{URL}/ProductItem5";
 
             Purchase_url = $"{URL}/Purchase";
             PurchaseNumber_url = $"{URL}/Purchase/PurchaseNumber";
@@ -192,9 +198,33 @@ namespace ERPManagementAPP.Methods
         /// </summary>
         private string ProductAttachmentFile_url { get; set; }
         /// <summary>
-        /// 產品類別資料(Get、Post、Put、Delete)
+        /// 產品類別資料(Get、Post、Put、Delete，不使用 2022/5/4)
         /// </summary>
         private string ProductGategory_url { get; set; }
+        /// <summary>
+        /// 部門類別資料(Get、Post、Put、Delete)
+        /// </summary>
+        private string ProductDepartment_url { get; set; }
+        /// <summary>
+        /// 項目1類別資料(Get、Post、Put、Delete)
+        /// </summary>
+        private string ProductItem1_url { get; set; }
+        /// <summary>
+        /// 項目2類別資料(Get、Post、Put、Delete)
+        /// </summary>
+        private string ProductItem2_url { get; set; }
+        /// <summary>
+        /// 項目3類別資料(Get、Post、Put、Delete)
+        /// </summary>
+        private string ProductItem3_url { get; set; }
+        /// <summary>
+        /// 項目4類別資料(Get、Post、Put、Delete)
+        /// </summary>
+        private string ProductItem4_url { get; set; }
+        /// <summary>
+        /// 項目5類別資料(Get、Post、Put、Delete)
+        /// </summary>
+        private string ProductItem5_url { get; set; }
         #endregion
         #region 進貨資訊
         /// <summary>
@@ -1763,12 +1793,11 @@ namespace ERPManagementAPP.Methods
             }
         }
         #endregion
-        #endregion
 
-        #region 產品類別API
-        #region 全部產品類別
+        #region 產品類別API (不使用 2022/5/4)
+        #region 全部產品類別  
         /// <summary>
-        /// 全部產品類別
+        /// 全部產品類別 (不使用)
         /// </summary>
         /// <returns></returns>
         public List<ProductCategorySetting> Get_ProductGategory()
@@ -1800,7 +1829,7 @@ namespace ERPManagementAPP.Methods
         #endregion
         #region 新增產品類別資料
         /// <summary>
-        /// 新增產品類別資料
+        /// 新增產品類別資料  (不使用)
         /// </summary>
         /// <param name="productGategorySetting"></param>
         /// <returns></returns>
@@ -1831,7 +1860,7 @@ namespace ERPManagementAPP.Methods
         #endregion
         #region 修改產品類別資料
         /// <summary>
-        /// 修改產品類別資料
+        /// 修改產品類別資料 (不使用)
         /// </summary>
         /// <param name="productGategorySetting"></param>
         /// <returns></returns>
@@ -1862,7 +1891,7 @@ namespace ERPManagementAPP.Methods
         #endregion
         #region 刪除產品類別資料
         /// <summary>
-        /// 刪除產品類別資料
+        /// 刪除產品類別資料 (不使用)
         /// </summary>
         /// <param name="productGategorySetting"></param>
         /// <returns></returns>
@@ -1890,6 +1919,775 @@ namespace ERPManagementAPP.Methods
                 return null;
             }
         }
+        #endregion
+        #endregion
+
+        #region 部門類別
+        #region 全部部門類別
+        /// <summary>
+        /// 全部部門類別
+        /// </summary>
+        /// <returns></returns>
+        public List<ProductDepartmentSetting> Get_ProductDepartment()
+        {
+            try
+            {
+                List<ProductDepartmentSetting> settings = null;
+                var option = new RestClientOptions(ProductDepartment_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<ProductDepartmentSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<ProductDepartmentSetting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "全部部門類別API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 新增部門類別資料
+        /// <summary>
+        /// 新增部門類別資料
+        /// </summary>
+        /// <param name="productDepartmentSetting"></param>
+        /// <returns></returns>
+        public string Post_ProductDepartment(string productDepartmentSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductDepartment_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddBody(productDepartmentSetting, ContentType.Json);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "新增部門類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 修改部門類別資料
+        /// <summary>
+        /// 修改部門類別資料
+        /// </summary>
+        /// <param name="productDepartmentSetting"></param>
+        /// <returns></returns>
+        public string Put_ProductDepartment(string productDepartmentSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductDepartment_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(productDepartmentSetting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "修改部門類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 刪除部門類別資料
+        /// <summary>
+        /// 刪除部門類別資料
+        /// </summary>
+        /// <param name="productDepartmentSetting"></param>
+        /// <returns></returns>
+        public string Delete_ProductDepartment(string productDepartmentSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductDepartment_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Delete);
+                requsest.AddBody(productDepartmentSetting, ContentType.Json);
+                var response = clinet.DeleteAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "刪除部門類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region 項目1
+        #region 全部項目1類別
+        /// <summary>
+        /// 全部項目1類別
+        /// </summary>
+        /// <returns></returns>
+        public List<ProductItem1Setting> Get_ProductItem1()
+        {
+            try
+            {
+                List<ProductItem1Setting> settings = null;
+                var option = new RestClientOptions(ProductItem1_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<ProductItem1Setting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<ProductItem1Setting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "全部項目1類別API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 新增項目1類別資料
+        /// <summary>
+        /// 新增項目1類別資料
+        /// </summary>
+        /// <param name="productItem1Setting"></param>
+        /// <returns></returns>
+        public string Post_ProductItem1(string productItem1Setting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductItem1_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddBody(productItem1Setting, ContentType.Json);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "新增項目1類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 修改項目1類別資料
+        /// <summary>
+        /// 修改項目1類別資料
+        /// </summary>
+        /// <param name="productItem1Setting"></param>
+        /// <returns></returns>
+        public string Put_ProductItem1(string productItem1Setting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductItem1_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(productItem1Setting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "修改項目1類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 刪除項目1類別資料
+        /// <summary>
+        /// 刪除項目1類別資料
+        /// </summary>
+        /// <param name="productItem1Setting"></param>
+        /// <returns></returns>
+        public string Delete_ProductItem1(string productItem1Setting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductItem1_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Delete);
+                requsest.AddBody(productItem1Setting, ContentType.Json);
+                var response = clinet.DeleteAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "刪除項目1類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region 項目2
+        #region 全部項目2類別
+        /// <summary>
+        /// 全部項目2類別
+        /// </summary>
+        /// <returns></returns>
+        public List<ProductItem2Setting> Get_ProductItem2()
+        {
+            try
+            {
+                List<ProductItem2Setting> settings = null;
+                var option = new RestClientOptions(ProductItem2_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<ProductItem2Setting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<ProductItem2Setting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "全部項目2類別API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 新增項目2類別資料
+        /// <summary>
+        /// 新增項目2類別資料
+        /// </summary>
+        /// <param name="productItem2Setting"></param>
+        /// <returns></returns>
+        public string Post_ProductItem2(string productItem2Setting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductItem2_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddBody(productItem2Setting, ContentType.Json);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "新增項目2類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 修改項目2類別資料
+        /// <summary>
+        /// 修改項目2類別資料
+        /// </summary>
+        /// <param name="productItem2Setting"></param>
+        /// <returns></returns>
+        public string Put_ProductItem2(string productItem2Setting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductItem2_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(productItem2Setting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "修改項目2類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 刪除項目2類別資料
+        /// <summary>
+        /// 刪除項目2類別資料
+        /// </summary>
+        /// <param name="productItem2Setting"></param>
+        /// <returns></returns>
+        public string Delete_ProductItem2(string productItem2Setting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductItem2_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Delete);
+                requsest.AddBody(productItem2Setting, ContentType.Json);
+                var response = clinet.DeleteAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "刪除項目2類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region 項目3
+        #region 全部項目3類別
+        /// <summary>
+        /// 全部項目3類別
+        /// </summary>
+        /// <returns></returns>
+        public List<ProductItem3Setting> Get_ProductItem3()
+        {
+            try
+            {
+                List<ProductItem3Setting> settings = null;
+                var option = new RestClientOptions(ProductItem3_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<ProductItem3Setting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<ProductItem3Setting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "全部項目3類別API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 新增項目3類別資料
+        /// <summary>
+        /// 新增項目3類別資料
+        /// </summary>
+        /// <param name="productItem3Setting"></param>
+        /// <returns></returns>
+        public string Post_ProductItem3(string productItem3Setting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductItem3_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddBody(productItem3Setting, ContentType.Json);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "新增項目3類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 修改項目3類別資料
+        /// <summary>
+        /// 修改項目3類別資料
+        /// </summary>
+        /// <param name="productItem3Setting"></param>
+        /// <returns></returns>
+        public string Put_ProductItem3(string productItem3Setting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductItem3_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(productItem3Setting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "修改項目3類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 刪除項目3類別資料
+        /// <summary>
+        /// 刪除項目3類別資料
+        /// </summary>
+        /// <param name="productItem3Setting"></param>
+        /// <returns></returns>
+        public string Delete_ProductItem3(string productItem3Setting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductItem3_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Delete);
+                requsest.AddBody(productItem3Setting, ContentType.Json);
+                var response = clinet.DeleteAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "刪除項目3類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region 項目4
+        #region 全部項目4類別
+        /// <summary>
+        /// 全部項目4類別
+        /// </summary>
+        /// <returns></returns>
+        public List<ProductItem4Setting> Get_ProductItem4()
+        {
+            try
+            {
+                List<ProductItem4Setting> settings = null;
+                var option = new RestClientOptions(ProductItem4_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<ProductItem4Setting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<ProductItem4Setting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "全部項目4類別API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 新增項目4類別資料
+        /// <summary>
+        /// 新增項目4類別資料
+        /// </summary>
+        /// <param name="productItem4Setting"></param>
+        /// <returns></returns>
+        public string Post_ProductItem4(string productItem4Setting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductItem4_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddBody(productItem4Setting, ContentType.Json);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "新增項目4類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 修改項目4類別資料
+        /// <summary>
+        /// 修改項目4類別資料
+        /// </summary>
+        /// <param name="productItem4Setting"></param>
+        /// <returns></returns>
+        public string Put_ProductItem4(string productItem4Setting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductItem4_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(productItem4Setting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "修改項目4類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 刪除項目4類別資料
+        /// <summary>
+        /// 刪除項目4類別資料
+        /// </summary>
+        /// <param name="productItem4Setting"></param>
+        /// <returns></returns>
+        public string Delete_ProductItem4(string productItem4Setting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductItem4_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Delete);
+                requsest.AddBody(productItem4Setting, ContentType.Json);
+                var response = clinet.DeleteAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "刪除項目4類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region 項目5
+        #region 全部項目5類別
+        /// <summary>
+        /// 全部項目5類別
+        /// </summary>
+        /// <returns></returns>
+        public List<ProductItem5Setting> Get_ProductItem5()
+        {
+            try
+            {
+                List<ProductItem5Setting> settings = null;
+                var option = new RestClientOptions(ProductItem5_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                var response = clinet.ExecuteGetAsync<List<ProductItem5Setting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<ProductItem5Setting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "全部項目5類別API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 新增項目5類別資料
+        /// <summary>
+        /// 新增項目5類別資料
+        /// </summary>
+        /// <param name="productItem5Setting"></param>
+        /// <returns></returns>
+        public string Post_ProductItem5(string productItem5Setting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductItem5_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddBody(productItem5Setting, ContentType.Json);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "新增項目5類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 修改項目5類別資料
+        /// <summary>
+        /// 修改項目5類別資料
+        /// </summary>
+        /// <param name="productItem5Setting"></param>
+        /// <returns></returns>
+        public string Put_ProductItem5(string productItem5Setting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductItem5_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddBody(productItem5Setting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "修改項目5類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 刪除項目5類別資料
+        /// <summary>
+        /// 刪除項目5類別資料
+        /// </summary>
+        /// <param name="productItem5Setting"></param>
+        /// <returns></returns>
+        public string Delete_ProductItem5(string productItem5Setting)
+        {
+            try
+            {
+                var option = new RestClientOptions(ProductItem5_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Delete);
+                requsest.AddBody(productItem5Setting, ContentType.Json);
+                var response = clinet.DeleteAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "刪除項目5類別資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
         #endregion
         #endregion
 

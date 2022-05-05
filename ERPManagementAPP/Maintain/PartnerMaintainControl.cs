@@ -430,8 +430,8 @@ namespace ERPManagementAPP.Maintain
                     {
                         gridView1.Columns[index].BestFit();
                     }
+                    break;
                 }
-                break;
             }
             CloseProgressPanel(handle);
         }

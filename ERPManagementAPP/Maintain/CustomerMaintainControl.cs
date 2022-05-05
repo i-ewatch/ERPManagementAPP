@@ -495,8 +495,8 @@ namespace ERPManagementAPP.Maintain
                     {
                         advBandedGridView1.Columns[index].BestFit();
                     }
+                    break;
                 }
-                break;
             }
             CloseProgressPanel(handle);
         }

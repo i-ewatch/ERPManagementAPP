@@ -1,5 +1,4 @@
-﻿using DevExpress.Utils;
-using DevExpress.XtraBars.Docking2010.Customization;
+﻿using DevExpress.XtraBars.Docking2010.Customization;
 using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
