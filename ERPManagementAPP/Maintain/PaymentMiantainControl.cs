@@ -185,21 +185,62 @@ namespace ERPManagementAPP.Maintain
             #region 修改代墊代付
             btn_Payment_Edit.Click += (s, e) =>
             {
-                PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, FocusePaymentSetting, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
-                if (product.ShowDialog() == DialogResult.OK)
+                if (Form1.EmployeeSetting.Token == 2)
                 {
-                    Refresh_Main_GridView();
+                    PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, FocusePaymentSetting, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
+                    if (product.ShowDialog() == DialogResult.OK)
+                    {
+                        Refresh_Main_GridView();
+                    }
+                }
+                else if (Form1.EmployeeSetting.Token == 1)
+                {
+                    if (FocusePaymentSetting.EmployeeNumber == Form1.EmployeeSetting.EmployeeNumber)
+                    {
+                        PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, FocusePaymentSetting, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
+                        if (product.ShowDialog() == DialogResult.OK)
+                        {
+                            Refresh_Main_GridView();
+                        }
+                    }
+                    else
+                    {
+                        action.Caption = "權限不足";
+                        action.Description = "請管理員或該帳號做修改";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion
             #region 雙擊修改代墊代付
             gridControl1.DoubleClick += (s, e) =>
             {
-                FocuseSecondGrid();
-                PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, FocusePaymentSetting, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
-                if (product.ShowDialog() == DialogResult.OK)
+                if (Form1.EmployeeSetting.Token == 2)
                 {
-                    Refresh_Main_GridView();
+                    FocuseSecondGrid();
+                    PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, FocusePaymentSetting, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
+                    if (product.ShowDialog() == DialogResult.OK)
+                    {
+                        Refresh_Main_GridView();
+                    }
+                }
+                else if (Form1.EmployeeSetting.Token == 1)
+                {
+                    if (FocusePaymentSetting.EmployeeNumber == Form1.EmployeeSetting.EmployeeNumber)
+                    {
+                        FocuseSecondGrid();
+                        PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, FocusePaymentSetting, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
+                        if (product.ShowDialog() == DialogResult.OK)
+                        {
+                            Refresh_Main_GridView();
+                        }
+                    }
+                    else
+                    {
+                        action.Caption = "權限不足";
+                        action.Description = "請管理員或該帳號做修改";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion
@@ -453,6 +494,7 @@ namespace ERPManagementAPP.Maintain
             if (PaymentSettings != null && EmployeeSettings != null)
             {
                 gridControl1.DataSource = PaymentSettings;
+                gridView1.Columns["EmployeeNumber"].Group();
                 for (int i = 0; i < gridView1.Columns.Count; i++)
                 {
                     if (gridView1.Columns[i].FieldName != "PaymentUse")
@@ -460,6 +502,7 @@ namespace ERPManagementAPP.Maintain
                         gridView1.Columns[i].BestFit();
                     }
                 }
+                gridView1.ExpandAllGroups();
                 ChangeGridStr();
             }
         }

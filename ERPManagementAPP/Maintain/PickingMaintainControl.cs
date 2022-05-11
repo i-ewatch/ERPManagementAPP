@@ -27,6 +27,10 @@ namespace ERPManagementAPP.Maintain
         /// </summary>
         private List<CustomerSetting> CustomerSettings { get; set; }
         /// <summary>
+        /// 公司資訊
+        /// </summary>
+        private List<CompanySetting> CompanySettings { get; set; }
+        /// <summary>
         /// 員工資訊
         /// </summary>
         private List<EmployeeSetting> EmployeeSettings { get; set; }
@@ -186,7 +190,7 @@ namespace ERPManagementAPP.Maintain
             btn_Picking_Add.Click += (s, e) =>
             {
                 Refresh_API();
-                PickingEditForm purchaseEdit = new PickingEditForm(CustomerSettings, EmployeeSettings, ProductSettings, ProjectSettings, null, apiMethod, Form1);
+                PickingEditForm purchaseEdit = new PickingEditForm(CompanySettings, CustomerSettings, EmployeeSettings, ProductSettings, ProjectSettings, null, apiMethod, Form1);
                 if (purchaseEdit.ShowDialog() == DialogResult.OK)
                 {
                     Refresh_Main_GridView();
@@ -198,7 +202,7 @@ namespace ERPManagementAPP.Maintain
             {
                 Refresh_API();
                 PickingSettings = APIMethod.Get_Picking(FocusePickingMainSetting);
-                PickingEditForm purchaseEdit = new PickingEditForm(CustomerSettings, EmployeeSettings, ProductSettings, ProjectSettings, PickingSettings[0], apiMethod, Form1);
+                PickingEditForm purchaseEdit = new PickingEditForm(CompanySettings, CustomerSettings, EmployeeSettings, ProductSettings, ProjectSettings, PickingSettings[0], apiMethod, Form1);
                 if (purchaseEdit.ShowDialog() == DialogResult.OK)
                 {
                     Refresh_Main_GridView();
@@ -211,7 +215,7 @@ namespace ERPManagementAPP.Maintain
                 Refresh_API();
                 FocuseMainGrid();
                 PickingSettings = APIMethod.Get_Picking(FocusePickingMainSetting);
-                PickingEditForm purchaseEdit = new PickingEditForm(CustomerSettings, EmployeeSettings, ProductSettings, ProjectSettings, PickingSettings[0], apiMethod, Form1);
+                PickingEditForm purchaseEdit = new PickingEditForm(CompanySettings, CustomerSettings, EmployeeSettings, ProductSettings, ProjectSettings, PickingSettings[0], apiMethod, Form1);
                 if (purchaseEdit.ShowDialog() == DialogResult.OK)
                 {
                     Refresh_Main_GridView();
@@ -377,6 +381,7 @@ namespace ERPManagementAPP.Maintain
         {
             CustomerSettings = apiMethod.Get_Customer();
             EmployeeSettings = apiMethod.Get_Employee();
+            CompanySettings = apiMethod.Get_Company();
             ProductSettings = apiMethod.Get_Product();
             ProjectSettings = apiMethod.Get_Project();
         }

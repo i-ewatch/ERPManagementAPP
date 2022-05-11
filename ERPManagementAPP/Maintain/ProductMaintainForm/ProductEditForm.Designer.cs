@@ -33,6 +33,8 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.slt_ProductCompanyNumber = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colCompanyNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCompanyName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.mmt_Remark = new DevExpress.XtraEditors.MemoEdit();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
@@ -57,16 +59,43 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.btn_Cancel = new DevExpress.XtraEditors.SimpleButton();
             this.slt_DepartmentNumber = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.slt_Item1Number = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn112 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.slt_Item2Number = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View11 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn111 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn211 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.slt_Item3Number = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View111 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1111 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn311 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2111 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.slt_Item4Number = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View1111 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn11111 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3111 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn411 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn51 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn21111 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.slt_Item5Number = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View11111 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn111111 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn31111 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4111 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn511 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn61 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn211111 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -85,35 +114,6 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.colCompanyNumber = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colCompanyName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn112 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn111 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn211 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1111 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn311 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2111 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn11111 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3111 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn411 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn51 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn21111 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn111111 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn31111 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4111 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn511 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn61 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn211111 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slt_ProductCompanyNumber.Properties)).BeginInit();
@@ -226,6 +226,22 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // colCompanyNumber
+            // 
+            this.colCompanyNumber.Caption = "公司編號";
+            this.colCompanyNumber.FieldName = "CompanyNumber";
+            this.colCompanyNumber.Name = "colCompanyNumber";
+            this.colCompanyNumber.Visible = true;
+            this.colCompanyNumber.VisibleIndex = 0;
+            // 
+            // colCompanyName
+            // 
+            this.colCompanyName.Caption = "公司名稱";
+            this.colCompanyName.FieldName = "CompanyName";
+            this.colCompanyName.Name = "colCompanyName";
+            this.colCompanyName.Visible = true;
+            this.colCompanyName.VisibleIndex = 1;
             // 
             // panelControl2
             // 
@@ -510,6 +526,24 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "部門編號";
+            this.gridColumn11.FieldName = "DepartmentNumber";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.OptionsColumn.AllowEdit = false;
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "部門名稱";
+            this.gridColumn2.FieldName = "DepartmentName";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.OptionsColumn.AllowEdit = false;
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            // 
             // slt_Item1Number
             // 
             this.slt_Item1Number.EditValue = "";
@@ -538,6 +572,31 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.searchLookUpEdit1View1.Name = "searchLookUpEdit1View1";
             this.searchLookUpEdit1View1.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.searchLookUpEdit1View1.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn112
+            // 
+            this.gridColumn112.Caption = "部門編號";
+            this.gridColumn112.FieldName = "DepartmentNumber";
+            this.gridColumn112.Name = "gridColumn112";
+            this.gridColumn112.OptionsColumn.AllowEdit = false;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "項目1編號";
+            this.gridColumn3.FieldName = "Item1Number";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.OptionsColumn.AllowEdit = false;
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 0;
+            // 
+            // gridColumn21
+            // 
+            this.gridColumn21.Caption = "項目1名稱";
+            this.gridColumn21.FieldName = "Item1Name";
+            this.gridColumn21.Name = "gridColumn21";
+            this.gridColumn21.OptionsColumn.AllowEdit = false;
+            this.gridColumn21.Visible = true;
+            this.gridColumn21.VisibleIndex = 1;
             // 
             // slt_Item2Number
             // 
@@ -569,6 +628,38 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.searchLookUpEdit1View11.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.searchLookUpEdit1View11.OptionsView.ShowGroupPanel = false;
             // 
+            // gridColumn111
+            // 
+            this.gridColumn111.Caption = "部門編號";
+            this.gridColumn111.FieldName = "DepartmentNumber";
+            this.gridColumn111.Name = "gridColumn111";
+            this.gridColumn111.OptionsColumn.AllowEdit = false;
+            // 
+            // gridColumn31
+            // 
+            this.gridColumn31.Caption = "項目1編號";
+            this.gridColumn31.FieldName = "Item1Number";
+            this.gridColumn31.Name = "gridColumn31";
+            this.gridColumn31.OptionsColumn.AllowEdit = false;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "項目2編號";
+            this.gridColumn4.FieldName = "Item2Number";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.OptionsColumn.AllowEdit = false;
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 0;
+            // 
+            // gridColumn211
+            // 
+            this.gridColumn211.Caption = "項目2名稱";
+            this.gridColumn211.FieldName = "Item2Name";
+            this.gridColumn211.Name = "gridColumn211";
+            this.gridColumn211.OptionsColumn.AllowEdit = false;
+            this.gridColumn211.Visible = true;
+            this.gridColumn211.VisibleIndex = 1;
+            // 
             // slt_Item3Number
             // 
             this.slt_Item3Number.EditValue = "";
@@ -599,6 +690,44 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.searchLookUpEdit1View111.Name = "searchLookUpEdit1View111";
             this.searchLookUpEdit1View111.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.searchLookUpEdit1View111.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn1111
+            // 
+            this.gridColumn1111.Caption = "部門編號";
+            this.gridColumn1111.FieldName = "DepartmentNumber";
+            this.gridColumn1111.Name = "gridColumn1111";
+            this.gridColumn1111.OptionsColumn.AllowEdit = false;
+            // 
+            // gridColumn311
+            // 
+            this.gridColumn311.Caption = "項目1編號";
+            this.gridColumn311.FieldName = "Item1Number";
+            this.gridColumn311.Name = "gridColumn311";
+            this.gridColumn311.OptionsColumn.AllowEdit = false;
+            // 
+            // gridColumn41
+            // 
+            this.gridColumn41.Caption = "項目2編號";
+            this.gridColumn41.FieldName = "Item2Number";
+            this.gridColumn41.Name = "gridColumn41";
+            this.gridColumn41.OptionsColumn.AllowEdit = false;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "項目3編號";
+            this.gridColumn5.FieldName = "Item3Number";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 0;
+            // 
+            // gridColumn2111
+            // 
+            this.gridColumn2111.Caption = "項目3名稱";
+            this.gridColumn2111.FieldName = "Item3Name";
+            this.gridColumn2111.Name = "gridColumn2111";
+            this.gridColumn2111.OptionsColumn.AllowEdit = false;
+            this.gridColumn2111.Visible = true;
+            this.gridColumn2111.VisibleIndex = 1;
             // 
             // slt_Item4Number
             // 
@@ -632,6 +761,50 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.searchLookUpEdit1View1111.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.searchLookUpEdit1View1111.OptionsView.ShowGroupPanel = false;
             // 
+            // gridColumn11111
+            // 
+            this.gridColumn11111.Caption = "部門編號";
+            this.gridColumn11111.FieldName = "DepartmentNumber";
+            this.gridColumn11111.Name = "gridColumn11111";
+            this.gridColumn11111.OptionsColumn.AllowEdit = false;
+            // 
+            // gridColumn3111
+            // 
+            this.gridColumn3111.Caption = "項目1編號";
+            this.gridColumn3111.FieldName = "Item1Number";
+            this.gridColumn3111.Name = "gridColumn3111";
+            this.gridColumn3111.OptionsColumn.AllowEdit = false;
+            // 
+            // gridColumn411
+            // 
+            this.gridColumn411.Caption = "項目2編號";
+            this.gridColumn411.FieldName = "Item2Number";
+            this.gridColumn411.Name = "gridColumn411";
+            this.gridColumn411.OptionsColumn.AllowEdit = false;
+            // 
+            // gridColumn51
+            // 
+            this.gridColumn51.Caption = "項目3編號";
+            this.gridColumn51.FieldName = "Item3Number";
+            this.gridColumn51.Name = "gridColumn51";
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "項目4編號";
+            this.gridColumn6.FieldName = "Item4Number";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 0;
+            // 
+            // gridColumn21111
+            // 
+            this.gridColumn21111.Caption = "項目4名稱";
+            this.gridColumn21111.FieldName = "Item4Name";
+            this.gridColumn21111.Name = "gridColumn21111";
+            this.gridColumn21111.OptionsColumn.AllowEdit = false;
+            this.gridColumn21111.Visible = true;
+            this.gridColumn21111.VisibleIndex = 1;
+            // 
             // slt_Item5Number
             // 
             this.slt_Item5Number.EditValue = "";
@@ -664,6 +837,56 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.searchLookUpEdit1View11111.Name = "searchLookUpEdit1View11111";
             this.searchLookUpEdit1View11111.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.searchLookUpEdit1View11111.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn111111
+            // 
+            this.gridColumn111111.Caption = "部門編號";
+            this.gridColumn111111.FieldName = "DepartmentNumber";
+            this.gridColumn111111.Name = "gridColumn111111";
+            this.gridColumn111111.OptionsColumn.AllowEdit = false;
+            // 
+            // gridColumn31111
+            // 
+            this.gridColumn31111.Caption = "項目1編號";
+            this.gridColumn31111.FieldName = "Item1Number";
+            this.gridColumn31111.Name = "gridColumn31111";
+            this.gridColumn31111.OptionsColumn.AllowEdit = false;
+            // 
+            // gridColumn4111
+            // 
+            this.gridColumn4111.Caption = "項目2編號";
+            this.gridColumn4111.FieldName = "Item2Number";
+            this.gridColumn4111.Name = "gridColumn4111";
+            this.gridColumn4111.OptionsColumn.AllowEdit = false;
+            // 
+            // gridColumn511
+            // 
+            this.gridColumn511.Caption = "項目3編號";
+            this.gridColumn511.FieldName = "Item3Number";
+            this.gridColumn511.Name = "gridColumn511";
+            // 
+            // gridColumn61
+            // 
+            this.gridColumn61.Caption = "項目4編號";
+            this.gridColumn61.FieldName = "Item4Number";
+            this.gridColumn61.Name = "gridColumn61";
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "項目5編號";
+            this.gridColumn1.FieldName = "Item5Number";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            // 
+            // gridColumn211111
+            // 
+            this.gridColumn211111.Caption = "項目5名稱";
+            this.gridColumn211111.FieldName = "Item5Name";
+            this.gridColumn211111.Name = "gridColumn211111";
+            this.gridColumn211111.OptionsColumn.AllowEdit = false;
+            this.gridColumn211111.Visible = true;
+            this.gridColumn211111.VisibleIndex = 1;
             // 
             // Root
             // 
@@ -891,229 +1114,6 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.layoutControlItem16.Size = new System.Drawing.Size(277, 30);
             this.layoutControlItem16.Text = "項目5編號*";
             this.layoutControlItem16.TextSize = new System.Drawing.Size(80, 20);
-            // 
-            // colCompanyNumber
-            // 
-            this.colCompanyNumber.Caption = "公司編號";
-            this.colCompanyNumber.FieldName = "CompanyNumber";
-            this.colCompanyNumber.Name = "colCompanyNumber";
-            this.colCompanyNumber.Visible = true;
-            this.colCompanyNumber.VisibleIndex = 0;
-            // 
-            // colCompanyName
-            // 
-            this.colCompanyName.Caption = "公司名稱";
-            this.colCompanyName.FieldName = "CompanyName";
-            this.colCompanyName.Name = "colCompanyName";
-            this.colCompanyName.Visible = true;
-            this.colCompanyName.VisibleIndex = 1;
-            // 
-            // gridColumn11
-            // 
-            this.gridColumn11.Caption = "部門編號";
-            this.gridColumn11.FieldName = "DepartmentNumber";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.OptionsColumn.AllowEdit = false;
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 0;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "部門名稱";
-            this.gridColumn2.FieldName = "DepartmentName";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.OptionsColumn.AllowEdit = false;
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
-            // 
-            // gridColumn112
-            // 
-            this.gridColumn112.Caption = "部門編號";
-            this.gridColumn112.FieldName = "DepartmentNumber";
-            this.gridColumn112.Name = "gridColumn112";
-            this.gridColumn112.OptionsColumn.AllowEdit = false;
-            // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "項目1編號";
-            this.gridColumn3.FieldName = "Item1Number";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.OptionsColumn.AllowEdit = false;
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 0;
-            // 
-            // gridColumn21
-            // 
-            this.gridColumn21.Caption = "項目1名稱";
-            this.gridColumn21.FieldName = "Item1Name";
-            this.gridColumn21.Name = "gridColumn21";
-            this.gridColumn21.OptionsColumn.AllowEdit = false;
-            this.gridColumn21.Visible = true;
-            this.gridColumn21.VisibleIndex = 1;
-            // 
-            // gridColumn111
-            // 
-            this.gridColumn111.Caption = "部門編號";
-            this.gridColumn111.FieldName = "DepartmentNumber";
-            this.gridColumn111.Name = "gridColumn111";
-            this.gridColumn111.OptionsColumn.AllowEdit = false;
-            // 
-            // gridColumn31
-            // 
-            this.gridColumn31.Caption = "項目1編號";
-            this.gridColumn31.FieldName = "Item1Number";
-            this.gridColumn31.Name = "gridColumn31";
-            this.gridColumn31.OptionsColumn.AllowEdit = false;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.Caption = "項目2編號";
-            this.gridColumn4.FieldName = "Item2Number";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.OptionsColumn.AllowEdit = false;
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 0;
-            // 
-            // gridColumn211
-            // 
-            this.gridColumn211.Caption = "項目2名稱";
-            this.gridColumn211.FieldName = "Item2Name";
-            this.gridColumn211.Name = "gridColumn211";
-            this.gridColumn211.OptionsColumn.AllowEdit = false;
-            this.gridColumn211.Visible = true;
-            this.gridColumn211.VisibleIndex = 1;
-            // 
-            // gridColumn1111
-            // 
-            this.gridColumn1111.Caption = "部門編號";
-            this.gridColumn1111.FieldName = "DepartmentNumber";
-            this.gridColumn1111.Name = "gridColumn1111";
-            this.gridColumn1111.OptionsColumn.AllowEdit = false;
-            // 
-            // gridColumn311
-            // 
-            this.gridColumn311.Caption = "項目1編號";
-            this.gridColumn311.FieldName = "Item1Number";
-            this.gridColumn311.Name = "gridColumn311";
-            this.gridColumn311.OptionsColumn.AllowEdit = false;
-            // 
-            // gridColumn41
-            // 
-            this.gridColumn41.Caption = "項目2編號";
-            this.gridColumn41.FieldName = "Item2Number";
-            this.gridColumn41.Name = "gridColumn41";
-            this.gridColumn41.OptionsColumn.AllowEdit = false;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.Caption = "項目3編號";
-            this.gridColumn5.FieldName = "Item3Number";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 0;
-            // 
-            // gridColumn2111
-            // 
-            this.gridColumn2111.Caption = "項目3名稱";
-            this.gridColumn2111.FieldName = "Item3Name";
-            this.gridColumn2111.Name = "gridColumn2111";
-            this.gridColumn2111.OptionsColumn.AllowEdit = false;
-            this.gridColumn2111.Visible = true;
-            this.gridColumn2111.VisibleIndex = 1;
-            // 
-            // gridColumn11111
-            // 
-            this.gridColumn11111.Caption = "部門編號";
-            this.gridColumn11111.FieldName = "DepartmentNumber";
-            this.gridColumn11111.Name = "gridColumn11111";
-            this.gridColumn11111.OptionsColumn.AllowEdit = false;
-            // 
-            // gridColumn3111
-            // 
-            this.gridColumn3111.Caption = "項目1編號";
-            this.gridColumn3111.FieldName = "Item1Number";
-            this.gridColumn3111.Name = "gridColumn3111";
-            this.gridColumn3111.OptionsColumn.AllowEdit = false;
-            // 
-            // gridColumn411
-            // 
-            this.gridColumn411.Caption = "項目2編號";
-            this.gridColumn411.FieldName = "Item2Number";
-            this.gridColumn411.Name = "gridColumn411";
-            this.gridColumn411.OptionsColumn.AllowEdit = false;
-            // 
-            // gridColumn51
-            // 
-            this.gridColumn51.Caption = "項目3編號";
-            this.gridColumn51.FieldName = "Item3Number";
-            this.gridColumn51.Name = "gridColumn51";
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "項目4編號";
-            this.gridColumn6.FieldName = "Item4Number";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 0;
-            // 
-            // gridColumn21111
-            // 
-            this.gridColumn21111.Caption = "項目4名稱";
-            this.gridColumn21111.FieldName = "Item4Name";
-            this.gridColumn21111.Name = "gridColumn21111";
-            this.gridColumn21111.OptionsColumn.AllowEdit = false;
-            this.gridColumn21111.Visible = true;
-            this.gridColumn21111.VisibleIndex = 1;
-            // 
-            // gridColumn111111
-            // 
-            this.gridColumn111111.Caption = "部門編號";
-            this.gridColumn111111.FieldName = "DepartmentNumber";
-            this.gridColumn111111.Name = "gridColumn111111";
-            this.gridColumn111111.OptionsColumn.AllowEdit = false;
-            // 
-            // gridColumn31111
-            // 
-            this.gridColumn31111.Caption = "項目1編號";
-            this.gridColumn31111.FieldName = "Item1Number";
-            this.gridColumn31111.Name = "gridColumn31111";
-            this.gridColumn31111.OptionsColumn.AllowEdit = false;
-            // 
-            // gridColumn4111
-            // 
-            this.gridColumn4111.Caption = "項目2編號";
-            this.gridColumn4111.FieldName = "Item2Number";
-            this.gridColumn4111.Name = "gridColumn4111";
-            this.gridColumn4111.OptionsColumn.AllowEdit = false;
-            // 
-            // gridColumn511
-            // 
-            this.gridColumn511.Caption = "項目3編號";
-            this.gridColumn511.FieldName = "Item3Number";
-            this.gridColumn511.Name = "gridColumn511";
-            // 
-            // gridColumn61
-            // 
-            this.gridColumn61.Caption = "項目4編號";
-            this.gridColumn61.FieldName = "Item4Number";
-            this.gridColumn61.Name = "gridColumn61";
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "項目5編號";
-            this.gridColumn1.FieldName = "Item5Number";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
-            // 
-            // gridColumn211111
-            // 
-            this.gridColumn211111.Caption = "項目5名稱";
-            this.gridColumn211111.FieldName = "Item5Name";
-            this.gridColumn211111.Name = "gridColumn211111";
-            this.gridColumn211111.OptionsColumn.AllowEdit = false;
-            this.gridColumn211111.Visible = true;
-            this.gridColumn211111.VisibleIndex = 1;
             // 
             // ProductEditForm
             // 

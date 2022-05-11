@@ -107,6 +107,7 @@ namespace ERPManagementAPP.Maintain
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
+            this.btn_Item5_Export = new DevExpress.XtraEditors.SimpleButton();
             this.btn_Item5_Refresh = new DevExpress.XtraEditors.SimpleButton();
             this.btn_Item5_Delete = new DevExpress.XtraEditors.SimpleButton();
             this.btn_Item5_Edit = new DevExpress.XtraEditors.SimpleButton();
@@ -198,9 +199,9 @@ namespace ERPManagementAPP.Maintain
             // 
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl1.Controls.Add(this.xtraTabControl1);
-            this.panelControl1.Location = new System.Drawing.Point(878, 12);
+            this.panelControl1.Location = new System.Drawing.Point(867, 12);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(388, 822);
+            this.panelControl1.Size = new System.Drawing.Size(399, 822);
             this.panelControl1.TabIndex = 5;
             // 
             // xtraTabControl1
@@ -215,7 +216,7 @@ namespace ERPManagementAPP.Maintain
             this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.DepartmentTabPage;
-            this.xtraTabControl1.Size = new System.Drawing.Size(388, 822);
+            this.xtraTabControl1.Size = new System.Drawing.Size(399, 822);
             this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.DepartmentTabPage,
@@ -230,7 +231,7 @@ namespace ERPManagementAPP.Maintain
             this.DepartmentTabPage.Controls.Add(this.DepartmentgridControl);
             this.DepartmentTabPage.Controls.Add(this.panelControl2);
             this.DepartmentTabPage.Name = "DepartmentTabPage";
-            this.DepartmentTabPage.Size = new System.Drawing.Size(382, 787);
+            this.DepartmentTabPage.Size = new System.Drawing.Size(393, 787);
             this.DepartmentTabPage.Text = "部門";
             // 
             // DepartmentgridControl
@@ -239,7 +240,7 @@ namespace ERPManagementAPP.Maintain
             this.DepartmentgridControl.Location = new System.Drawing.Point(0, 43);
             this.DepartmentgridControl.MainView = this.DepartmentgridView;
             this.DepartmentgridControl.Name = "DepartmentgridControl";
-            this.DepartmentgridControl.Size = new System.Drawing.Size(382, 744);
+            this.DepartmentgridControl.Size = new System.Drawing.Size(393, 744);
             this.DepartmentgridControl.TabIndex = 2;
             this.DepartmentgridControl.Tag = "0";
             this.DepartmentgridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -282,7 +283,7 @@ namespace ERPManagementAPP.Maintain
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl2.Location = new System.Drawing.Point(0, 0);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(382, 43);
+            this.panelControl2.Size = new System.Drawing.Size(393, 43);
             this.panelControl2.TabIndex = 1;
             // 
             // btn_Department_Refresh
@@ -292,7 +293,7 @@ namespace ERPManagementAPP.Maintain
             this.btn_Department_Refresh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Department_Refresh.ImageOptions.Image")));
             this.btn_Department_Refresh.Location = new System.Drawing.Point(285, 0);
             this.btn_Department_Refresh.Name = "btn_Department_Refresh";
-            this.btn_Department_Refresh.Size = new System.Drawing.Size(97, 43);
+            this.btn_Department_Refresh.Size = new System.Drawing.Size(108, 43);
             this.btn_Department_Refresh.TabIndex = 7;
             this.btn_Department_Refresh.Text = "Refresh";
             // 
@@ -334,7 +335,7 @@ namespace ERPManagementAPP.Maintain
             this.Item1TabPage.Controls.Add(this.Item1gridControl);
             this.Item1TabPage.Controls.Add(this.panelControl3);
             this.Item1TabPage.Name = "Item1TabPage";
-            this.Item1TabPage.Size = new System.Drawing.Size(382, 787);
+            this.Item1TabPage.Size = new System.Drawing.Size(393, 787);
             this.Item1TabPage.Text = "項目1";
             // 
             // Item1gridControl
@@ -343,7 +344,7 @@ namespace ERPManagementAPP.Maintain
             this.Item1gridControl.Location = new System.Drawing.Point(0, 43);
             this.Item1gridControl.MainView = this.Item1gridView;
             this.Item1gridControl.Name = "Item1gridControl";
-            this.Item1gridControl.Size = new System.Drawing.Size(382, 744);
+            this.Item1gridControl.Size = new System.Drawing.Size(393, 744);
             this.Item1gridControl.TabIndex = 3;
             this.Item1gridControl.Tag = "1";
             this.Item1gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -397,7 +398,7 @@ namespace ERPManagementAPP.Maintain
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl3.Location = new System.Drawing.Point(0, 0);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(382, 43);
+            this.panelControl3.Size = new System.Drawing.Size(393, 43);
             this.panelControl3.TabIndex = 2;
             // 
             // btn_Item1_Refresh
@@ -407,7 +408,7 @@ namespace ERPManagementAPP.Maintain
             this.btn_Item1_Refresh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Item1_Refresh.ImageOptions.Image")));
             this.btn_Item1_Refresh.Location = new System.Drawing.Point(285, 0);
             this.btn_Item1_Refresh.Name = "btn_Item1_Refresh";
-            this.btn_Item1_Refresh.Size = new System.Drawing.Size(97, 43);
+            this.btn_Item1_Refresh.Size = new System.Drawing.Size(108, 43);
             this.btn_Item1_Refresh.TabIndex = 7;
             this.btn_Item1_Refresh.Text = "Refresh";
             // 
@@ -449,7 +450,7 @@ namespace ERPManagementAPP.Maintain
             this.Item2TabPage.Controls.Add(this.Item2gridControl);
             this.Item2TabPage.Controls.Add(this.panelControl4);
             this.Item2TabPage.Name = "Item2TabPage";
-            this.Item2TabPage.Size = new System.Drawing.Size(382, 787);
+            this.Item2TabPage.Size = new System.Drawing.Size(393, 787);
             this.Item2TabPage.Text = "項目2";
             // 
             // Item2gridControl
@@ -458,7 +459,7 @@ namespace ERPManagementAPP.Maintain
             this.Item2gridControl.Location = new System.Drawing.Point(0, 43);
             this.Item2gridControl.MainView = this.Item2gridView;
             this.Item2gridControl.Name = "Item2gridControl";
-            this.Item2gridControl.Size = new System.Drawing.Size(382, 744);
+            this.Item2gridControl.Size = new System.Drawing.Size(393, 744);
             this.Item2gridControl.TabIndex = 4;
             this.Item2gridControl.Tag = "2";
             this.Item2gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -522,7 +523,7 @@ namespace ERPManagementAPP.Maintain
             this.panelControl4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl4.Location = new System.Drawing.Point(0, 0);
             this.panelControl4.Name = "panelControl4";
-            this.panelControl4.Size = new System.Drawing.Size(382, 43);
+            this.panelControl4.Size = new System.Drawing.Size(393, 43);
             this.panelControl4.TabIndex = 3;
             // 
             // btn_Item2_Refresh
@@ -532,7 +533,7 @@ namespace ERPManagementAPP.Maintain
             this.btn_Item2_Refresh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Item2_Refresh.ImageOptions.Image")));
             this.btn_Item2_Refresh.Location = new System.Drawing.Point(285, 0);
             this.btn_Item2_Refresh.Name = "btn_Item2_Refresh";
-            this.btn_Item2_Refresh.Size = new System.Drawing.Size(97, 43);
+            this.btn_Item2_Refresh.Size = new System.Drawing.Size(108, 43);
             this.btn_Item2_Refresh.TabIndex = 7;
             this.btn_Item2_Refresh.Text = "Refresh";
             // 
@@ -574,7 +575,7 @@ namespace ERPManagementAPP.Maintain
             this.Item3TabPage.Controls.Add(this.Item3gridControl);
             this.Item3TabPage.Controls.Add(this.panelControl5);
             this.Item3TabPage.Name = "Item3TabPage";
-            this.Item3TabPage.Size = new System.Drawing.Size(382, 787);
+            this.Item3TabPage.Size = new System.Drawing.Size(393, 787);
             this.Item3TabPage.Text = "項目3";
             // 
             // Item3gridControl
@@ -583,7 +584,7 @@ namespace ERPManagementAPP.Maintain
             this.Item3gridControl.Location = new System.Drawing.Point(0, 43);
             this.Item3gridControl.MainView = this.Item3gridView;
             this.Item3gridControl.Name = "Item3gridControl";
-            this.Item3gridControl.Size = new System.Drawing.Size(382, 744);
+            this.Item3gridControl.Size = new System.Drawing.Size(393, 744);
             this.Item3gridControl.TabIndex = 5;
             this.Item3gridControl.Tag = "3";
             this.Item3gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -657,7 +658,7 @@ namespace ERPManagementAPP.Maintain
             this.panelControl5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl5.Location = new System.Drawing.Point(0, 0);
             this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(382, 43);
+            this.panelControl5.Size = new System.Drawing.Size(393, 43);
             this.panelControl5.TabIndex = 3;
             // 
             // btn_Item3_Refresh
@@ -667,7 +668,7 @@ namespace ERPManagementAPP.Maintain
             this.btn_Item3_Refresh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Item3_Refresh.ImageOptions.Image")));
             this.btn_Item3_Refresh.Location = new System.Drawing.Point(285, 0);
             this.btn_Item3_Refresh.Name = "btn_Item3_Refresh";
-            this.btn_Item3_Refresh.Size = new System.Drawing.Size(97, 43);
+            this.btn_Item3_Refresh.Size = new System.Drawing.Size(108, 43);
             this.btn_Item3_Refresh.TabIndex = 7;
             this.btn_Item3_Refresh.Text = "Refresh";
             // 
@@ -709,7 +710,7 @@ namespace ERPManagementAPP.Maintain
             this.Item4TabPage.Controls.Add(this.Item4gridControl);
             this.Item4TabPage.Controls.Add(this.panelControl6);
             this.Item4TabPage.Name = "Item4TabPage";
-            this.Item4TabPage.Size = new System.Drawing.Size(382, 787);
+            this.Item4TabPage.Size = new System.Drawing.Size(393, 787);
             this.Item4TabPage.Text = "項目4";
             // 
             // Item4gridControl
@@ -718,7 +719,7 @@ namespace ERPManagementAPP.Maintain
             this.Item4gridControl.Location = new System.Drawing.Point(0, 43);
             this.Item4gridControl.MainView = this.Item4gridView;
             this.Item4gridControl.Name = "Item4gridControl";
-            this.Item4gridControl.Size = new System.Drawing.Size(382, 744);
+            this.Item4gridControl.Size = new System.Drawing.Size(393, 744);
             this.Item4gridControl.TabIndex = 6;
             this.Item4gridControl.Tag = "4";
             this.Item4gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -802,7 +803,7 @@ namespace ERPManagementAPP.Maintain
             this.panelControl6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl6.Location = new System.Drawing.Point(0, 0);
             this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(382, 43);
+            this.panelControl6.Size = new System.Drawing.Size(393, 43);
             this.panelControl6.TabIndex = 3;
             // 
             // btn_Item4_Refresh
@@ -812,7 +813,7 @@ namespace ERPManagementAPP.Maintain
             this.btn_Item4_Refresh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Item4_Refresh.ImageOptions.Image")));
             this.btn_Item4_Refresh.Location = new System.Drawing.Point(285, 0);
             this.btn_Item4_Refresh.Name = "btn_Item4_Refresh";
-            this.btn_Item4_Refresh.Size = new System.Drawing.Size(97, 43);
+            this.btn_Item4_Refresh.Size = new System.Drawing.Size(108, 43);
             this.btn_Item4_Refresh.TabIndex = 7;
             this.btn_Item4_Refresh.Text = "Refresh";
             // 
@@ -854,7 +855,7 @@ namespace ERPManagementAPP.Maintain
             this.Item5TabPage.Controls.Add(this.Item5gridControl);
             this.Item5TabPage.Controls.Add(this.panelControl7);
             this.Item5TabPage.Name = "Item5TabPage";
-            this.Item5TabPage.Size = new System.Drawing.Size(382, 787);
+            this.Item5TabPage.Size = new System.Drawing.Size(393, 787);
             this.Item5TabPage.Text = "項目5";
             // 
             // Item5gridControl
@@ -863,7 +864,7 @@ namespace ERPManagementAPP.Maintain
             this.Item5gridControl.Location = new System.Drawing.Point(0, 43);
             this.Item5gridControl.MainView = this.Item5gridView;
             this.Item5gridControl.Name = "Item5gridControl";
-            this.Item5gridControl.Size = new System.Drawing.Size(382, 744);
+            this.Item5gridControl.Size = new System.Drawing.Size(393, 744);
             this.Item5gridControl.TabIndex = 7;
             this.Item5gridControl.Tag = "5";
             this.Item5gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -881,7 +882,6 @@ namespace ERPManagementAPP.Maintain
             this.gridColumn18});
             this.Item5gridView.GridControl = this.Item5gridControl;
             this.Item5gridView.Name = "Item5gridView";
-            this.Item5gridView.OptionsView.ColumnAutoWidth = false;
             this.Item5gridView.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn13
@@ -950,6 +950,7 @@ namespace ERPManagementAPP.Maintain
             // panelControl7
             // 
             this.panelControl7.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl7.Controls.Add(this.btn_Item5_Export);
             this.panelControl7.Controls.Add(this.btn_Item5_Refresh);
             this.panelControl7.Controls.Add(this.btn_Item5_Delete);
             this.panelControl7.Controls.Add(this.btn_Item5_Edit);
@@ -957,17 +958,28 @@ namespace ERPManagementAPP.Maintain
             this.panelControl7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl7.Location = new System.Drawing.Point(0, 0);
             this.panelControl7.Name = "panelControl7";
-            this.panelControl7.Size = new System.Drawing.Size(382, 43);
+            this.panelControl7.Size = new System.Drawing.Size(393, 43);
             this.panelControl7.TabIndex = 3;
+            // 
+            // btn_Item5_Export
+            // 
+            this.btn_Item5_Export.AllowFocus = false;
+            this.btn_Item5_Export.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Item5_Export.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Export.ImageOptions.Image")));
+            this.btn_Item5_Export.Location = new System.Drawing.Point(312, 0);
+            this.btn_Item5_Export.Name = "btn_Item5_Export";
+            this.btn_Item5_Export.Size = new System.Drawing.Size(81, 43);
+            this.btn_Item5_Export.TabIndex = 8;
+            this.btn_Item5_Export.Text = "Export";
             // 
             // btn_Item5_Refresh
             // 
             this.btn_Item5_Refresh.AllowFocus = false;
-            this.btn_Item5_Refresh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btn_Item5_Refresh.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_Item5_Refresh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Item5_Refresh.ImageOptions.Image")));
-            this.btn_Item5_Refresh.Location = new System.Drawing.Point(285, 0);
+            this.btn_Item5_Refresh.Location = new System.Drawing.Point(223, 0);
             this.btn_Item5_Refresh.Name = "btn_Item5_Refresh";
-            this.btn_Item5_Refresh.Size = new System.Drawing.Size(97, 43);
+            this.btn_Item5_Refresh.Size = new System.Drawing.Size(89, 43);
             this.btn_Item5_Refresh.TabIndex = 7;
             this.btn_Item5_Refresh.Text = "Refresh";
             // 
@@ -976,9 +988,9 @@ namespace ERPManagementAPP.Maintain
             this.btn_Item5_Delete.AllowFocus = false;
             this.btn_Item5_Delete.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_Item5_Delete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Item5_Delete.ImageOptions.Image")));
-            this.btn_Item5_Delete.Location = new System.Drawing.Point(190, 0);
+            this.btn_Item5_Delete.Location = new System.Drawing.Point(142, 0);
             this.btn_Item5_Delete.Name = "btn_Item5_Delete";
-            this.btn_Item5_Delete.Size = new System.Drawing.Size(95, 43);
+            this.btn_Item5_Delete.Size = new System.Drawing.Size(81, 43);
             this.btn_Item5_Delete.TabIndex = 6;
             this.btn_Item5_Delete.Text = "Delete";
             // 
@@ -987,9 +999,9 @@ namespace ERPManagementAPP.Maintain
             this.btn_Item5_Edit.AllowFocus = false;
             this.btn_Item5_Edit.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_Item5_Edit.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Item5_Edit.ImageOptions.Image")));
-            this.btn_Item5_Edit.Location = new System.Drawing.Point(95, 0);
+            this.btn_Item5_Edit.Location = new System.Drawing.Point(71, 0);
             this.btn_Item5_Edit.Name = "btn_Item5_Edit";
-            this.btn_Item5_Edit.Size = new System.Drawing.Size(95, 43);
+            this.btn_Item5_Edit.Size = new System.Drawing.Size(71, 43);
             this.btn_Item5_Edit.TabIndex = 5;
             this.btn_Item5_Edit.Text = "Edit";
             // 
@@ -1000,7 +1012,7 @@ namespace ERPManagementAPP.Maintain
             this.btn_Item5_Add.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_Item5_Add.ImageOptions.Image")));
             this.btn_Item5_Add.Location = new System.Drawing.Point(0, 0);
             this.btn_Item5_Add.Name = "btn_Item5_Add";
-            this.btn_Item5_Add.Size = new System.Drawing.Size(95, 43);
+            this.btn_Item5_Add.Size = new System.Drawing.Size(71, 43);
             this.btn_Item5_Add.TabIndex = 4;
             this.btn_Item5_Add.Text = "Add";
             // 
@@ -1012,7 +1024,7 @@ namespace ERPManagementAPP.Maintain
             this.ProductgroupControl.Controls.Add(this.ProductpanelControl);
             this.ProductgroupControl.Location = new System.Drawing.Point(12, 12);
             this.ProductgroupControl.Name = "ProductgroupControl";
-            this.ProductgroupControl.Size = new System.Drawing.Size(857, 822);
+            this.ProductgroupControl.Size = new System.Drawing.Size(846, 822);
             this.ProductgroupControl.TabIndex = 4;
             this.ProductgroupControl.Text = "產品資料";
             // 
@@ -1022,7 +1034,7 @@ namespace ERPManagementAPP.Maintain
             this.ProductgridControl.Location = new System.Drawing.Point(2, 66);
             this.ProductgridControl.MainView = this.gridView1;
             this.ProductgridControl.Name = "ProductgridControl";
-            this.ProductgridControl.Size = new System.Drawing.Size(853, 754);
+            this.ProductgridControl.Size = new System.Drawing.Size(842, 754);
             this.ProductgridControl.TabIndex = 1;
             this.ProductgridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -1142,7 +1154,7 @@ namespace ERPManagementAPP.Maintain
             this.ProductpanelControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.ProductpanelControl.Location = new System.Drawing.Point(2, 23);
             this.ProductpanelControl.Name = "ProductpanelControl";
-            this.ProductpanelControl.Size = new System.Drawing.Size(853, 43);
+            this.ProductpanelControl.Size = new System.Drawing.Size(842, 43);
             this.ProductpanelControl.TabIndex = 0;
             // 
             // btn_Product_Refresh
@@ -1206,23 +1218,23 @@ namespace ERPManagementAPP.Maintain
             this.layoutControlItem1.Control = this.ProductgroupControl;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(861, 826);
+            this.layoutControlItem1.Size = new System.Drawing.Size(850, 826);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // splitterItem1
             // 
             this.splitterItem1.AllowHotTrack = true;
-            this.splitterItem1.Location = new System.Drawing.Point(861, 0);
+            this.splitterItem1.Location = new System.Drawing.Point(850, 0);
             this.splitterItem1.Name = "splitterItem1";
             this.splitterItem1.Size = new System.Drawing.Size(5, 826);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.panelControl1;
-            this.layoutControlItem2.Location = new System.Drawing.Point(866, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(855, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(392, 826);
+            this.layoutControlItem2.Size = new System.Drawing.Size(403, 826);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -1385,5 +1397,6 @@ namespace ERPManagementAPP.Maintain
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
+        private SimpleButton btn_Item5_Export;
     }
 }

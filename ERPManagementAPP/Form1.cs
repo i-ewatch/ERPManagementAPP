@@ -3,6 +3,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraNavBar;
 using ERPManagementAPP.Configuration;
 using ERPManagementAPP.Emuns;
+using ERPManagementAPP.Maintain.AccountMaintainForm;
 using ERPManagementAPP.Methods;
 using ERPManagementAPP.Models;
 using ERPManagementAPP.Modules;
@@ -46,31 +47,32 @@ namespace ERPManagementAPP
                 outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
                 .CreateLogger();        //宣告Serilog初始化
             #endregion
+            var tDll = this.GetType().Assembly.GetName();
             SystemSetting = InitailMethod.SystemLoad();
-            APIMethod = new APIMethod(SystemSetting.URL);
+            APIMethod = new APIMethod(SystemSetting.URL, tDll.Version.ToString()); ;
             LoginbarButtonItem.ImageOptions.Image = LoginimageCollection.Images["login"];
             Registrations.Register(APIMethod, this);
             #region 權限登入
-            //LoginbarButtonItem.ItemClick += (s, e) =>
-            //{
-            //    if (EmployeeSetting.AccountNo != null)
-            //    {
-            //        EmployeeSetting = new EmployeeSetting();
-            //        TokenChange();
-            //        HomeShow();
-            //    }
-            //    else
-            //    {
-            //        AccountEditForm accountEdit = new AccountEditForm(this, APIMethod);
-            //        if (accountEdit.ShowDialog() == DialogResult.OK)
-            //        {
-            //            TokenChange();
-            //            HomeShow();
-            //        }
-            //    }
-            //};
+            LoginbarButtonItem.ItemClick += (s, e) =>
+            {
+                if (EmployeeSetting.AccountNo != null)
+                {
+                    EmployeeSetting = new EmployeeSetting();
+                    TokenChange();
+                    HomeShow();
+                }
+                else
+                {
+                    AccountEditForm accountEdit = new AccountEditForm(this, APIMethod);
+                    if (accountEdit.ShowDialog() == DialogResult.OK)
+                    {
+                        TokenChange();
+                        HomeShow();
+                    }
+                }
+            };
             #endregion
-            //TokenChange();//權限限制
+            TokenChange();//權限限制
             HomeShow();
             timer.Interval = 1000;
             timer.Enabled = true;
@@ -96,6 +98,7 @@ namespace ERPManagementAPP
                         LoginbarButtonItem.Caption = "Login";
                         LoginbarButtonItem.ImageOptions.Image = LoginimageCollection.Images["login"];
                         navBarControl1.Enabled = false;
+                        PaymentManagementBarGroup.Visible = false;
                     }
                     break;
                 case TokenEnum.user:
@@ -105,6 +108,7 @@ namespace ERPManagementAPP
                         timer.Interval = 1000;
                         timer.Enabled = true;
                         navBarControl1.Enabled = true;
+                        PaymentManagementBarGroup.Visible = false;
                     }
                     break;
                 case TokenEnum.adminstrator:
@@ -114,6 +118,7 @@ namespace ERPManagementAPP
                         timer.Interval = 1000;
                         timer.Enabled = true;
                         navBarControl1.Enabled = true;
+                        PaymentManagementBarGroup.Visible = true;
                     }
                     break;
             }
@@ -153,7 +158,7 @@ namespace ERPManagementAPP
         #region 切換畫面功能
         private void NavBarItem_LinkClicked(object sender, NavBarLinkEventArgs e)
         {
-            //if (TokenEnum == TokenEnum.adminstrator || TokenEnum == TokenEnum.user)//權限限制
+            if (TokenEnum == TokenEnum.adminstrator || TokenEnum == TokenEnum.user)//權限限制
             {
                 pcl_View.Parent.SuspendLayout();
                 pcl_View.SuspendLayout();
@@ -166,7 +171,7 @@ namespace ERPManagementAPP
                         maintainControl.Dock = DockStyle.Fill;
                         maintainControl.Parent = pcl_View;
                         maintainControl.Refresh_Main_GridView();
-                        //maintainControl.Refresh_Token();//權限限制
+                        maintainControl.Refresh_Token();//權限限制
                         MaintainModule.CurrentControl.Visible = true;
                     }
                 }

@@ -215,25 +215,39 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             }
             slt_DepartmentNumber.EditValueChanged += (s, e) =>
             {
+                slt_Item1Number.EditValue = "";
                 Create_slt_Item1();
                 slt_Item2Number.Properties.DataSource = null;
                 slt_Item3Number.Properties.DataSource = null;
                 slt_Item4Number.Properties.DataSource = null;
+                SelectProductItem1Setting = null;
+                SelectProductItem2Setting = null;
+                SelectProductItem3Setting = null;
+                SelectProductItem4Setting = null;
             };
             slt_Item1Number.EditValueChanged += (s, e) =>
             {
+                slt_Item2Number.EditValue = "";
                 Create_slt_Item2();
                 slt_Item3Number.Properties.DataSource = null;
                 slt_Item4Number.Properties.DataSource = null;
+                SelectProductItem2Setting = null;
+                SelectProductItem3Setting = null;
+                SelectProductItem4Setting = null;
             };
             slt_Item2Number.EditValueChanged += (s, e) =>
             {
+                slt_Item3Number.EditValue = "";
                 Create_slt_Item3();
                 slt_Item4Number.Properties.DataSource = null;
+                SelectProductItem3Setting = null;
+                SelectProductItem4Setting = null;
             };
             slt_Item3Number.EditValueChanged += (s, e) =>
             {
+                slt_Item4Number.EditValue = "";
                 Create_slt_Item4();
+                SelectProductItem4Setting = null;
             };
             #region 儲存按鈕
             btn_Save.Click += (s, e) =>
@@ -730,7 +744,7 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
         /// </summary>
         private void Create_slt_Item2()
         {
-            if (SelectProductDepartmentSetting != null && SelectProductDepartmentSetting.DepartmentNumber != null)
+            if (SelectProductDepartmentSetting != null && SelectProductDepartmentSetting.DepartmentNumber != null && SelectProductItem1Setting != null)
             {
                 List<ProductItem2Setting> settings = ProductItem2Settings.Where(g => g.DepartmentNumber == SelectProductDepartmentSetting.DepartmentNumber & g.Item1Number == SelectProductItem1Setting.Item1Number).ToList();
                 slt_Item2Number.Properties.DataSource = settings;
@@ -937,7 +951,7 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
         /// </summary>
         private void Create_slt_Item3()
         {
-            if (SelectProductDepartmentSetting != null && SelectProductDepartmentSetting.DepartmentNumber != null)
+            if (SelectProductDepartmentSetting != null && SelectProductDepartmentSetting.DepartmentNumber != null && SelectProductItem1Setting != null && SelectProductItem2Setting != null)
             {
                 List<ProductItem3Setting> settings = ProductItem3Settings.Where(g => g.DepartmentNumber == SelectProductDepartmentSetting.DepartmentNumber & g.Item1Number == SelectProductItem1Setting.Item1Number & g.Item2Number == SelectProductItem2Setting.Item2Number).ToList();
                 slt_Item3Number.Properties.DataSource = settings;
@@ -1104,7 +1118,7 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
         /// </summary>
         private void Create_slt_Item4()
         {
-            if (SelectProductDepartmentSetting != null && SelectProductDepartmentSetting.DepartmentNumber != null)
+            if (SelectProductDepartmentSetting != null && SelectProductDepartmentSetting.DepartmentNumber != null && SelectProductItem1Setting != null && SelectProductItem2Setting != null && SelectProductItem3Setting != null)
             {
                 List<ProductItem4Setting> settings = ProductItem4Settings.Where(g => g.DepartmentNumber == SelectProductDepartmentSetting.DepartmentNumber & g.Item1Number == SelectProductItem1Setting.Item1Number & g.Item2Number == SelectProductItem2Setting.Item2Number & g.Item3Number == SelectProductItem3Setting.Item3Number).ToList();
                 slt_Item4Number.Properties.DataSource = settings;

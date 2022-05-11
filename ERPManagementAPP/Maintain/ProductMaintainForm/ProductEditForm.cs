@@ -115,38 +115,58 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             }
             slt_DepartmentNumber.EditValueChanged += (s, e) =>
             {
+                slt_Item1Number.EditValue = "";
                 Create_slt_Item1();
                 slt_Item2Number.Properties.DataSource = null;
                 slt_Item3Number.Properties.DataSource = null;
                 slt_Item4Number.Properties.DataSource = null;
                 slt_Item5Number.Properties.DataSource = null;
                 txt_ProductNumber.Text = "";
+                SelectProductItem1Setting = null;
+                SelectProductItem2Setting = null;
+                SelectProductItem3Setting = null;
+                SelectProductItem4Setting = null;
+                SelectProductItem5Setting = null;
             };
             slt_Item1Number.EditValueChanged += (s, e) =>
             {
+                slt_Item2Number.EditValue = "";
                 Create_slt_Item2();
                 slt_Item3Number.Properties.DataSource = null;
                 slt_Item4Number.Properties.DataSource = null;
                 slt_Item5Number.Properties.DataSource = null;
                 txt_ProductNumber.Text = "";
+                SelectProductItem2Setting = null;
+                SelectProductItem3Setting = null;
+                SelectProductItem4Setting = null;
+                SelectProductItem5Setting = null;
             };
             slt_Item2Number.EditValueChanged += (s, e) =>
             {
+                slt_Item3Number.EditValue = "";
                 Create_slt_Item3();
                 slt_Item4Number.Properties.DataSource = null;
                 slt_Item5Number.Properties.DataSource = null;
                 txt_ProductNumber.Text = "";
+                SelectProductItem3Setting = null;
+                SelectProductItem4Setting = null;
+                SelectProductItem5Setting = null;
             };
             slt_Item3Number.EditValueChanged += (s, e) =>
             {
+                slt_Item4Number.EditValue = "";
                 Create_slt_Item4();
                 slt_Item5Number.Properties.DataSource = null;
                 txt_ProductNumber.Text = "";
+                SelectProductItem4Setting = null;
+                SelectProductItem5Setting = null;
             };
             slt_Item4Number.EditValueChanged += (s, e) =>
             {
+                slt_Item5Number.EditValue = "";
                 Create_slt_Item5();
                 txt_ProductNumber.Text = "";
+                SelectProductItem5Setting = null;
             };
             slt_Item5Number.EditValueChanged += (s, e) =>
             {

@@ -445,6 +445,22 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         {
             slt_ProductName.Properties.DataSource = ProductSettings;
             slt_ProductName.Properties.DisplayMember = "ProductName";
+            gridView2.CustomColumnDisplayText += (s, e) =>
+            {
+                if (e.Column.FieldName == "ProductCompanyNumber")
+                {
+                    if (CompanySettings != null)
+                    {
+                        foreach (var item in CompanySettings)
+                        {
+                            if (item.CompanyNumber == e.Value.ToString())
+                            {
+                                e.DisplayText = item.CompanyName;
+                            }
+                        }
+                    }
+                }
+            };
             slt_ProductName.CustomDisplayText += (s, e) =>
             {
                 SelectProductSetting = e.Value as ProductSetting;

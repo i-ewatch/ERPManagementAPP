@@ -42,6 +42,10 @@ namespace ERPManagementAPP.Maintain.PickingMaintainForm
         /// </summary>
         private List<ProjectSetting> ProjectSettings { get; set; }
         /// <summary>
+        /// 公司資訊
+        /// </summary>
+        private List<CompanySetting> CompanySettings { get; set; }
+        /// <summary>
         /// 被選擇的客戶資訊
         /// </summary>
         private CustomerSetting SelectCustomerSetting { get; set; }
@@ -73,11 +77,12 @@ namespace ERPManagementAPP.Maintain.PickingMaintainForm
         /// 稅後總計
         /// </summary>
         private double TotalTax { get; set; } = 0;
-        public PickingEditForm(List<CustomerSetting> customerSettings, List<EmployeeSetting> employeeSettings, List<ProductSetting> productSettings, List<ProjectSetting> projectSettings, PickingSetting pickingSetting, APIMethod apiMethod, Form1 form1)
+        public PickingEditForm(List<CompanySetting> companySettings, List<CustomerSetting> customerSettings, List<EmployeeSetting> employeeSettings, List<ProductSetting> productSettings, List<ProjectSetting> projectSettings, PickingSetting pickingSetting, APIMethod apiMethod, Form1 form1)
         {
             InitializeComponent();
             Form1 = form1;
             action.Commands.Add(FlyoutCommand.Yes);
+            CompanySettings = companySettings;
             CustomerSettings = customerSettings;
             EmployeeSettings = employeeSettings;
             ProductSettings = productSettings;
@@ -442,6 +447,22 @@ namespace ERPManagementAPP.Maintain.PickingMaintainForm
         {
             slt_ProductName.Properties.DataSource = ProductSettings;
             slt_ProductName.Properties.DisplayMember = "ProductName";
+            gridView3.CustomColumnDisplayText += (s, e) =>
+            {
+                if (e.Column.FieldName == "ProductCompanyNumber")
+                {
+                    if (CompanySettings != null)
+                    {
+                        foreach (var item in CompanySettings)
+                        {
+                            if (item.CompanyNumber == e.Value.ToString())
+                            {
+                                e.DisplayText = item.CompanyName;
+                            }
+                        }
+                    }
+                }
+            };
             slt_ProductName.CustomDisplayText += (s, e) =>
             {
                 SelectProductSetting = e.Value as ProductSetting;

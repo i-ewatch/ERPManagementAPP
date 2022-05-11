@@ -35,6 +35,7 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colProductNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colProductName1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.slt_PurchasecompanyNumber = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colCompanyNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -228,7 +229,8 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             // 
             this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colProductNumber,
-            this.colProductName1});
+            this.colProductName1,
+            this.gridColumn1});
             this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -249,6 +251,15 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
             this.colProductName1.Name = "colProductName1";
             this.colProductName1.Visible = true;
             this.colProductName1.VisibleIndex = 1;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "廠商編號";
+            this.gridColumn1.FieldName = "ProductCompanyNumber";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.OptionsColumn.AllowEdit = false;
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 2;
             // 
             // slt_PurchasecompanyNumber
             // 
@@ -1321,5 +1332,6 @@ namespace ERPManagementAPP.Maintain.PurchaseMainTainForm
         private DevExpress.XtraGrid.Columns.GridColumn colProjectName;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem24;
         private DevExpress.XtraEditors.SimpleButton btn_Clear;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

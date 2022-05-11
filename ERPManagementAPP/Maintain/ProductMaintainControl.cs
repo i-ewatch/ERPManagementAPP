@@ -4,6 +4,7 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraPrinting;
 using DevExpress.XtraSplashScreen;
 using ERPManagementAPP.Maintain.ProductMaintainForm;
 using ERPManagementAPP.Methods;
@@ -731,6 +732,27 @@ namespace ERPManagementAPP.Maintain
                 Refresh_Main_GridView();
             };
             #endregion
+            #region 報表匯出
+            btn_Item5_Export.Click += (s, e) =>
+            {
+                if (Item5gridControl != null)
+                {
+                    using (SaveFileDialog saveFile = new SaveFileDialog())
+                    {
+                        saveFile.Filter = "*.xlsx | *.xlsx";
+                        saveFile.DefaultExt = "xlsx";//設定副檔名預設格式
+                        saveFile.AddExtension = true;//設定自動在檔名中新增副檔名
+                        saveFile.FileName = "項目分類報表";
+                        if (saveFile.ShowDialog() == DialogResult.OK)
+                        {
+                            var options = new XlsxExportOptions();
+                            options.TextExportMode = TextExportMode.Text;
+                            Item5gridControl.ExportToXlsx(saveFile.FileName, options);
+                        }
+                    }
+                }
+            };
+            #endregion
             #endregion
 
             #region 產品資料表
@@ -1296,6 +1318,11 @@ namespace ERPManagementAPP.Maintain
                     Item3gridControl.DataSource = ProductItem3Settings;
                     Item4gridControl.DataSource = ProductItem4Settings;
                     Item5gridControl.DataSource = ProductItem5Settings;
+                    Item5gridView.Columns["DepartmentNumber"].Group();
+                    Item5gridView.Columns["Item1Number"].Group();
+                    Item5gridView.Columns["Item2Number"].Group();
+                    Item5gridView.Columns["Item3Number"].Group();
+                    Item5gridView.Columns["Item4Number"].Group();
                     for (int item = 0; item < Item1gridView.Columns.Count; item++)
                     {
                         Item1gridView.Columns[item].BestFit();
@@ -1312,10 +1339,11 @@ namespace ERPManagementAPP.Maintain
                     {
                         Item4gridView.Columns[item].BestFit();
                     }
-                    for (int item = 0; item < Item5gridView.Columns.Count; item++)
-                    {
-                        Item5gridView.Columns[item].BestFit();
-                    }
+                    //for (int item = 0; item < Item5gridView.Columns.Count; item++)
+                    //{
+                    //Item5gridView.Columns[item].BestFit();
+                    //}
+                    Item5gridView.ExpandAllGroups();
                     Refresh_Second_GridView("");
                     break;
                 }

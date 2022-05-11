@@ -37,8 +37,10 @@ namespace ERPManagementAPP.Methods
         /// </summary>
         private RestClient clinet { get; set; }
 
-        public APIMethod(string url)
+        private string ReleaseNumber { get; set; }
+        public APIMethod(string url, string releaseNumber)
         {
+            ReleaseNumber = releaseNumber;
             URL = url;
             Login_url = $"{URL}/EmployeeLogin";
 
@@ -397,6 +399,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<CompanySetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CompanySetting>>(response.Result.Content);
@@ -430,6 +433,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<CompanySetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CompanySetting>>(response.Result.Content);
@@ -462,6 +466,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(companySetting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -493,6 +498,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(customerSetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -524,6 +530,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(customerSetting, ContentType.Json);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
@@ -557,6 +564,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("CompanyNumber", Number, type: ParameterType.QueryString);
                 requsest.AddParameter("CompanyName", Name, type: ParameterType.QueryString);
                 requsest.AddFile("AttachmentFile", Path);
@@ -592,6 +600,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("CompanyNumber", Number, type: ParameterType.QueryString);
                 requsest.AddParameter("CompanyName", Name, type: ParameterType.QueryString);
                 requsest.AddParameter("AttachmentFile", FileName, type: ParameterType.QueryString);
@@ -628,6 +637,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<CompanyDirectorySetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CompanyDirectorySetting>>(response.Result.Content);
@@ -661,6 +671,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<CompanyDirectorySetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CompanyDirectorySetting>>(response.Result.Content);
@@ -694,6 +705,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<CompanyDirectorySetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CompanyDirectorySetting>>(response.Result.Content);
@@ -726,6 +738,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(customerDirectorySetting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -757,6 +770,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(companyDirectorySetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -788,6 +802,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(companyDirectorySetting, ContentType.Json);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
@@ -821,6 +836,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("DirectoryCompany", DirectoryCustomer, type: ParameterType.QueryString);
                 requsest.AddParameter("DirectoryNumber", DirectoryNumber, type: ParameterType.QueryString);
                 requsest.AddFile("AttachmentFile", Path);
@@ -856,6 +872,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("DirectoryCompany", DirectoryCustomer, type: ParameterType.QueryString);
                 requsest.AddParameter("DirectoryNumber", DirectoryNumber, type: ParameterType.QueryString);
                 requsest.AddParameter("AttachmentFile", FileName, type: ParameterType.QueryString);
@@ -892,6 +909,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<CustomerSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CustomerSetting>>(response.Result.Content);
@@ -925,6 +943,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<CustomerSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CustomerSetting>>(response.Result.Content);
@@ -958,6 +977,7 @@ namespace ERPManagementAPP.Methods
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
                 requsest.AddBody(customerSetting, ContentType.Json);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
@@ -988,6 +1008,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(customerSetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -1019,6 +1040,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(customerSetting, ContentType.Json);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
@@ -1052,6 +1074,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("CustomerNumber", Number, type: ParameterType.QueryString);
                 requsest.AddParameter("CustomerName", Name, type: ParameterType.QueryString);
                 requsest.AddFile("AttachmentFile", Path);
@@ -1087,6 +1110,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("CustomerNumber", Number, type: ParameterType.QueryString);
                 requsest.AddParameter("CustomerName", Name, type: ParameterType.QueryString);
                 requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
@@ -1123,6 +1147,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<CustomerDirectorySetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CustomerDirectorySetting>>(response.Result.Content);
@@ -1156,6 +1181,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<CustomerDirectorySetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CustomerDirectorySetting>>(response.Result.Content);
@@ -1189,6 +1215,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<CustomerDirectorySetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<CustomerDirectorySetting>>(response.Result.Content);
@@ -1221,6 +1248,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(companyDirectorySetting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -1252,6 +1280,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(customerDirectorySetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -1283,6 +1312,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(customerDirectorySetting, ContentType.Json);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
@@ -1316,6 +1346,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("DirectoryCustomer", DirectoryCustomer, type: ParameterType.QueryString);
                 requsest.AddParameter("DirectoryNumber", DirectoryNumber, type: ParameterType.QueryString);
                 requsest.AddFile("AttachmentFile", Path);
@@ -1351,6 +1382,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("DirectoryCustomer", DirectoryCustomer, type: ParameterType.QueryString);
                 requsest.AddParameter("DirectoryNumber", DirectoryNumber, type: ParameterType.QueryString);
                 requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
@@ -1387,6 +1419,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<EmployeeSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<EmployeeSetting>>(response.Result.Content);
@@ -1420,6 +1453,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<EmployeeSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<EmployeeSetting>>(response.Result.Content);
@@ -1452,6 +1486,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(employeeSetting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -1483,6 +1518,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(employeeSetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -1514,6 +1550,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(employeeSetting, ContentType.Json);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
@@ -1548,6 +1585,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<ProductSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<ProductSetting>>(response.Result.Content);
@@ -1581,6 +1619,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<ProductSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<ProductSetting>>(response.Result.Content);
@@ -1614,6 +1653,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<ProductSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<ProductSetting>>(response.Result.Content);
@@ -1646,6 +1686,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productSetting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -1708,6 +1749,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productSetting, ContentType.Json);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
@@ -1741,6 +1783,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("ProductNumber", Number, type: ParameterType.QueryString);
                 requsest.AddParameter("ProductName", Name, type: ParameterType.QueryString);
                 requsest.AddFile("AttachmentFile", Path);
@@ -1776,6 +1819,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("ProductNumber", Number, type: ParameterType.QueryString);
                 requsest.AddParameter("ProductName", Name, type: ParameterType.QueryString);
                 requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
@@ -1811,6 +1855,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<ProductCategorySetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<ProductCategorySetting>>(response.Result.Content);
@@ -1843,6 +1888,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productGategorySetting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -1874,6 +1920,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productGategorySetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -1905,6 +1952,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productGategorySetting, ContentType.Json);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
@@ -1939,6 +1987,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<ProductDepartmentSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<ProductDepartmentSetting>>(response.Result.Content);
@@ -1971,6 +2020,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productDepartmentSetting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -2002,6 +2052,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productDepartmentSetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -2033,6 +2084,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productDepartmentSetting, ContentType.Json);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
@@ -2067,6 +2119,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<ProductItem1Setting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<ProductItem1Setting>>(response.Result.Content);
@@ -2099,6 +2152,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productItem1Setting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -2130,6 +2184,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productItem1Setting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -2161,6 +2216,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productItem1Setting, ContentType.Json);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
@@ -2195,6 +2251,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<ProductItem2Setting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<ProductItem2Setting>>(response.Result.Content);
@@ -2227,6 +2284,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productItem2Setting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -2258,6 +2316,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productItem2Setting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -2289,6 +2348,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productItem2Setting, ContentType.Json);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
@@ -2323,6 +2383,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<ProductItem3Setting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<ProductItem3Setting>>(response.Result.Content);
@@ -2355,6 +2416,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productItem3Setting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -2386,6 +2448,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productItem3Setting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -2417,6 +2480,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productItem3Setting, ContentType.Json);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
@@ -2451,6 +2515,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<ProductItem4Setting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<ProductItem4Setting>>(response.Result.Content);
@@ -2483,6 +2548,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productItem4Setting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -2514,6 +2580,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productItem4Setting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -2545,6 +2612,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productItem4Setting, ContentType.Json);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
@@ -2579,6 +2647,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<ProductItem5Setting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<ProductItem5Setting>>(response.Result.Content);
@@ -2611,6 +2680,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productItem5Setting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -2642,6 +2712,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productItem5Setting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -2673,6 +2744,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(productItem5Setting, ContentType.Json);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
@@ -2709,6 +2781,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("PurchaseNumber", PurchaseNumber, type: ParameterType.QueryString);
                 var response = clinet.ExecuteGetAsync<List<PurchaseMainSetting>>(requsest);
                 response.Wait();
@@ -2743,6 +2816,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<PurchaseSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PurchaseSetting>>(response.Result.Content);
@@ -2775,6 +2849,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<PurchaseMainSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PurchaseMainSetting>>(response.Result.Content);
@@ -2807,6 +2882,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PruchaseSetting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -2840,6 +2916,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PruchaseSetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -2871,6 +2948,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PruchaseMainSetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -2902,6 +2980,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
@@ -2932,6 +3011,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("PurchaseFlag", PurchaseFlag, type: ParameterType.QueryString);
                 requsest.AddParameter("PurchaseDate", PurchaseDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
                 requsest.AddParameter("PurchaseNumber", PurchaseNumber, type: ParameterType.QueryString);
@@ -2966,6 +3046,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
                 requsest.AddParameter("PurchaseNumber", PurchaseNumber, type: ParameterType.QueryString);
                 var response = clinet.DownloadDataAsync(requsest);
@@ -3002,6 +3083,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("SalesNumber", SalesNumber, type: ParameterType.QueryString);
                 var response = clinet.ExecuteGetAsync<List<SalesMainSetting>>(requsest);
                 response.Wait();
@@ -3036,6 +3118,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<SalesSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<SalesSetting>>(response.Result.Content);
@@ -3068,6 +3151,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<SalesMainSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<SalesMainSetting>>(response.Result.Content);
@@ -3100,6 +3184,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PruchaseSetting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -3133,6 +3218,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PruchaseSetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -3164,6 +3250,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(SalesMainSetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -3195,6 +3282,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
@@ -3226,6 +3314,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("SalesFlag", SalesFlag, type: ParameterType.QueryString);
                 requsest.AddParameter("SalesCustomerNumber", SalesCompanyNumber, type: ParameterType.QueryString);
                 requsest.AddParameter("SalesDate", SalesDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
@@ -3261,6 +3350,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
                 requsest.AddParameter("SalesCustomerNumber", SalesCompanyNumber, type: ParameterType.QueryString);
                 var response = clinet.DownloadDataAsync(requsest);
@@ -3293,6 +3383,7 @@ namespace ERPManagementAPP.Methods
                 var option = new RestClientOptions(Project_url) { Timeout = time };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<ProjectSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<ProjectSetting>>(response.Result.Content);
@@ -3325,6 +3416,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(projectSetting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -3353,6 +3445,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(ProjectSetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -3380,6 +3473,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
@@ -3411,6 +3505,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("ProjectNumber", ProjectNumber, type: ParameterType.QueryString);
                 requsest.AddFile("AttachmentFile", Path);
                 var response = clinet.ExecutePostAsync(requsest);
@@ -3438,6 +3533,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
                 requsest.AddParameter("ProjectNumber", ProjectNumber, type: ParameterType.QueryString);
                 var response = clinet.DownloadDataAsync(requsest);
@@ -3473,6 +3569,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<PaymentSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PaymentSetting>>(response.Result.Content);
@@ -3505,6 +3602,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<PaymentSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PaymentSetting>>(response.Result.Content);
@@ -3538,6 +3636,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("YearDate", Year, type: ParameterType.QueryString);
                 var response = clinet.ExecuteGetAsync<List<PaymentSetting>>(requsest);
                 response.Wait();
@@ -3572,6 +3671,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("MonthDate", Month, type: ParameterType.QueryString);
                 var response = clinet.ExecuteGetAsync<List<PaymentSetting>>(requsest);
                 response.Wait();
@@ -3605,6 +3705,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PaymentSetting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -3638,6 +3739,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PaymentSetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -3671,6 +3773,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PaymentSetting, ContentType.Json);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
@@ -3699,6 +3802,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("PaymentNumber", PaymentNumber, type: ParameterType.QueryString);
                 requsest.AddFile("AttachmentFile", Path);
                 var response = clinet.ExecutePostAsync(requsest);
@@ -3726,6 +3830,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
                 requsest.AddParameter("PaymentNumber", PaymentNumber, type: ParameterType.QueryString);
                 var response = clinet.DownloadDataAsync(requsest);
@@ -3761,6 +3866,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<PaymentItemSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PaymentItemSetting>>(response.Result.Content);
@@ -3792,6 +3898,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PaymentItemSetting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -3824,6 +3931,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PaymentItemSetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -3856,6 +3964,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PaymentItemSetting, ContentType.Json);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
@@ -3893,6 +4002,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("PickingNumber", PickingNumber, type: ParameterType.QueryString);
                 var response = clinet.ExecuteGetAsync<List<PickingMainSetting>>(requsest);
                 response.Wait();
@@ -3927,6 +4037,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<PickingSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PickingSetting>>(response.Result.Content);
@@ -3959,6 +4070,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<PickingMainSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<PickingMainSetting>>(response.Result.Content);
@@ -3991,6 +4103,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PruchaseSetting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -4024,6 +4137,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PruchaseSetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -4055,6 +4169,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PickingMainSetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -4086,6 +4201,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
@@ -4117,6 +4233,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("PickingFlag", PickingFlag, type: ParameterType.QueryString);
                 requsest.AddParameter("PickingCustomerNumber", PickingCompanyNumber, type: ParameterType.QueryString);
                 requsest.AddParameter("PickingDate", PickingDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
@@ -4152,6 +4269,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
                 requsest.AddParameter("PickingCustomerNumber", PickingCompanyNumber, type: ParameterType.QueryString);
                 var response = clinet.DownloadDataAsync(requsest);
@@ -4188,6 +4306,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("OperatingNumber", OperatingNumber, type: ParameterType.QueryString);
                 var response = clinet.ExecuteGetAsync<List<OperatingMainSetting>>(requsest);
                 response.Wait();
@@ -4222,6 +4341,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<OperatingSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<OperatingSetting>>(response.Result.Content);
@@ -4254,6 +4374,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.ExecuteGetAsync<List<OperatingMainSetting>>(requsest);
                 response.Wait();
                 settings = JsonConvert.DeserializeObject<List<OperatingMainSetting>>(response.Result.Content);
@@ -4286,6 +4407,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PruchaseSetting, ContentType.Json);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -4319,6 +4441,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PruchaseSetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -4350,6 +4473,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddBody(PruchaseMainSetting, ContentType.Json);
                 var response = clinet.ExecutePutAsync(requsest);
                 response.Wait();
@@ -4381,6 +4505,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 var response = clinet.DeleteAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
@@ -4411,6 +4536,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("OperatingFlag", OperatingFlag, type: ParameterType.QueryString);
                 requsest.AddParameter("OperatingDate", OperatingDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
                 requsest.AddParameter("OperatingNumber", OperatingNumber, type: ParameterType.QueryString);
@@ -4445,6 +4571,7 @@ namespace ERPManagementAPP.Methods
                 };
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
                 requsest.AddParameter("OperatingNumber", OperatingNumber, type: ParameterType.QueryString);
                 var response = clinet.DownloadDataAsync(requsest);

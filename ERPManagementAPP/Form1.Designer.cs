@@ -408,6 +408,7 @@ namespace ERPManagementAPP
             new DevExpress.XtraNavBar.NavBarItemLink(this.PaymentTransferDatenavBarItem),
             new DevExpress.XtraNavBar.NavBarItemLink(this.PartnernavBarItem)});
             this.PaymentManagementBarGroup.Name = "PaymentManagementBarGroup";
+            this.PaymentManagementBarGroup.Visible = false;
             // 
             // PurchasePostingnavBarItem
             // 
