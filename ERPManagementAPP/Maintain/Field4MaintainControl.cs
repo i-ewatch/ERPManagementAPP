@@ -45,6 +45,10 @@ namespace ERPManagementAPP.Maintain
         /// </summary>
         public FlyoutAction action1 = new FlyoutAction();
         /// <summary>
+        /// 刪除確認訊息顯示
+        /// </summary>
+        public FlyoutAction Delectaction = new FlyoutAction();
+        /// <summary>
         /// 刷新資料(主要)
         /// </summary>
         public virtual void Refresh_Main_GridView() { }

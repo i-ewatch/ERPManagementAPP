@@ -44,6 +44,9 @@ namespace ERPManagementAPP.Maintain
                 Refresh_Main_GridView();
             }
             action.Commands.Add(FlyoutCommand.Yes);
+            Delectaction.Commands.Add(FlyoutCommand.Yes);
+            Delectaction.Commands.Add(FlyoutCommand.Cancel);
+            Delectaction.Caption = "刪除確認";
             #region 客戶資料表
             advBandedGridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             #region 客戶資訊報表按鈕
@@ -150,20 +153,24 @@ namespace ERPManagementAPP.Maintain
             btn_Customer_Delete.Click += (s, e) =>
             {
                 FocuseMainGrid();
-                string data = JsonConvert.SerializeObject(FocuseCustomerSetting);
-                string response = apiMethod.Delete_Customer(data);
-                if (response == "200")
+                Delectaction.Description = $"刪除名稱 : {FocuseCustomerSetting.CustomerName}";
+                if (FlyoutDialog.Show(Form1, Delectaction) == DialogResult.Yes)
                 {
-                    Refresh_Main_GridView();
-                    action.Caption = "刪除客戶成功";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
-                }
-                else
-                {
-                    action.Caption = "刪除客戶失敗";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
+                    string data = JsonConvert.SerializeObject(FocuseCustomerSetting);
+                    string response = apiMethod.Delete_Customer(data);
+                    if (response == "200")
+                    {
+                        Refresh_Main_GridView();
+                        action.Caption = "刪除客戶成功";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
+                    else
+                    {
+                        action.Caption = "刪除客戶失敗";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion
@@ -249,20 +256,24 @@ namespace ERPManagementAPP.Maintain
             btn_CustomerDirectory_Delete.Click += (s, e) =>
             {
                 FocuseSecondGrid();
-                string data = JsonConvert.SerializeObject(FocuseCustomerDirectorySetting);
-                string response = apiMethod.Delete_CustomerDirectory(data);
-                if (response == "200")
+                Delectaction.Description = $"刪除名稱 : {FocuseCustomerDirectorySetting.DirectoryName}";
+                if (FlyoutDialog.Show(Form1, Delectaction) == DialogResult.Yes)
                 {
-                    Refresh_Second_GridView(FocuseCustomerSetting.CustomerNumber);
-                    action.Caption = "刪除客戶通訊錄成功";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
-                }
-                else
-                {
-                    action.Caption = "刪除客戶通訊錄失敗";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
+                    string data = JsonConvert.SerializeObject(FocuseCustomerDirectorySetting);
+                    string response = apiMethod.Delete_CustomerDirectory(data);
+                    if (response == "200")
+                    {
+                        Refresh_Second_GridView(FocuseCustomerSetting.CustomerNumber);
+                        action.Caption = "刪除客戶通訊錄成功";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
+                    else
+                    {
+                        action.Caption = "刪除客戶通訊錄失敗";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion

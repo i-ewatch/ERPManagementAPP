@@ -98,6 +98,9 @@ namespace ERPManagementAPP.Maintain
                 Refresh_Main_GridView();
             }
             action.Commands.Add(FlyoutCommand.Yes);
+            Delectaction.Commands.Add(FlyoutCommand.Yes);
+            Delectaction.Commands.Add(FlyoutCommand.Cancel);
+            Delectaction.Caption = "刪除確認";
             #region 部門類別資料表
             DepartmentgridView.OptionsSelection.EnableAppearanceFocusedCell = false;
             #region 部門類別聚焦功能
@@ -153,20 +156,24 @@ namespace ERPManagementAPP.Maintain
             btn_Department_Delete.Click += (s, e) =>
             {
                 FocuseMainGrid(Convert.ToInt32(DepartmentgridControl.Tag.ToString()));
-                string data = JsonConvert.SerializeObject(FocuseProductDepartmentSetting);
-                string response = apiMethod.Delete_ProductDepartment(data);
-                if (response == "200")
+                Delectaction.Description = $"刪除名稱 : {FocuseProductDepartmentSetting.DepartmentName}";
+                if (FlyoutDialog.Show(Form1, Delectaction) == DialogResult.Yes)
                 {
-                    Refresh_Main_GridView();
-                    action.Caption = "刪除部門類別成功";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
-                }
-                else
-                {
-                    action.Caption = "刪除部門類別失敗";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
+                    string data = JsonConvert.SerializeObject(FocuseProductDepartmentSetting);
+                    string response = apiMethod.Delete_ProductDepartment(data);
+                    if (response == "200")
+                    {
+                        Refresh_Main_GridView();
+                        action.Caption = "刪除部門類別成功";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
+                    else
+                    {
+                        action.Caption = "刪除部門類別失敗";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion
@@ -265,20 +272,24 @@ namespace ERPManagementAPP.Maintain
             #region 刪除項目1
             btn_Item1_Delete.Click += (s, e) =>
             {
-                string data = JsonConvert.SerializeObject(FocuseProductItem1Setting);
-                string response = apiMethod.Delete_ProductItem1(data);
-                if (response == "200")
+                Delectaction.Description = $"刪除名稱 : {FocuseProductItem1Setting.Item1Name}";
+                if (FlyoutDialog.Show(Form1, Delectaction) == DialogResult.Yes)
                 {
-                    Refresh_Main_GridView();
-                    action.Caption = "刪除項目1成功";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
-                }
-                else
-                {
-                    action.Caption = "刪除項目1失敗";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
+                    string data = JsonConvert.SerializeObject(FocuseProductItem1Setting);
+                    string response = apiMethod.Delete_ProductItem1(data);
+                    if (response == "200")
+                    {
+                        Refresh_Main_GridView();
+                        action.Caption = "刪除項目1成功";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
+                    else
+                    {
+                        action.Caption = "刪除項目1失敗";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion
@@ -376,20 +387,24 @@ namespace ERPManagementAPP.Maintain
             #region 刪除項目2
             btn_Item2_Delete.Click += (s, e) =>
             {
-                string data = JsonConvert.SerializeObject(FocuseProductItem2Setting);
-                string response = apiMethod.Delete_ProductItem2(data);
-                if (response == "200")
+                Delectaction.Description = $"刪除名稱 : {FocuseProductItem2Setting.Item2Name}";
+                if (FlyoutDialog.Show(Form1, Delectaction) == DialogResult.Yes)
                 {
-                    Refresh_Main_GridView();
-                    action.Caption = "刪除項目2成功";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
-                }
-                else
-                {
-                    action.Caption = "刪除項目2失敗";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
+                    string data = JsonConvert.SerializeObject(FocuseProductItem2Setting);
+                    string response = apiMethod.Delete_ProductItem2(data);
+                    if (response == "200")
+                    {
+                        Refresh_Main_GridView();
+                        action.Caption = "刪除項目2成功";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
+                    else
+                    {
+                        action.Caption = "刪除項目2失敗";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion
@@ -487,20 +502,24 @@ namespace ERPManagementAPP.Maintain
             #region 刪除項目3
             btn_Item3_Delete.Click += (s, e) =>
             {
-                string data = JsonConvert.SerializeObject(FocuseProductItem3Setting);
-                string response = apiMethod.Delete_ProductItem3(data);
-                if (response == "200")
+                Delectaction.Description = $"刪除名稱 : {FocuseProductItem3Setting.Item3Name}";
+                if (FlyoutDialog.Show(Form1, Delectaction) == DialogResult.Yes)
                 {
-                    Refresh_Main_GridView();
-                    action.Caption = "刪除項目3成功";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
-                }
-                else
-                {
-                    action.Caption = "刪除項目3失敗";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
+                    string data = JsonConvert.SerializeObject(FocuseProductItem3Setting);
+                    string response = apiMethod.Delete_ProductItem3(data);
+                    if (response == "200")
+                    {
+                        Refresh_Main_GridView();
+                        action.Caption = "刪除項目3成功";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
+                    else
+                    {
+                        action.Caption = "刪除項目3失敗";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion
@@ -598,20 +617,24 @@ namespace ERPManagementAPP.Maintain
             #region 刪除項目4
             btn_Item4_Delete.Click += (s, e) =>
             {
-                string data = JsonConvert.SerializeObject(FocuseProductItem4Setting);
-                string response = apiMethod.Delete_ProductItem4(data);
-                if (response == "200")
+                Delectaction.Description = $"刪除名稱 : {FocuseProductItem4Setting.Item4Name}";
+                if (FlyoutDialog.Show(Form1, Delectaction) == DialogResult.Yes)
                 {
-                    Refresh_Main_GridView();
-                    action.Caption = "刪除項目4成功";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
-                }
-                else
-                {
-                    action.Caption = "刪除項目4失敗";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
+                    string data = JsonConvert.SerializeObject(FocuseProductItem4Setting);
+                    string response = apiMethod.Delete_ProductItem4(data);
+                    if (response == "200")
+                    {
+                        Refresh_Main_GridView();
+                        action.Caption = "刪除項目4成功";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
+                    else
+                    {
+                        action.Caption = "刪除項目4失敗";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion
@@ -709,20 +732,24 @@ namespace ERPManagementAPP.Maintain
             #region 刪除項目5
             btn_Item5_Delete.Click += (s, e) =>
             {
-                string data = JsonConvert.SerializeObject(FocuseProductItem5Setting);
-                string response = apiMethod.Delete_ProductItem5(data);
-                if (response == "200")
+                Delectaction.Description = $"刪除名稱 : {FocuseProductItem5Setting.Item5Name}";
+                if (FlyoutDialog.Show(Form1, Delectaction) == DialogResult.Yes)
                 {
-                    Refresh_Main_GridView();
-                    action.Caption = "刪除項目5成功";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
-                }
-                else
-                {
-                    action.Caption = "刪除項目5失敗";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
+                    string data = JsonConvert.SerializeObject(FocuseProductItem5Setting);
+                    string response = apiMethod.Delete_ProductItem5(data);
+                    if (response == "200")
+                    {
+                        Refresh_Main_GridView();
+                        action.Caption = "刪除項目5成功";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
+                    else
+                    {
+                        action.Caption = "刪除項目5失敗";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion
@@ -859,18 +886,22 @@ namespace ERPManagementAPP.Maintain
             btn_Product_Delete.Click += (s, e) =>
             {
                 FocuseSecondGrid();
-                string data = JsonConvert.SerializeObject(FocuseProductSetting);
-                string response = apiMethod.Delete_Product(data);
-                if (response == "200")
+                Delectaction.Description = $"刪除編號 : {FocuseProductSetting.ProductNumber}";
+                if (FlyoutDialog.Show(Form1, Delectaction) == DialogResult.Yes)
                 {
-                    Refresh_Second_GridView("0");
-                    action.Caption = "刪除廠商通訊錄成功";
-                    FlyoutDialog.Show(Form1, action);
-                }
-                else
-                {
-                    action.Caption = "刪除廠商通訊錄失敗";
-                    FlyoutDialog.Show(Form1, action);
+                    string data = JsonConvert.SerializeObject(FocuseProductSetting);
+                    string response = apiMethod.Delete_Product(data);
+                    if (response == "200")
+                    {
+                        Refresh_Second_GridView("0");
+                        action.Caption = "刪除廠商通訊錄成功";
+                        FlyoutDialog.Show(Form1, action);
+                    }
+                    else
+                    {
+                        action.Caption = "刪除廠商通訊錄失敗";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion

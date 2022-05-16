@@ -44,7 +44,9 @@ namespace ERPManagementAPP.Maintain
                 Refresh_Main_GridView();
             }
             action.Commands.Add(FlyoutCommand.Yes);
-
+            Delectaction.Commands.Add(FlyoutCommand.Yes);
+            Delectaction.Commands.Add(FlyoutCommand.Cancel);
+            Delectaction.Caption = "刪除確認";
             #region 廠商資料表
             advBandedGridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             #region 廠商資訊報表按鈕
@@ -152,20 +154,24 @@ namespace ERPManagementAPP.Maintain
             btn_Company_Delete.Click += (s, e) =>
             {
                 FocuseMainGrid();
-                string data = JsonConvert.SerializeObject(FocuseCompanySetting);
-                string response = apiMethod.Delete_Company(data);
-                if (response == "200")
+                Delectaction.Description = $"刪除名稱 : {FocuseCompanySetting.CompanyName}";
+                if (FlyoutDialog.Show(Form1, Delectaction) == DialogResult.Yes)
                 {
-                    Refresh_Main_GridView();
-                    action.Caption = "刪除廠商成功";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
-                }
-                else
-                {
-                    action.Caption = "刪除廠商失敗";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
+                    string data = JsonConvert.SerializeObject(FocuseCompanySetting);
+                    string response = apiMethod.Delete_Company(data);
+                    if (response == "200")
+                    {
+                        Refresh_Main_GridView();
+                        action.Caption = "刪除廠商成功";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
+                    else
+                    {
+                        action.Caption = "刪除廠商失敗";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion
@@ -251,20 +257,24 @@ namespace ERPManagementAPP.Maintain
             btn_CompanyDirectory_Delete.Click += (s, e) =>
               {
                   FocuseSecondGrid();
-                  string data = JsonConvert.SerializeObject(FocuseCompanyDirectorySetting);
-                  string response = apiMethod.Delete_CompanyDirectory(data);
-                  if (response == "200")
+                  Delectaction.Description = $"刪除名稱 : {FocuseCompanyDirectorySetting.DirectoryName}";
+                  if (FlyoutDialog.Show(Form1, Delectaction) == DialogResult.Yes)
                   {
-                      Refresh_Second_GridView(FocuseCompanySetting.CompanyNumber);
-                      action.Caption = "刪除廠商通訊錄成功";
-                      action.Description = "";
-                      FlyoutDialog.Show(Form1, action);
-                  }
-                  else
-                  {
-                      action.Caption = "刪除廠商通訊錄失敗";
-                      action.Description = "";
-                      FlyoutDialog.Show(Form1, action);
+                      string data = JsonConvert.SerializeObject(FocuseCompanyDirectorySetting);
+                      string response = apiMethod.Delete_CompanyDirectory(data);
+                      if (response == "200")
+                      {
+                          Refresh_Second_GridView(FocuseCompanySetting.CompanyNumber);
+                          action.Caption = "刪除廠商通訊錄成功";
+                          action.Description = "";
+                          FlyoutDialog.Show(Form1, action);
+                      }
+                      else
+                      {
+                          action.Caption = "刪除廠商通訊錄失敗";
+                          action.Description = "";
+                          FlyoutDialog.Show(Form1, action);
+                      }
                   }
               };
             #endregion

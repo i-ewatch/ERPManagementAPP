@@ -822,7 +822,8 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
                         {
                             if (!string.IsNullOrEmpty(AttachmentFilePath))
                             {
-                                response = apiMethod.Post_ProductAttachmentFile(productSetting.ProductNumber, productSetting.ProductName, AttachmentFilePath);
+                                ProductSetting product = JsonConvert.DeserializeObject<ProductSetting>(apiMethod.ResponseDataMessage);
+                                response = apiMethod.Post_ProductAttachmentFile(product.ProductNumber, product.ProductName, AttachmentFilePath);
                                 if (response == "200")
                                 {
                                     DialogResult = DialogResult.OK;

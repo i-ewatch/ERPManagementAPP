@@ -1692,6 +1692,7 @@ namespace ERPManagementAPP.Methods
                 response.Wait();
                 ClientFlag = true;
                 ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                ResponseDataMessage = response.Result.Content;
                 return ResponseMessage(response.Result);
             }
             catch (Exception ex)

@@ -32,6 +32,9 @@ namespace ERPManagementAPP.Maintain
                 Refresh_Main_GridView();
             }
             action.Commands.Add(FlyoutCommand.Yes);
+            Delectaction.Commands.Add(FlyoutCommand.Yes);
+            Delectaction.Commands.Add(FlyoutCommand.Cancel);
+            Delectaction.Caption = "刪除確認";
             #region 員工資料表
             gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             #region 報表聚焦功能
@@ -161,20 +164,24 @@ namespace ERPManagementAPP.Maintain
                  //if (Form1.EmployeeSetting.Token == 2)
                  //{
                  FocuseMainGrid();
-                 string data = JsonConvert.SerializeObject(FocuseEmployeeSetting);
-                 string response = apiMethod.Delete_Employee(data);
-                 if (response == "200")
+                 Delectaction.Description = $"刪除名稱 : {FocuseEmployeeSetting.EmployeeName}";
+                 if (FlyoutDialog.Show(Form1, Delectaction) == DialogResult.Yes)
                  {
-                     Refresh_Main_GridView();
-                     action.Caption = "刪除員工成功";
-                     action.Description = "";
-                     FlyoutDialog.Show(Form1, action);
-                 }
-                 else
-                 {
-                     action.Caption = "刪除員工失敗";
-                     action.Description = "";
-                     FlyoutDialog.Show(Form1, action);
+                     string data = JsonConvert.SerializeObject(FocuseEmployeeSetting);
+                     string response = apiMethod.Delete_Employee(data);
+                     if (response == "200")
+                     {
+                         Refresh_Main_GridView();
+                         action.Caption = "刪除員工成功";
+                         action.Description = "";
+                         FlyoutDialog.Show(Form1, action);
+                     }
+                     else
+                     {
+                         action.Caption = "刪除員工失敗";
+                         action.Description = "";
+                         FlyoutDialog.Show(Form1, action);
+                     }
                  }
                  //}
                  //else

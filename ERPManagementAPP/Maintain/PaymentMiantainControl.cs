@@ -54,6 +54,9 @@ namespace ERPManagementAPP.Maintain
                 Refresh_Main_GridView();
             }
             action.Commands.Add(FlyoutCommand.Yes);
+            Delectaction.Commands.Add(FlyoutCommand.Yes);
+            Delectaction.Commands.Add(FlyoutCommand.Cancel);
+            Delectaction.Caption = "刪除確認";
             #region 代墊代付品項資料表
             gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
             #region 產品類別聚焦功能
@@ -109,20 +112,24 @@ namespace ERPManagementAPP.Maintain
             btn_PaymentItem_Delete.Click += (s, e) =>
             {
                 FocuseMainGrid();
-                string data = JsonConvert.SerializeObject(FocusePaymentItemSetting);
-                string response = apiMethod.Delete_PaymentItem(data);
-                if (response == "200")
+                Delectaction.Description = $"刪除名稱 : {FocusePaymentItemSetting.PaymentItemName}";
+                if (FlyoutDialog.Show(Form1, Delectaction) == DialogResult.Yes)
                 {
-                    Refresh_Main_GridView();
-                    action.Caption = "刪除代墊代付品項成功";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
-                }
-                else
-                {
-                    action.Caption = "刪除代墊代付品項失敗";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
+                    string data = JsonConvert.SerializeObject(FocusePaymentItemSetting);
+                    string response = apiMethod.Delete_PaymentItem(data);
+                    if (response == "200")
+                    {
+                        Refresh_Main_GridView();
+                        action.Caption = "刪除代墊代付品項成功";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
+                    else
+                    {
+                        action.Caption = "刪除代墊代付品項失敗";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion
@@ -248,18 +255,22 @@ namespace ERPManagementAPP.Maintain
             btn_Payment_Delete.Click += (s, e) =>
             {
                 FocuseSecondGrid();
-                string data = JsonConvert.SerializeObject(FocusePaymentSetting);
-                string response = apiMethod.Delete_Payment(data);
-                if (response == "200")
+                Delectaction.Description = $"刪除編碼 : {FocusePaymentSetting.PaymentNumber}";
+                if (FlyoutDialog.Show(Form1, Delectaction) == DialogResult.Yes)
                 {
-                    Refresh_Second_GridView("0");
-                    action.Caption = "刪除代墊代付成功";
-                    FlyoutDialog.Show(Form1, action);
-                }
-                else
-                {
-                    action.Caption = "刪除代墊代付失敗";
-                    FlyoutDialog.Show(Form1, action);
+                    string data = JsonConvert.SerializeObject(FocusePaymentSetting);
+                    string response = apiMethod.Delete_Payment(data);
+                    if (response == "200")
+                    {
+                        Refresh_Second_GridView("0");
+                        action.Caption = "刪除代墊代付成功";
+                        FlyoutDialog.Show(Form1, action);
+                    }
+                    else
+                    {
+                        action.Caption = "刪除代墊代付失敗";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion

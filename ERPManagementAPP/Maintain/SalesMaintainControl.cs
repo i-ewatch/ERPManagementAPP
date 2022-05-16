@@ -57,6 +57,9 @@ namespace ERPManagementAPP.Maintain
                 Refresh_Main_GridView();
             }
             action.Commands.Add(FlyoutCommand.Yes);
+            Delectaction.Commands.Add(FlyoutCommand.Yes);
+            Delectaction.Commands.Add(FlyoutCommand.Cancel);
+            Delectaction.Caption = "刪除確認";
             #region 銷貨資料表
             gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             #region 銷貨資訊報表按鈕
@@ -222,19 +225,23 @@ namespace ERPManagementAPP.Maintain
             btn_Sales_Delete.Click += (s, e) =>
             {
                 FocuseMainGrid();
-                string response = APIMethod.Delete_Sales(FocuseSalesMainSetting.SalesFlag, FocuseSalesMainSetting.SalesNumber);
-                if (response == "200")
+                Delectaction.Description = $"刪除編碼 : {FocuseSalesMainSetting.SalesNumber}";
+                if (FlyoutDialog.Show(Form1, Delectaction) == DialogResult.Yes)
                 {
-                    Refresh_Main_GridView();
-                    action.Caption = "刪除銷貨資訊成功";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
-                }
-                else
-                {
-                    action.Caption = "刪除銷貨資訊失敗";
-                    action.Description = "";
-                    FlyoutDialog.Show(Form1, action);
+                    string response = APIMethod.Delete_Sales(FocuseSalesMainSetting.SalesFlag, FocuseSalesMainSetting.SalesNumber);
+                    if (response == "200")
+                    {
+                        Refresh_Main_GridView();
+                        action.Caption = "刪除銷貨資訊成功";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
+                    else
+                    {
+                        action.Caption = "刪除銷貨資訊失敗";
+                        action.Description = "";
+                        FlyoutDialog.Show(Form1, action);
+                    }
                 }
             };
             #endregion
