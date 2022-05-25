@@ -593,7 +593,7 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.txt_Item5Number.Name = "txt_Item5Number";
             this.txt_Item5Number.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_Item5Number.Properties.Appearance.Options.UseFont = true;
-            this.txt_Item5Number.Properties.MaxLength = 2;
+            this.txt_Item5Number.Properties.MaxLength = 4;
             this.txt_Item5Number.Size = new System.Drawing.Size(557, 26);
             this.txt_Item5Number.StyleController = this.layoutControl1;
             this.txt_Item5Number.TabIndex = 4;
