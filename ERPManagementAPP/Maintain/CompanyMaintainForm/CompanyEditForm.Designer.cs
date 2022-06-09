@@ -403,6 +403,10 @@ namespace ERPManagementAPP.Maintain.CompanyMaintainForm
             this.txt_ComapnyNumber.Name = "txt_ComapnyNumber";
             this.txt_ComapnyNumber.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_ComapnyNumber.Properties.Appearance.Options.UseFont = true;
+            this.txt_ComapnyNumber.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            this.txt_ComapnyNumber.Properties.AppearanceDisabled.Options.UseForeColor = true;
+            this.txt_ComapnyNumber.Properties.AppearanceDisabled.Options.UseTextOptions = true;
+            this.txt_ComapnyNumber.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.txt_ComapnyNumber.Properties.MaxLength = 6;
             this.txt_ComapnyNumber.Properties.NullValuePrompt = "XX-000";
             this.txt_ComapnyNumber.Size = new System.Drawing.Size(559, 26);

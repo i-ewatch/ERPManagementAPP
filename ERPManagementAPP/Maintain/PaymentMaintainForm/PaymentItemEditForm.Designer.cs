@@ -103,6 +103,8 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
             this.txt_PaymentItemNo.Name = "txt_PaymentItemNo";
             this.txt_PaymentItemNo.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_PaymentItemNo.Properties.Appearance.Options.UseFont = true;
+            this.txt_PaymentItemNo.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            this.txt_PaymentItemNo.Properties.AppearanceDisabled.Options.UseForeColor = true;
             this.txt_PaymentItemNo.Properties.MaxLength = 24;
             this.txt_PaymentItemNo.Size = new System.Drawing.Size(566, 26);
             this.txt_PaymentItemNo.StyleController = this.layoutControl1;

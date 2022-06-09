@@ -346,6 +346,10 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.txt_CustomerNumber.Name = "txt_CustomerNumber";
             this.txt_CustomerNumber.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_CustomerNumber.Properties.Appearance.Options.UseFont = true;
+            this.txt_CustomerNumber.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            this.txt_CustomerNumber.Properties.AppearanceDisabled.Options.UseForeColor = true;
+            this.txt_CustomerNumber.Properties.AppearanceDisabled.Options.UseTextOptions = true;
+            this.txt_CustomerNumber.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.txt_CustomerNumber.Properties.MaxLength = 6;
             this.txt_CustomerNumber.Properties.NullValuePrompt = "XX-000";
             this.txt_CustomerNumber.Size = new System.Drawing.Size(451, 26);

@@ -206,6 +206,7 @@ namespace ERPManagementAPP.Maintain.PaymentMaintainForm
                 if (ProjectSettings[i].ProjectNumber == PaymentSetting.ProjectNumber)
                 {
                     SelectProjectSetting = ProjectSettings[i];
+                    break;
                 }
                 else
                 {

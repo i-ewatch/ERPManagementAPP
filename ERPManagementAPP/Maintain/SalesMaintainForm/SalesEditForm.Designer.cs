@@ -623,6 +623,10 @@ namespace ERPManagementAPP.Maintain.SalesMaintainForm
             this.txt_SalesNumber.Name = "txt_SalesNumber";
             this.txt_SalesNumber.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_SalesNumber.Properties.Appearance.Options.UseFont = true;
+            this.txt_SalesNumber.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            this.txt_SalesNumber.Properties.AppearanceDisabled.Options.UseForeColor = true;
+            this.txt_SalesNumber.Properties.AppearanceDisabled.Options.UseTextOptions = true;
+            this.txt_SalesNumber.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.txt_SalesNumber.Properties.ReadOnly = true;
             this.txt_SalesNumber.Size = new System.Drawing.Size(523, 26);
             this.txt_SalesNumber.StyleController = this.layoutControl1;

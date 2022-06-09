@@ -346,6 +346,10 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
             this.txt_ProductNumber.Properties.Appearance.Options.UseFont = true;
             this.txt_ProductNumber.Properties.Appearance.Options.UseTextOptions = true;
             this.txt_ProductNumber.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.txt_ProductNumber.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            this.txt_ProductNumber.Properties.AppearanceDisabled.Options.UseForeColor = true;
+            this.txt_ProductNumber.Properties.AppearanceDisabled.Options.UseTextOptions = true;
+            this.txt_ProductNumber.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.txt_ProductNumber.Properties.MaxLength = 24;
             this.txt_ProductNumber.Size = new System.Drawing.Size(1286, 26);
             this.txt_ProductNumber.StyleController = this.layoutControl1;

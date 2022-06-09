@@ -242,6 +242,8 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
             this.txt_DirectoryNumber.Name = "txt_DirectoryNumber";
             this.txt_DirectoryNumber.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_DirectoryNumber.Properties.Appearance.Options.UseFont = true;
+            this.txt_DirectoryNumber.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            this.txt_DirectoryNumber.Properties.AppearanceDisabled.Options.UseForeColor = true;
             this.txt_DirectoryNumber.Properties.MaxLength = 6;
             this.txt_DirectoryNumber.Properties.NullValuePrompt = "XX-000";
             this.txt_DirectoryNumber.Size = new System.Drawing.Size(496, 26);

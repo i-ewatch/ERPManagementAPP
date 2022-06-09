@@ -719,6 +719,10 @@ namespace ERPManagementAPP.Maintain.OperatingMaintainForm
             this.txt_OperatingNumber.Properties.AllowFocused = false;
             this.txt_OperatingNumber.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_OperatingNumber.Properties.Appearance.Options.UseFont = true;
+            this.txt_OperatingNumber.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            this.txt_OperatingNumber.Properties.AppearanceDisabled.Options.UseForeColor = true;
+            this.txt_OperatingNumber.Properties.AppearanceDisabled.Options.UseTextOptions = true;
+            this.txt_OperatingNumber.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.txt_OperatingNumber.Properties.AppearanceReadOnly.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_OperatingNumber.Properties.AppearanceReadOnly.Options.UseFont = true;
             this.txt_OperatingNumber.Properties.ReadOnly = true;

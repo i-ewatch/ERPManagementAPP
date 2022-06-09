@@ -586,6 +586,10 @@ namespace ERPManagementAPP.Maintain.PickingMaintainForm
             this.txt_PickingNumber.Name = "txt_PickingNumber";
             this.txt_PickingNumber.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_PickingNumber.Properties.Appearance.Options.UseFont = true;
+            this.txt_PickingNumber.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            this.txt_PickingNumber.Properties.AppearanceDisabled.Options.UseForeColor = true;
+            this.txt_PickingNumber.Properties.AppearanceDisabled.Options.UseTextOptions = true;
+            this.txt_PickingNumber.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.txt_PickingNumber.Properties.ReadOnly = true;
             this.txt_PickingNumber.Size = new System.Drawing.Size(523, 26);
             this.txt_PickingNumber.StyleController = this.layoutControl1;
