@@ -506,6 +506,18 @@
         b06C7sT+p0gO1A++AraRs0uR4gAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="OrderBarItem.ImageOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAjdEVYdFRpdGxlAE9yZGVyRGV0YWlsO1ByaW50T3JkZXJEZXRhaWw7aMqFLgAAATdJREFUWEft
+        kt1twzAQgz1cXztFd+gAhXfoCF0gDwWyQgfINooY6AAezSiu4jgvOeADxNP90IKnUspTsck9sck9sUlm
+        nudyDzpPsUmmDRmKl4GXgSEDtemIxsYmBmjeEZpJAlAx2NrARTNJAC6uqP43OjP2BEkALq4s7kfgmXqX
+        BODiR6D7kgCuaUt0XxLANV3hr4J6gLOrWaD7kgCuieClXMu5rhndlwQwTTzc3Svdet2XBNCGisutZTsD
+        EXK3IKLpIQMHaUoG1gb3Eod6lfYlcQ00R7x//V7gM+uI1mPnMTapsIG18TAD+sWqI57+Ai3sPMYmlVsv
+        gPj8+U60sPMYm1TWvIAzQGc7F9ikMvoC7WxnBjapjP4Duxpoyxx2ZmCTCgz06MR0+nizMwObHAVfrOe+
+        gTKdAcHuDdE5D8akAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="OperatingBarItem.ImageOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAA90RVh0VGl0

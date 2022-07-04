@@ -105,6 +105,10 @@ namespace ERPManagementAPP.Methods
             OperatingAttachmenFile_url = $"{URL}/OperatingAttachmentFile";
             OperatingPosting_url = $"{URL}/Operating/OperatingPosting";
             UpdateOperatingMain_url = $"{URL}/Operating/UpdateOperatingMain";
+
+            Order_url = $"{URL}/Order";
+            OrderNumber_url = $"{URL}/Order/OrderNumber";
+            OrderAttachmenFile_url = $"{URL}/OrderAttachmentFile";
         }
         #region 登入資訊
         /// <summary>
@@ -227,6 +231,20 @@ namespace ERPManagementAPP.Methods
         /// 項目5類別資料(Get、Post、Put、Delete)
         /// </summary>
         private string ProductItem5_url { get; set; }
+        #endregion
+        #region 訂購資訊
+        /// <summary>
+        /// 訂購資料(Get、Post、Put、Delete)
+        /// </summary>
+        private string Order_url { get; set; }
+        /// <summary>
+        /// 訂購資料查詢(年份)
+        /// </summary>
+        private string OrderNumber_url { get; set; }
+        /// <summary>
+        /// 訂購檔案(Post、Get)
+        /// </summary>
+        private string OrderAttachmenFile_url { get; set; }
         #endregion
         #region 進貨資訊
         /// <summary>
@@ -2761,6 +2779,240 @@ namespace ERPManagementAPP.Methods
             }
         }
         #endregion
+        #endregion
+        #endregion
+
+        #region 訂購API
+        #region 全部訂購單表頭(年份)
+        /// <summary>
+        /// 全部訂購單表頭(年份)
+        /// </summary>
+        /// <param name="Year"></param>
+        /// <returns></returns>
+        public List<OrderMainSetting> Get_Order(string Year)
+        {
+            try
+            {
+                List<OrderMainSetting> settings = null;
+                var option = new RestClientOptions(Order_url + "/Year")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
+                requsest.AddParameter("Year", Year, type: ParameterType.QueryString);
+                var response = clinet.ExecuteGetAsync<List<PurchaseMainSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<OrderMainSetting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "全部訂購單表頭(年份)API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 查詢單筆訂購單父子資料
+        public List<OrderSetting> Get_Order(OrderMainSetting setting)
+        {
+            try
+            {
+                List<OrderSetting> settings = null;
+                var option = new RestClientOptions(Order_url + $"/{setting.OrderNumber}")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
+                var response = clinet.ExecuteGetAsync<List<PurchaseSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<OrderSetting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "查詢單筆訂購單父子資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 新增訂購資料
+        /// <summary>
+        /// 新增訂購資料
+        /// </summary>
+        /// <param name="OrderSetting"></param>
+        /// <returns></returns>
+        public string Post_Order(string OrderSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Order_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
+                requsest.AddBody(OrderSetting, ContentType.Json);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                ResponseDataMessage = response.Result.Content;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "新增訂購資料API錯誤");
+                ResponseDataMessage = "";
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 修改訂購資料
+        /// <summary>
+        /// 修改訂購資料
+        /// </summary>
+        /// <param name="OrderSetting"></param>
+        /// <returns></returns>
+        public string Put_Order(string OrderSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Order_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
+                requsest.AddBody(OrderSetting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "修改訂購資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 刪除訂購資料
+        /// <summary>
+        /// 刪除訂購資料
+        /// </summary>
+        /// <param name="OrderNumber"></param>
+        /// <returns></returns>
+        public string Delete_Order(string OrderNumber)
+        {
+            try
+            {
+                var option = new RestClientOptions($"{Order_url}/{OrderNumber}")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
+                var response = clinet.DeleteAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "刪除訂購資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 訂購上傳檔案
+        /// <summary>
+        /// 訂購上傳檔案
+        /// </summary>
+        /// <param name="OrderDate"></param>
+        /// <param name="OrderNumber"></param>
+        /// <param name="Path"></param>
+        /// <returns></returns>
+        public string Post_OrderAttachmentFile(DateTime OrderDate, string OrderNumber, string Path)
+        {
+            try
+            {
+                var option = new RestClientOptions(OrderAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
+                requsest.AddParameter("PurchaseDate", OrderDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
+                requsest.AddParameter("PurchaseNumber", OrderNumber, type: ParameterType.QueryString);
+                requsest.AddFile("AttachmentFile", Path);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "訂購上傳檔案API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 訂購下載檔案
+        /// <summary>
+        /// 訂購下載檔案
+        /// </summary>
+        /// <param name="OrderNumber"></param>
+        /// <param name="File"></param>
+        /// <returns></returns>
+        public byte[] Get_OrderAttachmentFile(string OrderNumber,string File)
+        {
+            try
+            {
+                var option = new RestClientOptions(OrderAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
+                requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
+                requsest.AddParameter("PurchaseNumber", OrderNumber, type: ParameterType.QueryString);
+                var response = clinet.DownloadDataAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return response.Result;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "訂購下載檔案API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
         #endregion
         #endregion
 

@@ -290,8 +290,8 @@ namespace ERPManagementAPP.Maintain.CompanyMaintainForm
             this.txt_MobilePhone.Name = "txt_MobilePhone";
             this.txt_MobilePhone.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_MobilePhone.Properties.Appearance.Options.UseFont = true;
-            this.txt_MobilePhone.Properties.MaxLength = 11;
-            this.txt_MobilePhone.Properties.NullValuePrompt = "09-12345678";
+            this.txt_MobilePhone.Properties.MaxLength = 10;
+            this.txt_MobilePhone.Properties.NullValuePrompt = "0912345678";
             this.txt_MobilePhone.Size = new System.Drawing.Size(188, 26);
             this.txt_MobilePhone.StyleController = this.layoutControl1;
             this.txt_MobilePhone.TabIndex = 5;

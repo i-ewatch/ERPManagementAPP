@@ -22,5 +22,9 @@ namespace ERPManagementAPP.Maintain
         /// 錯誤訊息視窗顯示
         /// </summary>
         public FlyoutAction action = new FlyoutAction();
+        /// <summary>
+        /// 錯誤訊息視窗顯示1
+        /// </summary>
+        public FlyoutAction action1 = new FlyoutAction();
     }
 }

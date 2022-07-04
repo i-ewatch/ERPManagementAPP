@@ -63,6 +63,7 @@ namespace ERPManagementAPP
             this.LoginimageCollection = new DevExpress.Utils.ImageCollection(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.pcl_View = new DevExpress.XtraEditors.PanelControl();
+            this.OrderBarItem = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.MainbarManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LoginimageCollection)).BeginInit();
@@ -211,7 +212,8 @@ namespace ERPManagementAPP
             this.PartnernavBarItem,
             this.ProjectBarItem,
             this.PickingBarItem,
-            this.OperatingBarItem});
+            this.OperatingBarItem,
+            this.OrderBarItem});
             this.navBarControl1.LinkSelectionMode = DevExpress.XtraNavBar.LinkSelectionModeType.OneInControl;
             this.navBarControl1.Location = new System.Drawing.Point(0, 23);
             this.navBarControl1.Name = "navBarControl1";
@@ -322,12 +324,14 @@ namespace ERPManagementAPP
             this.AccountingBarGroup.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("AccountingBarGroup.ImageOptions.LargeImage")));
             this.AccountingBarGroup.ImageOptions.SmallImage = ((System.Drawing.Image)(resources.GetObject("AccountingBarGroup.ImageOptions.SmallImage")));
             this.AccountingBarGroup.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.OrderBarItem),
             new DevExpress.XtraNavBar.NavBarItemLink(this.OperatingBarItem),
             new DevExpress.XtraNavBar.NavBarItemLink(this.PurchasenavBarItem),
             new DevExpress.XtraNavBar.NavBarItemLink(this.PickingBarItem),
             new DevExpress.XtraNavBar.NavBarItemLink(this.SalesnavBarItem),
             new DevExpress.XtraNavBar.NavBarItemLink(this.PaymentnavBarItem)});
             this.AccountingBarGroup.Name = "AccountingBarGroup";
+            this.AccountingBarGroup.SelectedLinkIndex = 0;
             // 
             // OperatingBarItem
             // 
@@ -479,6 +483,14 @@ namespace ERPManagementAPP
             this.pcl_View.Size = new System.Drawing.Size(1302, 881);
             this.pcl_View.TabIndex = 14;
             // 
+            // OrderBarItem
+            // 
+            this.OrderBarItem.Caption = "訂購單";
+            this.OrderBarItem.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("OrderBarItem.ImageOptions.LargeImage")));
+            this.OrderBarItem.Name = "OrderBarItem";
+            this.OrderBarItem.Tag = "15";
+            this.OrderBarItem.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.NavBarItem_LinkClicked);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -538,6 +550,7 @@ namespace ERPManagementAPP
         private DevExpress.XtraNavBar.NavBarItem ProjectBarItem;
         private DevExpress.XtraNavBar.NavBarItem PickingBarItem;
         private DevExpress.XtraNavBar.NavBarItem OperatingBarItem;
+        private DevExpress.XtraNavBar.NavBarItem OrderBarItem;
     }
 }
 
