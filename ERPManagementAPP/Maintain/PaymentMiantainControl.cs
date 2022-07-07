@@ -565,7 +565,7 @@ namespace ERPManagementAPP.Maintain
             for (int i = 0; i < length; i++)
             {
                 EmployeeSettings = apiMethod.Get_Employee();
-                if (EmployeeSettings.Count > 0)
+                if (EmployeeSettings != null)
                 {
                     break;
                 }
@@ -573,7 +573,7 @@ namespace ERPManagementAPP.Maintain
             for (int i = 0; i < length; i++)
             {
                 ProjectSettings = apiMethod.Get_Project();
-                if (ProjectSettings.Count > 0)
+                if (ProjectSettings != null)
                 {
                     break;
                 }

@@ -358,7 +358,7 @@ namespace ERPManagementAPP.Maintain
             for (int i = 0; i < length; i++)
             {
                 CompanySettings = apiMethod.Get_Company();
-                if (CompanySettings.Count > 0)
+                if (CompanySettings != null)
                 {
                     break;
                 }
@@ -366,7 +366,7 @@ namespace ERPManagementAPP.Maintain
             for (int i = 0; i < length; i++)
             {
                 EmployeeSettings = apiMethod.Get_Employee();
-                if (EmployeeSettings.Count > 0)
+                if (EmployeeSettings != null)
                 {
                     break;
                 }
@@ -374,7 +374,7 @@ namespace ERPManagementAPP.Maintain
             for (int i = 0; i < length; i++)
             {
                 ProductSettings = apiMethod.Get_Product();
-                if (ProductSettings.Count > 0)
+                if (ProductSettings != null)
                 {
                     break;
                 }
@@ -382,7 +382,7 @@ namespace ERPManagementAPP.Maintain
             for (int i = 0; i < length; i++)
             {
                 ProjectSettings = apiMethod.Get_Project();
-                if (ProjectSettings.Count > 0)
+                if (ProjectSettings != null)
                 {
                     break;
                 }
@@ -390,7 +390,7 @@ namespace ERPManagementAPP.Maintain
             for (int i = 0; i < length; i++)
             {
                 CompanyDirectorySettings = apiMethod.Get_CompanyDirectory();
-                if (CompanyDirectorySettings.Count > 0)
+                if (CompanyDirectorySettings != null)
                 {
                     break;
                 }
