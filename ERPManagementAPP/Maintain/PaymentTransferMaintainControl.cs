@@ -262,6 +262,7 @@ namespace ERPManagementAPP.Maintain
                     gridControl1.DataSource = PaymentSettings;
                     gridView1.ExpandAllGroups();
                     ChangeGridStr();
+                    break;
                 }
             }
             CloseProgressPanel(handle);

@@ -540,26 +540,44 @@ namespace ERPManagementAPP.Maintain
         public override void Refresh_Second_GridView(string Number)
         {
             //PaymentSettings = apiMethod.Get_PaymentTransferDate();//未付款
-            PaymentSettings = apiMethod.Get_PaymentMonth(det_PaymentDate.Text.Replace("/", ""));
-            if (PaymentSettings != null && EmployeeSettings != null)
+            for (int x = 0; x < length; x++)
             {
-                gridControl1.DataSource = PaymentSettings;
-                gridView1.Columns["EmployeeNumber"].Group();
-                for (int i = 0; i < gridView1.Columns.Count; i++)
+                PaymentSettings = apiMethod.Get_PaymentMonth(det_PaymentDate.Text.Replace("/", ""));
+                if (PaymentSettings != null && EmployeeSettings != null)
                 {
-                    if (gridView1.Columns[i].FieldName != "PaymentUse")
+                    gridControl1.DataSource = PaymentSettings;
+                    gridView1.Columns["EmployeeNumber"].Group();
+                    for (int i = 0; i < gridView1.Columns.Count; i++)
                     {
-                        gridView1.Columns[i].BestFit();
+                        if (gridView1.Columns[i].FieldName != "PaymentUse")
+                        {
+                            gridView1.Columns[i].BestFit();
+                        }
                     }
+                    gridView1.ExpandAllGroups();
+                    ChangeGridStr();
+                    break;
                 }
-                gridView1.ExpandAllGroups();
-                ChangeGridStr();
             }
         }
         private void Refresh_API()
         {
-            EmployeeSettings = apiMethod.Get_Employee();
-            ProjectSettings = apiMethod.Get_Project();
+            for (int i = 0; i < length; i++)
+            {
+                EmployeeSettings = apiMethod.Get_Employee();
+                if (EmployeeSettings.Count > 0)
+                {
+                    break;
+                }
+            }
+            for (int i = 0; i < length; i++)
+            {
+                ProjectSettings = apiMethod.Get_Project();
+                if (ProjectSettings.Count > 0)
+                {
+                    break;
+                }
+            }
         }
         public override void Refresh_Token()
         {

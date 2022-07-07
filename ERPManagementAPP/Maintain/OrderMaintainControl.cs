@@ -338,7 +338,7 @@ namespace ERPManagementAPP.Maintain
                 }
                 else//不顯示作廢
                 {
-                    OrderMainSettings = apiMethod.Get_Order(det_OrderDate.Text).Where(g=>!g.InvalidFlag).ToList();
+                    OrderMainSettings = apiMethod.Get_Order(det_OrderDate.Text).Where(g => !g.InvalidFlag).ToList();
                 }
                 if (OrderMainSettings != null)
                 {
@@ -355,11 +355,46 @@ namespace ERPManagementAPP.Maintain
         }
         private void Refresh_API()
         {
-            CompanySettings = apiMethod.Get_Company();
-            EmployeeSettings = apiMethod.Get_Employee();
-            ProductSettings = apiMethod.Get_Product();
-            ProjectSettings = apiMethod.Get_Project();
-            CompanyDirectorySettings = apiMethod.Get_CompanyDirectory();
+            for (int i = 0; i < length; i++)
+            {
+                CompanySettings = apiMethod.Get_Company();
+                if (CompanySettings.Count > 0)
+                {
+                    break;
+                }
+            }
+            for (int i = 0; i < length; i++)
+            {
+                EmployeeSettings = apiMethod.Get_Employee();
+                if (EmployeeSettings.Count > 0)
+                {
+                    break;
+                }
+            }
+            for (int i = 0; i < length; i++)
+            {
+                ProductSettings = apiMethod.Get_Product();
+                if (ProductSettings.Count > 0)
+                {
+                    break;
+                }
+            }
+            for (int i = 0; i < length; i++)
+            {
+                ProjectSettings = apiMethod.Get_Project();
+                if (ProjectSettings.Count > 0)
+                {
+                    break;
+                }
+            }
+            for (int i = 0; i < length; i++)
+            {
+                CompanyDirectorySettings = apiMethod.Get_CompanyDirectory();
+                if (CompanyDirectorySettings.Count > 0)
+                {
+                    break;
+                }
+            }
         }
         public override void Refresh_Token()
         {
