@@ -837,10 +837,13 @@ namespace ERPManagementAPP.Maintain
                 else if (e.Column.FieldName == "ProductCompanyNumber")
                 {
                     string Index = e.DisplayText.ToString();
-                    CompanySetting company = CompanySettings.SingleOrDefault(g => g.CompanyNumber == Index);
-                    if (company != null)
+                    if (CompanySettings != null)
                     {
-                        e.DisplayText = company.CompanyName;
+                        CompanySetting company = CompanySettings.SingleOrDefault(g => g.CompanyNumber == Index);
+                        if (company != null)
+                        {
+                            e.DisplayText = company.CompanyName;
+                        }
                     }
                 }
             };
@@ -1337,9 +1340,9 @@ namespace ERPManagementAPP.Maintain
         public override void Refresh_Main_GridView()
         {
             handle = SplashScreenManager.ShowOverlayForm(FindForm());
+            Refresh_API();
             for (int i = 0; i < length; i++)
             {
-                Refresh_API();
                 //ProductCategorySettings = apiMethod.Get_ProductGategory(); //不使用
                 if (ProductDepartmentSettings != null && ProductItem1Settings != null && ProductItem2Settings != null && ProductItem3Settings != null && ProductItem4Settings != null && ProductItem5Settings != null)
                 {
@@ -1383,25 +1386,78 @@ namespace ERPManagementAPP.Maintain
         }
         public override void Refresh_Second_GridView(string Number)
         {
-            ProductSettings = apiMethod.Get_Product();
-            if (ProductSettings != null)
+            for (int x = 0; x < length; x++)
             {
-                ProductgridControl.DataSource = ProductSettings;
-                for (int i = 0; i < gridView1.Columns.Count; i++)
+                ProductSettings = apiMethod.Get_Product();
+                if (ProductSettings != null)
                 {
-                    gridView1.Columns[i].BestFit();
+                    ProductgridControl.DataSource = ProductSettings;
+                    for (int i = 0; i < gridView1.Columns.Count; i++)
+                    {
+                        gridView1.Columns[i].BestFit();
+                    }
+                    break;
                 }
             }
         }
         private void Refresh_API()
         {
-            CompanySettings = apiMethod.Get_Company();
-            ProductDepartmentSettings = apiMethod.Get_ProductDepartment();
-            ProductItem1Settings = apiMethod.Get_ProductItem1();
-            ProductItem2Settings = apiMethod.Get_ProductItem2();
-            ProductItem3Settings = apiMethod.Get_ProductItem3();
-            ProductItem4Settings = apiMethod.Get_ProductItem4();
-            ProductItem5Settings = apiMethod.Get_ProductItem5();
+            for (int i = 0; i < length; i++)
+            {
+                CompanySettings = apiMethod.Get_Company();
+                if (CompanySettings != null)
+                {
+                    break;
+                }
+            }
+            for (int i = 0; i < length; i++)
+            {
+                ProductDepartmentSettings = apiMethod.Get_ProductDepartment();
+                if (ProductDepartmentSettings != null)
+                {
+                    break;
+                }
+            }
+            for (int i = 0; i < length; i++)
+            {
+                ProductItem1Settings = apiMethod.Get_ProductItem1();
+                if (ProductItem1Settings != null)
+                {
+                    break;
+                }
+            }
+            for (int i = 0; i < length; i++)
+            {
+                ProductItem2Settings = apiMethod.Get_ProductItem2();
+                if (ProductItem2Settings != null)
+                {
+                    break;
+                }
+            }
+            for (int i = 0; i < length; i++)
+            {
+                ProductItem3Settings = apiMethod.Get_ProductItem3();
+                if (ProductItem3Settings != null)
+                {
+                    break;
+                }
+            }
+            for (int i = 0; i < length; i++)
+            {
+                ProductItem4Settings = apiMethod.Get_ProductItem4();
+                if (ProductItem4Settings != null)
+                {
+                    break;
+                }
+            }
+            for (int i = 0; i < length; i++)
+            {
+                ProductItem5Settings = apiMethod.Get_ProductItem5();
+                if (ProductItem5Settings != null)
+                {
+                    break;
+                }
+            }
         }
         public override void Refresh_Token()
         {

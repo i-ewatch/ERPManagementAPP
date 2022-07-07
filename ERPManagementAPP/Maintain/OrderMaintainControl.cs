@@ -167,7 +167,15 @@ namespace ERPManagementAPP.Maintain
             btn_Order_Edit.Click += (s, e) =>
             {
                 Refresh_API();
-                OrderSettings = APIMethod.Get_Order(FocuseOrderMainSetting);
+                FocuseMainGrid();
+                for (int i = 0; i < length; i++)
+                {
+                    OrderSettings = APIMethod.Get_Order(FocuseOrderMainSetting);
+                    if (OrderSettings != null)
+                    {
+                        break;
+                    }
+                }
                 OrderEditForm purchaseEdit = new OrderEditForm(CompanySettings, CompanyDirectorySettings, EmployeeSettings, ProductSettings, ProjectSettings, OrderSettings[0], apiMethod, Form1);
                 if (purchaseEdit.ShowDialog() == DialogResult.OK)
                 {
@@ -180,7 +188,14 @@ namespace ERPManagementAPP.Maintain
             {
                 Refresh_API();
                 FocuseMainGrid();
-                OrderSettings = APIMethod.Get_Order(FocuseOrderMainSetting);
+                for (int i = 0; i < length; i++)
+                {
+                    OrderSettings = APIMethod.Get_Order(FocuseOrderMainSetting);
+                    if (OrderSettings != null)
+                    {
+                        break;
+                    }
+                }
                 if (OrderSettings != null)
                 {
                     if (OrderSettings[0] != null)
@@ -330,25 +345,39 @@ namespace ERPManagementAPP.Maintain
         public override void Refresh_Main_GridView()
         {
             handle = SplashScreenManager.ShowOverlayForm(FindForm());
-            for (int i = 0; i < length; i++)
+            if (cet_InvaildFlag.CheckState == CheckState.Checked)//作廢顯示
             {
-                if (cet_InvaildFlag.CheckState == CheckState.Checked)//作廢顯示
+                for (int i = 0; i < length; i++)
                 {
                     OrderMainSettings = apiMethod.Get_Order(det_OrderDate.Text);
+                    if (OrderMainSettings != null)
+                    {
+                        OrdergridControl.DataSource = OrderMainSettings;
+                        gridView1.Columns["OrderDate"].GroupInterval = DevExpress.XtraGrid.ColumnGroupInterval.DateMonth;
+                        gridView1.Columns["OrderDate"].GroupFormat.FormatString = "M" + "月";
+                        gridView1.Columns["OrderDate"].GroupFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+                        gridView1.Columns["OrderDate"].Group();
+                        gridView1.ExpandAllGroups();
+                        break;
+                    }
                 }
-                else//不顯示作廢
+            }
+            else//不顯示作廢
+            {
+                for (int i = 0; i < length; i++)
                 {
-                    OrderMainSettings = apiMethod.Get_Order(det_OrderDate.Text).Where(g => !g.InvalidFlag).ToList();
-                }
-                if (OrderMainSettings != null)
-                {
-                    OrdergridControl.DataSource = OrderMainSettings;
-                    gridView1.Columns["OrderDate"].GroupInterval = DevExpress.XtraGrid.ColumnGroupInterval.DateMonth;
-                    gridView1.Columns["OrderDate"].GroupFormat.FormatString = "M" + "月";
-                    gridView1.Columns["OrderDate"].GroupFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-                    gridView1.Columns["OrderDate"].Group();
-                    gridView1.ExpandAllGroups();
-                    break;
+                    var orderMainSettings = apiMethod.Get_Order(det_OrderDate.Text);
+                    if (orderMainSettings != null)
+                    {
+                        OrderMainSettings = orderMainSettings.Where(g => !g.InvalidFlag).ToList();
+                        OrdergridControl.DataSource = OrderMainSettings;
+                        gridView1.Columns["OrderDate"].GroupInterval = DevExpress.XtraGrid.ColumnGroupInterval.DateMonth;
+                        gridView1.Columns["OrderDate"].GroupFormat.FormatString = "M" + "月";
+                        gridView1.Columns["OrderDate"].GroupFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+                        gridView1.Columns["OrderDate"].Group();
+                        gridView1.ExpandAllGroups();
+                        break;
+                    }
                 }
             }
             CloseProgressPanel(handle);

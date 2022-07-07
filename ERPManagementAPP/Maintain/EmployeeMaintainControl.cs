@@ -259,6 +259,7 @@ namespace ERPManagementAPP.Maintain
                 if (EmployeeSettings != null)
                 {
                     EmployeegridControl.DataSource = EmployeeSettings;
+                    break;
                 }
             }
             CloseProgressPanel(handle);

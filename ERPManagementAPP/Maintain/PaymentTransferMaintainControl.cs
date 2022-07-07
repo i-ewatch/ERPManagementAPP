@@ -128,10 +128,18 @@ namespace ERPManagementAPP.Maintain
                     {
                         foreach (var Paymentitem in PaymentSettings)
                         {
-                            var paymentitem = APIMethod.Get_Payment(Paymentitem.PaymentNumber);
-                            paymentitem[0].TransferDate = DateTime.Now;
-                            string value = JsonConvert.SerializeObject(paymentitem[0]);
-                            apiMethod.Put_Payment(value);
+                            List<PaymentSetting> paymentitem = null;
+                            for (int i = 0; i < length; i++)
+                            {
+                                paymentitem = APIMethod.Get_Payment(Paymentitem.PaymentNumber);
+                                if (paymentitem != null)
+                                {
+                                    paymentitem[0].TransferDate = DateTime.Now;
+                                    string value = JsonConvert.SerializeObject(paymentitem[0]);
+                                    apiMethod.Put_Payment(value);
+                                    break;
+                                }
+                            }
                             Thread.Sleep(80);
                         }
                     }

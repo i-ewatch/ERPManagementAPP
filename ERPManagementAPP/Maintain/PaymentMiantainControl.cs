@@ -52,6 +52,7 @@ namespace ERPManagementAPP.Maintain
             if (Form1.EmployeeSetting.Token > 0)
             {
                 Refresh_Main_GridView();
+                Refresh_Second_GridView("");
             }
             action.Commands.Add(FlyoutCommand.Yes);
             Delectaction.Commands.Add(FlyoutCommand.Yes);
@@ -186,7 +187,7 @@ namespace ERPManagementAPP.Maintain
                 PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, null, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
                 if (product.ShowDialog() == DialogResult.OK)
                 {
-                    Refresh_Main_GridView();
+                    Refresh_Second_GridView("");
                 }
             };
             #endregion
@@ -196,11 +197,19 @@ namespace ERPManagementAPP.Maintain
                 if (Form1.EmployeeSetting.Token == 2)
                 {
                     Refresh_API();
-                    var paymentsetting = APIMethod.Get_Payment(FocusePaymentSetting.PaymentNumber);
+                    List<PaymentSetting> paymentsetting = null;
+                    for (int i = 0; i < length; i++)
+                    {
+                        paymentsetting = APIMethod.Get_Payment(FocusePaymentSetting.PaymentNumber);
+                        if (paymentsetting != null)
+                        {
+                            break;
+                        }
+                    }
                     PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, paymentsetting[0], EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
                     if (product.ShowDialog() == DialogResult.OK)
                     {
-                        Refresh_Main_GridView();
+                        Refresh_Second_GridView("");
                     }
                 }
                 else if (Form1.EmployeeSetting.Token == 1)
@@ -208,11 +217,19 @@ namespace ERPManagementAPP.Maintain
                     if (FocusePaymentSetting.EmployeeNumber == Form1.EmployeeSetting.EmployeeNumber)
                     {
                         Refresh_API();
-                        var paymentsetting = APIMethod.Get_Payment(FocusePaymentSetting.PaymentNumber);
+                        List<PaymentSetting> paymentsetting = null;
+                        for (int i = 0; i < length; i++)
+                        {
+                            paymentsetting = APIMethod.Get_Payment(FocusePaymentSetting.PaymentNumber);
+                            if (paymentsetting != null)
+                            {
+                                break;
+                            }
+                        }
                         PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, paymentsetting[0], EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
                         if (product.ShowDialog() == DialogResult.OK)
                         {
-                            Refresh_Main_GridView();
+                            Refresh_Second_GridView("");
                         }
                     }
                     else
@@ -231,11 +248,19 @@ namespace ERPManagementAPP.Maintain
                 {
                     Refresh_API();
                     FocuseSecondGrid();
-                    var paymentsetting = APIMethod.Get_Payment(FocusePaymentSetting.PaymentNumber);
+                    List<PaymentSetting> paymentsetting = null;
+                    for (int i = 0; i < length; i++)
+                    {
+                        paymentsetting = APIMethod.Get_Payment(FocusePaymentSetting.PaymentNumber);
+                        if (paymentsetting != null)
+                        {
+                            break;
+                        }
+                    }
                     PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, paymentsetting[0], EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
                     if (product.ShowDialog() == DialogResult.OK)
                     {
-                        Refresh_Main_GridView();
+                        Refresh_Second_GridView("");
                     }
                 }
                 else if (Form1.EmployeeSetting.Token == 1)
@@ -244,11 +269,19 @@ namespace ERPManagementAPP.Maintain
                     {
                         Refresh_API();
                         FocuseSecondGrid();
-                        var paymentsetting = APIMethod.Get_Payment(FocusePaymentSetting.PaymentNumber);
+                        List<PaymentSetting> paymentsetting = null;
+                        for (int i = 0; i < length; i++)
+                        {
+                            paymentsetting = APIMethod.Get_Payment(FocusePaymentSetting.PaymentNumber);
+                            if (paymentsetting != null)
+                            {
+                                break;
+                            }
+                        }
                         PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, paymentsetting[0], EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
                         if (product.ShowDialog() == DialogResult.OK)
                         {
-                            Refresh_Main_GridView();
+                            Refresh_Second_GridView("");
                         }
                     }
                     else
@@ -531,7 +564,7 @@ namespace ERPManagementAPP.Maintain
                 if (PaymentItemSettings != null)
                 {
                     gridControl2.DataSource = PaymentItemSettings;
-                    Refresh_Second_GridView("");
+                    Refresh_Second_GridView();
                     break;
                 }
             }
@@ -539,7 +572,31 @@ namespace ERPManagementAPP.Maintain
         }
         public override void Refresh_Second_GridView(string Number)
         {
+            handle = SplashScreenManager.ShowOverlayForm(FindForm());
             //PaymentSettings = apiMethod.Get_PaymentTransferDate();//未付款
+            for (int x = 0; x < length; x++)
+            {
+                PaymentSettings = apiMethod.Get_PaymentMonth(det_PaymentDate.Text.Replace("/", ""));
+                if (PaymentSettings != null && EmployeeSettings != null)
+                {
+                    gridControl1.DataSource = PaymentSettings;
+                    gridView1.Columns["EmployeeNumber"].Group();
+                    for (int i = 0; i < gridView1.Columns.Count; i++)
+                    {
+                        if (gridView1.Columns[i].FieldName != "PaymentUse")
+                        {
+                            gridView1.Columns[i].BestFit();
+                        }
+                    }
+                    gridView1.ExpandAllGroups();
+                    ChangeGridStr();
+                    break;
+                }
+            }
+            CloseProgressPanel(handle);
+        }
+        private void Refresh_Second_GridView()
+        {
             for (int x = 0; x < length; x++)
             {
                 PaymentSettings = apiMethod.Get_PaymentMonth(det_PaymentDate.Text.Replace("/", ""));
