@@ -3806,17 +3806,17 @@ namespace ERPManagementAPP.Methods
         #endregion
 
         #region 代墊代付API
-        #region 全部代墊代付資料
+        #region 單一代墊代付資料
         /// <summary>
-        /// 全部代墊代付資料
+        /// 單一代墊代付資料
         /// </summary>
         /// <returns></returns>
-        public List<PaymentSetting> Get_Payment()
+        public List<PaymentSetting> Get_Payment(string PaymentNumber)
         {
             try
             {
                 List<PaymentSetting> settings = null;
-                var option = new RestClientOptions(Payment_url)
+                var option = new RestClientOptions(Payment_url+$"/{PaymentNumber}")
                 {
                     Timeout = time
                 };
@@ -3832,7 +3832,7 @@ namespace ERPManagementAPP.Methods
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "全部代墊代付API錯誤");
+                Log.Error(ex, "單一代墊代付API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 ClientFlag = false;
                 return null;

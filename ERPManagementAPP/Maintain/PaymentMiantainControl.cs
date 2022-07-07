@@ -182,6 +182,7 @@ namespace ERPManagementAPP.Maintain
             #region 新增代墊代付
             btn_Payment_Add.Click += (s, e) =>
             {
+                Refresh_API();
                 PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, null, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
                 if (product.ShowDialog() == DialogResult.OK)
                 {
@@ -194,7 +195,9 @@ namespace ERPManagementAPP.Maintain
             {
                 if (Form1.EmployeeSetting.Token == 2)
                 {
-                    PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, FocusePaymentSetting, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
+                    Refresh_API();
+                    var paymentsetting = APIMethod.Get_Payment(FocusePaymentSetting.PaymentNumber);
+                    PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, paymentsetting[0], EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
                     if (product.ShowDialog() == DialogResult.OK)
                     {
                         Refresh_Main_GridView();
@@ -204,7 +207,9 @@ namespace ERPManagementAPP.Maintain
                 {
                     if (FocusePaymentSetting.EmployeeNumber == Form1.EmployeeSetting.EmployeeNumber)
                     {
-                        PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, FocusePaymentSetting, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
+                        Refresh_API();
+                        var paymentsetting = APIMethod.Get_Payment(FocusePaymentSetting.PaymentNumber);
+                        PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, paymentsetting[0], EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
                         if (product.ShowDialog() == DialogResult.OK)
                         {
                             Refresh_Main_GridView();
@@ -224,8 +229,10 @@ namespace ERPManagementAPP.Maintain
             {
                 if (Form1.EmployeeSetting.Token == 2)
                 {
+                    Refresh_API();
                     FocuseSecondGrid();
-                    PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, FocusePaymentSetting, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
+                    var paymentsetting = APIMethod.Get_Payment(FocusePaymentSetting.PaymentNumber);
+                    PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, paymentsetting[0], EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
                     if (product.ShowDialog() == DialogResult.OK)
                     {
                         Refresh_Main_GridView();
@@ -235,8 +242,10 @@ namespace ERPManagementAPP.Maintain
                 {
                     if (FocusePaymentSetting.EmployeeNumber == Form1.EmployeeSetting.EmployeeNumber)
                     {
+                        Refresh_API();
                         FocuseSecondGrid();
-                        PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, FocusePaymentSetting, EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
+                        var paymentsetting = APIMethod.Get_Payment(FocusePaymentSetting.PaymentNumber);
+                        PaymentEditForm product = new PaymentEditForm(PaymentSettings, ProjectSettings, paymentsetting[0], EmployeeSettings, PaymentItemSettings, apiMethod, Form1);
                         if (product.ShowDialog() == DialogResult.OK)
                         {
                             Refresh_Main_GridView();
@@ -308,10 +317,10 @@ namespace ERPManagementAPP.Maintain
             #region 產品資料刷新
             btn_Payment_Refresh.Click += (s, e) =>
             {
-                if (PaymentItemSettings != null)
-                {
-                    Refresh_Main_GridView();
-                }
+                //if (PaymentItemSettings != null)
+                //{
+                //    Refresh_Main_GridView();
+                //}
                 Refresh_Second_GridView("");
             };
             #endregion
@@ -414,34 +423,34 @@ namespace ERPManagementAPP.Maintain
         {
             gridView1.CustomColumnDisplayText += (s, e) =>
             {
-                if (e.Column.FieldName == "PaymentItemNo")
-                {
-                    if (e.DisplayText != null)
-                    {
-                        string Index = e.DisplayText.ToString();
-                        foreach (var item in PaymentItemSettings)
-                        {
-                            if (item.PaymentItemNo == Index)
-                            {
-                                e.DisplayText = item.PaymentItemName;
-                            }
-                        }
-                    }
-                }
-                else if (e.Column.FieldName == "EmployeeNumber")
-                {
-                    if (e.DisplayText != null)
-                    {
-                        string Index = e.DisplayText.ToString();
-                        foreach (var item in EmployeeSettings)
-                        {
-                            if (item.EmployeeNumber == Index)
-                            {
-                                e.DisplayText = item.EmployeeName;
-                            }
-                        }
-                    }
-                }
+                //if (e.Column.FieldName == "PaymentItemNo")
+                //{
+                //    if (e.DisplayText != null)
+                //    {
+                //        string Index = e.DisplayText.ToString();
+                //        foreach (var item in PaymentItemSettings)
+                //        {
+                //            if (item.PaymentItemNo == Index)
+                //            {
+                //                e.DisplayText = item.PaymentItemName;
+                //            }
+                //        }
+                //    }
+                //}
+                //else if (e.Column.FieldName == "EmployeeNumber")
+                //{
+                //    if (e.DisplayText != null)
+                //    {
+                //        string Index = e.DisplayText.ToString();
+                //        foreach (var item in EmployeeSettings)
+                //        {
+                //            if (item.EmployeeNumber == Index)
+                //            {
+                //                e.DisplayText = item.EmployeeName;
+                //            }
+                //        }
+                //    }
+                //}
                 if (e.Column.FieldName == "PaymentMethod")
                 {
                     string Index = e.DisplayText.ToString();
@@ -459,18 +468,18 @@ namespace ERPManagementAPP.Maintain
                             break;
                     }
                 }
-                else if (e.Column.FieldName == "ProjectNumber")
-                {
-                    if (e.DisplayText != null)
-                    {
-                        string Index = e.DisplayText.ToString();
-                        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
-                        if (project != null)
-                        {
-                            e.DisplayText = project.ProjectName;
-                        }
-                    }
-                }
+                //else if (e.Column.FieldName == "ProjectNumber")
+                //{
+                //    if (e.DisplayText != null)
+                //    {
+                //        string Index = e.DisplayText.ToString();
+                //        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
+                //        if (project != null)
+                //        {
+                //            e.DisplayText = project.ProjectName;
+                //        }
+                //    }
+                //}
             };
         }
         #endregion
@@ -518,7 +527,6 @@ namespace ERPManagementAPP.Maintain
             handle = SplashScreenManager.ShowOverlayForm(FindForm());
             for (int i = 0; i < length; i++)
             {
-                Refresh_API();
                 PaymentItemSettings = apiMethod.Get_PaymentItem();
                 if (PaymentItemSettings != null)
                 {

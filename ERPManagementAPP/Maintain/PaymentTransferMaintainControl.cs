@@ -128,8 +128,9 @@ namespace ERPManagementAPP.Maintain
                     {
                         foreach (var Paymentitem in PaymentSettings)
                         {
-                            Paymentitem.TransferDate = DateTime.Now;
-                            string value = JsonConvert.SerializeObject(Paymentitem);
+                            var paymentitem = APIMethod.Get_Payment(Paymentitem.PaymentNumber);
+                            paymentitem[0].TransferDate = DateTime.Now;
+                            string value = JsonConvert.SerializeObject(paymentitem[0]);
                             apiMethod.Put_Payment(value);
                             Thread.Sleep(80);
                         }
@@ -150,35 +151,35 @@ namespace ERPManagementAPP.Maintain
         {
             gridView1.CustomColumnDisplayText += (s, e) =>
             {
-                if (e.Column.FieldName == "PaymentItemNo")
-                {
-                    if (e.DisplayText != null)
-                    {
-                        string Index = e.DisplayText.ToString();
-                        foreach (var item in PaymentItemSettings)
-                        {
-                            if (item.PaymentItemNo == Index)
-                            {
-                                e.DisplayText = item.PaymentItemName;
-                            }
-                        }
-                    }
-                }
-                else if (e.Column.FieldName == "EmployeeNumber")
-                {
-                    if (e.DisplayText != null)
-                    {
-                        string Index = e.DisplayText.ToString();
-                        foreach (var item in EmployeeSettings)
-                        {
-                            if (item.EmployeeNumber == Index)
-                            {
-                                e.DisplayText = item.EmployeeName;
-                            }
-                        }
-                    }
-                }
-                else if (e.Column.FieldName == "PaymentMethod")
+                //if (e.Column.FieldName == "PaymentItemNo")
+                //{
+                //    if (e.DisplayText != null)
+                //    {
+                //        string Index = e.DisplayText.ToString();
+                //        foreach (var item in PaymentItemSettings)
+                //        {
+                //            if (item.PaymentItemNo == Index)
+                //            {
+                //                e.DisplayText = item.PaymentItemName;
+                //            }
+                //        }
+                //    }
+                //}
+                //else if (e.Column.FieldName == "EmployeeNumber")
+                //{
+                //    if (e.DisplayText != null)
+                //    {
+                //        string Index = e.DisplayText.ToString();
+                //        foreach (var item in EmployeeSettings)
+                //        {
+                //            if (item.EmployeeNumber == Index)
+                //            {
+                //                e.DisplayText = item.EmployeeName;
+                //            }
+                //        }
+                //    }
+                //}
+                if (e.Column.FieldName == "PaymentMethod")
                 {
                     string Index = e.DisplayText.ToString();
                     switch (Index)
@@ -195,18 +196,18 @@ namespace ERPManagementAPP.Maintain
                             break;
                     }
                 }
-                else if (e.Column.FieldName == "ProjectNumber")
-                {
-                    if (e.DisplayText != null)
-                    {
-                        string Index = e.DisplayText.ToString();
-                        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
-                        if (project != null)
-                        {
-                            e.DisplayText = project.ProjectName;
-                        }
-                    }
-                }
+                //else if (e.Column.FieldName == "ProjectNumber")
+                //{
+                //    if (e.DisplayText != null)
+                //    {
+                //        string Index = e.DisplayText.ToString();
+                //        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
+                //        if (project != null)
+                //        {
+                //            e.DisplayText = project.ProjectName;
+                //        }
+                //    }
+                //}
             };
         }
         #endregion
@@ -253,8 +254,8 @@ namespace ERPManagementAPP.Maintain
             handle = SplashScreenManager.ShowOverlayForm(FindForm());
             for (int i = 0; i < length; i++)
             {
-                Refresh_API();
-                PaymentItemSettings = apiMethod.Get_PaymentItem();
+                //Refresh_API();
+                //PaymentItemSettings = apiMethod.Get_PaymentItem();
                 PaymentSettings = apiMethod.Get_PaymentTransferDate();
                 if (PaymentSettings != null && EmployeeSettings != null)
                 {

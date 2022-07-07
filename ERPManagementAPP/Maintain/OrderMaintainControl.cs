@@ -103,40 +103,40 @@ namespace ERPManagementAPP.Maintain
                 FocuseMainGrid();
             };
             #endregion
-            #region 報表修改字串功能
-            gridView1.CustomColumnDisplayText += (s, e) =>
-            {
-                if (e.Column.FieldName == "OrderCompanyNumber")
-                {
-                    string Index = e.DisplayText.ToString();
-                    CompanySetting company = CompanySettings.SingleOrDefault(g => g.CompanyNumber == Index);
-                    if (company != null)
-                    {
-                        e.DisplayText = company.CompanyName;
-                    }
-                }
-                else if (e.Column.FieldName == "OrderDirectoryNumber")
-                {
-                    string Index = e.DisplayText.ToString();
-                    CompanyDirectorySetting company = CompanyDirectorySettings.SingleOrDefault(g => g.DirectoryNumber == Index);
-                    if (company != null)
-                    {
-                        e.DisplayText = company.DirectoryName;
-                    }
-                }
-                else if (e.Column.FieldName == "ProjectNumber")
-                {
-                    if (e.DisplayText != null)
-                    {
-                        string Index = e.DisplayText.ToString();
-                        ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
-                        if (project != null)
-                        {
-                            e.DisplayText = project.ProjectName;
-                        }
-                    }
-                }
-            };
+            #region 報表修改字串功能 (後台已整合，不使用2022/7/7)
+            //gridView1.CustomColumnDisplayText += (s, e) =>
+            //{
+            //    if (e.Column.FieldName == "OrderCompanyNumber")
+            //    {
+            //        string Index = e.DisplayText.ToString();
+            //        CompanySetting company = CompanySettings.SingleOrDefault(g => g.CompanyNumber == Index);
+            //        if (company != null)
+            //        {
+            //            e.DisplayText = company.CompanyName;
+            //        }
+            //    }
+            //    else if (e.Column.FieldName == "OrderDirectoryNumber")
+            //    {
+            //        string Index = e.DisplayText.ToString();
+            //        CompanyDirectorySetting company = CompanyDirectorySettings.SingleOrDefault(g => g.DirectoryNumber == Index);
+            //        if (company != null)
+            //        {
+            //            e.DisplayText = company.DirectoryName;
+            //        }
+            //    }
+            //    else if (e.Column.FieldName == "ProjectNumber")
+            //    {
+            //        if (e.DisplayText != null)
+            //        {
+            //            string Index = e.DisplayText.ToString();
+            //            ProjectSetting project = ProjectSettings.SingleOrDefault(g => g.ProjectNumber == Index);
+            //            if (project != null)
+            //            {
+            //                e.DisplayText = project.ProjectName;
+            //            }
+            //        }
+            //    }
+            //};
             #endregion
             #region 使用/作廢功能
             gridView1.RowStyle += (s, e) =>
@@ -332,7 +332,6 @@ namespace ERPManagementAPP.Maintain
             handle = SplashScreenManager.ShowOverlayForm(FindForm());
             for (int i = 0; i < length; i++)
             {
-                Refresh_API();
                 if (cet_InvaildFlag.CheckState == CheckState.Checked)//作廢顯示
                 {
                     OrderMainSettings = apiMethod.Get_Order(det_OrderDate.Text);

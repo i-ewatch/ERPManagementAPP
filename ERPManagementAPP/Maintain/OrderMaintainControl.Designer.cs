@@ -46,6 +46,7 @@ namespace ERPManagementAPP.Maintain
             this.colFileName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colInvalidFlag = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Company_BarpanelControl = new DevExpress.XtraEditors.PanelControl();
+            this.cet_InvaildFlag = new DevExpress.XtraEditors.CheckEdit();
             this.btn_Order_Delete = new DevExpress.XtraEditors.SimpleButton();
             this.btn_Order_Edit = new DevExpress.XtraEditors.SimpleButton();
             this.btn_Order_Add = new DevExpress.XtraEditors.SimpleButton();
@@ -54,7 +55,6 @@ namespace ERPManagementAPP.Maintain
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.cet_InvaildFlag = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PruchasegroupControl)).BeginInit();
@@ -63,11 +63,11 @@ namespace ERPManagementAPP.Maintain
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Company_BarpanelControl)).BeginInit();
             this.Company_BarpanelControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cet_InvaildFlag.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.det_OrderDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.det_OrderDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cet_InvaildFlag.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -237,6 +237,18 @@ namespace ERPManagementAPP.Maintain
             this.Company_BarpanelControl.Size = new System.Drawing.Size(1250, 43);
             this.Company_BarpanelControl.TabIndex = 3;
             // 
+            // cet_InvaildFlag
+            // 
+            this.cet_InvaildFlag.Dock = System.Windows.Forms.DockStyle.Left;
+            this.cet_InvaildFlag.Location = new System.Drawing.Point(553, 0);
+            this.cet_InvaildFlag.Name = "cet_InvaildFlag";
+            this.cet_InvaildFlag.Properties.AllowFocused = false;
+            this.cet_InvaildFlag.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.cet_InvaildFlag.Properties.Appearance.Options.UseFont = true;
+            this.cet_InvaildFlag.Properties.Caption = "作廢旗標";
+            this.cet_InvaildFlag.Size = new System.Drawing.Size(95, 43);
+            this.cet_InvaildFlag.TabIndex = 30;
+            // 
             // btn_Order_Delete
             // 
             this.btn_Order_Delete.AllowFocus = false;
@@ -338,19 +350,6 @@ namespace ERPManagementAPP.Maintain
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // cet_InvaildFlag
-            // 
-            this.cet_InvaildFlag.Dock = System.Windows.Forms.DockStyle.Left;
-            this.cet_InvaildFlag.EditValue = true;
-            this.cet_InvaildFlag.Location = new System.Drawing.Point(553, 0);
-            this.cet_InvaildFlag.Name = "cet_InvaildFlag";
-            this.cet_InvaildFlag.Properties.AllowFocused = false;
-            this.cet_InvaildFlag.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.cet_InvaildFlag.Properties.Appearance.Options.UseFont = true;
-            this.cet_InvaildFlag.Properties.Caption = "作廢旗標";
-            this.cet_InvaildFlag.Size = new System.Drawing.Size(95, 43);
-            this.cet_InvaildFlag.TabIndex = 30;
-            // 
             // OrderMaintainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -366,11 +365,11 @@ namespace ERPManagementAPP.Maintain
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Company_BarpanelControl)).EndInit();
             this.Company_BarpanelControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cet_InvaildFlag.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.det_OrderDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.det_OrderDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cet_InvaildFlag.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
