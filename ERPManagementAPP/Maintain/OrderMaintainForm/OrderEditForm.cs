@@ -492,9 +492,9 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
         /// </summary>
         private void Show_ProductCompanyNumber_Index()
         {
-            for (int i = 0; i < CompanySettings.Count; i++)
+            for (int i = 0; i < CompanyDirectorySettings.Count; i++)
             {
-                if (CompanySettings[i].CompanyNumber == OrderSetting.OrderCompanyNumber)
+                if (CompanyDirectorySettings[i].DirectoryCompany == OrderSetting.OrderCompanyNumber && CompanyDirectorySettings[i].DirectoryNumber == OrderSetting.OrderDirectoryNumber)
                 {
                     SelectCompanyDirectorySetting = CompanyDirectorySettings[i];
                     break;

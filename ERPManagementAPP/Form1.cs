@@ -49,7 +49,7 @@ namespace ERPManagementAPP
             #endregion
             var tDll = this.GetType().Assembly.GetName();
             SystemSetting = InitailMethod.SystemLoad();
-            APIMethod = new APIMethod(SystemSetting.URL, tDll.Version.ToString()); ;
+            APIMethod = new APIMethod(SystemSetting.URL, tDll.Version.ToString());
             LoginbarButtonItem.ImageOptions.Image = LoginimageCollection.Images["login"];
             Registrations.Register(APIMethod, this);
             #region 權限登入
