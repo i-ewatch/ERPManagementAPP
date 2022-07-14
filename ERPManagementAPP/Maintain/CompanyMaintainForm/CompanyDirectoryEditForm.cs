@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ERPManagementAPP.Maintain.CompanyMaintainForm
@@ -93,7 +94,7 @@ namespace ERPManagementAPP.Maintain.CompanyMaintainForm
             CompanyDirectorySetting companydirectorysetting = null;
             if (companyDirectorySettings != null)
             {
-                 companydirectorysetting = companyDirectorySettings.SingleOrDefault(g => g.DirectoryCompany == CompanyNumber && g.DirectoryNumber == txt_DirectoryNumber.Text);
+                companydirectorysetting = companyDirectorySettings.SingleOrDefault(g => g.DirectoryCompany == CompanyNumber && g.DirectoryNumber == txt_DirectoryNumber.Text);
             }
             if (companyDirectorySetting != null)
             {
@@ -111,6 +112,7 @@ namespace ERPManagementAPP.Maintain.CompanyMaintainForm
                 {
                     if (!string.IsNullOrEmpty(AttachmentFilePath))
                     {
+                        Thread.Sleep(80);
                         response = apiMethod.Post_CompanyDirectoryAttachmentFile(companyDirectorySetting.DirectoryCompany, companyDirectorySetting.DirectoryNumber, AttachmentFilePath);
                         if (response == "200")
                         {
@@ -156,6 +158,7 @@ namespace ERPManagementAPP.Maintain.CompanyMaintainForm
                         {
                             if (!string.IsNullOrEmpty(AttachmentFilePath))
                             {
+                                Thread.Sleep(80);
                                 response = apiMethod.Post_CompanyDirectoryAttachmentFile(companyDirectorySetting.DirectoryCompany, companyDirectorySetting.DirectoryNumber, AttachmentFilePath);
                                 if (response == "200")
                                 {

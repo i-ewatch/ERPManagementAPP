@@ -12,6 +12,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -347,6 +348,28 @@ namespace ERPManagementAPP.Maintain.QuotationMainForm
                         }
                         string value = JsonConvert.SerializeObject(quotationSetting);
                         response = apiMethod.Put_Quotation(value);
+                        if (response == "200")
+                        {
+                            if (!string.IsNullOrEmpty(AttachmentFilePath) && !string.IsNullOrEmpty(apiMethod.ResponseDataMessage))
+                            {
+                                List<OrderSetting> settings = JsonConvert.DeserializeObject<List<OrderSetting>>(apiMethod.ResponseDataMessage);
+                                Thread.Sleep(80);
+                                response = apiMethod.Post_OrderAttachmentFile(settings[0].OrderDate, settings[0].OrderNumber, AttachmentFilePath);
+                                if (response == "200")
+                                {
+                                    DialogResult = DialogResult.OK;
+                                }
+                                else
+                                {
+                                    action.Description = response;
+                                    FlyoutDialog.Show(Form1, action);
+                                }
+                            }
+                            else
+                            {
+                                DialogResult = DialogResult.OK;
+                            }
+                        }
                         QuotationReportForm purchaseEdit = new QuotationReportForm(SelectCustomerSetting, EmployeeSettings[cbt_EmployeeNumber.SelectedIndex], SelectProjectSetting, quotationSetting);
                         if (purchaseEdit.ShowDialog() == DialogResult.Cancel) { }
                     }
@@ -383,6 +406,28 @@ namespace ERPManagementAPP.Maintain.QuotationMainForm
                             };
                             string value = JsonConvert.SerializeObject(QuotationSetting);
                             response = apiMethod.Post_Quotation(value);
+                            if (response == "200")
+                            {
+                                if (!string.IsNullOrEmpty(AttachmentFilePath) && !string.IsNullOrEmpty(apiMethod.ResponseDataMessage))
+                                {
+                                    List<OrderSetting> settings = JsonConvert.DeserializeObject<List<OrderSetting>>(apiMethod.ResponseDataMessage);
+                                    Thread.Sleep(80);
+                                    response = apiMethod.Post_OrderAttachmentFile(settings[0].OrderDate, settings[0].OrderNumber, AttachmentFilePath);
+                                    if (response == "200")
+                                    {
+                                        DialogResult = DialogResult.OK;
+                                    }
+                                    else
+                                    {
+                                        action.Description = response;
+                                        FlyoutDialog.Show(Form1, action);
+                                    }
+                                }
+                                else
+                                {
+                                    DialogResult = DialogResult.OK;
+                                }
+                            }
                             if (apiMethod.ResponseDataMessage != null)
                             {
                                 var quotationsetting = JsonConvert.DeserializeObject<List<QuotationSetting>>(apiMethod.ResponseDataMessage);
@@ -796,6 +841,7 @@ namespace ERPManagementAPP.Maintain.QuotationMainForm
                 {
                     if (!string.IsNullOrEmpty(AttachmentFilePath))
                     {
+                        Thread.Sleep(80);
                         response = apiMethod.Post_QuotationAttachmentFile(quotationSetting.QuotationDate, quotationSetting.QuotationNumber, AttachmentFilePath);
                         if (response == "200")
                         {
@@ -848,6 +894,7 @@ namespace ERPManagementAPP.Maintain.QuotationMainForm
                         if (!string.IsNullOrEmpty(AttachmentFilePath) && !string.IsNullOrEmpty(apiMethod.ResponseDataMessage))
                         {
                             List<QuotationSetting> settings = JsonConvert.DeserializeObject<List<QuotationSetting>>(apiMethod.ResponseDataMessage);
+                            Thread.Sleep(80);
                             response = apiMethod.Post_QuotationAttachmentFile(settings[0].QuotationDate, settings[0].QuotationNumber, AttachmentFilePath);
                             if (response == "200")
                             {
@@ -910,6 +957,7 @@ namespace ERPManagementAPP.Maintain.QuotationMainForm
                     if (!string.IsNullOrEmpty(AttachmentFilePath) && !string.IsNullOrEmpty(apiMethod.ResponseDataMessage))
                     {
                         List<QuotationSetting> settings = JsonConvert.DeserializeObject<List<QuotationSetting>>(apiMethod.ResponseDataMessage);
+                        Thread.Sleep(80);
                         response = apiMethod.Post_QuotationAttachmentFile(settings[0].QuotationDate, settings[0].QuotationNumber, AttachmentFilePath);
                         if (response == "200")
                         {

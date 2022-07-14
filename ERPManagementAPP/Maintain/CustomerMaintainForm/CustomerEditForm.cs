@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ERPManagementAPP.Maintain.CustomerMaintainForm
@@ -103,6 +104,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
                 {
                     if (!string.IsNullOrEmpty(AttachmentFilePath))
                     {
+                        Thread.Sleep(80);
                         response = apiMethod.Post_CustomerAttachmentFile(customerSetting.CustomerNumber, customerSetting.CustomerName, AttachmentFilePath);
                         if (response == "200")
                         {
@@ -150,7 +152,8 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
                         {
                             if (!string.IsNullOrEmpty(AttachmentFilePath))
                             {
-                                response = apiMethod.Post_CustomerAttachmentFile(customerSetting.CustomerNumber, customerSetting.CustomerName, AttachmentFilePath);
+                                Thread.Sleep(80);
+                                response = apiMethod.Post_CustomerAttachmentFile(setting.CustomerNumber, setting.CustomerName, AttachmentFilePath);
                                 if (response == "200")
                                 {
                                     DialogResult = DialogResult.OK;

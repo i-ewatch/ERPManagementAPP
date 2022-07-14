@@ -2981,8 +2981,8 @@ namespace ERPManagementAPP.Methods
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
                 requsest.AddHeader("Authorization", ReleaseNumber);
-                requsest.AddParameter("PurchaseDate", OrderDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
-                requsest.AddParameter("PurchaseNumber", OrderNumber, type: ParameterType.QueryString);
+                requsest.AddParameter("OrderDate", OrderDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
+                requsest.AddParameter("OrderNumber", OrderNumber, type: ParameterType.QueryString);
                 requsest.AddFile("AttachmentFile", Path);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -3017,7 +3017,7 @@ namespace ERPManagementAPP.Methods
                 var requsest = new RestRequest("", Method.Get);
                 requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
-                requsest.AddParameter("PurchaseNumber", OrderNumber, type: ParameterType.QueryString);
+                requsest.AddParameter("OrderNumber", OrderNumber, type: ParameterType.QueryString);
                 var response = clinet.DownloadDataAsync(requsest);
                 response.Wait();
                 ClientFlag = true;
@@ -3215,8 +3215,8 @@ namespace ERPManagementAPP.Methods
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Post);
                 requsest.AddHeader("Authorization", ReleaseNumber);
-                requsest.AddParameter("PurchaseDate", QuotationDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
-                requsest.AddParameter("PurchaseNumber", QuotationNumber, type: ParameterType.QueryString);
+                requsest.AddParameter("QuotationDate", QuotationDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
+                requsest.AddParameter("QuotationNumber", QuotationNumber, type: ParameterType.QueryString);
                 requsest.AddFile("AttachmentFile", Path);
                 var response = clinet.ExecutePostAsync(requsest);
                 response.Wait();
@@ -3251,7 +3251,7 @@ namespace ERPManagementAPP.Methods
                 var requsest = new RestRequest("", Method.Get);
                 requsest.AddHeader("Authorization", ReleaseNumber);
                 requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
-                requsest.AddParameter("PurchaseNumber", QuotationNumber, type: ParameterType.QueryString);
+                requsest.AddParameter("QuotationNumber", QuotationNumber, type: ParameterType.QueryString);
                 var response = clinet.DownloadDataAsync(requsest);
                 response.Wait();
                 ClientFlag = true;

@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ERPManagementAPP.Maintain.CustomerMaintainForm
@@ -111,6 +112,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
                 {
                     if (!string.IsNullOrEmpty(AttachmentFilePath))
                     {
+                        Thread.Sleep(80);
                         response = apiMethod.Post_CustomerDirectoryAttachmentFile(customerDirectorySetting.DirectoryCustomer, customerDirectorySetting.DirectoryNumber, AttachmentFilePath);
                         if (response == "200")
                         {
@@ -156,6 +158,7 @@ namespace ERPManagementAPP.Maintain.CustomerMaintainForm
                         {
                             if (!string.IsNullOrEmpty(AttachmentFilePath))
                             {
+                                Thread.Sleep(80);
                                 response = apiMethod.Post_CustomerDirectoryAttachmentFile(customerDirectorySetting.DirectoryCustomer, customerDirectorySetting.DirectoryNumber, AttachmentFilePath);
                                 if (response == "200")
                                 {

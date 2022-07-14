@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ERPManagementAPP.Maintain.OrderMaintainForm
@@ -321,6 +322,28 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                         }
                         string value = JsonConvert.SerializeObject(orderSetting);
                         response = apiMethod.Put_Order(value);
+                        if (response == "200")
+                        {
+                            if (!string.IsNullOrEmpty(AttachmentFilePath) && !string.IsNullOrEmpty(apiMethod.ResponseDataMessage))
+                            {
+                                List<OrderSetting> settings = JsonConvert.DeserializeObject<List<OrderSetting>>(apiMethod.ResponseDataMessage);
+                                Thread.Sleep(80);
+                                response = apiMethod.Post_OrderAttachmentFile(settings[0].OrderDate, settings[0].OrderNumber, AttachmentFilePath);
+                                if (response == "200")
+                                {
+                                    DialogResult = DialogResult.OK;
+                                }
+                                else
+                                {
+                                    action.Description = response;
+                                    FlyoutDialog.Show(Form1, action);
+                                }
+                            }
+                            else
+                            {
+                                DialogResult = DialogResult.OK;
+                            }
+                        }
                         OrderReportForm purchaseEdit = new OrderReportForm(CompanySettings, SelectCompanyDirectorySetting, EmployeeSettings[cbt_EmployeeNumber.SelectedIndex], SelectProjectSetting, orderSetting);
                         if (purchaseEdit.ShowDialog() == DialogResult.Cancel) { }
                     }
@@ -358,6 +381,28 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                             };
                             string value = JsonConvert.SerializeObject(OrderSetting);
                             response = apiMethod.Post_Order(value);
+                            if (response == "200")
+                            {
+                                if (!string.IsNullOrEmpty(AttachmentFilePath) && !string.IsNullOrEmpty(apiMethod.ResponseDataMessage))
+                                {
+                                    List<OrderSetting> settings = JsonConvert.DeserializeObject<List<OrderSetting>>(apiMethod.ResponseDataMessage);
+                                    Thread.Sleep(80);
+                                    response = apiMethod.Post_OrderAttachmentFile(settings[0].OrderDate, settings[0].OrderNumber, AttachmentFilePath);
+                                    if (response == "200")
+                                    {
+                                        DialogResult = DialogResult.OK;
+                                    }
+                                    else
+                                    {
+                                        action.Description = response;
+                                        FlyoutDialog.Show(Form1, action);
+                                    }
+                                }
+                                else
+                                {
+                                    DialogResult = DialogResult.OK;
+                                }
+                            }
                             if (apiMethod.ResponseDataMessage != null)
                             {
                                 var ordersetting = JsonConvert.DeserializeObject<List<OrderSetting>>(apiMethod.ResponseDataMessage);
@@ -766,6 +811,7 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                 {
                     if (!string.IsNullOrEmpty(AttachmentFilePath))
                     {
+                        Thread.Sleep(80);
                         response = apiMethod.Post_OrderAttachmentFile(orderSetting.OrderDate, orderSetting.OrderNumber, AttachmentFilePath);
                         if (response == "200")
                         {
@@ -818,6 +864,7 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                         if (!string.IsNullOrEmpty(AttachmentFilePath) && !string.IsNullOrEmpty(apiMethod.ResponseDataMessage))
                         {
                             List<OrderSetting> settings = JsonConvert.DeserializeObject<List<OrderSetting>>(apiMethod.ResponseDataMessage);
+                            Thread.Sleep(80);
                             response = apiMethod.Post_OrderAttachmentFile(settings[0].OrderDate, settings[0].OrderNumber, AttachmentFilePath);
                             if (response == "200")
                             {
@@ -881,6 +928,7 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                     if (!string.IsNullOrEmpty(AttachmentFilePath) && !string.IsNullOrEmpty(apiMethod.ResponseDataMessage))
                     {
                         List<OrderSetting> settings = JsonConvert.DeserializeObject<List<OrderSetting>>(apiMethod.ResponseDataMessage);
+                        Thread.Sleep(80);
                         response = apiMethod.Post_OrderAttachmentFile(settings[0].OrderDate, settings[0].OrderNumber, AttachmentFilePath);
                         if (response == "200")
                         {

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ERPManagementAPP.Maintain.CompanyMaintainForm
@@ -125,6 +126,7 @@ namespace ERPManagementAPP.Maintain.CompanyMaintainForm
                 {
                     if (!string.IsNullOrEmpty(AttachmentFilePath))
                     {
+                        Thread.Sleep(80);
                         response = apiMethod.Post_CompanyAttachmentFile(companySetting.CompanyNumber, companySetting.CompanyName, AttachmentFilePath);
                         if (response == "200")
                         {
@@ -174,7 +176,9 @@ namespace ERPManagementAPP.Maintain.CompanyMaintainForm
                         {
                             if (!string.IsNullOrEmpty(AttachmentFilePath))
                             {
-                                response = apiMethod.Post_CompanyAttachmentFile(companySetting.CompanyNumber, companySetting.CompanyName, AttachmentFilePath);
+                                Thread.Sleep(80);
+
+                                response = apiMethod.Post_CompanyAttachmentFile(setting.CompanyNumber, setting.CompanyName, AttachmentFilePath);
                                 if (response == "200")
                                 {
                                     DialogResult = DialogResult.OK;
