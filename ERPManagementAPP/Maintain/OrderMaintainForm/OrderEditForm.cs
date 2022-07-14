@@ -111,6 +111,7 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                 Show_ProjectNumber_Index();
                 Show_EmployeeNumber_Index();
                 CheckEdit_Show(orderSetting.OrderNote);
+                cbt_OrderTax.SelectedIndex = orderSetting.OrderTax;
                 txt_Address.Text = orderSetting.Address;
                 mmt_Remark.Text = orderSetting.Remark;
                 OrderSubSettings = orderSetting.OrderSub;
@@ -118,10 +119,18 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
             else
             {
                 det_OrderDate.EditValue = DateTime.Now;
+                if (Form1.EmployeeSetting != null)
+                {
+                    Show_EmployeeNumber_Index(Form1.EmployeeSetting.EmployeeName);
+                }
             }
             CacalculateData();
             RefreshData();
             First_FocuseMainGrid();
+            cbt_OrderTax.SelectedIndexChanged += (s, e) =>
+            {
+                CacalculateData();
+            };
             #region 載入檔案按鈕
             btn_LoadFile.Click += (s, e) =>
             {
@@ -276,6 +285,12 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                 CheckNumber(orderSetting, apiMethod);
             };
             #endregion
+            #region 另存按鈕
+            btn_SaveAs.Click += (s, e) =>
+            {
+                CheckNumber_New(apiMethod);
+            };
+            #endregion
             #region 列印
             btn_Export.Click += (s, e) =>
             {
@@ -343,10 +358,13 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                             };
                             string value = JsonConvert.SerializeObject(OrderSetting);
                             response = apiMethod.Post_Order(value);
-                            var ordersetting = JsonConvert.DeserializeObject<List<OrderSetting>>(apiMethod.ResponseDataMessage);
-                            txt_OrderNumber.Text = ordersetting[0].OrderNumber;
-                            OrderReportForm purchaseEdit = new OrderReportForm(CompanySettings, SelectCompanyDirectorySetting, EmployeeSettings[cbt_EmployeeNumber.SelectedIndex], SelectProjectSetting, ordersetting[0]);
-                            if (purchaseEdit.ShowDialog() == DialogResult.Cancel) { }
+                            if (apiMethod.ResponseDataMessage != null)
+                            {
+                                var ordersetting = JsonConvert.DeserializeObject<List<OrderSetting>>(apiMethod.ResponseDataMessage);
+                                txt_OrderNumber.Text = ordersetting[0].OrderNumber;
+                                OrderReportForm purchaseEdit = new OrderReportForm(CompanySettings, SelectCompanyDirectorySetting, EmployeeSettings[cbt_EmployeeNumber.SelectedIndex], SelectProjectSetting, ordersetting[0]);
+                                if (purchaseEdit.ShowDialog() == DialogResult.Cancel) { }
+                            }
                         }
                     }
                 }
@@ -432,7 +450,10 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                     TotalQty += item.ProductQty;
                 }
             }
-            Tax = Math.Round(Total * 0.05, 0);
+            if (cbt_OrderTax.SelectedIndex == 0)
+            {
+                Tax = Math.Round(Total * 0.05, 0, MidpointRounding.AwayFromZero);
+            }
             TotalTax = Total + Tax;
             txt_Total.EditValue = Total.ToString();
             txt_Tax.EditValue = Tax.ToString();
@@ -552,6 +573,25 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                 foreach (var item in EmployeeSettings)
                 {
                     if (item.EmployeeNumber == OrderSetting.OrderEmployeeNumber)
+                    {
+                        Index++;
+                        cbt_EmployeeNumber.SelectedIndex = Index;
+                    }
+                    else
+                    {
+                        Index++;
+                    }
+                }
+            }
+        }
+        private void Show_EmployeeNumber_Index(string Name)
+        {
+            int Index = -1;
+            if (EmployeeSettings != null)
+            {
+                foreach (var item in EmployeeSettings)
+                {
+                    if (item.EmployeeName == Name)
                     {
                         Index++;
                         cbt_EmployeeNumber.SelectedIndex = Index;
@@ -709,6 +749,7 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                 orderSetting.Address = txt_Address.Text;
                 orderSetting.OrderEmployeeNumber = Get_cbt_EmployeeNumber_Number();
                 orderSetting.Remark = mmt_Remark.Text;
+                orderSetting.OrderTax = cbt_OrderTax.SelectedIndex;
                 orderSetting.TotalQty = Convert.ToDouble(txt_TotalQty.EditValue);
                 orderSetting.OrderSub = OrderSubSettings;
                 orderSetting.Total = Convert.ToDouble(txt_Total.EditValue);
@@ -762,6 +803,7 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                         Address = txt_Address.Text,
                         OrderEmployeeNumber = Get_cbt_EmployeeNumber_Number(),
                         Remark = mmt_Remark.Text,
+                        OrderTax = cbt_OrderTax.SelectedIndex,
                         TotalQty = Convert.ToDouble(txt_TotalQty.EditValue),
                         OrderNote = OrderNote,
                         Total = Convert.ToDouble(txt_Total.EditValue),
@@ -803,6 +845,68 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                     action.Description = "資料未填選完整";
                     FlyoutDialog.Show(Form1, action);
                 }
+            }
+        }
+        #endregion
+        #region 另存檢查資料問題
+        private void CheckNumber_New(APIMethod apiMethod)
+        {
+            string response = "";
+            Checked_Note();
+            if (!string.IsNullOrEmpty(det_OrderDate.Text) && SelectCompanyDirectorySetting != null && cbt_EmployeeNumber.SelectedIndex > -1)
+            {
+                OrderSetting OrderSetting = new OrderSetting()
+                {
+                    InvalidFlag = Convert.ToBoolean(cbt_InvalidFlag.SelectedIndex),
+                    OrderNumber = txt_OrderNumber.Text,
+                    ProjectNumber = Get_slt_ProjectNumber(),
+                    OrderDate = Convert.ToDateTime(det_OrderDate.Text),
+                    OrderCompanyNumber = SelectCompanyDirectorySetting.DirectoryCompany,
+                    OrderDirectoryNumber = SelectCompanyDirectorySetting.DirectoryNumber,
+                    Address = txt_Address.Text,
+                    OrderEmployeeNumber = Get_cbt_EmployeeNumber_Number(),
+                    Remark = mmt_Remark.Text,
+                    OrderTax = cbt_OrderTax.SelectedIndex,
+                    TotalQty = Convert.ToDouble(txt_TotalQty.EditValue),
+                    OrderNote = OrderNote,
+                    Total = Convert.ToDouble(txt_Total.EditValue),
+                    Tax = Convert.ToDouble(txt_Tax.EditValue),
+                    TotalTax = Convert.ToDouble(txt_TotalTax.EditValue),
+                    OrderSub = OrderSubSettings
+                };
+                string value = JsonConvert.SerializeObject(OrderSetting);
+                response = apiMethod.Post_Order(value);
+                if (response == "200")
+                {
+                    if (!string.IsNullOrEmpty(AttachmentFilePath) && !string.IsNullOrEmpty(apiMethod.ResponseDataMessage))
+                    {
+                        List<OrderSetting> settings = JsonConvert.DeserializeObject<List<OrderSetting>>(apiMethod.ResponseDataMessage);
+                        response = apiMethod.Post_OrderAttachmentFile(settings[0].OrderDate, settings[0].OrderNumber, AttachmentFilePath);
+                        if (response == "200")
+                        {
+                            DialogResult = DialogResult.OK;
+                        }
+                        else
+                        {
+                            action.Description = response;
+                            FlyoutDialog.Show(Form1, action);
+                        }
+                    }
+                    else
+                    {
+                        DialogResult = DialogResult.OK;
+                    }
+                }
+                else
+                {
+                    action.Description = response;
+                    FlyoutDialog.Show(Form1, action);
+                }
+            }
+            else
+            {
+                action.Description = "資料未填選完整";
+                FlyoutDialog.Show(Form1, action);
             }
         }
         #endregion

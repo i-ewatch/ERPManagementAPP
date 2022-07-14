@@ -36,7 +36,13 @@ namespace ERPManagementAPP.Report
             {
                 xlbl_ProjectName.Text = projectSetting.ProjectName;
             }
-            xlbl_OrderEmployeeNumber.Text = employeeSetting.EmployeeName;
+            if (employeeSetting != null)
+            {
+                xlbl_OrderEmployeeNumber.Text = employeeSetting.EmployeeName;
+                xlbl_OrderEmployeePhone.Text = employeeSetting.Phone;
+                xlbl_OrderEmployeeEmail.Text = employeeSetting.Address;
+            }
+
             XRTable xRTable = new XRTable();
             Detail.Controls.Add(xRTable);
             int numRows = orderSetting.OrderSub.Count;

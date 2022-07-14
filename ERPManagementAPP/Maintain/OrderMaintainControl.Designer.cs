@@ -31,7 +31,7 @@ namespace ERPManagementAPP.Maintain
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderMaintainControl));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.PruchasegroupControl = new DevExpress.XtraEditors.GroupControl();
+            this.OrdergroupControl = new DevExpress.XtraEditors.GroupControl();
             this.OrdergridControl = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colOrderNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -57,8 +57,8 @@ namespace ERPManagementAPP.Maintain
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PruchasegroupControl)).BeginInit();
-            this.PruchasegroupControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.OrdergroupControl)).BeginInit();
+            this.OrdergroupControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OrdergridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Company_BarpanelControl)).BeginInit();
@@ -72,7 +72,7 @@ namespace ERPManagementAPP.Maintain
             // 
             // layoutControl1
             // 
-            this.layoutControl1.Controls.Add(this.PruchasegroupControl);
+            this.layoutControl1.Controls.Add(this.OrdergroupControl);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
@@ -81,17 +81,17 @@ namespace ERPManagementAPP.Maintain
             this.layoutControl1.TabIndex = 2;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // PruchasegroupControl
+            // OrdergroupControl
             // 
-            this.PruchasegroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
-            this.PruchasegroupControl.AppearanceCaption.Options.UseForeColor = true;
-            this.PruchasegroupControl.Controls.Add(this.OrdergridControl);
-            this.PruchasegroupControl.Controls.Add(this.Company_BarpanelControl);
-            this.PruchasegroupControl.Location = new System.Drawing.Point(12, 12);
-            this.PruchasegroupControl.Name = "PruchasegroupControl";
-            this.PruchasegroupControl.Size = new System.Drawing.Size(1254, 822);
-            this.PruchasegroupControl.TabIndex = 4;
-            this.PruchasegroupControl.Text = "訂購單";
+            this.OrdergroupControl.AppearanceCaption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            this.OrdergroupControl.AppearanceCaption.Options.UseForeColor = true;
+            this.OrdergroupControl.Controls.Add(this.OrdergridControl);
+            this.OrdergroupControl.Controls.Add(this.Company_BarpanelControl);
+            this.OrdergroupControl.Location = new System.Drawing.Point(12, 12);
+            this.OrdergroupControl.Name = "OrdergroupControl";
+            this.OrdergroupControl.Size = new System.Drawing.Size(1254, 822);
+            this.OrdergroupControl.TabIndex = 4;
+            this.OrdergroupControl.Text = "訂購單";
             // 
             // OrdergridControl
             // 
@@ -124,7 +124,7 @@ namespace ERPManagementAPP.Maintain
             // 
             // colOrderNumber
             // 
-            this.colOrderNumber.Caption = "訂購日期";
+            this.colOrderNumber.Caption = "訂購單號";
             this.colOrderNumber.FieldName = "OrderNumber";
             this.colOrderNumber.Name = "colOrderNumber";
             this.colOrderNumber.OptionsColumn.AllowEdit = false;
@@ -343,7 +343,7 @@ namespace ERPManagementAPP.Maintain
             // 
             // layoutControlItem1
             // 
-            this.layoutControlItem1.Control = this.PruchasegroupControl;
+            this.layoutControlItem1.Control = this.OrdergroupControl;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Size = new System.Drawing.Size(1258, 826);
@@ -359,8 +359,8 @@ namespace ERPManagementAPP.Maintain
             this.Size = new System.Drawing.Size(1278, 846);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PruchasegroupControl)).EndInit();
-            this.PruchasegroupControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.OrdergroupControl)).EndInit();
+            this.OrdergroupControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.OrdergridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Company_BarpanelControl)).EndInit();
@@ -377,7 +377,7 @@ namespace ERPManagementAPP.Maintain
         #endregion
 
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraEditors.GroupControl PruchasegroupControl;
+        private DevExpress.XtraEditors.GroupControl OrdergroupControl;
         private DevExpress.XtraGrid.GridControl OrdergridControl;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn colOrderNumber;

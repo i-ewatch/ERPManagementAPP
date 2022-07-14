@@ -37,7 +37,7 @@ namespace ERPManagementAPP.Methods
         /// </summary>
         private RestClient clinet { get; set; }
 
-        private string ReleaseNumber { get; set; }
+        public string ReleaseNumber { get; set; }
         public APIMethod(string url, string releaseNumber)
         {
             ReleaseNumber = releaseNumber;
@@ -109,6 +109,10 @@ namespace ERPManagementAPP.Methods
             Order_url = $"{URL}/Order";
             OrderNumber_url = $"{URL}/Order/OrderNumber";
             OrderAttachmenFile_url = $"{URL}/OrderAttachmentFile";
+
+            Quotation_url = $"{URL}/Quotation";
+            QuotationNumber_url = $"{URL}/Quotation/QuotationNumber";
+            QuotationAttachmenFile_url = $"{URL}/QuotationAttachmentFile";
         }
         #region 登入資訊
         /// <summary>
@@ -245,6 +249,20 @@ namespace ERPManagementAPP.Methods
         /// 訂購檔案(Post、Get)
         /// </summary>
         private string OrderAttachmenFile_url { get; set; }
+        #endregion
+        #region 報價資訊
+        /// <summary>
+        /// 報價資料(Get、Post、Put、Delete)
+        /// </summary>
+        private string Quotation_url { get; set; }
+        /// <summary>
+        /// 報價資料查詢(年份)
+        /// </summary>
+        private string QuotationNumber_url { get; set; }
+        /// <summary>
+        /// 報價檔案(Post、Get)
+        /// </summary>
+        private string QuotationAttachmenFile_url { get; set; }
         #endregion
         #region 進貨資訊
         /// <summary>
@@ -1154,11 +1172,11 @@ namespace ERPManagementAPP.Methods
         /// 全部客戶通訊錄
         /// </summary>
         /// <returns></returns>
-        public List<CustomerDirectorySetting> Get_CustomerDirectory()
+        public List<CustomerSetting> Get_CustomerDirectory()
         {
             try
             {
-                List<CustomerDirectorySetting> settings = null;
+                List<CustomerSetting> settings = null;
                 var option = new RestClientOptions(CustomerDirectory_url)
                 {
                     Timeout = time
@@ -1166,9 +1184,9 @@ namespace ERPManagementAPP.Methods
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
                 requsest.AddHeader("Authorization", ReleaseNumber);
-                var response = clinet.ExecuteGetAsync<List<CustomerDirectorySetting>>(requsest);
+                var response = clinet.ExecuteGetAsync<List<CustomerSetting>>(requsest);
                 response.Wait();
-                settings = JsonConvert.DeserializeObject<List<CustomerDirectorySetting>>(response.Result.Content);
+                settings = JsonConvert.DeserializeObject<List<CustomerSetting>>(response.Result.Content);
                 ClientFlag = true;
                 ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
@@ -1222,11 +1240,11 @@ namespace ERPManagementAPP.Methods
         /// </summary>
         /// <param name="DirectoryNumber">客戶通訊錄編號</param>
         /// <returns></returns>
-        public List<CustomerDirectorySetting> Get_CustomerDirectory(string DirectoryNumber)
+        public List<CustomerSetting> Get_CustomerDirectory(string DirectoryNumber)
         {
             try
             {
-                List<CustomerDirectorySetting> settings = null;
+                List<CustomerSetting> settings = null;
                 var option = new RestClientOptions(CustomerDirectoryNumber_url + $"/{DirectoryNumber}")
                 {
                     Timeout = time
@@ -1234,9 +1252,9 @@ namespace ERPManagementAPP.Methods
                 clinet = new RestClient(option);
                 var requsest = new RestRequest("", Method.Get);
                 requsest.AddHeader("Authorization", ReleaseNumber);
-                var response = clinet.ExecuteGetAsync<List<CustomerDirectorySetting>>(requsest);
+                var response = clinet.ExecuteGetAsync<List<CustomerSetting>>(requsest);
                 response.Wait();
-                settings = JsonConvert.DeserializeObject<List<CustomerDirectorySetting>>(response.Result.Content);
+                settings = JsonConvert.DeserializeObject<List<CustomerSetting>>(response.Result.Content);
                 ClientFlag = true;
                 ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 return settings;
@@ -3009,6 +3027,240 @@ namespace ERPManagementAPP.Methods
             catch (Exception ex)
             {
                 Log.Error(ex, "訂購下載檔案API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #endregion
+
+        #region 報價API
+        #region 全部報價單表頭(年份)
+        /// <summary>
+        /// 全部報價單表頭(年份)
+        /// </summary>
+        /// <param name="Year"></param>
+        /// <returns></returns>
+        public List<QuotationMainSetting> Get_Quotation(string Year)
+        {
+            try
+            {
+                List<QuotationMainSetting> settings = null;
+                var option = new RestClientOptions(Quotation_url + "/Year")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
+                requsest.AddParameter("Year", Year, type: ParameterType.QueryString);
+                var response = clinet.ExecuteGetAsync<List<PurchaseMainSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<QuotationMainSetting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "全部報價單表頭(年份)API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 查詢單筆報價單父子資料
+        public List<QuotationSetting> Get_Quotation(QuotationMainSetting setting)
+        {
+            try
+            {
+                List<QuotationSetting> settings = null;
+                var option = new RestClientOptions(Quotation_url + $"/{setting.QuotationNumber}")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
+                var response = clinet.ExecuteGetAsync<List<PurchaseSetting>>(requsest);
+                response.Wait();
+                settings = JsonConvert.DeserializeObject<List<QuotationSetting>>(response.Result.Content);
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "查詢單筆報價單父子資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                ClientFlag = false;
+                return null;
+            }
+        }
+        #endregion
+        #region 新增報價資料
+        /// <summary>
+        /// 新增報價資料
+        /// </summary>
+        /// <param name="QuotationSetting"></param>
+        /// <returns></returns>
+        public string Post_Quotation(string QuotationSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Quotation_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
+                requsest.AddBody(QuotationSetting, ContentType.Json);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                ResponseDataMessage = response.Result.Content;
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "新增報價資料API錯誤");
+                ResponseDataMessage = "";
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 修改報價資料
+        /// <summary>
+        /// 修改報價資料
+        /// </summary>
+        /// <param name="QuotationSetting"></param>
+        /// <returns></returns>
+        public string Put_Quotation(string QuotationSetting)
+        {
+            try
+            {
+                var option = new RestClientOptions(Quotation_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Put);
+                requsest.AddHeader("Authorization", ReleaseNumber);
+                requsest.AddBody(QuotationSetting, ContentType.Json);
+                var response = clinet.ExecutePutAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "修改報價資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 刪除報價資料
+        /// <summary>
+        /// 刪除報價資料
+        /// </summary>
+        /// <param name="QuotationNumber"></param>
+        /// <returns></returns>
+        public string Delete_Quotation(string QuotationNumber)
+        {
+            try
+            {
+                var option = new RestClientOptions($"{Quotation_url}/{QuotationNumber}")
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Delete);
+                requsest.AddHeader("Authorization", ReleaseNumber);
+                var response = clinet.DeleteAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "刪除報價資料API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 報價上傳檔案
+        /// <summary>
+        /// 報價上傳檔案
+        /// </summary>
+        /// <param name="QuotationDate"></param>
+        /// <param name="QuotationNumber"></param>
+        /// <param name="Path"></param>
+        /// <returns></returns>
+        public string Post_QuotationAttachmentFile(DateTime QuotationDate, string QuotationNumber, string Path)
+        {
+            try
+            {
+                var option = new RestClientOptions(QuotationAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Post);
+                requsest.AddHeader("Authorization", ReleaseNumber);
+                requsest.AddParameter("PurchaseDate", QuotationDate.ToString("yyyy/MM/dd HH:mm:ss"), type: ParameterType.QueryString);
+                requsest.AddParameter("PurchaseNumber", QuotationNumber, type: ParameterType.QueryString);
+                requsest.AddFile("AttachmentFile", Path);
+                var response = clinet.ExecutePostAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return ResponseMessage(response.Result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "報價上傳檔案API錯誤");
+                ErrorStr = "無網路或伺服器未開啟!";
+                return null;
+            }
+        }
+        #endregion
+        #region 報價下載檔案
+        /// <summary>
+        /// 報價下載檔案
+        /// </summary>
+        /// <param name="QuotationNumber"></param>
+        /// <param name="File"></param>
+        /// <returns></returns>
+        public byte[] Get_QuotationAttachmentFile(string QuotationNumber, string File)
+        {
+            try
+            {
+                var option = new RestClientOptions(QuotationAttachmenFile_url)
+                {
+                    Timeout = time
+                };
+                clinet = new RestClient(option);
+                var requsest = new RestRequest("", Method.Get);
+                requsest.AddHeader("Authorization", ReleaseNumber);
+                requsest.AddParameter("AttachmentFile", File, type: ParameterType.QueryString);
+                requsest.AddParameter("PurchaseNumber", QuotationNumber, type: ParameterType.QueryString);
+                var response = clinet.DownloadDataAsync(requsest);
+                response.Wait();
+                ClientFlag = true;
+                ErrorStr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                return response.Result;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "報價下載檔案API錯誤");
                 ErrorStr = "無網路或伺服器未開啟!";
                 return null;
             }

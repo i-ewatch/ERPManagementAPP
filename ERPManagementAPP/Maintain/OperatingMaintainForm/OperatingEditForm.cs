@@ -326,7 +326,7 @@ namespace ERPManagementAPP.Maintain.OperatingMaintainForm
             }
             if (cbt_OperatingTax.SelectedIndex == 0)
             {
-                Tax = Math.Round(Total * 0.05, 0);
+                Tax = Math.Round(Total * 0.05, 0,MidpointRounding.AwayFromZero);
             }
             TotalTax = Total + Tax;
             txt_Total.EditValue = Total.ToString();

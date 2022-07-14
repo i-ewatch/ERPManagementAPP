@@ -337,6 +337,7 @@ namespace ERPManagementAPP.Maintain
             {
                 Refresh_API();
                 var salesMainSettings = apiMethod.Get_Sales(det_SalesDate.Text.Replace("/", ""));
+                gridView1.HideFindPanel();
                 if (salesMainSettings != null)
                 {
                     SalesMainSettings = new List<SalesMainSetting>();

@@ -519,6 +519,7 @@ namespace ERPManagementAPP.Maintain
                 if (CompanySettings != null)
                 {
                     CompanygridControl.DataSource = CompanySettings;
+                    advBandedGridView1.HideFindPanel();
                     for (int index = 0; index < advBandedGridView1.Columns.Count; index++)
                     {
                         advBandedGridView1.Columns[index].BestFit();
@@ -533,6 +534,7 @@ namespace ERPManagementAPP.Maintain
             for (int i = 0; i < length; i++)
             {
                 CompanyDirectorySettings = apiMethod.Get_DirectoryCompany(Number);
+                advBandedGridView2.HideFindPanel();
                 if (CompanyDirectorySettings != null)
                 {
                     CompanyDirectorygridControl.DataSource = CompanyDirectorySettings;

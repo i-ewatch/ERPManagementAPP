@@ -18,6 +18,7 @@ namespace ERPManagementAPP.Modules
 
             #region 會計管理(群組)
             OrderMaintainControl orderMaintainControl = new OrderMaintainControl(apiMethod, form1);//訂購單
+            QuotationMaintainControl quotationMaintainControl = new QuotationMaintainControl(apiMethod, form1);//報價單
             OperatingMaintainControl operatingMaintainControl = new OperatingMaintainControl(apiMethod, form1);//營運/營運退出
             PurchaseMaintainControl purchaseMaintainControl = new PurchaseMaintainControl(apiMethod, form1);//進貨/進貨退出
             PickingMaintainControl pickingMaintainControl = new PickingMaintainControl(apiMethod, form1);//領料/領料退回
@@ -48,6 +49,7 @@ namespace ERPManagementAPP.Modules
             MaintainModule.Add(pickingMaintainControl);         //13-會計管理(群組)_領料/領料退回
             MaintainModule.Add(operatingMaintainControl);       //14-會計管理(群組)_營運/營運退出
             MaintainModule.Add(orderMaintainControl);           //15-會計管理(群組)_訂購單
+            MaintainModule.Add(quotationMaintainControl);           //16-會計管理(群組)_報價單
         }
     }
 }

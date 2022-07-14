@@ -237,6 +237,7 @@ namespace ERPManagementAPP
         {
             Location = new Point(0, 0);
             Size = new System.Drawing.Size(1496, 962);
+            this.Text = $"ERPManagementAPP _ {APIMethod.ReleaseNumber}版";
         }
         #endregion
 

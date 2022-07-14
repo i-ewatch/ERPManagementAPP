@@ -350,6 +350,7 @@ namespace ERPManagementAPP.Maintain
                 for (int i = 0; i < length; i++)
                 {
                     OrderMainSettings = apiMethod.Get_Order(det_OrderDate.Text);
+                    gridView1.HideFindPanel();
                     if (OrderMainSettings != null)
                     {
                         OrdergridControl.DataSource = OrderMainSettings;
@@ -367,6 +368,7 @@ namespace ERPManagementAPP.Maintain
                 for (int i = 0; i < length; i++)
                 {
                     var orderMainSettings = apiMethod.Get_Order(det_OrderDate.Text);
+                    gridView1.HideFindPanel();
                     if (orderMainSettings != null)
                     {
                         OrderMainSettings = orderMainSettings.Where(g => !g.InvalidFlag).ToList();

@@ -834,18 +834,18 @@ namespace ERPManagementAPP.Maintain
                             break;
                     }
                 }
-                else if (e.Column.FieldName == "ProductCompanyNumber")
-                {
-                    string Index = e.DisplayText.ToString();
-                    if (CompanySettings != null)
-                    {
-                        CompanySetting company = CompanySettings.SingleOrDefault(g => g.CompanyNumber == Index);
-                        if (company != null)
-                        {
-                            e.DisplayText = company.CompanyName;
-                        }
-                    }
-                }
+                //else if (e.Column.FieldName == "ProductCompanyNumber")
+                //{
+                //    string Index = e.DisplayText.ToString();
+                //    if (CompanySettings != null)
+                //    {
+                //        CompanySetting company = CompanySettings.SingleOrDefault(g => g.CompanyNumber == Index);
+                //        if (company != null)
+                //        {
+                //            e.DisplayText = company.CompanyName;
+                //        }
+                //    }
+                //}
             };
             #endregion
             #region 關鍵字搜尋
@@ -857,6 +857,7 @@ namespace ERPManagementAPP.Maintain
             #region 新增產品
             btn_Product_Add.Click += (s, e) =>
             {
+                Refresh_API();
                 ProductEditForm product = new ProductEditForm(ProductSettings, null, CompanySettings, ProductDepartmentSettings, ProductItem1Settings, ProductItem2Settings, ProductItem3Settings, ProductItem4Settings, ProductItem5Settings, apiMethod, Form1);
                 if (product.ShowDialog() == DialogResult.OK)
                 {
@@ -867,7 +868,18 @@ namespace ERPManagementAPP.Maintain
             #region 修改產品
             btn_Product_Edit.Click += (s, e) =>
             {
-                ProductEditForm product = new ProductEditForm(ProductSettings, FocuseProductSetting, CompanySettings, ProductDepartmentSettings, ProductItem1Settings, ProductItem2Settings, ProductItem3Settings, ProductItem4Settings, ProductItem5Settings, apiMethod, Form1);
+                Refresh_API();
+                FocuseSecondGrid();
+                List<ProductSetting> productsetting = null;
+                for (int i = 0; i < length; i++)
+                {
+                    productsetting = APIMethod.Get_ProductNumber(FocuseProductSetting.ProductNumber);
+                    if (productsetting != null)
+                    {
+                        break;
+                    }
+                }
+                ProductEditForm product = new ProductEditForm(ProductSettings, productsetting[0], CompanySettings, ProductDepartmentSettings, ProductItem1Settings, ProductItem2Settings, ProductItem3Settings, ProductItem4Settings, ProductItem5Settings, apiMethod, Form1);
                 if (product.ShowDialog() == DialogResult.OK)
                 {
                     Refresh_Second_GridView("");
@@ -877,8 +889,18 @@ namespace ERPManagementAPP.Maintain
             #region 雙擊修改產品
             ProductgridControl.DoubleClick += (s, e) =>
             {
+                Refresh_API();
                 FocuseSecondGrid();
-                ProductEditForm product = new ProductEditForm(ProductSettings, FocuseProductSetting, CompanySettings, ProductDepartmentSettings, ProductItem1Settings, ProductItem2Settings, ProductItem3Settings, ProductItem4Settings, ProductItem5Settings, apiMethod, Form1);
+                List<ProductSetting> productsetting = null;
+                for (int i = 0; i < length; i++)
+                {
+                    productsetting = APIMethod.Get_ProductNumber(FocuseProductSetting.ProductNumber);
+                    if (productsetting != null)
+                    {
+                        break;
+                    }
+                }
+                ProductEditForm product = new ProductEditForm(ProductSettings, productsetting[0], CompanySettings, ProductDepartmentSettings, ProductItem1Settings, ProductItem2Settings, ProductItem3Settings, ProductItem4Settings, ProductItem5Settings, apiMethod, Form1);
                 if (product.ShowDialog() == DialogResult.OK)
                 {
                     Refresh_Second_GridView("");
@@ -1341,46 +1363,42 @@ namespace ERPManagementAPP.Maintain
         {
             handle = SplashScreenManager.ShowOverlayForm(FindForm());
             Refresh_API();
-            for (int i = 0; i < length; i++)
+            //ProductCategorySettings = apiMethod.Get_ProductGategory(); //不使用
+            if (ProductDepartmentSettings != null && ProductItem1Settings != null && ProductItem2Settings != null && ProductItem3Settings != null && ProductItem4Settings != null && ProductItem5Settings != null)
             {
-                //ProductCategorySettings = apiMethod.Get_ProductGategory(); //不使用
-                if (ProductDepartmentSettings != null && ProductItem1Settings != null && ProductItem2Settings != null && ProductItem3Settings != null && ProductItem4Settings != null && ProductItem5Settings != null)
+                DepartmentgridControl.DataSource = ProductDepartmentSettings;
+                Item1gridControl.DataSource = ProductItem1Settings;
+                Item2gridControl.DataSource = ProductItem2Settings;
+                Item3gridControl.DataSource = ProductItem3Settings;
+                Item4gridControl.DataSource = ProductItem4Settings;
+                Item5gridControl.DataSource = ProductItem5Settings;
+                Item5gridView.Columns["DepartmentNumber"].Group();
+                Item5gridView.Columns["Item1Number"].Group();
+                Item5gridView.Columns["Item2Number"].Group();
+                Item5gridView.Columns["Item3Number"].Group();
+                Item5gridView.Columns["Item4Number"].Group();
+                for (int item = 0; item < Item1gridView.Columns.Count; item++)
                 {
-                    DepartmentgridControl.DataSource = ProductDepartmentSettings;
-                    Item1gridControl.DataSource = ProductItem1Settings;
-                    Item2gridControl.DataSource = ProductItem2Settings;
-                    Item3gridControl.DataSource = ProductItem3Settings;
-                    Item4gridControl.DataSource = ProductItem4Settings;
-                    Item5gridControl.DataSource = ProductItem5Settings;
-                    Item5gridView.Columns["DepartmentNumber"].Group();
-                    Item5gridView.Columns["Item1Number"].Group();
-                    Item5gridView.Columns["Item2Number"].Group();
-                    Item5gridView.Columns["Item3Number"].Group();
-                    Item5gridView.Columns["Item4Number"].Group();
-                    for (int item = 0; item < Item1gridView.Columns.Count; item++)
-                    {
-                        Item1gridView.Columns[item].BestFit();
-                    }
-                    for (int item = 0; item < Item2gridView.Columns.Count; item++)
-                    {
-                        Item2gridView.Columns[item].BestFit();
-                    }
-                    for (int item = 0; item < Item3gridView.Columns.Count; item++)
-                    {
-                        Item3gridView.Columns[item].BestFit();
-                    }
-                    for (int item = 0; item < Item4gridView.Columns.Count; item++)
-                    {
-                        Item4gridView.Columns[item].BestFit();
-                    }
-                    //for (int item = 0; item < Item5gridView.Columns.Count; item++)
-                    //{
-                    //Item5gridView.Columns[item].BestFit();
-                    //}
-                    Item5gridView.ExpandAllGroups();
-                    Refresh_Second_GridView("");
-                    break;
+                    Item1gridView.Columns[item].BestFit();
                 }
+                for (int item = 0; item < Item2gridView.Columns.Count; item++)
+                {
+                    Item2gridView.Columns[item].BestFit();
+                }
+                for (int item = 0; item < Item3gridView.Columns.Count; item++)
+                {
+                    Item3gridView.Columns[item].BestFit();
+                }
+                for (int item = 0; item < Item4gridView.Columns.Count; item++)
+                {
+                    Item4gridView.Columns[item].BestFit();
+                }
+                //for (int item = 0; item < Item5gridView.Columns.Count; item++)
+                //{
+                //Item5gridView.Columns[item].BestFit();
+                //}
+                Item5gridView.ExpandAllGroups();
+                Refresh_Second_GridView("");
             }
             CloseProgressPanel(handle);
         }

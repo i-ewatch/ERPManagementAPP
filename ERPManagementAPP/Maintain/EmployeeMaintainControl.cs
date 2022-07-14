@@ -256,6 +256,7 @@ namespace ERPManagementAPP.Maintain
             for (int i = 0; i < length; i++)
             {
                 EmployeeSettings = apiMethod.Get_Employee();
+                gridView1.HideFindPanel();
                 if (EmployeeSettings != null)
                 {
                     EmployeegridControl.DataSource = EmployeeSettings;

@@ -54,9 +54,7 @@ namespace ERPManagementAPP.Methods
         public static AccountSetting AccountLoad()
         {
             AccountSetting setting = new AccountSetting();
-            if (!Directory.Exists($"{MyWorkPath}\\stf"))
-                Directory.CreateDirectory($"{MyWorkPath}\\stf");
-            string SettingPath = $"{MyWorkPath}\\stf\\Account.json";
+            string SettingPath = $"C:\\ProgramData\\I_Ewatch_ERPAccount.dll";
             try
             {
                 if (File.Exists(SettingPath))
@@ -77,9 +75,7 @@ namespace ERPManagementAPP.Methods
         /// <param name="setting"></param>
         public static void AccountSave(AccountSetting setting)
         {
-            if (!Directory.Exists($"{MyWorkPath}\\stf"))
-                Directory.CreateDirectory($"{MyWorkPath}\\stf");
-            string SettingPath = $"{MyWorkPath}\\stf\\Account.json";
+            string SettingPath = $"C:\\ProgramData\\I_Ewatch_ERPAccount.dll";
             string output = JsonConvert.SerializeObject(setting, Formatting.Indented, new JsonSerializerSettings());
             File.WriteAllText(SettingPath, output);
         }

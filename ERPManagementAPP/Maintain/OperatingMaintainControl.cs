@@ -375,6 +375,7 @@ namespace ERPManagementAPP.Maintain
             {
                 Refresh_API();
                 OperatingMainSettings = apiMethod.Get_Operating(det_OperatingDate.Text.Replace("/", ""));
+                gridView1.HideFindPanel();
                 if (OperatingMainSettings != null)
                 {
                     OperatinggridControl.DataSource = OperatingMainSettings;

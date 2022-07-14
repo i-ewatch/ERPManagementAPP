@@ -31,6 +31,10 @@ namespace ERPManagementAPP.Report
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderReport));
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
+            this.xrLabel6 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xlbl_OrderEmployeePhone = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel10 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xlbl_OrderEmployeeEmail = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
             this.xlbl_Email = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
@@ -102,6 +106,10 @@ namespace ERPManagementAPP.Report
             // TopMargin
             // 
             this.TopMargin.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel6,
+            this.xlbl_OrderEmployeePhone,
+            this.xrLabel10,
+            this.xlbl_OrderEmployeeEmail,
             this.xrLabel4,
             this.xlbl_Email,
             this.xrLabel3,
@@ -128,8 +136,53 @@ namespace ERPManagementAPP.Report
             this.xrLabel2,
             this.xrLabel1,
             this.xrPictureBox1});
-            this.TopMargin.HeightF = 244F;
+            this.TopMargin.HeightF = 267.3246F;
             this.TopMargin.Name = "TopMargin";
+            this.TopMargin.Scripts.OnAfterPrint = "TopMargin_AfterPrint";
+            // 
+            // xrLabel6
+            // 
+            this.xrLabel6.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(476.5293F, 170.4496F);
+            this.xrLabel6.Multiline = true;
+            this.xrLabel6.Name = "xrLabel6";
+            this.xrLabel6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel6.SizeF = new System.Drawing.SizeF(51.97073F, 23.95834F);
+            this.xrLabel6.StylePriority.UseFont = false;
+            this.xrLabel6.Text = "電話 :";
+            // 
+            // xlbl_OrderEmployeePhone
+            // 
+            this.xlbl_OrderEmployeePhone.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.xlbl_OrderEmployeePhone.LocationFloat = new DevExpress.Utils.PointFloat(528.5001F, 170.4497F);
+            this.xlbl_OrderEmployeePhone.Multiline = true;
+            this.xlbl_OrderEmployeePhone.Name = "xlbl_OrderEmployeePhone";
+            this.xlbl_OrderEmployeePhone.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xlbl_OrderEmployeePhone.SizeF = new System.Drawing.SizeF(258.4998F, 23.95834F);
+            this.xlbl_OrderEmployeePhone.StylePriority.UseFont = false;
+            this.xlbl_OrderEmployeePhone.Text = "N/A";
+            // 
+            // xrLabel10
+            // 
+            this.xrLabel10.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.xrLabel10.LocationFloat = new DevExpress.Utils.PointFloat(466.1127F, 194.4079F);
+            this.xrLabel10.Multiline = true;
+            this.xrLabel10.Name = "xrLabel10";
+            this.xrLabel10.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel10.SizeF = new System.Drawing.SizeF(60.41666F, 23.95833F);
+            this.xrLabel10.StylePriority.UseFont = false;
+            this.xrLabel10.Text = "Email :";
+            // 
+            // xlbl_OrderEmployeeEmail
+            // 
+            this.xlbl_OrderEmployeeEmail.Font = new System.Drawing.Font("微軟正黑體", 12F);
+            this.xlbl_OrderEmployeeEmail.LocationFloat = new DevExpress.Utils.PointFloat(528.5001F, 194.4079F);
+            this.xlbl_OrderEmployeeEmail.Multiline = true;
+            this.xlbl_OrderEmployeeEmail.Name = "xlbl_OrderEmployeeEmail";
+            this.xlbl_OrderEmployeeEmail.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xlbl_OrderEmployeeEmail.SizeF = new System.Drawing.SizeF(258.4998F, 23.95834F);
+            this.xlbl_OrderEmployeeEmail.StylePriority.UseFont = false;
+            this.xlbl_OrderEmployeeEmail.Text = "N/A";
             // 
             // xrLabel4
             // 
@@ -145,18 +198,18 @@ namespace ERPManagementAPP.Report
             // xlbl_Email
             // 
             this.xlbl_Email.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.xlbl_Email.LocationFloat = new DevExpress.Utils.PointFloat(528.4998F, 146.4909F);
+            this.xlbl_Email.LocationFloat = new DevExpress.Utils.PointFloat(116.3332F, 218.3663F);
             this.xlbl_Email.Multiline = true;
             this.xlbl_Email.Name = "xlbl_Email";
             this.xlbl_Email.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xlbl_Email.SizeF = new System.Drawing.SizeF(233.6667F, 23.95834F);
+            this.xlbl_Email.SizeF = new System.Drawing.SizeF(258.4998F, 23.95834F);
             this.xlbl_Email.StylePriority.UseFont = false;
             this.xlbl_Email.Text = "N/A";
             // 
             // xrLabel3
             // 
             this.xrLabel3.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(468.0831F, 146.4909F);
+            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(55.91655F, 218.3663F);
             this.xrLabel3.Multiline = true;
             this.xrLabel3.Name = "xrLabel3";
             this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -167,40 +220,40 @@ namespace ERPManagementAPP.Report
             // xlbl_OrderEmployeeNumber
             // 
             this.xlbl_OrderEmployeeNumber.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.xlbl_OrderEmployeeNumber.LocationFloat = new DevExpress.Utils.PointFloat(528.5001F, 218.3662F);
+            this.xlbl_OrderEmployeeNumber.LocationFloat = new DevExpress.Utils.PointFloat(528.5001F, 146.4913F);
             this.xlbl_OrderEmployeeNumber.Multiline = true;
             this.xlbl_OrderEmployeeNumber.Name = "xlbl_OrderEmployeeNumber";
             this.xlbl_OrderEmployeeNumber.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xlbl_OrderEmployeeNumber.SizeF = new System.Drawing.SizeF(233.6667F, 23.95834F);
+            this.xlbl_OrderEmployeeNumber.SizeF = new System.Drawing.SizeF(258.4998F, 23.95834F);
             this.xlbl_OrderEmployeeNumber.StylePriority.UseFont = false;
             this.xlbl_OrderEmployeeNumber.Text = "N/A";
             // 
             // xrLabel27
             // 
             this.xrLabel27.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.xrLabel27.LocationFloat = new DevExpress.Utils.PointFloat(444.1249F, 218.3662F);
+            this.xrLabel27.LocationFloat = new DevExpress.Utils.PointFloat(444.1249F, 146.4913F);
             this.xrLabel27.Multiline = true;
             this.xrLabel27.Name = "xrLabel27";
             this.xrLabel27.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel27.SizeF = new System.Drawing.SizeF(84.375F, 23.95834F);
             this.xrLabel27.StylePriority.UseFont = false;
-            this.xrLabel27.Text = "報價人員 :";
+            this.xrLabel27.Text = "製表人員 :";
             // 
             // xlbl_ProjectName
             // 
             this.xlbl_ProjectName.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.xlbl_ProjectName.LocationFloat = new DevExpress.Utils.PointFloat(116.3332F, 218.3663F);
+            this.xlbl_ProjectName.LocationFloat = new DevExpress.Utils.PointFloat(528.4998F, 122.5326F);
             this.xlbl_ProjectName.Multiline = true;
             this.xlbl_ProjectName.Name = "xlbl_ProjectName";
             this.xlbl_ProjectName.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xlbl_ProjectName.SizeF = new System.Drawing.SizeF(266.6668F, 23.95834F);
+            this.xlbl_ProjectName.SizeF = new System.Drawing.SizeF(258.4999F, 23.95834F);
             this.xlbl_ProjectName.StylePriority.UseFont = false;
             this.xlbl_ProjectName.Text = "N/A";
             // 
             // xrLabel19
             // 
             this.xrLabel19.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.xrLabel19.LocationFloat = new DevExpress.Utils.PointFloat(31.95833F, 218.3663F);
+            this.xrLabel19.LocationFloat = new DevExpress.Utils.PointFloat(444.1248F, 122.5326F);
             this.xrLabel19.Multiline = true;
             this.xrLabel19.Name = "xrLabel19";
             this.xrLabel19.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -211,18 +264,18 @@ namespace ERPManagementAPP.Report
             // xlbl_Address
             // 
             this.xlbl_Address.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.xlbl_Address.LocationFloat = new DevExpress.Utils.PointFloat(116.3333F, 194.408F);
+            this.xlbl_Address.LocationFloat = new DevExpress.Utils.PointFloat(116.3333F, 242.3246F);
             this.xlbl_Address.Multiline = true;
             this.xlbl_Address.Name = "xlbl_Address";
             this.xlbl_Address.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xlbl_Address.SizeF = new System.Drawing.SizeF(645.8333F, 23.95834F);
+            this.xlbl_Address.SizeF = new System.Drawing.SizeF(670.6666F, 23.95834F);
             this.xlbl_Address.StylePriority.UseFont = false;
             this.xlbl_Address.Text = "N/A";
             // 
             // xrLabel17
             // 
             this.xrLabel17.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.xrLabel17.LocationFloat = new DevExpress.Utils.PointFloat(31.95833F, 194.408F);
+            this.xrLabel17.LocationFloat = new DevExpress.Utils.PointFloat(31.95821F, 242.3246F);
             this.xrLabel17.Multiline = true;
             this.xrLabel17.Name = "xrLabel17";
             this.xrLabel17.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -237,7 +290,7 @@ namespace ERPManagementAPP.Report
             this.xlbl_Fax.Multiline = true;
             this.xlbl_Fax.Name = "xlbl_Fax";
             this.xlbl_Fax.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xlbl_Fax.SizeF = new System.Drawing.SizeF(266.6668F, 23.95833F);
+            this.xlbl_Fax.SizeF = new System.Drawing.SizeF(267.6899F, 23.95834F);
             this.xlbl_Fax.StylePriority.UseFont = false;
             this.xlbl_Fax.Text = "N/A";
             // 
@@ -259,7 +312,7 @@ namespace ERPManagementAPP.Report
             this.xlbl_Phone.Multiline = true;
             this.xlbl_Phone.Name = "xlbl_Phone";
             this.xlbl_Phone.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xlbl_Phone.SizeF = new System.Drawing.SizeF(266.6667F, 23.95834F);
+            this.xlbl_Phone.SizeF = new System.Drawing.SizeF(267.6899F, 23.95834F);
             this.xlbl_Phone.StylePriority.UseFont = false;
             this.xlbl_Phone.Text = "N/A";
             // 
@@ -277,18 +330,18 @@ namespace ERPManagementAPP.Report
             // xlbl_CompanyDirectoryName
             // 
             this.xlbl_CompanyDirectoryName.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.xlbl_CompanyDirectoryName.LocationFloat = new DevExpress.Utils.PointFloat(528.4998F, 122.5327F);
+            this.xlbl_CompanyDirectoryName.LocationFloat = new DevExpress.Utils.PointFloat(116.3332F, 194.4082F);
             this.xlbl_CompanyDirectoryName.Multiline = true;
             this.xlbl_CompanyDirectoryName.Name = "xlbl_CompanyDirectoryName";
             this.xlbl_CompanyDirectoryName.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xlbl_CompanyDirectoryName.SizeF = new System.Drawing.SizeF(233.6667F, 23.95834F);
+            this.xlbl_CompanyDirectoryName.SizeF = new System.Drawing.SizeF(258.4998F, 23.95834F);
             this.xlbl_CompanyDirectoryName.StylePriority.UseFont = false;
             this.xlbl_CompanyDirectoryName.Text = "N/A";
             // 
             // xrLabel11
             // 
             this.xrLabel11.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(444.1249F, 122.5326F);
+            this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(31.95833F, 194.4081F);
             this.xrLabel11.Multiline = true;
             this.xrLabel11.Name = "xrLabel11";
             this.xrLabel11.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -314,7 +367,7 @@ namespace ERPManagementAPP.Report
             this.xlbl_CompanyName.Multiline = true;
             this.xlbl_CompanyName.Name = "xlbl_CompanyName";
             this.xlbl_CompanyName.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xlbl_CompanyName.SizeF = new System.Drawing.SizeF(266.6667F, 23.95834F);
+            this.xlbl_CompanyName.SizeF = new System.Drawing.SizeF(267.6899F, 23.95834F);
             this.xlbl_CompanyName.StylePriority.UseFont = false;
             this.xlbl_CompanyName.Text = "N/A";
             // 
@@ -411,7 +464,7 @@ namespace ERPManagementAPP.Report
             // 
             // BottomMargin
             // 
-            this.BottomMargin.HeightF = 8.083217F;
+            this.BottomMargin.HeightF = 8F;
             this.BottomMargin.Name = "BottomMargin";
             // 
             // xrPictureBox2
@@ -655,7 +708,7 @@ namespace ERPManagementAPP.Report
             // 
             // xrTableCell1
             // 
-            this.xrTableCell1.BackColor = System.Drawing.Color.LightGray;
+            this.xrTableCell1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(204)))), ((int)(((byte)(255)))));
             this.xrTableCell1.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.xrTableCell1.Multiline = true;
             this.xrTableCell1.Name = "xrTableCell1";
@@ -666,7 +719,7 @@ namespace ERPManagementAPP.Report
             // 
             // xrTableCell2
             // 
-            this.xrTableCell2.BackColor = System.Drawing.Color.LightGray;
+            this.xrTableCell2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(204)))), ((int)(((byte)(255)))));
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.StylePriority.UseBackColor = false;
@@ -677,7 +730,7 @@ namespace ERPManagementAPP.Report
             // 
             // xrTableCell3
             // 
-            this.xrTableCell3.BackColor = System.Drawing.Color.LightGray;
+            this.xrTableCell3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(204)))), ((int)(((byte)(255)))));
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.StylePriority.UseBackColor = false;
@@ -686,7 +739,7 @@ namespace ERPManagementAPP.Report
             // 
             // xrTableCell4
             // 
-            this.xrTableCell4.BackColor = System.Drawing.Color.LightGray;
+            this.xrTableCell4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(204)))), ((int)(((byte)(255)))));
             this.xrTableCell4.Multiline = true;
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.StylePriority.UseBackColor = false;
@@ -695,7 +748,7 @@ namespace ERPManagementAPP.Report
             // 
             // xrTableCell5
             // 
-            this.xrTableCell5.BackColor = System.Drawing.Color.LightGray;
+            this.xrTableCell5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(204)))), ((int)(((byte)(255)))));
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.StylePriority.UseBackColor = false;
@@ -704,7 +757,7 @@ namespace ERPManagementAPP.Report
             // 
             // xrTableCell6
             // 
-            this.xrTableCell6.BackColor = System.Drawing.Color.LightGray;
+            this.xrTableCell6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(204)))), ((int)(((byte)(255)))));
             this.xrTableCell6.Multiline = true;
             this.xrTableCell6.Name = "xrTableCell6";
             this.xrTableCell6.StylePriority.UseBackColor = false;
@@ -836,7 +889,7 @@ namespace ERPManagementAPP.Report
             // 
             // xrLine4
             // 
-            this.xrLine4.LocationFloat = new DevExpress.Utils.PointFloat(2.000332F, 71.87501F);
+            this.xrLine4.LocationFloat = new DevExpress.Utils.PointFloat(0.0003051758F, 71.87501F);
             this.xrLine4.Name = "xrLine4";
             this.xrLine4.SizeF = new System.Drawing.SizeF(786.9997F, 2.083351F);
             // 
@@ -867,10 +920,11 @@ namespace ERPManagementAPP.Report
             this.ReportFooter,
             this.PageFooter});
             this.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margins = new System.Drawing.Printing.Margins(20, 18, 244, 8);
+            this.Margins = new System.Drawing.Printing.Margins(20, 20, 267, 8);
             this.PageHeight = 1169;
             this.PageWidth = 827;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
+            this.ScriptsSource = "\r\nprivate void TopMargin_AfterPrint(object sender, System.EventArgs e) {\r\n\r\n}\r\n";
             this.Version = "20.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
@@ -945,5 +999,9 @@ namespace ERPManagementAPP.Report
         private DevExpress.XtraReports.UI.XRLine xrLine4;
         private DevExpress.XtraReports.UI.PageFooterBand PageFooter;
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo2;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel6;
+        private DevExpress.XtraReports.UI.XRLabel xlbl_OrderEmployeePhone;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel10;
+        private DevExpress.XtraReports.UI.XRLabel xlbl_OrderEmployeeEmail;
     }
 }
