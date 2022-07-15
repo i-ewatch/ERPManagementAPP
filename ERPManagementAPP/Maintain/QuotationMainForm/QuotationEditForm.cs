@@ -159,10 +159,10 @@ namespace ERPManagementAPP.Maintain.QuotationMainForm
                 {
                     if (e.Value.ToString() != "")
                     {
-                        ProductQty = Convert.ToDouble(e.Value.ToString());
-                        ProductPrice = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductPrice"));
-                        gridView1.SetFocusedRowCellValue("ProductTotal", (ProductQty * ProductPrice).ToString());
-                        CacalculateData();
+                            ProductQty = Convert.ToDouble(e.Value.ToString());
+                            ProductPrice = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductPrice"));
+                            gridView1.SetFocusedRowCellValue("ProductTotal", (ProductQty * ProductPrice).ToString());
+                            CacalculateData();
                     }
                     else
                     {
@@ -173,10 +173,14 @@ namespace ERPManagementAPP.Maintain.QuotationMainForm
                 {
                     if (e.Value.ToString() != "")
                     {
-                        ProductQty = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductQty"));
-                        ProductPrice = Convert.ToDouble(e.Value.ToString());
-                        gridView1.SetFocusedRowCellValue("ProductTotal", (ProductQty * ProductPrice).ToString());
-                        CacalculateData();
+                        try
+                        {
+                            ProductQty = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductQty"));
+                            ProductPrice = Convert.ToDouble(e.Value.ToString());
+                            gridView1.SetFocusedRowCellValue("ProductTotal", (ProductQty * ProductPrice).ToString());
+                            CacalculateData();
+                        }
+                        catch (Exception) { }
                     }
                     else
                     {
@@ -248,8 +252,8 @@ namespace ERPManagementAPP.Maintain.QuotationMainForm
                         sltQuotationSubSetting = QuotationSubSettings.Where(g => g.QuotationThrNo == 0).ToList();
                     }
                     slt_QuotationSub.Properties.DataSource = sltQuotationSubSetting.OrderBy(g => g.QuotationNo).ToList();
-                    slt_QuotationSub.EditValue = null;
-                    SelectQuotationSubSetting = null;
+                    //slt_QuotationSub.EditValue = null;
+                    //SelectQuotationSubSetting = null;
                     txt_productQty.Text = "0";
                     txt_productPrice.Text = "0";
                     txt_ProductName.Text = "";
@@ -355,19 +359,11 @@ namespace ERPManagementAPP.Maintain.QuotationMainForm
                                 List<OrderSetting> settings = JsonConvert.DeserializeObject<List<OrderSetting>>(apiMethod.ResponseDataMessage);
                                 Thread.Sleep(80);
                                 response = apiMethod.Post_OrderAttachmentFile(settings[0].OrderDate, settings[0].OrderNumber, AttachmentFilePath);
-                                if (response == "200")
-                                {
-                                    DialogResult = DialogResult.OK;
-                                }
-                                else
+                                if (response != "200")
                                 {
                                     action.Description = response;
                                     FlyoutDialog.Show(Form1, action);
                                 }
-                            }
-                            else
-                            {
-                                DialogResult = DialogResult.OK;
                             }
                         }
                         QuotationReportForm purchaseEdit = new QuotationReportForm(SelectCustomerSetting, EmployeeSettings[cbt_EmployeeNumber.SelectedIndex], SelectProjectSetting, quotationSetting);
@@ -413,19 +409,11 @@ namespace ERPManagementAPP.Maintain.QuotationMainForm
                                     List<OrderSetting> settings = JsonConvert.DeserializeObject<List<OrderSetting>>(apiMethod.ResponseDataMessage);
                                     Thread.Sleep(80);
                                     response = apiMethod.Post_OrderAttachmentFile(settings[0].OrderDate, settings[0].OrderNumber, AttachmentFilePath);
-                                    if (response == "200")
-                                    {
-                                        DialogResult = DialogResult.OK;
-                                    }
-                                    else
+                                    if (response != "200")
                                     {
                                         action.Description = response;
                                         FlyoutDialog.Show(Form1, action);
                                     }
-                                }
-                                else
-                                {
-                                    DialogResult = DialogResult.OK;
                                 }
                             }
                             if (apiMethod.ResponseDataMessage != null)
@@ -573,8 +561,6 @@ namespace ERPManagementAPP.Maintain.QuotationMainForm
         private void RefreshData()
         {
             gridControl1.DataSource = QuotationSubSettings.OrderBy(g => g.QuotationNo).ToList();
-            //QuotationSubSettings.OrderBy(g => g.QuotationNo & g.QuotationSubNo & g.QuotationThrNo).ToList();
-            //gridView1.Columns["QuotationNo"].Group();
             gridControl1.RefreshDataSource();
         }
         #endregion
@@ -598,6 +584,7 @@ namespace ERPManagementAPP.Maintain.QuotationMainForm
             }
             if (cbt_QuotationTax.SelectedIndex == 0)
             {
+                Total = Math.Round(Total, 0, MidpointRounding.AwayFromZero);
                 Tax = Math.Round(Total * 0.05, 0, MidpointRounding.AwayFromZero);
             }
             TotalTax = Total + Tax;
@@ -724,10 +711,37 @@ namespace ERPManagementAPP.Maintain.QuotationMainForm
                 if (SelectQuotationSubSetting != null)
                 {
                     e.DisplayText = $"{SelectQuotationSubSetting.QuotationNoStr},{SelectQuotationSubSetting.ProductName}";
+                    switch (SelectQuotationSubSetting.LineFlag)
+                    {
+                        case 0://大項
+                            {
+                                txt_ProducUnit.Enabled = true;
+                                txt_productQty.Enabled = true;
+                                txt_productPrice.Enabled = true;
+                            }
+                            break;
+                        case 1://中項
+                        case 2://小項
+                            {
+                                txt_ProducUnit.Text = "";
+                                txt_ProducUnit.Enabled = false;
+                                txt_productQty.Text = "0";
+                                txt_productQty.Enabled = false;
+                                txt_productPrice.Text = "0";
+                                txt_productPrice.Enabled = false;
+                            }
+                            break;
+                    }
                 }
                 else
                 {
                     e.DisplayText = "";
+                    txt_ProducUnit.Text = "";
+                    txt_ProducUnit.Enabled = false;
+                    txt_productQty.Text = "0";
+                    txt_productQty.Enabled = false;
+                    txt_productPrice.Text = "0";
+                    txt_productPrice.Enabled = false;
                 }
             };
         }

@@ -173,10 +173,14 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                 {
                     if (e.Value.ToString() != "")
                     {
-                        ProductQty = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductQty"));
-                        ProductPrice = Convert.ToDouble(e.Value.ToString());
-                        gridView1.SetFocusedRowCellValue("ProductTotal", (ProductQty * ProductPrice).ToString());
-                        CacalculateData();
+                        try
+                        {
+                            ProductQty = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductQty"));
+                            ProductPrice = Convert.ToDouble(e.Value.ToString());
+                            gridView1.SetFocusedRowCellValue("ProductTotal", (ProductQty * ProductPrice).ToString());
+                            CacalculateData();
+                        }
+                        catch (Exception) { }
                     }
                     else
                     {
@@ -329,19 +333,11 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                                 List<OrderSetting> settings = JsonConvert.DeserializeObject<List<OrderSetting>>(apiMethod.ResponseDataMessage);
                                 Thread.Sleep(80);
                                 response = apiMethod.Post_OrderAttachmentFile(settings[0].OrderDate, settings[0].OrderNumber, AttachmentFilePath);
-                                if (response == "200")
-                                {
-                                    DialogResult = DialogResult.OK;
-                                }
-                                else
+                                if (response != "200")
                                 {
                                     action.Description = response;
                                     FlyoutDialog.Show(Form1, action);
                                 }
-                            }
-                            else
-                            {
-                                DialogResult = DialogResult.OK;
                             }
                         }
                         OrderReportForm purchaseEdit = new OrderReportForm(CompanySettings, SelectCompanyDirectorySetting, EmployeeSettings[cbt_EmployeeNumber.SelectedIndex], SelectProjectSetting, orderSetting);
@@ -388,19 +384,11 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                                     List<OrderSetting> settings = JsonConvert.DeserializeObject<List<OrderSetting>>(apiMethod.ResponseDataMessage);
                                     Thread.Sleep(80);
                                     response = apiMethod.Post_OrderAttachmentFile(settings[0].OrderDate, settings[0].OrderNumber, AttachmentFilePath);
-                                    if (response == "200")
-                                    {
-                                        DialogResult = DialogResult.OK;
-                                    }
-                                    else
+                                    if (response != "200")
                                     {
                                         action.Description = response;
                                         FlyoutDialog.Show(Form1, action);
                                     }
-                                }
-                                else
-                                {
-                                    DialogResult = DialogResult.OK;
                                 }
                             }
                             if (apiMethod.ResponseDataMessage != null)
@@ -497,6 +485,7 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
             }
             if (cbt_OrderTax.SelectedIndex == 0)
             {
+                Total = Math.Round(Total, 0, MidpointRounding.AwayFromZero);
                 Tax = Math.Round(Total * 0.05, 0, MidpointRounding.AwayFromZero);
             }
             TotalTax = Total + Tax;

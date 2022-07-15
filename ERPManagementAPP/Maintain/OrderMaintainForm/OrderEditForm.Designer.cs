@@ -523,7 +523,6 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
             this.colProductUnit.Caption = "產品單位";
             this.colProductUnit.FieldName = "ProductUnit";
             this.colProductUnit.Name = "colProductUnit";
-            this.colProductUnit.OptionsColumn.AllowEdit = false;
             this.colProductUnit.Visible = true;
             this.colProductUnit.VisibleIndex = 2;
             // 
@@ -538,7 +537,7 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
             // colProductPrice
             // 
             this.colProductPrice.Caption = "產品單價";
-            this.colProductPrice.DisplayFormat.FormatString = "c0";
+            this.colProductPrice.DisplayFormat.FormatString = "c2";
             this.colProductPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colProductPrice.FieldName = "ProductPrice";
             this.colProductPrice.Name = "colProductPrice";
@@ -548,7 +547,7 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
             // colProductTotal
             // 
             this.colProductTotal.Caption = "產品小計";
-            this.colProductTotal.DisplayFormat.FormatString = "c0";
+            this.colProductTotal.DisplayFormat.FormatString = "c2";
             this.colProductTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.colProductTotal.FieldName = "ProductTotal";
             this.colProductTotal.Name = "colProductTotal";
@@ -856,8 +855,8 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
             this.txt_productPrice.Name = "txt_productPrice";
             this.txt_productPrice.Properties.Appearance.Font = new System.Drawing.Font("微軟正黑體", 12F);
             this.txt_productPrice.Properties.Appearance.Options.UseFont = true;
-            this.txt_productPrice.Properties.Mask.EditMask = "[0-9]*";
-            this.txt_productPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txt_productPrice.Properties.Mask.EditMask = "n2";
+            this.txt_productPrice.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txt_productPrice.Properties.NullText = "0";
             this.txt_productPrice.Size = new System.Drawing.Size(339, 26);
             this.txt_productPrice.StyleController = this.layoutControl1;
@@ -874,13 +873,13 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
             this.txt_Total.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txt_Total.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txt_Total.Properties.ReadOnly = true;
-            this.txt_Total.Size = new System.Drawing.Size(104, 26);
+            this.txt_Total.Size = new System.Drawing.Size(215, 26);
             this.txt_Total.StyleController = this.layoutControl1;
             this.txt_Total.TabIndex = 22;
             // 
             // txt_Tax
             // 
-            this.txt_Tax.Location = new System.Drawing.Point(489, 578);
+            this.txt_Tax.Location = new System.Drawing.Point(600, 578);
             this.txt_Tax.Name = "txt_Tax";
             this.txt_Tax.Properties.AllowFocused = false;
             this.txt_Tax.Properties.AppearanceReadOnly.Font = new System.Drawing.Font("微軟正黑體", 12F);
@@ -889,13 +888,13 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
             this.txt_Tax.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txt_Tax.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txt_Tax.Properties.ReadOnly = true;
-            this.txt_Tax.Size = new System.Drawing.Size(126, 26);
+            this.txt_Tax.Size = new System.Drawing.Size(221, 26);
             this.txt_Tax.StyleController = this.layoutControl1;
             this.txt_Tax.TabIndex = 23;
             // 
             // txt_TotalTax
             // 
-            this.txt_TotalTax.Location = new System.Drawing.Point(693, 578);
+            this.txt_TotalTax.Location = new System.Drawing.Point(899, 578);
             this.txt_TotalTax.Name = "txt_TotalTax";
             this.txt_TotalTax.Properties.AllowFocused = false;
             this.txt_TotalTax.Properties.AppearanceReadOnly.Font = new System.Drawing.Font("微軟正黑體", 12F);
@@ -904,7 +903,7 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
             this.txt_TotalTax.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txt_TotalTax.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txt_TotalTax.Properties.ReadOnly = true;
-            this.txt_TotalTax.Size = new System.Drawing.Size(473, 26);
+            this.txt_TotalTax.Size = new System.Drawing.Size(267, 26);
             this.txt_TotalTax.StyleController = this.layoutControl1;
             this.txt_TotalTax.TabIndex = 24;
             // 
@@ -1172,7 +1171,7 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
             this.layoutControlItem13.CustomizationFormText = "合計";
             this.layoutControlItem13.Location = new System.Drawing.Point(221, 566);
             this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Size = new System.Drawing.Size(182, 30);
+            this.layoutControlItem13.Size = new System.Drawing.Size(293, 30);
             this.layoutControlItem13.Text = "合計";
             this.layoutControlItem13.TextSize = new System.Drawing.Size(71, 20);
             // 
@@ -1183,9 +1182,9 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
             this.layoutControlItem12.Control = this.txt_Tax;
             this.layoutControlItem12.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem12.CustomizationFormText = "稅金";
-            this.layoutControlItem12.Location = new System.Drawing.Point(403, 566);
+            this.layoutControlItem12.Location = new System.Drawing.Point(514, 566);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(204, 30);
+            this.layoutControlItem12.Size = new System.Drawing.Size(299, 30);
             this.layoutControlItem12.Text = "稅金";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(71, 20);
             // 
@@ -1196,9 +1195,9 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
             this.layoutControlItem14.Control = this.txt_TotalTax;
             this.layoutControlItem14.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem14.CustomizationFormText = "稅後總計";
-            this.layoutControlItem14.Location = new System.Drawing.Point(607, 566);
+            this.layoutControlItem14.Location = new System.Drawing.Point(813, 566);
             this.layoutControlItem14.Name = "layoutControlItem14";
-            this.layoutControlItem14.Size = new System.Drawing.Size(551, 30);
+            this.layoutControlItem14.Size = new System.Drawing.Size(345, 30);
             this.layoutControlItem14.Text = "稅後總計";
             this.layoutControlItem14.TextSize = new System.Drawing.Size(71, 20);
             // 
