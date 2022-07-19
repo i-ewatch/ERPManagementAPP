@@ -11,6 +11,13 @@ namespace ERPManagementAPP.Maintain.ProductMaintainForm
 {
     public partial class ProductCategoryEditForm : BaseEditForm
     {
+        /// <summary>
+        /// 不使用
+        /// </summary>
+        /// <param name="productCategorySettings"></param>
+        /// <param name="productCategorySetting"></param>
+        /// <param name="apiMethod"></param>
+        /// <param name="form1"></param>
         public ProductCategoryEditForm(List<ProductCategorySetting> productCategorySettings, ProductCategorySetting productCategorySetting, APIMethod apiMethod, Form1 form1)
         {
             InitializeComponent();

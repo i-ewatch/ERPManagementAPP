@@ -1,6 +1,8 @@
-﻿using ERPManagementAPP.Models;
+﻿using DevExpress.XtraPrinting;
+using ERPManagementAPP.Models;
 using ERPManagementAPP.Report;
 using System.Collections.Generic;
+using System.Text;
 
 namespace ERPManagementAPP.Maintain.QuotationMainForm
 {
@@ -18,6 +20,15 @@ namespace ERPManagementAPP.Maintain.QuotationMainForm
             {
                 DialogResult = System.Windows.Forms.DialogResult.Cancel;
             };
+            PrintingSystemBase ps = qutationReport.PrintingSystem;
+            ExportOptions options = ps.ExportOptions;
+            //options.PrintPreview.ShowOptionsBeforeExport = false; //隱藏匯出詢問視窗
+            options.Csv.Encoding = Encoding.UTF8;
+            options.Html.CharacterSet = "UTF-8";
+            options.Mht.CharacterSet = "UTF-8";
+            options.Text.Encoding = Encoding.UTF8;
+            options.Xls.ShowGridLines = true;
+            options.Xlsx.ShowGridLines = true;
             #endregion
         }
     }

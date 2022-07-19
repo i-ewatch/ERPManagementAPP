@@ -80,8 +80,8 @@ namespace ERPManagementAPP.Report
                 xRTableCell2.Text = orderSetting.OrderSub[i].ProductName;
                 xRTableCell3.Text = orderSetting.OrderSub[i].ProductUnit.ToString();
                 xRTableCell4.Text = orderSetting.OrderSub[i].ProductQty.ToString();
-                xRTableCell5.Text = orderSetting.OrderSub[i].ProductPrice.ToString("N0");
-                xRTableCell6.Text = orderSetting.OrderSub[i].ProductTotal.ToString("N0");
+                xRTableCell5.Text = orderSetting.OrderSub[i].ProductPrice.ToString("N2");
+                xRTableCell6.Text = orderSetting.OrderSub[i].ProductTotal.ToString("N2");
             }
             XRTableRow xRTableRow_Empty = new XRTableRow();
             xRTable.Rows.Add(xRTableRow_Empty);

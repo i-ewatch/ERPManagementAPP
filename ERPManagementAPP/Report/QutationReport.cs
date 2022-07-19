@@ -131,8 +131,8 @@ namespace ERPManagementAPP.Report
                     xRTableCell2.Text = quotationSub[i].ProductName;
                     xRTableCell3.Text = quotationSub[i].ProductUnit.ToString();
                     xRTableCell4.Text = quotationSub[i].ProductQty.ToString();
-                    xRTableCell5.Text = quotationSub[i].ProductPrice.ToString("N0");
-                    xRTableCell6.Text = quotationSub[i].ProductTotal.ToString("N0");
+                    xRTableCell5.Text = quotationSub[i].ProductPrice.ToString("N2");
+                    xRTableCell6.Text = quotationSub[i].ProductTotal.ToString("N2");
                     xRTable.Rows[i].Cells.Add(xRTableCell1);
                     xRTable.Rows[i].Cells.Add(xRTableCell2);
                     xRTable.Rows[i].Cells.Add(xRTableCell3);

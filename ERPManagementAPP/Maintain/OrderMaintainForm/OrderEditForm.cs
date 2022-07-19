@@ -960,21 +960,21 @@ namespace ERPManagementAPP.Maintain.OrderMaintainForm
                 }
                 OrderNote += clbl_File.Items[0].Value.ToString();
             }
-            if (clbl_File.Items[1].CheckState == CheckState.Checked)//發票
-            {
-                if (OrderNote != "")
-                {
-                    OrderNote += ",";
-                }
-                OrderNote += clbl_File.Items[1].Value.ToString();
-            }
-            if (clbl_File.Items[2].CheckState == CheckState.Checked)//回郵信封
+            if (clbl_File.Items[1].CheckState == CheckState.Checked)//回郵信封
             {
                 if (OrderNote != "")
                 {
                     OrderNote += ",";
                 }
                 OrderNote += clbl_File.Items[2].Value.ToString();
+            }
+            if (clbl_File.Items[2].CheckState == CheckState.Checked)//發票
+            {
+                if (OrderNote != "")
+                {
+                    OrderNote += ",";
+                }
+                OrderNote += clbl_File.Items[1].Value.ToString();
             }
             if (clbl_pay.Items[0].CheckState == CheckState.Checked)//貨到現金付款(T/T)
             {
